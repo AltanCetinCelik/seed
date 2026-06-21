@@ -43,6 +43,10 @@ Current abilities:
 - Show current log path with /log
 - Add developer notes to logs with /log-note
 - Read recent log lines with /log-read
+- Summarize current chat sessions with /summary
+- Save approved session summaries to memory
+- Save approved session summaries to journal
+
 
 Current limitations:
 - No voice yet

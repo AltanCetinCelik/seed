@@ -18,7 +18,8 @@ def talk_to_seed():
 
     chat_state = {
         "autosuggest_enabled": AUTOSUGGEST_DEFAULT,
-        "log_path": log_path
+        "log_path": log_path,
+        "last_summary": None
     }
 
     print("\n=== TALK TO SEED ===")

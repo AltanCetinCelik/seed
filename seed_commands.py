@@ -21,6 +21,11 @@ from seed_chat_logger import (
     show_current_log_path,
     read_recent_log_lines
 )
+from seed_session_summarizer import (
+    show_session_summary,
+    save_last_summary_to_memory,
+    save_last_summary_to_journal
+)
 
 
 def show_chat_help():
@@ -48,6 +53,9 @@ def show_chat_help():
     print("/log = show current chat log path")
     print("/log-note = write a note into current chat log")
     print("/log-read = read recent lines from current chat log")
+    print("/summary = summarize current chat session")
+    print("/summary-save-memory = save last summary to memory")
+    print("/summary-save-journal = save last summary to journal")
 
 
 def save_memory_from_chat():
@@ -309,6 +317,18 @@ def handle_chat_command(user_message, session_history, chat_state):
 
     if command == "/first-contact":
         show_first_contact()
+        return "handled"
+    
+    if command == "/summary":
+        show_session_summary(session_history, chat_state)
+        return "handled"
+
+    if command == "/summary-save-memory":
+        save_last_summary_to_memory(chat_state)
+        return "handled"
+
+    if command == "/summary-save-journal":
+        save_last_summary_to_journal(chat_state)
         return "handled"
     
     if command == "/log":

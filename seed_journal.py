@@ -30,6 +30,15 @@ def read_journal():
     print("\n=== SEED JOURNAL ===")
     print(content)
 
+def write_journal_direct(entry):
+    if entry == "":
+        return False
+
+    with open(JOURNAL_FILE, "a") as file:
+        file.write(entry + "\n")
+
+    return True
+
 def get_recent_journal_entries(limit=RECENT_JOURNAL_LIMIT):
     try:
         with open(JOURNAL_FILE, "r") as file:
