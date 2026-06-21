@@ -188,5 +188,17 @@
         "content": "User progress update: we added automatic memory suggestions and it works",
         "importance": 5,
         "created_at": "2026-06-21T17:35:48"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed V0.6.0 added a usability and control command pack inside Talk to Seed, including /suggest, /autosuggest, /forget, /journal-read, /core, and /clear-session.",
+        "importance": 5,
+        "created_at": "2026-06-21T17:59:37"
+    },
+    {
+        "type": "reflection",
+        "content": "Seed's chat mode is becoming a controlled local shell where slash commands manage memory, journal, status, debug, and session behavior while normal text goes to the model.",
+        "importance": 5,
+        "created_at": "2026-06-21T18:01:23"
     }
 ]

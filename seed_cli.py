@@ -1,13 +1,20 @@
 from seed_files import show_seed_core, show_memory_rules, show_first_contact
-from seed_memory import add_memory, list_memories, search_memories, delete_memory
+from seed_memory import (
+    add_memory,
+    list_memories,
+    search_memories,
+    delete_memory,
+    save_memory_direct
+)
 from seed_journal import write_journal, read_journal
 from seed_status import show_seed_status
-from seed_brain import ask_seed, get_context_debug
-from seed_memory import add_memory, list_memories, search_memories, delete_memory, save_memory_direct
 from seed_brain import ask_seed, get_context_debug, search_memory_context
-from seed_memory_tools import list_memories_by_type, show_memory_stats, find_possible_duplicates
+from seed_memory_tools import (
+    list_memories_by_type,
+    show_memory_stats,
+    find_possible_duplicates
+)
 from seed_memory_suggester import suggest_memory
-
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -68,17 +75,63 @@ def handle_memory_suggestion(user_message, seed_answer, session_history):
     else:
         print("Suggested memory skipped.")
 
+def manual_memory_suggestion(session_history):
+    print("\n=== MANUAL MEMORY SUGGESTION ===")
+
+    user_message = input("What happened / what did we do?: ")
+
+    if user_message == "":
+        print("Suggestion input cannot be empty.")
+        return
+
+    seed_answer = "Manual suggestion requested by user."
+
+    suggestion = suggest_memory(user_message, seed_answer)
+
+    if suggestion is None:
+        print("No suggestion generated.")
+        return
+
+    print("\n=== SUGGESTED MEMORY ===")
+    print(f"Type: {suggestion['type']}")
+    print(f"Content: {suggestion['content']}")
+    print(f"Importance: {suggestion['importance']}")
+
+    choice = input("Save this memory? (y/n): ")
+
+    if choice.lower() == "y":
+        saved = save_memory_direct(
+            suggestion["type"],
+            suggestion["content"],
+            suggestion["importance"]
+        )
+
+        if saved:
+            print("Suggested memory saved.")
+
+            session_history.append({
+                "role": "System",
+                "content": (
+                    f"User manually approved and saved suggested memory: "
+                    f"[{suggestion['type']}] "
+                    f"{suggestion['content']} "
+                    f"Importance: {suggestion['importance']}"
+                )
+            })
+    else:
+        print("Suggested memory skipped.")
+
+def forget_memory_from_chat():
+    print("\n=== FORGET MEMORY FROM CHAT ===")
+    delete_memory()
+
 def talk_to_seed():
     session_history = []
+    autosuggest_enabled = True
 
     print("\n=== TALK TO SEED ===")
-    print("Type /exit to return to the main menu.")
-    print("Type /save to save a memory.")
-    print("Type /journal to write a journal entry.")
     print("Type /help to show chat commands.")
-    print("Type /debug to show context debug information.")
-    print("Type /memories to list Seed memories.")
-    print("Type /status to show Seed status.")
+    print("Type /exit to return to the main menu.")
 
     while True:
         user_message = input("\nYou: ")
@@ -93,21 +146,65 @@ def talk_to_seed():
 
         if user_message == "/help":
             print("\n=== CHAT COMMANDS ===")
-            print("/exit = return to main menu")
-            print("/save = save a memory")
-            print("/memories = list Seed memories")
-            print("/status = show Seed status")
-            print("/debug = show context debug information")
             print("/help = show commands")
-            print("/search = search relevant memories")
+            print("/exit = return to main menu")
+            print("/save = manually save a memory")
+            print("/suggest = manually generate a memory suggestion")
+            print("/autosuggest = toggle automatic memory suggestions on/off")
+            print("/memories = list Seed memories")
             print("/search = search relevant memories")
             print("/search-type = list memories by type")
             print("/memory-stats = show memory statistics")
             print("/duplicates = find possible duplicate memories")
+            print("/forget = delete memory by number")
+            print("/journal = write a journal entry")
+            print("/journal-read = read journal entries")
+            print("/core = show Seed Core")
+            print("/status = show Seed status")
+            print("/debug = show current prompt context")
+            print("/clear-session = clear temporary chat history")
             continue
+
+        if user_message == "/autosuggest":
+            autosuggest_enabled = not autosuggest_enabled
+
+            if autosuggest_enabled:
+                print("Autosuggest is now ON.")
+            else:
+                print("Autosuggest is now OFF.")
+
+            continue
+
+        if user_message == "/save":
+            saved_memory = save_memory_from_chat()
+
+            if saved_memory is not None:
+                session_history.append({
+                    "role": "System",
+                    "content": (
+                        f"User just saved a long-term memory: "
+                        f"[{saved_memory['type']}] "
+                        f"{saved_memory['content']} "
+                        f"Importance: {saved_memory['importance']}"
+                    )
+                })
+
+            continue
+
+        if user_message == "/suggest":
+            manual_memory_suggestion(session_history)
+            continue
+
         if user_message == "/memories":
             list_memories()
             continue
+
+        if user_message == "/search":
+            search_query = input("Search query: ")
+            print("\n=== MEMORY SEARCH RESULTS ===")
+            print(search_memory_context(search_query))
+            continue
+
         if user_message == "/search-type":
             memory_type = input("Memory type: ")
             list_memories_by_type(memory_type)
@@ -120,19 +217,11 @@ def talk_to_seed():
         if user_message == "/duplicates":
             find_possible_duplicates()
             continue
-        if user_message == "/debug":
-            debug_query = input("Debug query: ")
-            print(get_context_debug(session_history, debug_query))
-            continue
-        if user_message == "/search":
-            search_query = input("Search query: ")
-            print("\n=== MEMORY SEARCH RESULTS ===")
-            print(search_memory_context(search_query))
+
+        if user_message == "/forget":
+            forget_memory_from_chat()
             continue
 
-        if user_message == "/status":
-            show_seed_status()
-            continue
         if user_message == "/journal":
             journal_entry = write_journal()
 
@@ -140,24 +229,31 @@ def talk_to_seed():
                 session_history.append({
                     "role": "System",
                     "content": f"User wrote this journal entry during this chat session: {journal_entry}"
-            })
+                })
 
             continue
-        if user_message == "/save":
-            saved_memory = save_memory_from_chat()
 
-            if saved_memory is not None:
-             session_history.append({
-            "role": "System",
-            "content": (
-                f"User just saved a long-term memory: "
-                f"[{saved_memory['type']}] "
-                f"{saved_memory['content']} "
-                f"Importance: {saved_memory['importance']}"
-            )
-        })
+        if user_message == "/journal-read":
+            read_journal()
+            continue
 
-             continue
+        if user_message == "/core":
+            show_seed_core()
+            continue
+
+        if user_message == "/status":
+            show_seed_status()
+            continue
+
+        if user_message == "/debug":
+            debug_query = input("Debug query: ")
+            print(get_context_debug(session_history, debug_query))
+            continue
+
+        if user_message == "/clear-session":
+            session_history.clear()
+            print("Temporary session history cleared.")
+            continue
 
         print("\nSeed is thinking...")
 
@@ -175,11 +271,12 @@ def talk_to_seed():
             "role": "Seed",
             "content": answer
         })
-        handle_memory_suggestion(user_message, answer, session_history)
 
+        if autosuggest_enabled:
+            handle_memory_suggestion(user_message, answer, session_history)
 
 def menu():
-    print("\n=== SEED v0.2.9 ===")
+    print("\n=== SEED v0.6.0 ===")
     print("1. Show Seed Core")
     print("2. Add Seed Memory")
     print("3. List Seed Memories")

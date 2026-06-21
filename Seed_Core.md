@@ -27,12 +27,15 @@ Current abilities:
 - Write and read journal entries
 - Show system status
 - Talk through local Ollama llama3.1:8b
-- Use relevant stored memories in prompts
-- Use recent journal entries in prompts
-- Use temporary session history inside active chat
-- Save intentional memories from chat with /save
-- Write journal entries from chat with /journal
-- Show context debug with /debug
+- Use structured memories, journal entries, and session history in prompts
+- Save approved memories from chat
+- Suggest memories with approval
+- Toggle autosuggest on/off
+- Search and inspect memories from chat
+- Delete memories from chat
+- Read and write journal from chat
+- Show context debug from chat
+- Clear temporary session history
 
 Current limitations:
 - No voice yet

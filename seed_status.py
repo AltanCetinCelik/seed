@@ -12,7 +12,7 @@ def file_status(filename):
 
 def show_seed_status():
     print("\n=== SEED STATUS ===")
-    print("Version: v0.2.9")
+    print("Version: v0.6.0")
     print(f"Core file: {file_status('Seed_Core.md')}")
     print(f"Memory rules file: {file_status('memory_rules.md')}")
     print(f"First contact file: {file_status('first_contact.md')}")
