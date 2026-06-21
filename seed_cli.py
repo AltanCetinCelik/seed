@@ -4,13 +4,13 @@ from seed_journal import write_journal, read_journal
 from seed_status import show_seed_status
 from seed_brain import ask_seed
 from seed_commands import handle_chat_command, handle_memory_suggestion
-
+from seed_config import SEED_VERSION, AUTOSUGGEST_DEFAULT
 
 def talk_to_seed():
     session_history = []
 
     chat_state = {
-        "autosuggest_enabled": True
+    "autosuggest_enabled": AUTOSUGGEST_DEFAULT
     }
 
     print("\n=== TALK TO SEED ===")
@@ -60,7 +60,7 @@ def talk_to_seed():
                 session_history
             )
 def menu():
-    print("\n=== SEED v0.6.0 ===")
+    print(f"\n=== SEED {SEED_VERSION} ===")
     print("1. Show Seed Core")
     print("2. Add Seed Memory")
     print("3. List Seed Memories")

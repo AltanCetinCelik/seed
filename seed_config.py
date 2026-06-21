@@ -1,0 +1,16 @@
+SEED_VERSION = "v0.7.0"
+
+OLLAMA_URL = "http://localhost:11434/api/generate"
+MODEL_NAME = "llama3.1:8b"
+
+MEMORY_SEARCH_LIMIT = 8
+IMPORTANT_MEMORY_LIMIT = 5
+RECENT_MEMORY_LIMIT = 5
+
+RECENT_JOURNAL_LIMIT = 5
+SESSION_HISTORY_LIMIT = 8
+
+AUTOSUGGEST_DEFAULT = True
+
+SEED_MODE = "local terminal"
+LLM_STATUS = "connected through local Ollama when Ollama is running"

@@ -1,4 +1,13 @@
 import os
+from seed_config import (
+    SEED_VERSION,
+    MODEL_NAME,
+    SEED_MODE,
+    LLM_STATUS,
+    MEMORY_SEARCH_LIMIT,
+    RECENT_JOURNAL_LIMIT,
+    SESSION_HISTORY_LIMIT
+)
 
 from seed_memory import memories, ALLOWED_TYPES
 
@@ -12,7 +21,13 @@ def file_status(filename):
 
 def show_seed_status():
     print("\n=== SEED STATUS ===")
-    print("Version: v0.6.0")
+    print(f"Version: {SEED_VERSION}")
+    print(f"Model: {MODEL_NAME}")
+    print(f"Mode: {SEED_MODE}")
+    print(f"LLM status: {LLM_STATUS}")
+    print(f"Memory search limit: {MEMORY_SEARCH_LIMIT}")
+    print(f"Recent journal limit: {RECENT_JOURNAL_LIMIT}")
+    print(f"Session history limit: {SESSION_HISTORY_LIMIT}")
     print(f"Core file: {file_status('Seed_Core.md')}")
     print(f"Memory rules file: {file_status('memory_rules.md')}")
     print(f"First contact file: {file_status('first_contact.md')}")
@@ -20,5 +35,3 @@ def show_seed_status():
     print(f"Journal file: {file_status('seed_journal.txt')}")
     print(f"Number of memories: {len(memories)}")
     print(f"Allowed memory types: {len(ALLOWED_TYPES)}")
-    print("LLM: not connected yet")
-    print("Mode: local terminal")

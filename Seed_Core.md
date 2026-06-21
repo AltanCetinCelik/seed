@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v0.2.9 local memory-aware terminal assistant with Ollama brain connection.
+Seed v0.7.0 local memory-aware terminal assistant with centralized configuration.
 
 Core principles:
 - Local-first when possible.
@@ -37,6 +37,7 @@ Current abilities:
 - Show context debug from chat
 - Clear temporary session history
 - Route slash commands through seed_commands.py
+- Use centralized configuration through seed_config.py
 
 Current limitations:
 - No voice yet

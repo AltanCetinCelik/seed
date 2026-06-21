@@ -1,3 +1,4 @@
+from seed_config import RECENT_JOURNAL_LIMIT
 JOURNAL_FILE = "seed_journal.txt"
 
 def write_journal():
@@ -29,7 +30,7 @@ def read_journal():
     print("\n=== SEED JOURNAL ===")
     print(content)
 
-def get_recent_journal_entries(limit=5):
+def get_recent_journal_entries(limit=RECENT_JOURNAL_LIMIT):
     try:
         with open(JOURNAL_FILE, "r") as file:
             lines = file.readlines()

@@ -36,6 +36,7 @@ def show_chat_help():
     print("/status = show Seed status")
     print("/debug = show current prompt context")
     print("/clear-session = clear temporary chat history")
+    print("/config = show Seed configuration")
 
 
 def save_memory_from_chat():
@@ -152,6 +153,9 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command in ["/exit", "/quit"]:
         print("Leaving Seed chat...")
         return "exit"
+    if command == "/config":
+        show_config()
+        return "handled"
 
     if command in ["/help", "/commands"]:
         show_chat_help()
@@ -264,3 +268,25 @@ def handle_chat_command(user_message, session_history, chat_state):
         return "handled"
 
     return "normal"
+
+def show_config():
+    from seed_config import (
+        SEED_VERSION,
+        MODEL_NAME,
+        OLLAMA_URL,
+        MEMORY_SEARCH_LIMIT,
+        RECENT_JOURNAL_LIMIT,
+        SESSION_HISTORY_LIMIT,
+        AUTOSUGGEST_DEFAULT,
+        SEED_MODE
+    )
+
+    print("\n=== SEED CONFIG ===")
+    print(f"Version: {SEED_VERSION}")
+    print(f"Model: {MODEL_NAME}")
+    print(f"Ollama URL: {OLLAMA_URL}")
+    print(f"Memory search limit: {MEMORY_SEARCH_LIMIT}")
+    print(f"Recent journal limit: {RECENT_JOURNAL_LIMIT}")
+    print(f"Session history limit: {SESSION_HISTORY_LIMIT}")
+    print(f"Autosuggest default: {AUTOSUGGEST_DEFAULT}")
+    print(f"Mode: {SEED_MODE}")

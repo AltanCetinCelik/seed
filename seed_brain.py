@@ -2,11 +2,14 @@ import requests
 from seed_memory import memories
 from seed_journal import get_recent_journal_entries
 from seed_memory_tools import expand_query
+from seed_config import (
+    OLLAMA_URL,
+    MODEL_NAME,
+    MEMORY_SEARCH_LIMIT,
+    SESSION_HISTORY_LIMIT
+)
 
 
-
-OLLAMA_URL = "http://localhost:11434/api/generate"
-MODEL_NAME = "llama3.1:8b"
 
 
 
@@ -66,7 +69,7 @@ def score_memory(memory, user_prompt):
         "memory": memory
     }
 
-def format_relevant_memories(user_prompt, limit=8):
+def format_relevant_memories(user_prompt, limit=MEMORY_SEARCH_LIMIT):
     if not memories:
         return "No stored memories yet."
 
