@@ -1,0 +1,186 @@
+[
+    {
+        "type": "seed_identity",
+        "content": "Seed is a private local-first companion system.",
+        "importance": 5
+    },
+    {
+        "type": "seed_identity",
+        "content": "Seed is a private local-first companion. Not a random chatbot.",
+        "importance": 5
+    },
+    {
+        "type": "technical_progress",
+        "content": "Built Seed v0.1 local terminal core with menu control, Seed_Core.md reading, memory_rules.md reading, first_contact.md reading, JSON memory, and journal files.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:02:42"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added safe JSON memory functions: load memories, save memories, add memory, list memories, search memories by type, and delete memories by number.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:03:58"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Refactored Seed into modules: seed_cli.py for menu control, seed_memory.py for memory, seed_journal.py for journal, seed_files.py for Markdown files, seed_status.py for status, and seed_brain.py for Ollama connection.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:05:32"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added memory quality upgrades: allowed memory type validation, created_at timestamps, old memory compatibility with memory.get(), and cleaner memory printing.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:06:07"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added Seed system status screen showing version, required file status, memory count, allowed memory type count, LLM status, and local terminal mode.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:06:29"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Connected Seed to local Ollama using llama3.1:8b through the Ollama HTTP API and requests.post().",
+        "importance": 5,
+        "created_at": "2026-06-21T13:06:49"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added Talk to Seed in seed_cli.py. Seed now sends user messages ",
+        "importance": 5,
+        "created_at": "2026-06-21T13:07:10"
+    },
+    {
+        "type": "mistake",
+        "content": "Seed gave an incomplete progress summary because the actual project progress was not saved into seed_memory.json yet.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:07:44"
+    },
+    {
+        "type": "reflection",
+        "content": "A memory-aware Seed can only use memories that are actually stored. Unsaved progress is invisible to Seed.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:08:11"
+    },
+    {
+        "type": "technical_progress",
+        "content": "seed_brain.py is currently active. The Talk to Seed option in seed_cli.py calls ask_seed() from seed_brain.py, which builds the prompt and sends it to Ollama.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:19:40"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Updated Seed_Core.md and status/menu version to Seed v0.2.3 so Seed's identity file matches its current actual capabilities.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:22:29"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v0.2.3 now gives structured progress summaries using stored memories. It groups project progress into phases and answers based on memory context instead of guessing.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:24:33"
+    },
+    {
+        "type": "reflection",
+        "content": "Seed's answers improve when important progress is saved as structured memories. Memory quality directly affects answer quality.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:24:57"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added Seed v0.2.4 session chat mode. Talk to Seed now supports multiple messages in one chat and uses temporary session_history for follow-up questions.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:43:42"
+    },
+    {
+        "type": "reflection",
+        "content": "Seed now has two memory layers: short-term session history for the current chat and long-term JSON memory for intentional saved memories.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:44:28"
+    },
+    {
+        "type": "mistake",
+        "content": "Seed initially asked to save temporary test phrases too often. The prompt rules needed to more clearly separate temporary chat context from important long-term memory.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:44:46"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added /save command inside Talk to Seed so memories can be saved without leaving chat.",
+        "importance": 5,
+        "created_at": "2026-06-21T13:51:30"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added /save command inside Talk to Seed so memories can be saved without leaving chat",
+        "importance": 5,
+        "created_at": "2026-06-21T13:59:28"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v0.2.5 added intentional memory saving from chat. The /save command saves long-term memories without leaving Talk to Seed and also updates session_history so Seed knows what was just saved.",
+        "importance": 5,
+        "created_at": "2026-06-21T14:02:02"
+    },
+    {
+        "type": "reflection",
+        "content": "SSeed now separates temporary session context from intentional long-term memory. /save acts as the bridge between short-term chat and permanent JSON memory.",
+        "importance": 5,
+        "created_at": "2026-06-21T14:03:27"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v0.2.9 added /debug context inspection. Seed can now show relevant memories, recent journal entries, and current session history for debugging context",
+        "importance": 5,
+        "created_at": "2026-06-21T16:05:32"
+    },
+    {
+        "type": "reflection",
+        "content": "Seed's behavior depends heavily on prompt context. The /debug command helps inspect what the model actually sees before answering.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:06:50"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Fixed /journal session context. write_journal() now returns the saved journal entry, and talk_to_seed() adds the exact journal entry text into session_history so Seed can answer what was written during the same chat.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:28:06"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Added recent journal injection. seed_journal_py can return recent journal entries, and seed_brain.py injects them into the prompt so Seed can use recent free-form journal context",
+        "importance": 5,
+        "created_at": "2026-06-21T16:30:05"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Connected Seed to local Ollama llama3.1:8b using requests.post() and the Ollama HTTP API at localhost:11434/api/generate",
+        "importance": 5,
+        "created_at": "2026-06-21T16:31:36"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v0.3.3 added minimum relevance filtering. Memory retrieval now requires keyword matches before importance ranking, so unrelated high-importance memories do not appear in search results.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:48:32"
+    },
+    {
+        "type": "reflection",
+        "content": "Importance and relevance are different. Seed should prefer memories that match the current question, then use importanc eto rank them.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:49:39"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v0.3.4 added memory search score visibility. /search now shows keyword_score and total_score so retrieval decisions are easier to debug.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:58:14"
+    },
+    {
+        "type": "reflection",
+        "content": "Seeing retrieval scores make Seed's memory system more transparent. Debuggable retrieval is necessary before adding more advanced memory features.",
+        "importance": 5,
+        "created_at": "2026-06-21T16:59:52"
+    }
+]
