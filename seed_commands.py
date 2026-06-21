@@ -6,7 +6,7 @@ from seed_memory import (
 )
 from seed_journal import write_journal, read_journal
 from seed_status import show_seed_status
-from seed_brain import get_context_debug, search_memory_context
+from seed_brain import ask_seed, get_context_debug, search_memory_context, memory_debug_report
 from seed_memory_tools import (
     list_memories_by_type,
     show_memory_stats,
@@ -68,6 +68,7 @@ def show_chat_help():
     print("/modules = show Python modules")
     print("/version = show Seed version info")
     print("/project-save-memory = save project report to memory")
+    print("/memory-debug = show detailed memory retrieval scoring")
 
 
 def save_memory_from_chat():
@@ -271,7 +272,12 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/memories":
         list_memories()
         return "handled"
-
+    
+    if command == "/memory-debug":
+        debug_query = input("Memory debug query: ")
+        print(memory_debug_report(debug_query))
+        return "handled"
+    
     if command == "/search":
         search_query = input("Search query: ")
         print("\n=== MEMORY SEARCH RESULTS ===")

@@ -69,7 +69,56 @@ KEYWORD_ALIASES = {
         "modules",
         "structure",
         "split"
-    ]
+    ],   
+    "log": [
+        "log",
+        "logs",
+        "logging",
+        "chat log",
+        "chat logs",
+        "conversation log",
+        "conversation logs",
+        "seed_logs",
+        "seed_chat_logger",
+        "raw conversation",
+        "audit trail"
+    ],
+
+    "summary": [
+        "summary",
+        "summaries",
+        "summarize",
+        "summarization",
+        "session summary",
+        "session summaries",
+        "seed_session_summarizer",
+        "summary-save-memory",
+        "summary-save-journal"
+    ],
+
+    "project": [
+        "project",
+        "files",
+        "file",
+        "modules",
+        "module",
+        "architecture",
+        "structure",
+        "codebase",
+        "self-inspection",
+        "seed_project_inspector"
+    ],
+
+    "config": [
+        "config",
+        "configuration",
+        "settings",
+        "seed_config",
+        "version",
+        "model name",
+        "ollama url",
+        "limits"
+    ],
 }
 
 

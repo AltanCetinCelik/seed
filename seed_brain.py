@@ -15,116 +15,173 @@ from seed_project_inspector import get_project_context_for_prompt
 
 def clean_words(text):
     stop_words = [
-        "what", "did", "we", "the", "a", "an", "to", "of", "and",
-        "or", "is", "are", "was", "were", "about", "with", "in",
-        "on", "for", "so", "far", "just", "me", "my", "our"
+        "a", "an", "the",
+        "and", "or", "but",
+        "is", "are", "was", "were",
+        "am", "be", "been", "being",
+        "i", "you", "he", "she", "it", "we", "they",
+        "me", "him", "her", "us", "them",
+        "my", "your", "his", "its", "our", "their",
+        "this", "that", "these", "those",
+        "what", "when", "where", "why", "how",
+        "do", "does", "did", "done",
+        "with", "without", "for", "to", "from", "of", "in", "on", "at", "by",
+        "about", "as", "into", "through", "during",
+        "so", "just", "really", "very",
+        "have", "has", "had",
+        "can", "could", "should", "would",
+        "tell", "show", "give",
+        "please"
     ]
+
+    punctuation = ".,!?;:()[]{}<>\"'`~@#$%^&*_+=|\\/"
 
     cleaned_text = text.lower()
 
-    for symbol in [".", ",", "?", "!", ":", ";", "(", ")", "[", "]", "{", "}", "/", "\\"]:
-        cleaned_text = cleaned_text.replace(symbol, " ")
+    for mark in punctuation:
+        cleaned_text = cleaned_text.replace(mark, " ")
 
-    words = cleaned_text.split()
-
+    raw_words = cleaned_text.split()
     useful_words = []
 
-    for word in words:
-        if word not in stop_words and len(word) > 2:
+    for word in raw_words:
+        word = word.strip()
+
+        if word == "":
+            continue
+
+        if word in stop_words:
+            continue
+
+        if len(word) < 3:
+            continue
+
+        if word not in useful_words:
             useful_words.append(word)
 
     return useful_words
 
-
 def score_memory(memory, user_prompt):
     prompt_words = clean_words(user_prompt)
     expanded_words = expand_query(user_prompt)
-    prompt_words.extend(expanded_words)
-    unique_prompt_words = []
 
-    for word in prompt_words:
-        if word not in unique_prompt_words:
-            unique_prompt_words.append(word)
+    for word in expanded_words:
+        cleaned_alias_words = clean_words(word)
 
-    prompt_words = unique_prompt_words
-    memory_text = (
-        memory.get("type", "") + " " +
-        memory.get("content", "") + " " +
-        memory.get("created_at", "")
-    ).lower()
+        for cleaned_word in cleaned_alias_words:
+            if cleaned_word not in prompt_words:
+                prompt_words.append(cleaned_word)
+
+    memory_type = memory.get("type", "")
+    content = memory.get("content", "")
+    created_at = memory.get("created_at", "")
+
+    memory_text = f"{memory_type} {content} {created_at}".lower()
+    memory_words = clean_words(memory_text)
+
+    user_prompt_lower = user_prompt.lower()
 
     keyword_score = 0
 
     for word in prompt_words:
-        if word in memory_text:
+        if word in memory_words:
             keyword_score += 10
+
+    phrase_score = 0
+
+    useful_query_words = clean_words(user_prompt)
+
+    if len(useful_query_words) >= 2:
+        useful_query_phrase = " ".join(useful_query_words)
+
+        if useful_query_phrase in memory_text:
+            phrase_score += 25
+
+    type_score = 0
+
+    if memory_type.lower() in user_prompt_lower:
+        type_score += 15
 
     importance_score = memory.get("importance", 0)
 
-    total_score = keyword_score + importance_score
+    total_score = keyword_score + phrase_score + type_score + importance_score
 
     return {
         "total_score": total_score,
         "keyword_score": keyword_score,
+        "phrase_score": phrase_score,
+        "type_score": type_score,
+        "importance_score": importance_score,
         "memory": memory
     }
 
 def format_relevant_memories(user_prompt, limit=MEMORY_SEARCH_LIMIT):
-    if not memories:
-        return "No stored memories yet."
-
     scored_memories = []
 
     for memory in memories:
-        scored_memory = score_memory(memory, user_prompt)
+        result = score_memory(memory, user_prompt)
+        scored_memories.append(result)
 
-        if scored_memory["keyword_score"] > 0:
-            scored_memories.append(scored_memory)
+    direct_matches = []
 
-    if not scored_memories:
-        important_memories = sorted(
-            memories,
-            key=lambda memory: memory.get("importance", 0),
+    for result in scored_memories:
+        if (
+            result["keyword_score"] > 0
+            or result["phrase_score"] > 0
+            or result["type_score"] > 0
+        ):
+            direct_matches.append(result)
+
+    if direct_matches:
+        direct_matches.sort(
+            key=lambda result: result["total_score"],
             reverse=True
-        )[:limit]
+        )
 
-        memory_text = "No direct keyword matches found. Showing important memories instead:\n"
+        selected_memories = direct_matches[:limit]
 
-        for number, memory in enumerate(important_memories, start=1):
-            memory_text += (
-                f"{number}. "
-                f"[{memory.get('type', 'unknown_type')}] "
-                f"{memory.get('content', 'no content')} "
-                f"Importance: {memory.get('importance', 'unknown')} "
-                f"Created: {memory.get('created_at', 'unknown time')}\n"
-            )
+        memory_text = "Direct memory matches found:\n\n"
+
+        for number, result in enumerate(selected_memories, start=1):
+            memory = result["memory"]
+
+            memory_text += f"{number}. [{memory.get('type', 'unknown')}]\n"
+            memory_text += f"Content: {memory.get('content', '')}\n"
+            memory_text += f"Importance: {memory.get('importance', 0)}\n"
+            memory_text += f"Created: {memory.get('created_at', 'unknown time')}\n"
+            memory_text += f"Keyword score: {result['keyword_score']}\n"
+            memory_text += f"Phrase score: {result['phrase_score']}\n"
+            memory_text += f"Type score: {result['type_score']}\n"
+            memory_text += f"Importance score: {result['importance_score']}\n"
+            memory_text += f"Total score: {result['total_score']}\n"
+            memory_text += "-" * 40 + "\n"
 
         return memory_text
 
-    sorted_memories = sorted(
-        scored_memories,
-        key=lambda item: item["total_score"],
+    scored_memories.sort(
+        key=lambda result: result["total_score"],
         reverse=True
     )
 
-    selected_memories = sorted_memories[:limit]
+    fallback_memories = scored_memories[:limit]
 
-    memory_text = ""
+    memory_text = "No direct keyword, phrase, or type matches found. Showing important memories instead:\n\n"
 
-    for number, item in enumerate(selected_memories, start=1):
-        memory = item["memory"]
+    for number, result in enumerate(fallback_memories, start=1):
+        memory = result["memory"]
 
-        memory_text += (
-        f"{number}. "
-        f"[{memory.get('type', 'unknown_type')}] "
-        f"{memory.get('content', 'no content')} "
-        f"Importance: {memory.get('importance', 'unknown')} "
-        f"Keyword score: {item.get('keyword_score', 'unknown')} "
-        f"Total score: {item.get('total_score', 'unknown')} "
-        f"Created: {memory.get('created_at', 'unknown time')}\n"
-     )
+        memory_text += f"{number}. [{memory.get('type', 'unknown')}]\n"
+        memory_text += f"Content: {memory.get('content', '')}\n"
+        memory_text += f"Importance: {memory.get('importance', 0)}\n"
+        memory_text += f"Created: {memory.get('created_at', 'unknown time')}\n"
+        memory_text += f"Keyword score: {result['keyword_score']}\n"
+        memory_text += f"Phrase score: {result['phrase_score']}\n"
+        memory_text += f"Type score: {result['type_score']}\n"
+        memory_text += f"Importance score: {result['importance_score']}\n"
+        memory_text += f"Total score: {result['total_score']}\n"
+        memory_text += "-" * 40 + "\n"
+
     return memory_text
-
 
 def read_file(filename):
     try:
@@ -204,6 +261,12 @@ Important behavior rules:
 - When answering from stored memories, do not cite memory numbers unless the user asks for raw memory references. Summarize the actual contents naturally.
 If the user asks about Seed's current files, modules, project structure, version, or architecture, use the Live project context section. Do not guess a file list from memory if live project context is available.
 
+Memory honesty rule:
+If the relevant memory section says no direct keyword matches were found, do not pretend to remember exact details. Say that the current memory retrieval did not find a direct match, then answer from available context if possible.
+
+Retrieval rule:
+When answering questions about previous progress, prefer the Relevant memories section. If live project context is available for project questions, combine it with memories.
+
 User message:
 {user_prompt}
 
@@ -259,6 +322,41 @@ Debug query:
 """
 
     return debug_text
+
+def memory_debug_report(user_prompt, limit=None):
+    from seed_config import MEMORY_DEBUG_LIMIT
+
+    if limit is None:
+        limit = MEMORY_DEBUG_LIMIT
+
+    scored_memories = []
+
+    for memory in memories:
+        result = score_memory(memory, user_prompt)
+        scored_memories.append(result)
+
+    scored_memories.sort(
+        key=lambda result: result["total_score"],
+        reverse=True
+    )
+
+    report = "=== MEMORY DEBUG REPORT ===\n"
+    report += f"Query: {user_prompt}\n\n"
+
+    for number, result in enumerate(scored_memories[:limit], start=1):
+        memory = result["memory"]
+
+        report += f"{number}. [{memory.get('type', 'unknown')}]\n"
+        report += f"Content: {memory.get('content', '')}\n"
+        report += f"Created: {memory.get('created_at', 'unknown time')}\n"
+        report += f"Keyword score: {result['keyword_score']}\n"
+        report += f"Phrase score: {result['phrase_score']}\n"
+        report += f"Type score: {result['type_score']}\n"
+        report += f"Importance score: {result['importance_score']}\n"
+        report += f"Total score: {result['total_score']}\n"
+        report += "-" * 40 + "\n"
+
+    return report
 
 def search_memory_context(user_prompt, limit=8):
     return format_relevant_memories(user_prompt, limit)

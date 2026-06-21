@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v1.1.0 local memory-aware terminal assistant with live project context injection.
+Seed v1.2.0 local memory-aware terminal assistant with live project context and improved memory retrieval debugging.
 
 Core principles:
 - Local-first when possible.
@@ -55,6 +55,9 @@ Current abilities:
 - Show version info with /version
 - Save project report to memory with approval
 - Inject live project context into prompts when the user asks about Seed's files, modules, version, or architecture
+- Show detailed memory retrieval scoring with /memory-debug
+- Use improved memory scoring with keyword, phrase, type, and importance scores
+- Be honest when no direct memory match exists
 
 
 Current limitations:
