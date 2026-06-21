@@ -1,4 +1,4 @@
-SEED_VERSION = "v0.9.0"
+SEED_VERSION = "v1.1.0"
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.1:8b"
@@ -22,3 +22,20 @@ LOG_COMMAND_EVENTS = True
 SUMMARY_MAX_LOG_LINES = 120
 SUMMARY_MEMORY_TYPE = "technical_progress"
 SUMMARY_IMPORTANCE = 5
+
+PROJECT_ROOT = "."
+PROJECT_REPORT_MEMORY_TYPE = "technical_progress"
+PROJECT_REPORT_IMPORTANCE = 5
+
+PROJECT_IGNORED_FOLDERS = [
+    "__pycache__",
+    ".git",
+    "seed_logs"
+]
+
+PROJECT_IGNORED_FILES = [
+    ".DS_Store"
+]
+
+PROJECT_CONTEXT_ENABLED = True
+PROJECT_CONTEXT_FILE_LIMIT = 40

@@ -8,7 +8,7 @@ from seed_config import (
     MEMORY_SEARCH_LIMIT,
     SESSION_HISTORY_LIMIT
 )
-
+from seed_project_inspector import get_project_context_for_prompt
 
 
 
@@ -155,6 +155,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     relevant_memories = format_relevant_memories(user_prompt)
     session_text = format_session_history(session_history)
     recent_journal = get_recent_journal_entries()
+    project_context = get_project_context_for_prompt(user_prompt)
 
     full_prompt = f"""
 You are Seed.
@@ -162,6 +163,9 @@ You are Seed.
 Use the following Seed Core as your identity and behavior guide:
 
 {seed_core}
+
+Live project context:
+{project_context}
 
 Recent journal entries:
 {recent_journal}
@@ -198,7 +202,7 @@ Important behavior rules:
 - Use journal entries as context when the user asks about recent thoughts, notes, debugging, or reflections.
 - Do not treat journal entries as permanent verified facts unless they are supported by stored memories too.
 - When answering from stored memories, do not cite memory numbers unless the user asks for raw memory references. Summarize the actual contents naturally.
-
+If the user asks about Seed's current files, modules, project structure, version, or architecture, use the Live project context section. Do not guess a file list from memory if live project context is available.
 
 User message:
 {user_prompt}

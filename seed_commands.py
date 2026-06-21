@@ -26,6 +26,13 @@ from seed_session_summarizer import (
     save_last_summary_to_memory,
     save_last_summary_to_journal
 )
+from seed_project_inspector import (
+    show_project_report,
+    show_project_files,
+    show_project_modules,
+    show_version_info,
+    save_project_report_to_memory
+)
 
 
 def show_chat_help():
@@ -56,6 +63,11 @@ def show_chat_help():
     print("/summary = summarize current chat session")
     print("/summary-save-memory = save last summary to memory")
     print("/summary-save-journal = save last summary to journal")
+    print("/project = show Seed project report")
+    print("/files = show project files")
+    print("/modules = show Python modules")
+    print("/version = show Seed version info")
+    print("/project-save-memory = save project report to memory")
 
 
 def save_memory_from_chat():
@@ -343,6 +355,26 @@ def handle_chat_command(user_message, session_history, chat_state):
         read_recent_log_lines(log_path)
         return "handled"
 
+
+    if command == "/project":
+        show_project_report()
+        return "handled"
+
+    if command == "/files":
+        show_project_files()
+        return "handled"
+
+    if command == "/modules":
+        show_project_modules()
+        return "handled"
+
+    if command == "/version":
+        show_version_info()
+        return "handled"
+
+    if command == "/project-save-memory":
+        save_project_report_to_memory(chat_state)
+        return "handled"
 
     if command == "/status":
         show_seed_status()

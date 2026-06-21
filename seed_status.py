@@ -20,6 +20,9 @@ def file_status(filename):
 
 
 def show_seed_status():
+    from seed_project_inspector import get_python_modules
+    modules = get_python_modules()
+    print(f"Python modules: {len(modules)}")
     print("\n=== SEED STATUS ===")
     print(f"Version: {SEED_VERSION}")
     print(f"Model: {MODEL_NAME}")
