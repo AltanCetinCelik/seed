@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v0.7.0 local memory-aware terminal assistant with centralized configuration.
+Seed v0.8.0 local memory-aware terminal assistant with centralized config and conversation logging.
 
 Core principles:
 - Local-first when possible.
@@ -38,6 +38,11 @@ Current abilities:
 - Clear temporary session history
 - Route slash commands through seed_commands.py
 - Use centralized configuration through seed_config.py
+- Create one chat log file per Talk to Seed session
+- Log user messages, Seed answers, slash commands, and system events
+- Show current log path with /log
+- Add developer notes to logs with /log-note
+- Read recent log lines with /log-read
 
 Current limitations:
 - No voice yet

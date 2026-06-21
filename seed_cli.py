@@ -5,17 +5,28 @@ from seed_status import show_seed_status
 from seed_brain import ask_seed
 from seed_commands import handle_chat_command, handle_memory_suggestion
 from seed_config import SEED_VERSION, AUTOSUGGEST_DEFAULT
-
+from seed_chat_logger import (
+    create_chat_log,
+    log_user_message,
+    log_seed_answer,
+    log_system_event,
+    close_chat_log
+)
 def talk_to_seed():
     session_history = []
+    log_path = create_chat_log()
 
     chat_state = {
-    "autosuggest_enabled": AUTOSUGGEST_DEFAULT
+        "autosuggest_enabled": AUTOSUGGEST_DEFAULT,
+        "log_path": log_path
     }
 
     print("\n=== TALK TO SEED ===")
     print("Type /help to show chat commands.")
     print("Type /exit to return to the main menu.")
+    print(f"Chat log started: {log_path}")
+
+    log_system_event(log_path, "Talk to Seed session started.")
 
     while True:
         user_message = input("\nYou: ")
@@ -31,10 +42,13 @@ def talk_to_seed():
         )
 
         if command_result == "exit":
+            close_chat_log(log_path)
             break
 
         if command_result == "handled":
             continue
+
+        log_user_message(log_path, user_message)
 
         print("\nSeed is thinking...")
 
@@ -42,6 +56,8 @@ def talk_to_seed():
 
         print("\n=== SEED ===")
         print(answer)
+
+        log_seed_answer(log_path, answer)
 
         session_history.append({
             "role": "User",
@@ -57,7 +73,8 @@ def talk_to_seed():
             handle_memory_suggestion(
                 user_message,
                 answer,
-                session_history
+                session_history,
+                chat_state
             )
 def menu():
     print(f"\n=== SEED {SEED_VERSION} ===")

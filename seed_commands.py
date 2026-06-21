@@ -13,6 +13,14 @@ from seed_memory_tools import (
     find_possible_duplicates
 )
 from seed_memory_suggester import suggest_memory
+from seed_config import LOG_COMMAND_EVENTS
+from seed_chat_logger import (
+    log_system_event,
+    log_command_event,
+    log_developer_note,
+    show_current_log_path,
+    read_recent_log_lines
+)
 
 
 def show_chat_help():
@@ -37,6 +45,9 @@ def show_chat_help():
     print("/debug = show current prompt context")
     print("/clear-session = clear temporary chat history")
     print("/config = show Seed configuration")
+    print("/log = show current chat log path")
+    print("/log-note = write a note into current chat log")
+    print("/log-read = read recent lines from current chat log")
 
 
 def save_memory_from_chat():
@@ -64,7 +75,7 @@ def save_memory_from_chat():
     return None
 
 
-def manual_memory_suggestion(session_history):
+def manual_memory_suggestion(session_history, chat_state):
     print("\n=== MANUAL MEMORY SUGGESTION ===")
 
     user_message = input("What happened / what did we do?: ")
@@ -97,6 +108,15 @@ def manual_memory_suggestion(session_history):
 
         if saved:
             print("Suggested memory saved.")
+            log_system_event(
+                chat_state.get("log_path"),
+                (
+                    f"Manually approved suggested memory: "
+                    f"[{suggestion['type']}] "
+                    f"{suggestion['content']} "
+                    f"Importance: {suggestion['importance']}"
+                )
+            )
 
             session_history.append({
                 "role": "System",
@@ -109,9 +129,13 @@ def manual_memory_suggestion(session_history):
             })
     else:
         print("Suggested memory skipped.")
+        log_system_event(
+            chat_state.get("log_path"),
+            "Manual suggested memory skipped."
+        )
 
 
-def handle_memory_suggestion(user_message, seed_answer, session_history):
+def handle_memory_suggestion(user_message, seed_answer, session_history, chat_state=None):
     suggestion = suggest_memory(user_message, seed_answer)
 
     if suggestion is None:
@@ -143,12 +167,32 @@ def handle_memory_suggestion(user_message, seed_answer, session_history):
                     f"Importance: {suggestion['importance']}"
                 )
             })
+
+            if chat_state is not None:
+                log_path = chat_state.get("log_path")
+                log_system_event(
+                    log_path,
+                    (
+                        f"Approved suggested memory: "
+                        f"[{suggestion['type']}] "
+                        f"{suggestion['content']} "
+                        f"Importance: {suggestion['importance']}"
+                    )
+                )
     else:
         print("Suggested memory skipped.")
+
+        if chat_state is not None:
+            log_path = chat_state.get("log_path")
+            log_system_event(log_path, "Suggested memory skipped.")
 
 
 def handle_chat_command(user_message, session_history, chat_state):
     command = user_message.strip().lower()
+    log_path = chat_state.get("log_path")
+
+    if command.startswith("/") and LOG_COMMAND_EVENTS:
+        log_command_event(log_path, command)
 
     if command in ["/exit", "/quit"]:
         print("Leaving Seed chat...")
@@ -168,6 +212,10 @@ def handle_chat_command(user_message, session_history, chat_state):
             print("Autosuggest is now ON.")
         else:
             print("Autosuggest is now OFF.")
+        log_system_event(
+            log_path,
+            f"Autosuggest set to {chat_state['autosuggest_enabled']}"
+        )
 
         return "handled"
 
@@ -184,6 +232,15 @@ def handle_chat_command(user_message, session_history, chat_state):
                     f"Importance: {saved_memory['importance']}"
                 )
             })
+            log_system_event(
+                log_path,
+                (
+                    f"Manual memory saved: "
+                    f"[{saved_memory['type']}] "
+                    f"{saved_memory['content']} "
+                    f"Importance: {saved_memory['importance']}"
+                )
+            )
 
         return "handled"
 
@@ -217,6 +274,7 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/forget":
         print("\n=== FORGET MEMORY FROM CHAT ===")
         delete_memory()
+        log_system_event(log_path, "Forget memory command used.")
         return "handled"
 
     if command == "/journal":
@@ -230,6 +288,10 @@ def handle_chat_command(user_message, session_history, chat_state):
                     f"{journal_entry}"
                 )
             })
+            log_system_event(
+                    log_path,
+                    f"Journal entry written: {journal_entry}"
+                )
 
         return "handled"
 
@@ -248,6 +310,19 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/first-contact":
         show_first_contact()
         return "handled"
+    
+    if command == "/log":
+        show_current_log_path(log_path)
+        return "handled"
+
+    if command == "/log-note":
+        log_developer_note(log_path)
+        return "handled"
+
+    if command == "/log-read":
+        read_recent_log_lines(log_path)
+        return "handled"
+
 
     if command == "/status":
         show_seed_status()
@@ -261,6 +336,7 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/clear-session":
         session_history.clear()
         print("Temporary session history cleared.")
+        log_system_event(log_path, "Temporary session history cleared.")
         return "handled"
 
     if command.startswith("/"):

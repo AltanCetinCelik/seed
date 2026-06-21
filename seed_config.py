@@ -1,4 +1,4 @@
-SEED_VERSION = "v0.7.0"
+SEED_VERSION = "v0.8.0"
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.1:8b"
@@ -14,3 +14,7 @@ AUTOSUGGEST_DEFAULT = True
 
 SEED_MODE = "local terminal"
 LLM_STATUS = "connected through local Ollama when Ollama is running"
+
+CHAT_LOG_DIR = "seed_logs"
+CHAT_LOG_TAIL_LINES = 40
+LOG_COMMAND_EVENTS = True
