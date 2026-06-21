@@ -36,6 +36,7 @@ Current abilities:
 - Read and write journal from chat
 - Show context debug from chat
 - Clear temporary session history
+- Route slash commands through seed_commands.py
 
 Current limitations:
 - No voice yet
