@@ -34,6 +34,7 @@ from seed_project_inspector import (
     save_project_report_to_memory
 )
 from seed_visuals import show_seed_hud_screen
+from seed_personality import show_personality
 
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
@@ -70,7 +71,7 @@ def show_chat_help():
     print("/project-save-memory = save project report to memory")
     print("/memory-debug = show detailed memory retrieval scoring")
     print("/hud = show Seed visual dashboard")
-
+    print("/personality = show Seed personality profile")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -387,6 +388,10 @@ def handle_chat_command(user_message, session_history, chat_state):
         show_seed_status()
         return "handled"
     
+    if command == "/personality":
+        show_personality()
+        return "handled"
+
     if command == "/hud":
         show_seed_hud_screen(chat_state)
         return "handled"

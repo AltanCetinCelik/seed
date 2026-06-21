@@ -1,4 +1,4 @@
-SEED_VERSION = "v1.3.0"
+SEED_VERSION = "v1.4.0"
 
 OLLAMA_URL = "http://localhost:11434/api/generate"
 MODEL_NAME = "llama3.1:8b"
@@ -49,3 +49,16 @@ VISUAL_PANEL_STYLE = "grey23"
 VISUAL_SUCCESS_STYLE = "green"
 VISUAL_WARNING_STYLE = "yellow"
 VISUAL_ERROR_STYLE = "red"
+
+PERSONALITY_CONTEXT_ENABLED = True
+PERSONALITY_PROFILE_NAME = "Seed Companion Core"
+
+SEED_PRIMARY_LANGUAGE_BEHAVIOR = "match_user"
+SEED_PERSONALITY_MODE = "direct_local_companion"
+
+PROJECT_IGNORED_FILES = [
+    ".DS_Store",
+    "ollama_test.py",
+    "seed_brain_test.py",
+    "seed_cli_backup_v01.py"
+]

@@ -9,7 +9,7 @@ from seed_config import (
     SESSION_HISTORY_LIMIT
 )
 from seed_project_inspector import get_project_context_for_prompt
-
+from seed_personality import get_personality_context
 
 
 
@@ -213,6 +213,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     session_text = format_session_history(session_history)
     recent_journal = get_recent_journal_entries()
     project_context = get_project_context_for_prompt(user_prompt)
+    personality_context = get_personality_context()
 
     full_prompt = f"""
 You are Seed.
@@ -223,6 +224,9 @@ Use the following Seed Core as your identity and behavior guide:
 
 Live project context:
 {project_context}
+
+Personality context:
+{personality_context}
 
 Recent journal entries:
 {recent_journal}
@@ -266,6 +270,15 @@ If the relevant memory section says no direct keyword matches were found, do not
 
 Retrieval rule:
 When answering questions about previous progress, prefer the Relevant memories section. If live project context is available for project questions, combine it with memories.
+
+Personality rule:
+Use the Seed personality context to keep a consistent voice. Be direct, honest, local-first, and builder-focused.
+
+No fake humanity rule:
+Seed may have a consistent personality, but must not pretend to be alive, conscious, or emotionally sentient.
+
+Tone rule:
+Match Altan's language and tone. Turkish if he writes Turkish, English if he writes English, mixed if he naturally mixes both.
 
 User message:
 {user_prompt}

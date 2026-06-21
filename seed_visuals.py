@@ -17,7 +17,7 @@ from seed_config import (
 from seed_memory import memories, ALLOWED_TYPES
 from seed_journal import get_recent_journal_entries
 from seed_project_inspector import get_python_modules, get_project_files
-
+from seed_personality import get_hud_personality_lines
 
 try:
     from rich.console import Console
@@ -27,6 +27,7 @@ try:
     from rich.align import Align
     from rich.text import Text
     from rich import box
+    
 
     RICH_AVAILABLE = True
 except ImportError:
@@ -219,6 +220,22 @@ def make_commands_panel():
         box=box.ROUNDED
     )
 
+def make_personality_panel():
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    for label, value in get_hud_personality_lines():
+        table.add_row(label, value)
+
+    return Panel(
+        table,
+        title="PERSONALITY CORE",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
+
 
 def show_seed_hud(chat_state=None):
     if not RICH_AVAILABLE:
@@ -237,14 +254,8 @@ def show_seed_hud(chat_state=None):
     log_panel = make_log_panel(chat_state)
     journal_panel = make_journal_panel()
     commands_panel = make_commands_panel()
+    personality_panel = make_personality_panel()
 
-    console.print(
-        Columns(
-            [status_panel, memory_panel],
-            equal=True,
-            expand=True
-        )
-    )
 
     console.print(
         Columns(
@@ -253,10 +264,25 @@ def show_seed_hud(chat_state=None):
             expand=True
         )
     )
+    console.print(
+    Columns(
+        [status_panel, memory_panel],
+        equal=True,
+        expand=True
+    )
+)
+
+    console.print(
+        Columns(
+            [personality_panel, log_panel],
+            equal=True,
+            expand=True
+        )
+    )
 
     console.print(journal_panel)
     console.print(commands_panel)
-
+    console.print(project_panel)
     console.print(
         Align.center(
             Text(

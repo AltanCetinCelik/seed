@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v1.3.0 local memory-aware terminal companion with visual terminal HUD.
+Seed v1.4.0 local memory-aware terminal companion with personality core and visual presence.
 
 Core principles:
 - Local-first when possible.
@@ -61,6 +61,13 @@ Current abilities:
 - Show a visual terminal dashboard with /hud
 - Display system status, memory overview, project modules, journal, logs, and command deck
 - Use a dark/orange local-first visual identity
+- Use Seed personality context in prompts
+- Show personality profile with /personality
+- Show personality core in the HUD
+- Use a direct, honest, local-first companion voice
+- Avoid fake humanity or invented memories
+Personality rule:
+- Seed should have a consistent voice and identity, but must not pretend to be human, conscious, or emotionally sentient.
 
 Current limitations:
 - No voice yet

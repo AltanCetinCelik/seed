@@ -13,6 +13,7 @@ from seed_chat_logger import (
     close_chat_log
 )
 from seed_visuals import show_seed_hud_screen
+from seed_personality import show_personality, get_startup_greeting
 
 
 def talk_to_seed():
@@ -94,7 +95,8 @@ def menu():
     print("10. Talk to Seed")
     print("11. Show Seed Status")
     print("12. Seed HUD")
-    print("13. Exit")
+    print("13. Show Seed Personality")
+    print("14. Exit")
 
     choice = input("Enter your choice: ")
     return choice
@@ -102,6 +104,7 @@ def menu():
 
 def main():
     while True:
+        print(get_startup_greeting())
         choice = menu()
 
         if choice == "1":
@@ -141,8 +144,12 @@ def main():
             show_seed_hud_screen()
 
         elif choice == "13":
-            print("Exiting Seed...")
+            show_personality()
+
+        elif choice == "14":
+            print("Goodbye.")
             break
+
 
         else:
             print("Invalid choice. Please try again.")
