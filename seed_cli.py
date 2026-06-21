@@ -6,6 +6,8 @@ from seed_brain import ask_seed, get_context_debug
 from seed_memory import add_memory, list_memories, search_memories, delete_memory, save_memory_direct
 from seed_brain import ask_seed, get_context_debug, search_memory_context
 from seed_memory_tools import list_memories_by_type, show_memory_stats, find_possible_duplicates
+from seed_memory_suggester import suggest_memory
+
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -30,6 +32,41 @@ def save_memory_from_chat():
         }
 
     return None
+
+def handle_memory_suggestion(user_message, seed_answer, session_history):
+    suggestion = suggest_memory(user_message, seed_answer)
+
+    if suggestion is None:
+        return
+
+    print("\n=== SUGGESTED MEMORY ===")
+    print(f"Type: {suggestion['type']}")
+    print(f"Content: {suggestion['content']}")
+    print(f"Importance: {suggestion['importance']}")
+
+    choice = input("Save this memory? (y/n): ")
+
+    if choice.lower() == "y":
+        saved = save_memory_direct(
+            suggestion["type"],
+            suggestion["content"],
+            suggestion["importance"]
+        )
+
+        if saved:
+            print("Suggested memory saved.")
+
+            session_history.append({
+                "role": "System",
+                "content": (
+                    f"User approved and saved suggested memory: "
+                    f"[{suggestion['type']}] "
+                    f"{suggestion['content']} "
+                    f"Importance: {suggestion['importance']}"
+                )
+            })
+    else:
+        print("Suggested memory skipped.")
 
 def talk_to_seed():
     session_history = []
@@ -138,6 +175,7 @@ def talk_to_seed():
             "role": "Seed",
             "content": answer
         })
+        handle_memory_suggestion(user_message, answer, session_history)
 
 
 def menu():

@@ -182,5 +182,11 @@
         "content": "Seeing retrieval scores make Seed's memory system more transparent. Debuggable retrieval is necessary before adding more advanced memory features.",
         "importance": 5,
         "created_at": "2026-06-21T16:59:52"
+    },
+    {
+        "type": "seed_boundary",
+        "content": "User progress update: we added automatic memory suggestions and it works",
+        "importance": 5,
+        "created_at": "2026-06-21T17:35:48"
     }
 ]
