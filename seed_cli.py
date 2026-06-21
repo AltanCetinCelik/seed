@@ -12,6 +12,9 @@ from seed_chat_logger import (
     log_system_event,
     close_chat_log
 )
+from seed_visuals import show_seed_hud_screen
+
+
 def talk_to_seed():
     session_history = []
     log_path = create_chat_log()
@@ -90,7 +93,8 @@ def menu():
     print("9. Show First Contact")
     print("10. Talk to Seed")
     print("11. Show Seed Status")
-    print("12. Exit")
+    print("12. Seed HUD")
+    print("13. Exit")
 
     choice = input("Enter your choice: ")
     return choice
@@ -134,6 +138,9 @@ def main():
             show_seed_status()
 
         elif choice == "12":
+            show_seed_hud_screen()
+
+        elif choice == "13":
             print("Exiting Seed...")
             break
 
