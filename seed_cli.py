@@ -4,7 +4,7 @@ from seed_journal import write_journal, read_journal
 from seed_status import show_seed_status
 from seed_brain import ask_seed
 from seed_commands import handle_chat_command, handle_memory_suggestion
-from seed_config import SEED_VERSION, AUTOSUGGEST_DEFAULT
+from seed_config import SEED_VERSION, AUTOSUGGEST_DEFAULT, DEFAULT_CHAT_MODEL
 from seed_chat_logger import (
     create_chat_log,
     log_user_message,
@@ -23,8 +23,10 @@ def talk_to_seed():
     chat_state = {
         "autosuggest_enabled": AUTOSUGGEST_DEFAULT,
         "log_path": log_path,
-        "last_summary": None
-    }
+        "last_summary": None,
+        "active_model": DEFAULT_CHAT_MODEL,
+        "task_models": {}
+}
 
     print("\n=== TALK TO SEED ===")
     print("Type /help to show chat commands.")
@@ -57,7 +59,7 @@ def talk_to_seed():
 
         print("\nSeed is thinking...")
 
-        answer = ask_seed(user_message, session_history)
+        answer = ask_seed(user_message, session_history, chat_state)
 
         print("\n=== SEED ===")
         print(answer)

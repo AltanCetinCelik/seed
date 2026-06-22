@@ -10,7 +10,7 @@ from seed_config import (
 )
 from seed_project_inspector import get_project_context_for_prompt
 from seed_personality import get_personality_context
-
+from seed_llm import ask_llm
 
 
 def clean_words(text):
@@ -289,26 +289,16 @@ Seed response:
     return full_prompt
 
 
-def ask_seed(user_prompt, session_history=None):
+def ask_seed(user_prompt, session_history=None, runtime_context=None):
     prompt = build_seed_prompt(user_prompt, session_history)
 
-    payload = {
-        "model": MODEL_NAME,
-        "prompt": prompt,
-        "stream": False
-    }
+    response = ask_llm(
+        prompt,
+        task_type="chat",
+        runtime_context=runtime_context
+    )
 
-    try:
-        response = requests.post(OLLAMA_URL, json=payload)
-        response.raise_for_status()
-        data = response.json()
-        return data["response"]
-
-    except requests.exceptions.ConnectionError:
-        return "Seed brain is not connected. Make sure Ollama is running."
-
-    except requests.exceptions.RequestException as error:
-        return f"Seed brain error: {error}"
+    return response
     
 def get_context_debug(session_history=None, user_prompt=""):
     if session_history is None:

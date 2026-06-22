@@ -10,7 +10,7 @@ from seed_config import (
 )
 
 from seed_memory import memories, ALLOWED_TYPES
-
+from seed_llm import check_ollama_health, get_local_models
 
 def file_status(filename):
     if os.path.exists(filename):
@@ -21,6 +21,10 @@ def file_status(filename):
 
 def show_seed_status():
     from seed_project_inspector import get_python_modules
+    health = check_ollama_health()
+    models = get_local_models()
+
+
     modules = get_python_modules()
     print(f"Python modules: {len(modules)}")
     print("\n=== SEED STATUS ===")
@@ -38,3 +42,5 @@ def show_seed_status():
     print(f"Journal file: {file_status('seed_journal.txt')}")
     print(f"Number of memories: {len(memories)}")
     print(f"Allowed memory types: {len(ALLOWED_TYPES)}")
+    print(f"Ollama health: {health['message']}")
+    print(f"Local Ollama models: {len(models)}")

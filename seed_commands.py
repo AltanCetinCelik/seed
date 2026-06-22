@@ -35,6 +35,14 @@ from seed_project_inspector import (
 )
 from seed_visuals import show_seed_hud_screen
 from seed_personality import show_personality
+from seed_llm import (
+    show_llm_status,
+    show_local_models,
+    show_task_models,
+    set_active_chat_model,
+    set_task_model,
+    test_llm
+)
 
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
@@ -72,6 +80,13 @@ def show_chat_help():
     print("/memory-debug = show detailed memory retrieval scoring")
     print("/hud = show Seed visual dashboard")
     print("/personality = show Seed personality profile")
+    print("/llm = show LLM engine status")
+    print("/models = list local Ollama models")
+    print("/model = change active chat model")
+    print("/model <name> = set active chat model directly")
+    print("/task-models = show task model routing")
+    print("/set-task-model = set model for a task route")
+    print("/llm-test = test LLM route")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -382,6 +397,71 @@ def handle_chat_command(user_message, session_history, chat_state):
 
     if command == "/project-save-memory":
         save_project_report_to_memory(chat_state)
+        return "handled"
+    
+    if command == "/llm":
+        show_llm_status(chat_state)
+        return "handled"
+
+    if command == "/models":
+        show_local_models()
+        return "handled"
+
+    if command == "/task-models":
+        show_task_models(chat_state)
+        return "handled"
+
+    if command == "/model":
+        changed = set_active_chat_model(chat_state)
+
+        if changed:
+            session_history.append({
+                "role": "System",
+                "content": f"Active chat model changed to {chat_state.get('active_model')}."
+            })
+
+            log_system_event(
+                log_path,
+                f"Active chat model changed to {chat_state.get('active_model')}."
+            )
+
+        return "handled"
+
+    if command.startswith("/model "):
+        requested_model = command.replace("/model ", "", 1).strip()
+        changed = set_active_chat_model(chat_state, requested_model)
+
+        if changed:
+            session_history.append({
+                "role": "System",
+                "content": f"Active chat model changed to {chat_state.get('active_model')}."
+            })
+
+            log_system_event(
+                log_path,
+                f"Active chat model changed to {chat_state.get('active_model')}."
+            )
+
+        return "handled"
+
+    if command == "/set-task-model":
+        changed = set_task_model(chat_state)
+
+        if changed:
+            session_history.append({
+                "role": "System",
+                "content": "Seed task model routing was updated."
+            })
+
+            log_system_event(
+                log_path,
+                "Seed task model routing was updated."
+            )
+
+        return "handled"
+
+    if command == "/llm-test":
+        test_llm(chat_state)
         return "handled"
 
     if command == "/status":

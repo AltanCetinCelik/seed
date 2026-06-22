@@ -3,7 +3,7 @@ from seed_config import (
     SUMMARY_MEMORY_TYPE,
     SUMMARY_IMPORTANCE
 )
-from seed_brain import ask_seed
+from seed_llm import ask_llm
 from seed_memory import save_memory_direct
 from seed_journal import write_journal_direct
 from seed_chat_logger import log_system_event
@@ -72,16 +72,21 @@ Current chat log:
 """
 
 
-def generate_session_summary(session_history, log_path):
+def generate_session_summary(session_history, log_path, runtime_context=None):
     prompt = build_summary_prompt(session_history, log_path)
-    summary = ask_seed(prompt, session_history=[])
+
+    summary = ask_llm(
+        prompt,
+        task_type="summary",
+        runtime_context=runtime_context
+    )
 
     return summary
 
 
 def show_session_summary(session_history, chat_state):
     log_path = chat_state.get("log_path")
-    summary = generate_session_summary(session_history, log_path)
+    summary = generate_session_summary(session_history, log_path, chat_state)
 
     print("\n=== SESSION SUMMARY ===")
     print(summary)

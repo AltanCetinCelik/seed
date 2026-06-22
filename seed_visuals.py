@@ -18,6 +18,7 @@ from seed_memory import memories, ALLOWED_TYPES
 from seed_journal import get_recent_journal_entries
 from seed_project_inspector import get_python_modules, get_project_files
 from seed_personality import get_hud_personality_lines
+from seed_llm import get_llm_hud_lines
 
 try:
     from rich.console import Console
@@ -27,6 +28,7 @@ try:
     from rich.align import Align
     from rich.text import Text
     from rich import box
+
     
 
     RICH_AVAILABLE = True
@@ -235,9 +237,24 @@ def make_personality_panel():
         box=box.ROUNDED
     )
 
+def make_llm_panel(chat_state=None):
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
 
+    for label, value in get_llm_hud_lines(chat_state):
+        table.add_row(label, value)
+
+    return Panel(
+        table,
+        title="LLM ENGINE",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
 
 def show_seed_hud(chat_state=None):
+    
+    llm_panel = make_llm_panel(chat_state)
     if not RICH_AVAILABLE:
         print("\nRich is not installed.")
         print("Run: python -m pip install rich")
@@ -274,7 +291,7 @@ def show_seed_hud(chat_state=None):
 
     console.print(
         Columns(
-            [personality_panel, log_panel],
+            [llm_panel, personality_panel],
             equal=True,
             expand=True
         )
