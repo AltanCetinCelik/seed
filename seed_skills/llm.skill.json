@@ -1,0 +1,23 @@
+{
+    "id": "llm",
+    "name": "LLM Skill",
+    "category": "cognition",
+    "inspired_by": [
+        "Open WebUI",
+        "AnythingLLM",
+        "OpenClaw"
+    ],
+    "purpose": "Manage local model/cognition status and task routing.",
+    "risk": "read_only",
+    "approval_rule": "Model changes are user-controlled.",
+    "capabilities": [
+        {
+            "id": "llm.status",
+            "name": "LLM status",
+            "risk": "read_only",
+            "tool": "llm_status",
+            "description": "Show Ollama and task-model status."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

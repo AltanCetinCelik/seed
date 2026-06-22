@@ -1,0 +1,37 @@
+{
+    "id": "project",
+    "name": "Project Skill",
+    "category": "project_introspection",
+    "inspired_by": [
+        "Aider",
+        "SWE-agent",
+        "OpenHands"
+    ],
+    "purpose": "Inspect Seed's own project files, modules, and architecture.",
+    "risk": "read_only",
+    "approval_rule": "Project inspection is read-only.",
+    "capabilities": [
+        {
+            "id": "project.report",
+            "name": "Project report",
+            "risk": "read_only",
+            "tool": "project_report",
+            "description": "Show Seed architecture report."
+        },
+        {
+            "id": "project.files",
+            "name": "Project files",
+            "risk": "read_only",
+            "tool": "project_files",
+            "description": "List Seed project files."
+        },
+        {
+            "id": "project.modules",
+            "name": "Project modules",
+            "risk": "read_only",
+            "tool": "project_modules",
+            "description": "List Seed Python modules."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

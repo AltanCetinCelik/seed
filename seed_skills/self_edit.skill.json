@@ -1,0 +1,52 @@
+{
+    "id": "self_edit",
+    "name": "Self-Edit Skill",
+    "category": "self_modification",
+    "inspired_by": [
+        "Cline",
+        "Aider",
+        "SWE-agent",
+        "mini-SWE-agent"
+    ],
+    "purpose": "Let Seed safely inspect, propose, apply, test, and roll back edits.",
+    "risk": "dangerous",
+    "approval_rule": "File modification requires diff review and exact APPLY confirmation.",
+    "capabilities": [
+        {
+            "id": "self_edit.status",
+            "name": "Editable files status",
+            "risk": "read_only",
+            "tool": "self_edit_status",
+            "description": "Show files Seed is allowed to edit."
+        },
+        {
+            "id": "self_edit.syntax_test",
+            "name": "Python syntax test",
+            "risk": "diagnostic",
+            "tool": "self_test",
+            "description": "Run Python syntax checks."
+        },
+        {
+            "id": "self_edit.propose",
+            "name": "Propose file edit",
+            "risk": "dangerous",
+            "command": "/self-edit",
+            "description": "Create a pending self-edit proposal."
+        },
+        {
+            "id": "self_edit.diff",
+            "name": "Show edit diff",
+            "risk": "read_only",
+            "command": "/self-diff",
+            "description": "Show the pending self-edit diff."
+        },
+        {
+            "id": "self_edit.apply",
+            "name": "Apply edit",
+            "risk": "dangerous",
+            "command": "/self-apply",
+            "description": "Apply pending edit after exact approval."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

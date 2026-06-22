@@ -7,3 +7,5 @@ seed_edit_backups/*
 !seed_edit_backups/.gitkeep
 seed_pending_edit.json
 seed_memory_embeddings.json
+third_party_repos/
+seed_skill_state.json

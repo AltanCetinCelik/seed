@@ -12,6 +12,8 @@ from seed_project_inspector import get_project_context_for_prompt
 from seed_personality import get_personality_context
 from seed_llm import ask_llm
 from seed_semantic_memory import format_semantic_context_for_prompt
+from seed_open_source_dna import get_dna_context_for_prompt
+from seed_skill_kernel import get_skill_context_for_prompt
 
 def clean_words(text):
     stop_words = [
@@ -215,7 +217,8 @@ def build_seed_prompt(user_prompt, session_history=None):
     project_context = get_project_context_for_prompt(user_prompt)
     personality_context = get_personality_context()
     semantic_memory_context = format_semantic_context_for_prompt(user_prompt)
-
+    dna_context = get_dna_context_for_prompt(user_prompt)
+    skill_context = get_skill_context_for_prompt(user_prompt)
     full_prompt = f"""
 You are Seed.
 
@@ -239,8 +242,14 @@ Use these memory rules as system boundaries:
 
 {memory_rules}
 
+Open-source DNA context:
+{dna_context}
+
 Relevant stored memories available to Seed:
 {relevant_memories}
+
+Skill OS context:
+{skill_context}
 
 Active session history:
 {session_text}
@@ -286,6 +295,12 @@ Match Altan's language and tone. Turkish if he writes Turkish, English if he wri
 
 Semantic memory rule:
 Seed has both keyword-scored memories and semantic memory context. For questions about previous work, combine both. If keyword memory is weak but semantic memory is strong, explain that the match is semantic rather than exact.
+
+Open-source DNA rule:
+Seed has a local research set of cloned open-source repos. Use this context when Altan asks about borrowing, architecture, repos, future plans, skills, planners, cockpit, or v2.0.0. Do not claim code was borrowed unless it was actually reviewed and integrated.
+
+Skill OS rule:
+Seed has skills, capabilities, risk levels, and approval rules. When Altan asks about tools, planning, borrowing architecture, v2.0.0, or future upgrades, reason through the Skill OS instead of treating commands as disconnected features.
 
 User message:
 {user_prompt}

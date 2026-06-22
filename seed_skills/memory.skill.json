@@ -1,0 +1,44 @@
+{
+    "id": "memory",
+    "name": "Memory Skill",
+    "category": "memory",
+    "inspired_by": [
+        "Letta",
+        "Khoj",
+        "AnythingLLM"
+    ],
+    "purpose": "Manage Seed's long-term, semantic, and smart captured memories.",
+    "risk": "read_only",
+    "approval_rule": "Saving or deleting memories requires user approval.",
+    "capabilities": [
+        {
+            "id": "memory.stats",
+            "name": "Memory statistics",
+            "risk": "read_only",
+            "tool": "memory_stats",
+            "description": "Show memory counts and type distribution."
+        },
+        {
+            "id": "memory.duplicates",
+            "name": "Memory duplicate scan",
+            "risk": "read_only",
+            "tool": "memory_duplicates",
+            "description": "Find possible duplicate memories."
+        },
+        {
+            "id": "memory.semantic_status",
+            "name": "Semantic memory status",
+            "risk": "read_only",
+            "tool": "semantic_memory_status",
+            "description": "Show semantic memory cache and embedding status."
+        },
+        {
+            "id": "memory.smart_capture",
+            "name": "Smart memory capture",
+            "risk": "write",
+            "command": "/save <text>",
+            "description": "Infer type, content, and importance from natural memory text."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

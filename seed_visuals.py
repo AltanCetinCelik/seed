@@ -23,6 +23,9 @@ from seed_personality import get_hud_personality_lines
 from seed_llm import get_llm_hud_lines
 from seed_self_editor import load_pending_edit, get_editable_files
 from seed_semantic_memory import load_embedding_cache
+from seed_tool_kernel import TOOL_REGISTRY
+from seed_open_source_dna import load_dna_data
+from seed_skill_kernel import load_all_skills, get_all_capabilities
 
 try:
     from rich.console import Console
@@ -39,6 +42,26 @@ try:
 except ImportError:
     RICH_AVAILABLE = False
 
+
+def make_dna_panel():
+    data = load_dna_data()
+    audits = data.get("audits", {})
+
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    table.add_row("Repos found", f"{data.get('found_count')} / {data.get('repo_count')}")
+    table.add_row("Audits", str(len(audits)))
+    table.add_row("Research dir", "third_party_repos")
+    table.add_row("Next use", "v1.12 skill/planner rewrite")
+
+    return Panel(
+        table,
+        title="OPEN-SOURCE DNA",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
 
 def count_memories_by_type():
     counts = {}
@@ -233,6 +256,38 @@ def make_commands_panel():
         box=box.ROUNDED
     )
 
+def make_agent_panel(chat_state=None):
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    pending_plan = "no"
+    last_run = "no"
+    last_review = "no"
+
+    if chat_state is not None:
+        if chat_state.get("pending_agent_plan") is not None:
+            pending_plan = "yes"
+
+        if chat_state.get("last_agent_run") is not None:
+            last_run = "yes"
+
+        if chat_state.get("last_self_review") is not None:
+            last_review = "yes"
+
+    table.add_row("Tools", str(len(TOOL_REGISTRY)))
+    table.add_row("Pending plan", pending_plan)
+    table.add_row("Last run", last_run)
+    table.add_row("Self-review", last_review)
+    table.add_row("Auto-run", "read-only only")
+
+    return Panel(
+        table,
+        title="AGENT KERNEL",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
 def make_personality_panel():
     table = Table.grid(padding=(0, 2))
     table.add_column(style="grey70")
@@ -314,6 +369,37 @@ def make_semantic_memory_panel():
         box=box.ROUNDED
     )
 
+def make_skill_os_panel(chat_state=None):
+    skills = load_all_skills()
+    capabilities = get_all_capabilities()
+
+    pending_plan = "no"
+    last_run = "no"
+
+    if chat_state is not None:
+        if chat_state.get("pending_skill_plan") is not None:
+            pending_plan = "yes"
+
+        if chat_state.get("last_skill_run") is not None:
+            last_run = "yes"
+
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    table.add_row("Skills", str(len(skills)))
+    table.add_row("Capabilities", str(len(capabilities)))
+    table.add_row("Pending plan", pending_plan)
+    table.add_row("Last run", last_run)
+    table.add_row("Auto-run", "read-only/diagnostic")
+
+    return Panel(
+        table,
+        title="SKILL OS",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
 def show_seed_hud(chat_state=None):
 
     if not RICH_AVAILABLE:
@@ -336,10 +422,28 @@ def show_seed_hud(chat_state=None):
     commands_panel = make_commands_panel()
     personality_panel = make_personality_panel()
     semantic_panel = make_semantic_memory_panel()
+    agent_panel = make_agent_panel(chat_state)
+    dna_panel = make_dna_panel()
+    skill_os_panel = make_skill_os_panel(chat_state)
 
     console.print(
         Columns(
             [status_panel, memory_panel],
+            equal=True,
+            expand=True
+        )
+    )
+
+    console.print(
+        Columns(
+            [agent_panel, dna_panel],
+            equal=True,
+            expand=True
+        )
+    )
+    console.print(
+        Columns(
+            [skill_os_panel, dna_panel],
             equal=True,
             expand=True
         )
@@ -356,6 +460,14 @@ def show_seed_hud(chat_state=None):
     console.print(
         Columns(
             [personality_panel, self_edit_panel],
+            equal=True,
+            expand=True
+        )
+    )
+
+    console.print(
+        Columns(
+            [agent_panel, self_edit_panel],
             equal=True,
             expand=True
         )

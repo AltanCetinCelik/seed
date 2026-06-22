@@ -26,7 +26,12 @@ def talk_to_seed():
         "last_summary": None,
         "active_model": DEFAULT_CHAT_MODEL,
         "task_models": {},
-        "pending_memory_draft": None
+        "pending_memory_draft": None,
+        "pending_agent_plan": None,
+        "last_agent_run": None,
+        "last_self_review": None,
+        "pending_skill_plan": None,
+        "last_skill_run": None
 }
 
     print("\n=== TALK TO SEED ===")

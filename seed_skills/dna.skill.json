@@ -1,0 +1,42 @@
+{
+    "id": "dna",
+    "name": "Open-Source DNA Skill",
+    "category": "research",
+    "inspired_by": [
+        "Hermes Agent",
+        "Letta",
+        "Aider",
+        "Cline",
+        "OpenHands",
+        "OpenClaw",
+        "LangGraph",
+        "MCP Servers"
+    ],
+    "purpose": "Study cloned open-source repos and convert lessons into Seed-native architecture.",
+    "risk": "read_only",
+    "approval_rule": "Borrowing code requires license review and explicit approval.",
+    "capabilities": [
+        {
+            "id": "dna.status",
+            "name": "DNA status",
+            "risk": "read_only",
+            "tool": "open_source_dna_status",
+            "description": "Show open-source DNA research status."
+        },
+        {
+            "id": "dna.borrow_map",
+            "name": "Borrow map",
+            "risk": "read_only",
+            "tool": "open_source_borrow_map",
+            "description": "Show repo-inspired Seed upgrade map."
+        },
+        {
+            "id": "dna.borrow_candidates",
+            "name": "Borrow candidates",
+            "risk": "read_only",
+            "tool": "open_source_borrow_candidates",
+            "description": "Show candidate files worth studying."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

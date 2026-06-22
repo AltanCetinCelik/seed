@@ -1,5 +1,51 @@
-SEED_VERSION = "v1.9.0"
+SEED_VERSION = "v1.12.0"
 
+SEED_SKILLS_DIR = "seed_skills"
+SEED_SKILL_STATE_FILE = "seed_skill_state.json"
+
+SKILL_OS_ENABLED = True
+SKILL_CONTEXT_ENABLED = True
+SKILL_PLAN_MAX_STEPS = 10
+
+SKILL_AUTO_RUN_RISKS = [
+    "read_only",
+    "diagnostic"
+]
+
+SKILL_APPROVAL_RISKS = [
+    "write",
+    "dangerous",
+    "external"
+]
+OPEN_SOURCE_DNA_ENABLED = True
+DNA_CONTEXT_ENABLED = True
+
+THIRD_PARTY_REPOS_DIR = "third_party_repos"
+SEED_RESEARCH_DIR = "seed_research"
+
+OPEN_SOURCE_DNA_FILE = "seed_research/open_source_dna.json"
+OPEN_SOURCE_DNA_REPORT_FILE = "seed_research/OPEN_SOURCE_DNA_REPORT.md"
+BORROW_CANDIDATES_FILE = "seed_research/borrow_candidates.json"
+
+DNA_README_CHAR_LIMIT = 8000
+DNA_KEY_FILE_LIMIT = 120
+DNA_CANDIDATE_LIMIT = 500
+DNA_CANDIDATE_MAX_FILE_BYTES = 300000
+AGENT_KERNEL_ENABLED = True
+AGENT_MAX_PLAN_STEPS = 8
+AGENT_READONLY_AUTO_RUN = True
+
+AGENT_ALLOWED_AUTO_TOOLS = [
+    "system_snapshot",
+    "project_report",
+    "project_files",
+    "project_modules",
+    "memory_stats",
+    "semantic_memory_status",
+    "llm_status",
+    "self_edit_status",
+    "log_status"
+]
 MEMORY_CAPTURE_LLM_ENABLED = True
 SMART_MEMORY_AUTO_REINDEX = True
 SMART_MEMORY_DEFAULT_IMPORTANCE = 4

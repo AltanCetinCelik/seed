@@ -1,0 +1,39 @@
+{
+    "id": "coding",
+    "name": "Coding Skill",
+    "category": "coding_agent",
+    "inspired_by": [
+        "Aider",
+        "Cline",
+        "SWE-agent",
+        "mini-SWE-agent",
+        "OpenHands"
+    ],
+    "purpose": "Support repo-aware coding, diagnostics, and safe self-improvement workflows.",
+    "risk": "diagnostic",
+    "approval_rule": "Code edits require self-edit proposal, diff, approval, backup, test, and rollback.",
+    "capabilities": [
+        {
+            "id": "coding.project_report",
+            "name": "Coding project report",
+            "risk": "read_only",
+            "tool": "project_report",
+            "description": "Inspect repo architecture before coding."
+        },
+        {
+            "id": "coding.syntax_test",
+            "name": "Coding syntax test",
+            "risk": "diagnostic",
+            "tool": "self_test",
+            "description": "Run syntax checks before/after edits."
+        },
+        {
+            "id": "coding.propose_edit",
+            "name": "Coding edit proposal",
+            "risk": "dangerous",
+            "command": "/self-edit",
+            "description": "Create a safe edit proposal."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

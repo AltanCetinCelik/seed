@@ -1,0 +1,58 @@
+{
+    "repos": [
+        {
+            "name": "Letta",
+            "purpose": "advanced agent memory",
+            "borrow": ["memory layers", "agent memory concepts", "API style"],
+            "avoid": ["large architecture copy before understanding"]
+        },
+        {
+            "name": "SWE-agent",
+            "purpose": "software engineering agent",
+            "borrow": ["agent-computer interface", "repo navigation", "issue-to-fix loop"],
+            "avoid": ["uncontrolled autonomous edits"]
+        },
+        {
+            "name": "mini-SWE-agent",
+            "purpose": "minimal coding agent",
+            "borrow": ["small agent loop", "simple harness ideas"],
+            "avoid": ["blindly replacing Seed's architecture"]
+        },
+        {
+            "name": "OpenHands",
+            "purpose": "developer agent control center",
+            "borrow": ["developer cockpit", "task workflow", "agent state"],
+            "avoid": ["too much complexity too early"]
+        },
+        {
+            "name": "Open Interpreter",
+            "purpose": "local computer/code control",
+            "borrow": ["tool execution interface", "local action patterns"],
+            "avoid": ["unsafe computer control without approval"]
+        },
+        {
+            "name": "Open WebUI",
+            "purpose": "self-hosted AI cockpit",
+            "borrow": ["local cockpit layout", "model/RAG panels", "provider UI"],
+            "avoid": ["turning Seed into a generic web UI clone"]
+        },
+        {
+            "name": "AnythingLLM",
+            "purpose": "local AI app with RAG and agents",
+            "borrow": ["workspace model", "document/RAG UX", "agent extensions"],
+            "avoid": ["heavy product complexity before Seed core is stable"]
+        },
+        {
+            "name": "Khoj",
+            "purpose": "AI second brain",
+            "borrow": ["personal knowledge retrieval", "notes/search concepts"],
+            "avoid": ["cloud-style features before local core"]
+        },
+        {
+            "name": "OpenJarvis",
+            "purpose": "local personal AI agent",
+            "borrow": ["local personal-agent vision"],
+            "avoid": ["copying identity instead of Seed's own personality"]
+        }
+    ]
+}

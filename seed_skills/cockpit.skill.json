@@ -1,0 +1,31 @@
+{
+    "id": "cockpit",
+    "name": "Cockpit Skill",
+    "category": "interface",
+    "inspired_by": [
+        "Open WebUI",
+        "AnythingLLM",
+        "OpenClaw",
+        "Moltbot AI Assistant"
+    ],
+    "purpose": "Represent Seed's visual control surface and future local cockpit direction.",
+    "risk": "read_only",
+    "approval_rule": "Cockpit display is read-only until explicit UI actions are approved.",
+    "capabilities": [
+        {
+            "id": "cockpit.hud",
+            "name": "Terminal HUD",
+            "risk": "read_only",
+            "command": "/hud",
+            "description": "Show Seed mission-control dashboard."
+        },
+        {
+            "id": "cockpit.boot",
+            "name": "Boot brief",
+            "risk": "read_only",
+            "command": "/boot",
+            "description": "Show Seed boot/system brief."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}

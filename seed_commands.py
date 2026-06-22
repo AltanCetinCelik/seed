@@ -69,6 +69,47 @@ from seed_memory_intelligence import (
     reject_pending_memory
 )
 
+from seed_tool_kernel import show_tools, show_tool_result
+from seed_agent import (
+    create_agent_plan,
+    show_pending_agent_plan,
+    run_readonly_agent_plan,
+    generate_self_review,
+    show_boot_brief,
+    show_agent_status
+)
+
+from seed_open_source_dna import (
+    show_dna_status,
+    scan_open_source_dna,
+    audit_repo,
+    audit_all_repos,
+    generate_open_source_report,
+    show_dna_report,
+    show_borrow_map,
+    show_repo_dna,
+    build_borrow_candidate_index,
+    show_borrow_candidates,
+    show_borrow_candidate_file
+)
+
+from seed_skill_kernel import (
+    bootstrap_default_skills,
+    show_skills,
+    show_skill_detail,
+    show_skill_map,
+    show_skill_audit
+)
+from seed_capability_runtime import (
+    show_capability,
+    show_capability_result
+)
+from seed_skill_planner import (
+    create_skill_plan,
+    show_pending_skill_plan,
+    run_readonly_skill_plan
+)
+
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
     print("/help or /commands = show commands")
@@ -132,6 +173,34 @@ def show_chat_help():
     print("/memory-draft = show pending smart memory draft")
     print("/memory-approve = approve pending smart memory draft")
     print("/memory-reject = reject pending smart memory draft")
+    print("/boot = show Seed boot brief")
+    print("/tools = show Seed tool kernel")
+    print("/tool <name> = run one safe tool")
+    print("/agent-status = show agent kernel status")
+    print("/agent-plan <goal> = create agent plan")
+    print("/agent-plan-show = show pending agent plan")
+    print("/agent-run-readonly = run safe read-only plan steps")
+    print("/self-review = generate Seed self-review report")
+    print("/dna = show open-source DNA status")
+    print("/dna-scan = scan cloned research repos")
+    print("/dna-repo = show one repo DNA")
+    print("/dna-audit = audit one repo with local LLM")
+    print("/dna-audit-all = audit all cloned repos with local LLM")
+    print("/dna-report-build = build open-source DNA report")
+    print("/dna-report = show open-source DNA report")
+    print("/borrow-map = show Seed borrow map")
+    print("/borrow-candidates = scan code-pattern candidates")
+    print("/borrow-view = view one borrow candidate file")
+    print("/skill-bootstrap = create default Seed skill manifests")
+    print("/skills = show Seed Skill OS")
+    print("/skill <name> = show one skill")
+    print("/skill-map = show skills and capabilities")
+    print("/skill-audit = validate skill manifests")
+    print("/capability <id> = show one capability")
+    print("/capability-run <id> = run safe read-only/diagnostic capability")
+    print("/skill-plan <goal> = create Skill OS plan")
+    print("/skill-plan-show = show pending Skill OS plan")
+    print("/skill-run-readonly = run read-only/diagnostic skill plan")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -630,6 +699,174 @@ def handle_chat_command(user_message, session_history, chat_state):
         session_history.clear()
         print("Temporary session history cleared.")
         log_system_event(log_path, "Temporary session history cleared.")
+        return "handled"
+
+    if command == "/boot":
+        show_boot_brief(chat_state)
+        return "handled"
+
+    if command == "/tools":
+        show_tools()
+        return "handled"
+
+    if command.startswith("/tool "):
+        tool_name = command.replace("/tool ", "", 1).strip()
+        show_tool_result(tool_name, chat_state)
+        return "handled"
+
+    if command == "/agent-status":
+        show_agent_status(chat_state)
+        return "handled"
+
+    if command.startswith("/agent-plan "):
+        goal = user_message.strip()[len("/agent-plan "):]
+        create_agent_plan(goal, chat_state)
+        return "handled"
+
+    if command == "/agent-plan":
+        goal = input("Agent goal: ")
+        create_agent_plan(goal, chat_state)
+        return "handled"
+
+    if command == "/agent-plan-show":
+        show_pending_agent_plan(chat_state)
+        return "handled"
+
+    if command == "/agent-run-readonly":
+        run_readonly_agent_plan(chat_state)
+        return "handled"
+
+    if command == "/self-review":
+        generate_self_review(chat_state)
+        return "handled"
+    
+    if command == "/dna":
+        show_dna_status()
+        return "handled"
+
+    if command == "/dna-scan":
+        scan_open_source_dna()
+        return "handled"
+
+    if command == "/dna-repo":
+        repo_query = input("Repo name/folder: ")
+        show_repo_dna(repo_query)
+        return "handled"
+
+    if command.startswith("/dna-repo "):
+        repo_query = user_message.strip()[len("/dna-repo "):]
+        show_repo_dna(repo_query)
+        return "handled"
+
+    if command == "/dna-audit":
+        repo_query = input("Repo name/folder: ")
+        audit_repo(repo_query, chat_state)
+        return "handled"
+
+    if command.startswith("/dna-audit "):
+        repo_query = user_message.strip()[len("/dna-audit "):]
+        audit_repo(repo_query, chat_state)
+        return "handled"
+
+    if command == "/dna-audit-all":
+        confirmation = input("Audit all repos with local LLM? This may take time. Type AUDIT: ")
+
+        if confirmation == "AUDIT":
+            audit_all_repos(chat_state)
+        else:
+            print("DNA audit cancelled.")
+
+            return "handled"
+
+    if command == "/dna-report-build":
+        generate_open_source_report()
+        return "handled"
+
+    if command == "/dna-report":
+        show_dna_report()
+        return "handled"
+
+    if command == "/borrow-map":
+        show_borrow_map()
+        return "handled"
+
+    if command == "/borrow-candidates":
+        build_borrow_candidate_index()
+        show_borrow_candidates()
+        return "handled"
+
+    if command == "/borrow-view":
+        candidate_number = input("Candidate number: ")
+        show_borrow_candidate_file(candidate_number)
+        return "handled"
+    
+    if command == "/skill-bootstrap":
+        bootstrap_default_skills()
+        return "handled"
+
+    if command == "/skills":
+        show_skills()
+        return "handled"
+
+    if command == "/skill-map":
+        show_skill_map()
+        return "handled"
+
+    if command == "/skill-audit":
+        show_skill_audit()
+        return "handled"
+
+    if command.startswith("/skill "):
+        skill_query = user_message.strip()[len("/skill "):]
+        show_skill_detail(skill_query)
+        return "handled"
+
+    if command == "/skill":
+        skill_query = input("Skill name/id: ")
+        show_skill_detail(skill_query)
+        return "handled"
+
+    if command.startswith("/capability-run "):
+        capability_query = user_message.strip()[len("/capability-run "):]
+        show_capability_result(capability_query, chat_state)
+        return "handled"
+
+    if command == "/capability-run":
+        capability_query = input("Capability id/name: ")
+        show_capability_result(capability_query, chat_state)
+        return "handled"
+
+    if command.startswith("/capability "):
+        capability_query = user_message.strip()[len("/capability "):]
+        show_capability(capability_query)
+        return "handled"
+
+    if command == "/capability":
+        capability_query = input("Capability id/name: ")
+        show_capability(capability_query)
+        return "handled"
+
+    if command.startswith("/skill-plan "):
+        goal = user_message.strip()[len("/skill-plan "):]
+        create_skill_plan(goal, chat_state)
+        return "handled"
+
+    if command == "/skill-plan":
+        goal = input("Skill plan goal: ")
+        create_skill_plan(goal, chat_state)
+        return "handled"
+
+    if command == "/skill-plan-show":
+        show_pending_skill_plan(chat_state)
+        return "handled"
+
+    if command == "/skill-run-readonly":
+        run_readonly_skill_plan(chat_state)
+        return "handled"
+
+    if command.startswith("/borrow-view "):
+        candidate_number = user_message.strip()[len("/borrow-view "):]
+        show_borrow_candidate_file(candidate_number)
         return "handled"
 
     if command.startswith("/"):

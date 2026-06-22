@@ -1,0 +1,31 @@
+{
+    "id": "agent",
+    "name": "Agent Skill",
+    "category": "planning",
+    "inspired_by": [
+        "LangGraph",
+        "Hermes Agent",
+        "OpenHands",
+        "MCP Servers"
+    ],
+    "purpose": "Plan and run safe read-only diagnostic steps.",
+    "risk": "diagnostic",
+    "approval_rule": "Only read-only and diagnostic capabilities may auto-run.",
+    "capabilities": [
+        {
+            "id": "agent.snapshot",
+            "name": "System snapshot",
+            "risk": "read_only",
+            "tool": "system_snapshot",
+            "description": "Show full Seed system state."
+        },
+        {
+            "id": "agent.self_review",
+            "name": "Self-review",
+            "risk": "diagnostic",
+            "command": "/self-review",
+            "description": "Generate a self-review improvement report."
+        }
+    ],
+    "updated_at": "2026-06-23T00:44:22"
+}
