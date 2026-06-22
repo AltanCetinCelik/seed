@@ -41,7 +41,32 @@ from seed_llm import (
     show_task_models,
     set_active_chat_model,
     set_task_model,
-    test_llm
+    test_llm,
+    test_embedding
+)
+
+from seed_self_editor import (
+    show_editable_files,
+    show_file_for_edit,
+    create_edit_proposal,
+    show_pending_diff,
+    apply_pending_edit,
+    cancel_pending_edit,
+    run_python_syntax_check,
+    rollback_latest_edit
+)
+from seed_semantic_memory import (
+    build_memory_embedding_index,
+    format_semantic_results,
+    format_semantic_context_for_prompt,
+    show_semantic_memory_status
+)
+
+from seed_memory_intelligence import (
+    smart_memory_capture_from_chat,
+    show_pending_memory_draft,
+    approve_pending_memory,
+    reject_pending_memory
 )
 
 def show_chat_help():
@@ -87,6 +112,26 @@ def show_chat_help():
     print("/task-models = show task model routing")
     print("/set-task-model = set model for a task route")
     print("/llm-test = test LLM route")
+    print("/self-files = show files Seed is allowed to edit")
+    print("/self-read = read an editable Seed file")
+    print("/self-edit = create a self-edit proposal")
+    print("/self-diff = show pending self-edit diff")
+    print("/self-apply = apply pending self-edit after approval")
+    print("/self-cancel = cancel pending self-edit")
+    print("/self-test = run Python syntax checks")
+    print("/self-rollback = restore latest self-edit backup")
+    print("/embedding-test = test embedding engine")
+    print("/memory-reindex = rebuild semantic memory embeddings")
+    print("/semantic-memory = show semantic memory status")
+    print("/semantic-search = semantic memory search")
+    print("/semantic-context = show semantic context for a prompt")
+    print("/save = smart memory capture")
+    print("/save <text> = smart memory capture from one line")
+    print("/save-manual = old manual memory save")
+    print("/remember <text> = smart memory capture alias")
+    print("/memory-draft = show pending smart memory draft")
+    print("/memory-approve = approve pending smart memory draft")
+    print("/memory-reject = reject pending smart memory draft")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -258,18 +303,45 @@ def handle_chat_command(user_message, session_history, chat_state):
         return "handled"
 
     if command == "/save":
+        smart_memory_capture_from_chat(chat_state, session_history)
+        return "handled"
+
+    if command.startswith("/save "):
+        memory_text = user_message.strip()[len("/save "):]
+        smart_memory_capture_from_chat(
+            chat_state,
+            session_history,
+            initial_text=memory_text
+        )
+        return "handled"
+
+    if command == "/remember":
+        smart_memory_capture_from_chat(chat_state, session_history)
+        return "handled"
+
+    if command.startswith("/remember "):
+        memory_text = user_message.strip()[len("/remember "):]
+        smart_memory_capture_from_chat(
+            chat_state,
+            session_history,
+            initial_text=memory_text
+        )
+        return "handled"
+
+    if command == "/save-manual":
         saved_memory = save_memory_from_chat()
 
         if saved_memory is not None:
             session_history.append({
                 "role": "System",
                 "content": (
-                    f"User just saved a long-term memory: "
+                    f"User manually saved a long-term memory: "
                     f"[{saved_memory['type']}] "
                     f"{saved_memory['content']} "
                     f"Importance: {saved_memory['importance']}"
                 )
             })
+
             log_system_event(
                 log_path,
                 (
@@ -280,6 +352,18 @@ def handle_chat_command(user_message, session_history, chat_state):
                 )
             )
 
+        return "handled"
+
+    if command == "/memory-draft":
+        show_pending_memory_draft(chat_state)
+        return "handled"
+
+    if command == "/memory-approve":
+        approve_pending_memory(chat_state, session_history)
+        return "handled"
+
+    if command == "/memory-reject":
+        reject_pending_memory(chat_state)
         return "handled"
 
     if command == "/suggest":
@@ -377,7 +461,29 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/log-read":
         read_recent_log_lines(log_path)
         return "handled"
+    
+    if command == "/embedding-test":
+        test_embedding()
+        return "handled"
 
+    if command == "/memory-reindex":
+        build_memory_embedding_index()
+        log_system_event(log_path, "Semantic memory reindex command used.")
+        return "handled"
+
+    if command == "/semantic-memory":
+        show_semantic_memory_status()
+        return "handled"
+
+    if command == "/semantic-search":
+        query = input("Semantic search query: ")
+        print(format_semantic_results(query))
+        return "handled"
+
+    if command == "/semantic-context":
+        query = input("Semantic context query: ")
+        print(format_semantic_context_for_prompt(query))
+        return "handled"
 
     if command == "/project":
         show_project_report()
@@ -425,6 +531,45 @@ def handle_chat_command(user_message, session_history, chat_state):
                 f"Active chat model changed to {chat_state.get('active_model')}."
             )
 
+        return "handled"
+
+    if command == "/self-files":
+        show_editable_files()
+        return "handled"
+
+    if command == "/self-read":
+        show_file_for_edit()
+        return "handled"
+
+    if command == "/self-edit":
+        create_edit_proposal(chat_state)
+        log_system_event(log_path, "Self-edit proposal command used.")
+        return "handled"
+
+    if command == "/self-diff":
+        show_pending_diff()
+        return "handled"
+
+    if command == "/self-apply":
+        edited_file = apply_pending_edit()
+
+        if edited_file is not None:
+            log_system_event(log_path, f"Self-edit applied to {edited_file}.")
+
+        return "handled"
+
+    if command == "/self-cancel":
+        cancel_pending_edit()
+        log_system_event(log_path, "Pending self-edit cancelled.")
+        return "handled"
+
+    if command == "/self-test":
+        run_python_syntax_check()
+        return "handled"
+
+    if command == "/self-rollback":
+        rollback_latest_edit()
+        log_system_event(log_path, "Self-edit rollback command used.")
         return "handled"
 
     if command.startswith("/model "):

@@ -8,9 +8,10 @@ from seed_config import (
     LLM_TIMEOUT_SECONDS,
     LLM_HEALTH_TIMEOUT_SECONDS,
     LLM_NUM_CTX,
-    LLM_TASK_CONFIG
+    LLM_TASK_CONFIG,
+    OLLAMA_EMBED_URL,
+    EMBEDDING_MODEL
 )
-
 
 def normalize_task_type(task_type):
     if task_type is None:
@@ -329,6 +330,55 @@ def set_task_model(chat_state):
     print(f"Task model changed: {task_type} -> {requested_model}")
     return True
 
+def get_embedding(text, model_name=None):
+    if model_name is None:
+        model_name = EMBEDDING_MODEL
+
+    payload = {
+        "model": model_name,
+        "input": text
+    }
+
+    try:
+        response = requests.post(
+            OLLAMA_EMBED_URL,
+            json=payload,
+            timeout=LLM_TIMEOUT_SECONDS
+        )
+
+        response.raise_for_status()
+        data = response.json()
+
+        embeddings = data.get("embeddings", [])
+
+        if not embeddings:
+            return None, "No embeddings returned."
+
+        return embeddings[0], None
+
+    except requests.exceptions.ConnectionError:
+        return None, "Could not connect to Ollama for embeddings."
+
+    except requests.exceptions.Timeout:
+        return None, "Embedding request timed out."
+
+    except requests.exceptions.RequestException as error:
+        return None, f"Embedding request error: {error}"
+
+
+def test_embedding():
+    print("\n=== EMBEDDING TEST ===")
+
+    embedding, error = get_embedding("Seed semantic memory test.")
+
+    if error is not None:
+        print(error)
+        return False
+
+    print(f"Embedding model: {EMBEDDING_MODEL}")
+    print(f"Embedding dimensions: {len(embedding)}")
+    print("Embedding engine is working.")
+    return True
 
 def test_llm(chat_state=None):
     print("\n=== LLM TEST ===")

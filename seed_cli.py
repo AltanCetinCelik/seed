@@ -25,7 +25,8 @@ def talk_to_seed():
         "log_path": log_path,
         "last_summary": None,
         "active_model": DEFAULT_CHAT_MODEL,
-        "task_models": {}
+        "task_models": {},
+        "pending_memory_draft": None
 }
 
     print("\n=== TALK TO SEED ===")

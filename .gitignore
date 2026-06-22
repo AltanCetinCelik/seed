@@ -3,3 +3,7 @@ __pycache__/
 .DS_Store
 .env
 seed_private_backup*/
+seed_edit_backups/*
+!seed_edit_backups/.gitkeep
+seed_pending_edit.json
+seed_memory_embeddings.json

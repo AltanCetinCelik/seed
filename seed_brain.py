@@ -11,7 +11,7 @@ from seed_config import (
 from seed_project_inspector import get_project_context_for_prompt
 from seed_personality import get_personality_context
 from seed_llm import ask_llm
-
+from seed_semantic_memory import format_semantic_context_for_prompt
 
 def clean_words(text):
     stop_words = [
@@ -214,6 +214,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     recent_journal = get_recent_journal_entries()
     project_context = get_project_context_for_prompt(user_prompt)
     personality_context = get_personality_context()
+    semantic_memory_context = format_semantic_context_for_prompt(user_prompt)
 
     full_prompt = f"""
 You are Seed.
@@ -230,6 +231,9 @@ Personality context:
 
 Recent journal entries:
 {recent_journal}
+
+Semantic memory context:
+{semantic_memory_context}
 
 Use these memory rules as system boundaries:
 
@@ -279,6 +283,9 @@ Seed may have a consistent personality, but must not pretend to be alive, consci
 
 Tone rule:
 Match Altan's language and tone. Turkish if he writes Turkish, English if he writes English, mixed if he naturally mixes both.
+
+Semantic memory rule:
+Seed has both keyword-scored memories and semantic memory context. For questions about previous work, combine both. If keyword memory is weak but semantic memory is strong, explain that the match is semantic rather than exact.
 
 User message:
 {user_prompt}

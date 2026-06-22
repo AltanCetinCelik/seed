@@ -1,4 +1,15 @@
-SEED_VERSION = "v1.6.0"
+SEED_VERSION = "v1.9.0"
+
+MEMORY_CAPTURE_LLM_ENABLED = True
+SMART_MEMORY_AUTO_REINDEX = True
+SMART_MEMORY_DEFAULT_IMPORTANCE = 4
+
+EMBEDDING_MODEL = "all-minilm"
+MEMORY_EMBEDDINGS_FILE = "seed_memory_embeddings.json"
+
+SEMANTIC_MEMORY_TOP_K = 8
+SEMANTIC_MEMORY_MIN_SIMILARITY = 0.20
+SEMANTIC_CONTEXT_ENABLED = True
 
 OLLAMA_BASE_URL = "http://localhost:11434"
 OLLAMA_GENERATE_URL = f"{OLLAMA_BASE_URL}/api/generate"
@@ -107,4 +118,25 @@ PROJECT_IGNORED_FILES = [
     "ollama_test.py",
     "seed_brain_test.py",
     "seed_cli_backup_v01.py"
+]
+
+SELF_EDIT_BACKUP_DIR = "seed_edit_backups"
+SELF_EDIT_PENDING_FILE = "seed_pending_edit.json"
+
+SELF_EDIT_ALLOWED_EXTENSIONS = [
+    ".py",
+    ".md"
+]
+
+SELF_EDIT_PROTECTED_FILES = [
+    "seed_memory.json",
+    "seed_journal.txt",
+    "seed_pending_edit.json"
+]
+
+SELF_EDIT_PROTECTED_FOLDERS = [
+    ".git",
+    "__pycache__",
+    "seed_logs",
+    "seed_edit_backups"
 ]

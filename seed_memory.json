@@ -200,5 +200,17 @@
         "content": "Seed's chat mode is becoming a controlled local shell where slash commands manage memory, journal, status, debug, and session behavior while normal text goes to the model.",
         "importance": 5,
         "created_at": "2026-06-21T18:01:23"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Fixed self-edit syntax test behavior, confirmed working.",
+        "importance": 5,
+        "created_at": "2026-06-22T09:03:53"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed's memory system became more companion-like because Altan no longer has to manually classify every memory; Seed can draft the classification while Altan keeps final approval.",
+        "importance": 5,
+        "created_at": "2026-06-22T09:05:00"
     }
 ]

@@ -12,6 +12,8 @@ from seed_config import (
     VISUAL_ACCENT,
     VISUAL_SUCCESS_STYLE,
     VISUAL_WARNING_STYLE,
+    EMBEDDING_MODEL, 
+    MEMORY_EMBEDDINGS_FILE
 )
 
 from seed_memory import memories, ALLOWED_TYPES
@@ -19,6 +21,8 @@ from seed_journal import get_recent_journal_entries
 from seed_project_inspector import get_python_modules, get_project_files
 from seed_personality import get_hud_personality_lines
 from seed_llm import get_llm_hud_lines
+from seed_self_editor import load_pending_edit, get_editable_files
+from seed_semantic_memory import load_embedding_cache
 
 try:
     from rich.console import Console
@@ -109,12 +113,19 @@ def make_status_panel():
     )
 
 
-def make_memory_panel():
+def make_memory_panel(chat_state=None):
     counts = count_memories_by_type()
 
     table = Table(box=box.SIMPLE_HEAVY)
     table.add_column("Type", style="grey70")
     table.add_column("Count", justify="right", style="white")
+
+    pending_draft = "no"
+
+    if chat_state is not None and chat_state.get("pending_memory_draft") is not None:
+        pending_draft = "yes"
+
+    table.add_row("pending_draft", pending_draft)
 
     for memory_type, count in counts.items():
         if count > 0:
@@ -252,9 +263,59 @@ def make_llm_panel(chat_state=None):
         box=box.ROUNDED
     )
 
+def make_self_edit_panel():
+    pending_edit = load_pending_edit()
+    editable_files = get_editable_files()
+
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    table.add_row("Editable files", str(len(editable_files)))
+
+    if pending_edit is None:
+        table.add_row("Pending edit", "none")
+    else:
+        table.add_row("Pending edit", pending_edit.get("target_path", "unknown"))
+        table.add_row("Instruction", pending_edit.get("instruction", ""))
+
+    table.add_row("Apply gate", "requires APPLY")
+    table.add_row("Rollback", "latest backup available after edits")
+
+    return Panel(
+        table,
+        title="SELF-EDIT KERNEL",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
+def make_semantic_memory_panel():
+    cache = load_embedding_cache()
+    cached_count = len(cache.get("items", {}))
+
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    table.add_row("Embedding model", EMBEDDING_MODEL)
+    table.add_row("Cache file", MEMORY_EMBEDDINGS_FILE)
+    table.add_row("Memory count", str(len(memories)))
+    table.add_row("Cached vectors", str(cached_count))
+
+    if cached_count == 0:
+        table.add_row("Status", "needs /memory-reindex")
+    else:
+        table.add_row("Status", "ready")
+
+    return Panel(
+        table,
+        title="SEMANTIC MEMORY",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
 def show_seed_hud(chat_state=None):
-    
-    llm_panel = make_llm_panel(chat_state)
+
     if not RICH_AVAILABLE:
         print("\nRich is not installed.")
         print("Run: python -m pip install rich")
@@ -265,14 +326,40 @@ def show_seed_hud(chat_state=None):
     console.clear()
     make_header(console)
 
+    self_edit_panel = make_self_edit_panel()
+    llm_panel = make_llm_panel(chat_state)
     status_panel = make_status_panel()
-    memory_panel = make_memory_panel()
+    memory_panel = make_memory_panel(chat_state)
     project_panel = make_project_panel()
     log_panel = make_log_panel(chat_state)
     journal_panel = make_journal_panel()
     commands_panel = make_commands_panel()
     personality_panel = make_personality_panel()
+    semantic_panel = make_semantic_memory_panel()
 
+    console.print(
+        Columns(
+            [status_panel, memory_panel],
+            equal=True,
+            expand=True
+        )
+    )
+
+    console.print(
+        Columns(
+            [llm_panel, semantic_panel],
+            equal=True,
+            expand=True
+        )
+    )
+
+    console.print(
+        Columns(
+            [personality_panel, self_edit_panel],
+            equal=True,
+            expand=True
+        )
+    )
 
     console.print(
         Columns(
@@ -281,25 +368,9 @@ def show_seed_hud(chat_state=None):
             expand=True
         )
     )
-    console.print(
-    Columns(
-        [status_panel, memory_panel],
-        equal=True,
-        expand=True
-    )
-)
-
-    console.print(
-        Columns(
-            [llm_panel, personality_panel],
-            equal=True,
-            expand=True
-        )
-    )
 
     console.print(journal_panel)
     console.print(commands_panel)
-    console.print(project_panel)
     console.print(
         Align.center(
             Text(
