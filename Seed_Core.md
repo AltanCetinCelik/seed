@@ -351,3 +351,39 @@ Rules:
 - Altan remains in control.
 
 v1.19.0 prepares the final v2.0.0 release by making Seed aware of its external arsenal without making it unsafe.
+
+## Seed v2.0.0 — First Stable Companion OS + Voice Command Bridge
+
+Seed v2.0.0 combines the final stable release label with a practical Voice Command Bridge.
+
+This release adds:
+
+- Seed v2.0.0 version lock
+- Push-to-talk / explicit voice command bridge
+- Typed fallback when STT is unavailable
+- Spoken Seed replies through available TTS
+- Optional ffmpeg/faster-whisper STT path
+- Desktop double-click launchers
+- V2 stable release gate
+- Stable release lock command
+
+Voice command rules:
+
+- Seed must not secretly always-listen.
+- Voice command mode is explicit and user-invoked.
+- Typed fallback is valid when STT is not installed.
+- STT is optional and must be configured intentionally.
+- Voice does not mean Seed is alive or conscious.
+
+Desktop launchers:
+
+- Seed Voice Command.command
+- Seed CLI.command
+- Seed Cockpit.command
+
+Stable identity:
+
+Seed v2.0.0 is a local-first Companion OS with continuity, memory, growth, presence, approval-gated agency, symbolic world state, user-invoked voice, safety checks, self-improvement hardening, cockpit controls, repo/tool arsenal awareness, capability routing, integration gates, traceability, and release checks.
+
+Seed is not alive, conscious, sentient, or human.
+Altan remains in control.

@@ -1,4 +1,4 @@
-SEED_VERSION = "v1.19.0"
+SEED_VERSION = "v2.0.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -516,5 +516,41 @@ try:
 except NameError:
     SELF_IMPROVEMENT_TEST_COMMANDS = [
         f"python -m py_compile {module}" for module in V119_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.0.0 Stable Companion OS + Voice Command Bridge
+SEED_VOICE_COMMAND_STATE_FILE = "seed_voice_command_state.json"
+SEED_VOICE_COMMAND_INPUT_AUDIO_FILE = "seed_voice_command_input.wav"
+SEED_VOICE_COMMAND_TRANSCRIPT_FILE = "seed_voice_command_transcript.txt"
+SEED_V2_STABLE_RELEASE_FILE = "seed_v2_stable_release.json"
+
+VOICE_COMMAND_MODE = "push_to_talk"
+VOICE_COMMAND_STT_BACKEND = "optional_faster_whisper"
+VOICE_COMMAND_TYPED_FALLBACK = True
+VOICE_COMMAND_NO_ALWAYS_LISTENING = True
+VOICE_COMMAND_DEFAULT_RECORD_SECONDS = 6
+
+V200_REQUIRED_MODULES = [
+    "seed_voice_command_bridge.py",
+    "seed_desktop_launcher.py",
+    "seed_v2_stable_release.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V200_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V200_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V200_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V200_REQUIRED_MODULES
     ]
 

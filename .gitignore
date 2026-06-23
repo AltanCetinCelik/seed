@@ -51,3 +51,9 @@ seed_repo_arsenal_state.json
 seed_friend_advice_registry.json
 seed_tool_router_trace.jsonl
 seed_integration_gate_report.json
+
+# Seed v2.0.0 voice command runtime state
+seed_voice_command_state.json
+seed_voice_command_input.wav
+seed_voice_command_transcript.txt
+seed_v2_stable_release.json

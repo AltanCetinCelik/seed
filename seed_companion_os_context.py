@@ -289,3 +289,40 @@ try:
 except Exception:
     pass
 
+
+
+
+# v2.0.0 Voice Command Bridge context wrapper
+try:
+    _original_v200_voice_command_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v200_voice_command_context_function(user_prompt)
+
+        extras = []
+
+        try:
+            from seed_voice_command_bridge import get_voice_command_context_for_prompt
+            extras.append(get_voice_command_context_for_prompt())
+        except Exception:
+            pass
+
+        try:
+            from seed_v2_stable_release import run_v2_stable_gate
+            report = run_v2_stable_gate()
+            extras.append(
+                "=== V2 STABLE CONTEXT ===\n"
+                + f"Stable ready: {report.get('stable_ready')}\n"
+                + f"Voice command OK: {report.get('voice_command_ok')}\n"
+                + f"Integration OK: {report.get('integration_ok')}\n"
+            )
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
