@@ -68,6 +68,26 @@ except Exception:
     COMMANDS_AVAILABLE = False
 
 
+_WHISPER_MODEL_CACHE = None
+
+
+def get_cached_whisper_model():
+    global _WHISPER_MODEL_CACHE
+
+    if _WHISPER_MODEL_CACHE is not None:
+        return _WHISPER_MODEL_CACHE
+
+    try:
+        from seed_config import SEED_VOICE_WHISPER_MODEL
+        model_name = SEED_VOICE_WHISPER_MODEL
+    except Exception:
+        model_name = "tiny"
+
+    from faster_whisper import WhisperModel
+    _WHISPER_MODEL_CACHE = WhisperModel(model_name, device="cpu", compute_type="int8")
+    return _WHISPER_MODEL_CACHE
+
+
 VOICE_COMMAND_RULES = [
     "Voice command mode is push-to-talk / explicit session only.",
     "Seed must not secretly always-listen.",
@@ -265,23 +285,28 @@ def transcribe_audio(audio_path=None):
 
     if faster_whisper_import_available():
         try:
-            from faster_whisper import WhisperModel
-            model = WhisperModel("base", device="cpu", compute_type="int8")
-            segments, info = model.transcribe(audio_path, beam_size=5)
+            try:
+                from seed_config import SEED_VOICE_TRANSCRIBE_BEAM_SIZE
+                beam_size = int(SEED_VOICE_TRANSCRIBE_BEAM_SIZE)
+            except Exception:
+                beam_size = 1
+
+            model = get_cached_whisper_model()
+            segments, info = model.transcribe(audio_path, beam_size=beam_size)
             text = " ".join(segment.text.strip() for segment in segments).strip()
 
             Path(SEED_VOICE_COMMAND_TRANSCRIPT_FILE).write_text(text)
 
             return {
                 "ok": bool(text),
-                "backend": "faster_whisper",
+                "backend": "faster_whisper_cached",
                 "text": text,
                 "language": getattr(info, "language", None)
             }
         except Exception as error:
             return {
                 "ok": False,
-                "backend": "faster_whisper",
+                "backend": "faster_whisper_cached",
                 "error": str(error),
                 "text": ""
             }
@@ -389,7 +414,19 @@ def ask_seed_text(user_text):
         except Exception as error:
             return f"Command failed: {error}"
 
-    if CONTEXT_AVAILABLE:
+    try:
+        from seed_config import SEED_VOICE_SKIP_HEAVY_CONTEXT_IN_VOICE
+        skip_heavy_context = bool(SEED_VOICE_SKIP_HEAVY_CONTEXT_IN_VOICE)
+    except Exception:
+        skip_heavy_context = True
+
+    if skip_heavy_context:
+        try:
+            from seed_fast_voice_context import get_fast_voice_context_for_prompt
+            context = get_fast_voice_context_for_prompt(user_text)
+        except Exception:
+            context = ""
+    elif CONTEXT_AVAILABLE:
         try:
             context = get_full_companion_os_context_for_prompt(user_text)
         except Exception:

@@ -426,6 +426,7 @@ def active_voice_loop():
     print("This is explicit local listening only while this window is open.")
     print("No secret always-listening.")
     print("Say one of:", ", ".join(ACTIVE_VOICE_WAKE_WORDS))
+    print("Best use: say the wake word and command in one sentence, e.g. 'Seed what are you now?'")
     print("Say 'Seed stop' or press CTRL+C to stop.")
     print(f"Active voice ready: {check['active_voice_ready']}")
 
@@ -460,7 +461,7 @@ def active_voice_loop():
                     print("Stopped.")
                     break
 
-                if maybe_command and len(maybe_command.split()) >= 2:
+                if maybe_command:
                     result = answer_and_speak(maybe_command, source="active_voice_wake_inline")
                     print("\nSeed:")
                     print(result.get("answer"))
