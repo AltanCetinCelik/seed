@@ -1,4 +1,17 @@
 def print_arsenal_help():
+    print("/active-voice-check = check real active voice readiness")
+    print("/active-voice = start real active voice wake loop")
+    print("/active-voice-once = record one voice command")
+    print("/active-voice-devices = list macOS microphone devices")
+    print("/active-voice-device = set macOS audio device")
+    print("/active-voice-install-plan = show active voice install plan")
+    print("/active-voice-history = show active voice history")
+    print("/agent-tools = show installed/detected agent tool profiles")
+    print("/agent-install-plan = show optional agent install plan")
+    print("/agent-task = plan task and optionally queue agent approval")
+    print("/agent-plan = show agent task plan without queueing")
+    print("/agent-diagnostic = run safe agent diagnostics")
+    print("/v21-check = run Seed v2.1 capability gate")
     print("/voice-command = start Seed v2.0 voice command bridge")
     print("/voice-command-check = check voice command bridge readiness")
     print("/voice-command-history = show voice command history")
@@ -118,6 +131,73 @@ def handle_arsenal_command(command, chat_state=None):
     if command == "/v2-lock":
         from seed_v2_stable_release import lock_v2_stable_release
         lock_v2_stable_release()
+        return "handled"
+
+
+
+    if command == "/active-voice-check":
+        from seed_active_voice_daemon import show_active_voice_check
+        show_active_voice_check()
+        return "handled"
+
+    if command == "/active-voice":
+        from seed_active_voice_daemon import active_voice_loop
+        active_voice_loop()
+        return "handled"
+
+    if command == "/active-voice-once":
+        from seed_active_voice_daemon import active_voice_once
+        active_voice_once()
+        return "handled"
+
+    if command == "/active-voice-devices":
+        from seed_active_voice_daemon import list_macos_audio_devices
+        list_macos_audio_devices()
+        return "handled"
+
+    if command == "/active-voice-device":
+        from seed_active_voice_daemon import set_audio_device_interactive
+        set_audio_device_interactive()
+        return "handled"
+
+    if command == "/active-voice-install-plan":
+        from seed_active_voice_daemon import active_voice_install_plan
+        active_voice_install_plan()
+        return "handled"
+
+    if command == "/active-voice-history":
+        from seed_active_voice_daemon import show_active_voice_history
+        show_active_voice_history()
+        return "handled"
+
+    if command == "/agent-tools":
+        from seed_agent_tool_profiles import show_agent_tool_profiles
+        show_agent_tool_profiles()
+        return "handled"
+
+    if command == "/agent-install-plan":
+        from seed_agent_tool_profiles import show_agent_install_plan
+        show_agent_install_plan()
+        return "handled"
+
+    if command == "/agent-task":
+        from seed_agent_orchestrator import run_agent_task_interactive
+        run_agent_task_interactive()
+        return "handled"
+
+    if command == "/agent-plan":
+        from seed_agent_orchestrator import show_agent_task_plan
+        show_agent_task_plan()
+        return "handled"
+
+    if command == "/agent-diagnostic":
+        from seed_agent_executor import show_agent_diagnostic
+        show_agent_diagnostic()
+        return "handled"
+
+    if command == "/v21-check":
+        from seed_v21_capability_gate import show_v21_gate
+        show_v21_gate()
         return "handled"
 
 

@@ -57,3 +57,12 @@ seed_voice_command_state.json
 seed_voice_command_input.wav
 seed_voice_command_transcript.txt
 seed_v2_stable_release.json
+
+# Seed v2.1 active voice / agent arsenal runtime state
+seed_active_voice_state.json
+seed_active_voice_input.wav
+seed_active_voice_command.wav
+seed_agent_tool_profiles.json
+seed_agent_runs/
+seed_agent_orchestrator_trace.jsonl
+seed_v21_gate_report.json

@@ -1,4 +1,4 @@
-SEED_VERSION = "v2.0.0"
+SEED_VERSION = "v2.1.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -552,5 +552,46 @@ try:
 except NameError:
     SELF_IMPROVEMENT_TEST_COMMANDS = [
         f"python -m py_compile {module}" for module in V200_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.1.0 Active Voice + Agent Arsenal Activation
+SEED_ACTIVE_VOICE_STATE_FILE = "seed_active_voice_state.json"
+SEED_ACTIVE_VOICE_INPUT_FILE = "seed_active_voice_input.wav"
+SEED_ACTIVE_VOICE_COMMAND_FILE = "seed_active_voice_command.wav"
+SEED_AGENT_TOOL_PROFILES_FILE = "seed_agent_tool_profiles.json"
+SEED_AGENT_RUNS_DIR = "seed_agent_runs"
+SEED_AGENT_ORCHESTRATOR_TRACE_FILE = "seed_agent_orchestrator_trace.jsonl"
+SEED_V21_GATE_REPORT_FILE = "seed_v21_gate_report.json"
+
+ACTIVE_VOICE_WAKE_WORDS = ["seed", "hey seed", "yo seed"]
+ACTIVE_VOICE_LISTEN_SECONDS = 3
+ACTIVE_VOICE_COMMAND_SECONDS = 8
+ACTIVE_VOICE_NO_SECRET_ALWAYS_LISTENING = True
+ACTIVE_VOICE_REQUIRE_EXPLICIT_LAUNCH = True
+
+V21_REQUIRED_MODULES = [
+    "seed_active_voice_daemon.py",
+    "seed_agent_tool_profiles.py",
+    "seed_agent_executor.py",
+    "seed_agent_orchestrator.py",
+    "seed_v21_capability_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V21_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V21_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V21_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V21_REQUIRED_MODULES
     ]
 

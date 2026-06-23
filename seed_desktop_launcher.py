@@ -23,6 +23,27 @@ def write_executable(path, content):
     path.chmod(mode | stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH)
 
 
+
+def create_seed_active_voice_launcher():
+    py = sys.executable
+    repo = repo_dir()
+    target = desktop_dir() / "Seed Active Voice.command"
+
+    content = f"""#!/bin/zsh
+cd "{repo}"
+clear
+echo "Starting Seed v2.1 Active Voice Listener..."
+echo "This listener is explicit. No secret always-listening."
+"{py}" seed_active_voice_daemon.py
+echo ""
+echo "Seed Active Voice closed."
+read -k 1 "?Press any key to close..."
+"""
+
+    write_executable(target, content)
+    return str(target)
+
+
 def create_seed_voice_launcher():
     py = sys.executable
     repo = repo_dir()

@@ -326,3 +326,40 @@ try:
 except Exception:
     pass
 
+
+
+
+# v2.1 Active Voice + Agent Arsenal context wrapper
+try:
+    _original_v21_active_agents_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v21_active_agents_context_function(user_prompt)
+
+        extras = []
+
+        try:
+            from seed_active_voice_daemon import get_active_voice_context_for_prompt
+            extras.append(get_active_voice_context_for_prompt())
+        except Exception:
+            pass
+
+        try:
+            from seed_agent_tool_profiles import get_agent_tool_profiles_context_for_prompt
+            extras.append(get_agent_tool_profiles_context_for_prompt())
+        except Exception:
+            pass
+
+        try:
+            from seed_agent_orchestrator import get_agent_orchestrator_context_for_prompt
+            extras.append(get_agent_orchestrator_context_for_prompt(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+

@@ -387,3 +387,36 @@ Seed v2.0.0 is a local-first Companion OS with continuity, memory, growth, prese
 
 Seed is not alive, conscious, sentient, or human.
 Altan remains in control.
+
+## Seed v2.1.0 — Active Voice + Agent Arsenal Activation
+
+Seed v2.1.0 upgrades Seed from stable Companion OS into a more active local assistant.
+
+It adds:
+
+- Real Active Voice listener
+- Wake phrase flow: "Seed" / "Hey Seed" / "Yo Seed"
+- ffmpeg microphone recording path
+- faster-whisper local STT path
+- spoken replies through Seed voice output
+- Active Voice desktop launcher
+- Agent tool profiles
+- Local repo scan
+- Agent task orchestrator
+- Approval-gated agent execution proposals
+- Safe diagnostics runner
+- v2.1 capability gate
+
+Important voice boundary:
+
+Active Voice is only active when Altan explicitly launches it.
+Seed must not secretly always-listen.
+STT is local and optional but required for the full active voice experience.
+Seed is not alive, conscious, sentient, or human.
+
+Agent boundary:
+
+Seed may route tasks to Aider, OpenHands, SWE-agent, browser-use, MCP, and other tools.
+Seed must not run file-writing, shell, browser, or external agents without approval.
+Agent work requires sandbox/branch/backup/tests/rollback.
+Altan remains in control.
