@@ -1,5 +1,16 @@
-SEED_VERSION = "v1.12.0"
+SEED_VERSION = "v1.13.0"
 
+SEED_WORLD_FILE = "seed_world.json"
+SEED_TIMELINE_FILE = "seed_life_timeline.json"
+SEED_QUESTS_FILE = "seed_quests.json"
+SEED_RITUALS_FILE = "seed_rituals.json"
+
+COCKPIT_HOST = "127.0.0.1"
+COCKPIT_PORT = 8765
+COCKPIT_TITLE = "SEED Companion Cockpit"
+
+SEED_WORLD_ENABLED = True
+SEED_COCKPIT_ENABLED = True
 SEED_SKILLS_DIR = "seed_skills"
 SEED_SKILL_STATE_FILE = "seed_skill_state.json"
 

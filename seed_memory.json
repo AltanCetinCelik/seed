@@ -212,5 +212,11 @@
         "content": "Seed's memory system became more companion-like because Altan no longer has to manually classify every memory; Seed can draft the classification while Altan keeps final approval.",
         "importance": 5,
         "created_at": "2026-06-22T09:05:00"
+    },
+    {
+        "type": "technical_progress",
+        "content": "Seed v1.13.0 added the Companion Cockpit and Seed World Kernel. It introduced seed_world.py and seed_cockpit.py, persistent Seed World state, Memory Garden counters, life timeline events, quests, rituals, local FastAPI cockpit, browser dashboard, local API endpoints, browser chat, World context injection, and HUD World visibility.",
+        "importance": 5,
+        "created_at": "2026-06-23T09:36:42"
     }
 ]

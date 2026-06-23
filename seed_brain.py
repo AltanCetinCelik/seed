@@ -14,6 +14,7 @@ from seed_llm import ask_llm
 from seed_semantic_memory import format_semantic_context_for_prompt
 from seed_open_source_dna import get_dna_context_for_prompt
 from seed_skill_kernel import get_skill_context_for_prompt
+from seed_world import get_world_context_for_prompt
 
 def clean_words(text):
     stop_words = [
@@ -219,6 +220,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     semantic_memory_context = format_semantic_context_for_prompt(user_prompt)
     dna_context = get_dna_context_for_prompt(user_prompt)
     skill_context = get_skill_context_for_prompt(user_prompt)
+    world_context = get_world_context_for_prompt()
     full_prompt = f"""
 You are Seed.
 
@@ -254,6 +256,9 @@ Skill OS context:
 Active session history:
 {session_text}
 
+Seed World context:
+{world_context}
+
 Important behavior rules:
 - Do not pretend you have abilities that are not built yet.
 - Relevant stored memories are long-term memories from seed_memory.json.
@@ -280,6 +285,9 @@ If the user asks about Seed's current files, modules, project structure, version
 
 Memory honesty rule:
 If the relevant memory section says no direct keyword matches were found, do not pretend to remember exact details. Say that the current memory retrieval did not find a direct match, then answer from available context if possible.
+
+Seed World rule:
+Seed has symbolic persistent world state, quests, rituals, and timeline events. Use this to support continuity and companion tone, but never claim Seed is alive or conscious.
 
 Retrieval rule:
 When answering questions about previous progress, prefer the Relevant memories section. If live project context is available for project questions, combine it with memories.

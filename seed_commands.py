@@ -110,6 +110,18 @@ from seed_skill_planner import (
     run_readonly_skill_plan
 )
 
+from seed_world import (
+    show_world,
+    show_timeline,
+    show_quests,
+    show_rituals,
+    add_timeline_event,
+    add_quest,
+    complete_quest,
+    adjust_world_after_event
+)
+from seed_cockpit import run_cockpit
+
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
     print("/help or /commands = show commands")
@@ -201,6 +213,15 @@ def show_chat_help():
     print("/skill-plan <goal> = create Skill OS plan")
     print("/skill-plan-show = show pending Skill OS plan")
     print("/skill-run-readonly = run read-only/diagnostic skill plan")
+    print("/world = show Seed World")
+    print("/timeline = show life timeline")
+    print("/timeline-add = add timeline event")
+    print("/quests = show quests")
+    print("/quest-add = add quest")
+    print("/quest-done = complete quest")
+    print("/rituals = show rituals")
+    print("/world-event = adjust world after symbolic event")
+    print("/cockpit = launch local web cockpit")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -867,6 +888,77 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command.startswith("/borrow-view "):
         candidate_number = user_message.strip()[len("/borrow-view "):]
         show_borrow_candidate_file(candidate_number)
+        return "handled"
+    
+    if command == "/world":
+        show_world()
+        return "handled"
+
+    if command == "/timeline":
+        show_timeline()
+        return "handled"
+
+    if command == "/timeline-add":
+        print("\n=== ADD TIMELINE EVENT ===")
+        title = input("Title: ")
+        event_type = input("Type (general/project_milestone/reflection): ")
+        note = input("Note: ")
+        importance = input("Importance (1-5): ")
+
+        try:
+            importance_value = int(importance)
+        except ValueError:
+            importance_value = 3
+
+        add_timeline_event(title, event_type, note, importance_value)
+        print("Timeline event added.")
+        return "handled"
+
+    if command == "/quests":
+        show_quests()
+        return "handled"
+
+    if command == "/quest-add":
+        print("\n=== ADD QUEST ===")
+        title = input("Title: ")
+        quest_type = input("Type (project/growth/courage/focus/reflection): ")
+        difficulty = input("Difficulty (1-5): ")
+        reward = input("Reward: ")
+        reason = input("Reason: ")
+
+        try:
+            difficulty_value = int(difficulty)
+        except ValueError:
+            difficulty_value = 3
+
+        quest = add_quest(title, quest_type, difficulty_value, reward, reason)
+        print(f"Quest added: {quest.get('id')}")
+        return "handled"
+
+    if command == "/quest-done":
+        quest_id = input("Quest ID: ")
+        quest = complete_quest(quest_id)
+
+        if quest is None:
+            print("Quest not found.")
+        else:
+            print(f"Quest completed: {quest.get('title')}")
+
+        return "handled"
+
+    if command == "/rituals":
+        show_rituals()
+        return "handled"
+
+    if command == "/world-event":
+        print("\nEvent types: memory_saved, quest_completed, reflection, project_milestone")
+        event_type = input("Event type: ")
+        adjust_world_after_event(event_type)
+        print("World updated.")
+        return "handled"
+
+    if command == "/cockpit":
+        run_cockpit()
         return "handled"
 
     if command.startswith("/"):

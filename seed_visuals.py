@@ -26,6 +26,7 @@ from seed_semantic_memory import load_embedding_cache
 from seed_tool_kernel import TOOL_REGISTRY
 from seed_open_source_dna import load_dna_data
 from seed_skill_kernel import load_all_skills, get_all_capabilities
+from seed_world import get_world_summary
 
 try:
     from rich.console import Console
@@ -62,6 +63,33 @@ def make_dna_panel():
         border_style=VISUAL_ACCENT,
         box=box.ROUNDED
     )
+
+
+def make_world_panel():
+    summary = get_world_summary()
+    world = summary.get("world", {})
+    garden = world.get("memory_garden", {})
+
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    table.add_row("Location", world.get("location", "unknown"))
+    table.add_row("Mood", world.get("mood", "unknown"))
+    table.add_row("Weather", world.get("weather", "unknown"))
+    table.add_row("Energy", str(world.get("energy", 0)))
+    table.add_row("Growth", str(world.get("growth", 0)))
+    table.add_row("Trust phase", world.get("trust_phase", "unknown"))
+    table.add_row("Garden seeds", str(garden.get("seeds", 0)))
+    table.add_row("Active quests", str(len(summary.get("active_quests", []))))
+
+    return Panel(
+        table,
+        title="SEED WORLD",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
 
 def count_memories_by_type():
     counts = {}
@@ -425,10 +453,18 @@ def show_seed_hud(chat_state=None):
     agent_panel = make_agent_panel(chat_state)
     dna_panel = make_dna_panel()
     skill_os_panel = make_skill_os_panel(chat_state)
+    world_panel = make_world_panel()
 
     console.print(
         Columns(
             [status_panel, memory_panel],
+            equal=True,
+            expand=True
+        )
+    )
+    console.print(
+        Columns(
+            [world_panel, skill_os_panel],
             equal=True,
             expand=True
         )
