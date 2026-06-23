@@ -1,4 +1,118 @@
-SEED_VERSION = "v1.15.0"
+SEED_VERSION = "v1.17.0"
+
+SEED_MEMORY_BACKEND_STATE_FILE = "seed_memory_backend_state.json"
+
+MEMORY_BACKEND_ACTIVE = "json_semantic"
+MEMORY_BACKEND_VECTOR_READY = True
+MEMORY_BACKEND_DOCUMENT_READY = True
+
+DOCUMENT_REGISTRY_SUMMARY_CHAR_LIMIT = 12000
+DOCUMENT_REGISTRY_SEARCH_LIMIT = 12
+CONTINUITY_RECALL_LIMIT = 12
+CONTINUITY_PACK_TIMELINE_LIMIT = 20
+
+WORKFLOW_RECENT_LIMIT = 12
+WORKFLOW_MAX_STEPS = 20
+
+WORLD_EVENT_LIMIT = 30
+AVATAR_ALLOWED_STATES = [
+    "focused",
+    "thinking",
+    "guarding",
+    "celebrating",
+    "quiet",
+    "listening",
+    "building",
+    "reflecting",
+    "archiving"
+]
+
+VOICE_TTS_BACKEND = "macos_say"
+VOICE_STT_BACKEND = "not_enabled"
+VOICE_ALLOW_SPEAKING = True
+VOICE_NO_ALWAYS_LISTENING = True
+
+COCKPIT_REFRESH_SECONDS = 5
+
+COUNCIL_AGENT_NAMES = [
+    "Builder",
+    "Guardian",
+    "Archive",
+    "Mentor",
+    "Muse",
+    "Operator"
+]
+
+SELF_IMPROVEMENT_TEST_COMMANDS = [
+    "python -m py_compile seed_companion_os.py",
+    "python -m py_compile seed_os_registry.py",
+    "python -m py_compile seed_os_migrations.py",
+    "python -m py_compile seed_os_bridge.py",
+    "python -m py_compile seed_trace_engine.py",
+    "python -m py_compile seed_tool_manifest_v2.py",
+    "python -m py_compile seed_trust_center.py",
+    "python -m py_compile seed_memory_backend.py",
+    "python -m py_compile seed_document_registry.py",
+    "python -m py_compile seed_continuity_engine.py"
+]
+
+RELEASE_MANAGER_RECENT_LIMIT = 8
+
+SEED_COMPANION_OS_STATE_FILE = "seed_companion_os_state.json"
+SEED_COMPANION_OS_EVENTS_FILE = "seed_companion_os_events.jsonl"
+SEED_COMPANION_OS_JOURNAL_FILE = "seed_companion_os_journal.md"
+SEED_COMPANION_OS_BACKUP_DIR = "seed_companion_os_backups"
+
+SEED_OS_MIGRATION_REPORT_FILE = "seed_os_migration_report.json"
+SEED_OS_REGISTRY_CACHE_FILE = "seed_os_registry_cache.json"
+SEED_TRACE_LOG_FILE = "seed_trace_log.jsonl"
+SEED_DOCUMENT_REGISTRY_FILE = "seed_document_registry.json"
+SEED_VOICE_SESSION_FILE = "seed_voice_session.json"
+SEED_RELEASE_MANAGER_FILE = "seed_release_manager.json"
+
+COMPANION_OS_ENABLED = True
+COMPANION_OS_CONTEXT_ENABLED = True
+
+COMPANION_OS_COCKPIT_HOST = "127.0.0.1"
+COMPANION_OS_COCKPIT_PORT = 8770
+
+COMPANION_OS_V2_TARGET_SCORE = 85
+COMPANION_OS_EVENT_LIMIT = 30
+COMPANION_OS_TIMELINE_LIMIT = 30
+COMPANION_OS_TRACE_LIMIT = 30
+SEED_EVENTS_FILE = "seed_events.jsonl"
+SEED_CODE_MAP_FILE = "seed_code_map.json"
+
+CODE_MAP_IGNORE_DIRS = [
+    ".git",
+    "__pycache__",
+    "seed_logs",
+    "seed_edit_backups",
+    "third_party_repos",
+    ".venv",
+    "venv",
+    "node_modules"
+]
+
+RUNTIME_RECENT_EVENTS_LIMIT = 12
+SEED_EVOLUTION_FOUNDRY_FILE = "seed_evolution_foundry.json"
+SEED_RELEASE_CANDIDATES_FILE = "seed_release_candidates.json"
+SEED_AUTONOMY_STATE_FILE = "seed_autonomy_state.json"
+SEED_FOUNDRY_JOURNAL_FILE = "seed_foundry_journal.md"
+SEED_FOUNDRY_SELF_EDIT_PROMPT_FILE = "seed_foundry_self_edit_prompt.md"
+
+EVOLUTION_FOUNDRY_ENABLED = True
+EVOLUTION_FOUNDRY_CONTEXT_ENABLED = True
+
+FOUNDRY_PROPOSAL_COUNT = 5
+FOUNDRY_RECENT_LIMIT = 8
+FOUNDRY_DEFAULT_AUTONOMY_LEVEL = 2
+
+FOUNDRY_SAFE_DIAGNOSTIC_COMMANDS = [
+    "git status",
+    "python --version",
+    "ollama list"
+]
 
 SEED_PRESENCE_STATE_FILE = "seed_presence_state.json"
 SEED_LOCAL_ACTIONS_FILE = "seed_local_actions.jsonl"

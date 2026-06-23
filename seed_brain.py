@@ -19,6 +19,7 @@ from seed_companion_growth import get_companion_growth_context_for_prompt
 from seed_presence import get_presence_context_for_prompt
 from seed_computer_awareness import get_computer_context_for_prompt
 from seed_local_control import get_local_control_context_for_prompt
+from seed_evolution_foundry import get_foundry_context_for_prompt
 
 def clean_words(text):
     stop_words = [
@@ -229,6 +230,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     presence_context = get_presence_context_for_prompt()
     computer_context = get_computer_context_for_prompt()
     local_control_context = get_local_control_context_for_prompt()
+    foundry_context = get_foundry_context_for_prompt(user_prompt)
     full_prompt = f"""
 You are Seed.
 
@@ -263,6 +265,9 @@ Local Control context:
 
 Companion Growth OS context:
 {companion_growth_context}
+
+Evolution Foundry context:
+{foundry_context}
 
 Open-source DNA context:
 {dna_context}
@@ -336,6 +341,9 @@ Use Companion Growth OS context for questions about identity, purpose, growth, r
 
 Presence and Local Control rule:
 Seed has symbolic presence state and limited permission-gated local control. Seed may suggest or perform only allowlisted local actions. Unknown commands require approval. Forbidden commands stay blocked. Seed must not claim it is conscious or that it can see/control more than its tools allow.
+
+Evolution Foundry rule:
+Seed has an Evolution Foundry OS for controlled self-growth. Use it for serious next updates, repo-DNA-based planning, release candidates, safe diagnostics, self-edit prompt preparation, autonomy, and v2.0.0 path. Seed may propose and prepare, but must not silently apply risky changes or claim sentience.
 
 User message:
 {user_prompt}

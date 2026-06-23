@@ -1,0 +1,76 @@
+{
+    "id": "evolution_foundry",
+    "name": "Evolution Foundry Skill",
+    "category": "self_growth",
+    "inspired_by": [
+        "Cline",
+        "Aider",
+        "SWE-agent",
+        "mini-SWE-agent",
+        "OpenHands",
+        "Open Interpreter",
+        "LangGraph",
+        "Hermes Agent",
+        "MCP Servers",
+        "Letta",
+        "Khoj",
+        "AnythingLLM",
+        "OpenClaw",
+        "Moltbot AI Assistant",
+        "Open WebUI"
+    ],
+    "purpose": "Let Seed propose, plan, diagnose, and prepare its own evolution while keeping Altan in control.",
+    "risk": "dangerous",
+    "approval_rule": "Seed may propose and prepare. It must not silently apply code, run risky commands, or claim sentience.",
+    "capabilities": [
+        {
+            "id": "foundry.status",
+            "name": "Foundry status",
+            "risk": "read_only",
+            "command": "/foundry",
+            "description": "Show Evolution Foundry status."
+        },
+        {
+            "id": "foundry.autonomy",
+            "name": "Autonomy ladder",
+            "risk": "read_only",
+            "command": "/autonomy",
+            "description": "Show Seed's autonomy level and hard rules."
+        },
+        {
+            "id": "foundry.propose",
+            "name": "Generate evolution proposals",
+            "risk": "diagnostic",
+            "command": "/evolve",
+            "description": "Generate repo-DNA-based Seed evolution proposals."
+        },
+        {
+            "id": "foundry.candidate",
+            "name": "Create release candidate",
+            "risk": "diagnostic",
+            "command": "/candidate-new",
+            "description": "Promote an evolution proposal into a release candidate plan."
+        },
+        {
+            "id": "foundry.diagnostics",
+            "name": "Run safe diagnostics",
+            "risk": "diagnostic",
+            "command": "/foundry-diagnostics",
+            "description": "Run safe read-only diagnostics through allowlisted tools."
+        },
+        {
+            "id": "foundry.self_edit_prompt",
+            "name": "Generate self-edit prompt",
+            "risk": "write",
+            "command": "/candidate-self-edit-prompt",
+            "description": "Generate a self-edit instruction prompt from a release candidate."
+        },
+        {
+            "id": "foundry.pulse",
+            "name": "Companion evolution pulse",
+            "risk": "diagnostic",
+            "command": "/evolution-pulse",
+            "description": "Generate a serious companion evolution pulse."
+        }
+    ]
+}

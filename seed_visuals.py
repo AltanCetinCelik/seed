@@ -30,6 +30,7 @@ from seed_world import get_world_summary
 from seed_companion_growth import get_growth_hud_lines
 from seed_presence import get_presence_hud_lines
 from seed_local_control import load_pending_action, emergency_lock_is_active
+from seed_evolution_foundry import get_foundry_hud_lines
 
 try:
     from rich.console import Console
@@ -111,6 +112,20 @@ def make_world_panel():
         box=box.ROUNDED
     )
 
+def make_evolution_foundry_panel():
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    for label, value in get_foundry_hud_lines():
+        table.add_row(label, str(value))
+
+    return Panel(
+        table,
+        title="EVOLUTION FOUNDRY OS",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
 
 def count_memories_by_type():
     counts = {}
@@ -492,6 +507,7 @@ def show_seed_hud(chat_state=None):
     world_panel = make_world_panel()
     companion_growth_panel = make_companion_growth_panel()
     presence_control_panel = make_presence_control_panel()
+    evolution_foundry_panel = make_evolution_foundry_panel()
     
 
     console.print(
@@ -504,6 +520,13 @@ def show_seed_hud(chat_state=None):
     console.print(
         Columns(
             [companion_growth_panel, presence_control_panel],
+            equal=True,
+            expand=True
+        )
+    )
+    console.print(
+        Columns(
+            [companion_growth_panel, evolution_foundry_panel],
             equal=True,
             expand=True
         )

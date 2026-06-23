@@ -162,7 +162,26 @@ from seed_local_control import (
     reject_pending_action,
     show_action_history
 )
+from seed_event_bus import show_events, add_manual_event
+from seed_code_map import build_code_map, show_code_map
 from seed_action_proposer import propose_local_action_interactive
+from seed_evolution_foundry import (
+    show_foundry_status,
+    show_autonomy,
+    set_autonomy_level_interactive,
+    set_foundry_stop,
+    generate_evolution_proposals,
+    show_evolution_proposals,
+    promote_proposal_to_release_candidate,
+    show_release_candidates,
+    approve_release_candidate_interactive,
+    reject_release_candidate_interactive,
+    generate_self_edit_prompt_from_candidate,
+    run_foundry_diagnostics,
+    generate_companion_evolution_pulse,
+    show_foundry_journal
+)
+
 
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
@@ -298,6 +317,25 @@ def show_chat_help():
     print("/action-history = show local action history")
     print("/local-lock = enable emergency local control lock")
     print("/local-unlock = disable emergency local control lock")
+    print("/foundry = show Evolution Foundry OS")
+    print("/autonomy = show Seed autonomy ladder")
+    print("/autonomy-set = set autonomy level")
+    print("/foundry-stop = enable Foundry emergency stop")
+    print("/foundry-start = disable Foundry emergency stop")
+    print("/evolve = generate monstrous evolution proposals")
+    print("/evolution-proposals = show recent proposals")
+    print("/candidate-new = promote proposal to release candidate")
+    print("/candidates = show release candidates")
+    print("/candidate-approve = approve candidate as plan")
+    print("/candidate-reject = reject candidate")
+    print("/candidate-self-edit-prompt = generate self-edit prompt from candidate")
+    print("/foundry-diagnostics = run safe Foundry diagnostics")
+    print("/evolution-pulse = generate companion evolution pulse")
+    print("/foundry-journal = show Foundry journal")
+    print("/events = show runtime event stream")
+    print("/event-add = add runtime event")
+    print("/code-map-build = build repo-aware code map")
+    print("/code-map = show repo-aware code map")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -1173,6 +1211,84 @@ def handle_chat_command(user_message, session_history, chat_state):
     if command == "/local-unlock":
         set_emergency_lock(False)
         print("Emergency local control lock disabled.")
+        return "handled"
+    
+    if command == "/foundry":
+        show_foundry_status()
+        return "handled"
+
+    if command == "/autonomy":
+        show_autonomy()
+        return "handled"
+
+    if command == "/autonomy-set":
+        set_autonomy_level_interactive()
+        return "handled"
+
+    if command == "/foundry-stop":
+        set_foundry_stop(True)
+        print("Evolution Foundry emergency stop enabled.")
+        return "handled"
+
+    if command == "/foundry-start":
+        set_foundry_stop(False)
+        print("Evolution Foundry emergency stop disabled.")
+        return "handled"
+
+    if command == "/evolve":
+        generate_evolution_proposals(chat_state)
+        return "handled"
+
+    if command == "/evolution-proposals":
+        show_evolution_proposals()
+        return "handled"
+
+    if command == "/candidate-new":
+        promote_proposal_to_release_candidate(chat_state=chat_state)
+        return "handled"
+
+    if command == "/candidates":
+        show_release_candidates()
+        return "handled"
+
+    if command == "/candidate-approve":
+        approve_release_candidate_interactive()
+        return "handled"
+
+    if command == "/candidate-reject":
+        reject_release_candidate_interactive()
+        return "handled"
+
+    if command == "/candidate-self-edit-prompt":
+        generate_self_edit_prompt_from_candidate()
+        return "handled"
+
+    if command == "/foundry-diagnostics":
+        run_foundry_diagnostics(chat_state)
+        return "handled"
+
+    if command == "/evolution-pulse":
+        generate_companion_evolution_pulse(chat_state)
+        return "handled"
+
+    if command == "/foundry-journal":
+        show_foundry_journal()
+        return "handled"
+    
+    if command == "/events":
+        show_events()
+        return "handled"
+
+    if command == "/event-add":
+        add_manual_event()
+        return "handled"
+
+    if command == "/code-map-build":
+        build_code_map()
+        return "handled"
+
+    if command == "/code-map":
+        show_code_map()
         return "handled"
 
     if command.startswith("/"):
