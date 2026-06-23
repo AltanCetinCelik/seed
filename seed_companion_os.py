@@ -607,6 +607,12 @@ def calculate_companion_os_v2_score(save=True):
     scores["Self-improvement"] = min(10, 3 + release_draft_count * 2 + impact_report_count * 2)
     scores["Cockpit"] = 3
 
+    try:
+        from seed_v2_hardening_metrics import apply_v118_hardening_scores
+        scores = apply_v118_hardening_scores(state, scores)
+    except Exception:
+        pass
+
     total = sum(scores.values())
 
     blockers = []

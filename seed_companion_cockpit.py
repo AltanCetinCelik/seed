@@ -283,6 +283,13 @@ def create_app():
         response = cockpit_chat_response(message)
         return JSONResponse({"response": response})
 
+    try:
+        from seed_cockpit_actions import attach_cockpit_action_routes, mark_cockpit_api_signals
+        attach_cockpit_action_routes(app)
+        mark_cockpit_api_signals()
+    except Exception as error:
+        print(f"Cockpit action routes unavailable: {error}")
+
     return app
 
 
@@ -522,6 +529,46 @@ input {{
     <h2>Trace Stats</h2>
     <div id="traces"></div>
   </section>
+
+
+  <section class="panel full">
+    <h2>Interactive Cockpit Actions</h2>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:10px; margin-bottom:12px;">
+      <button onclick="runAction('voice_privacy_check', {{}})">Voice Privacy Check</button>
+      <button onclick="runAction('voice_pulse_dry', {{}})">Voice Pulse Dry-Run</button>
+      <button onclick="runAction('module_health', {{}})">Module Health</button>
+      <button onclick="runAction('test_matrix', {{}})">Test Matrix</button>
+      <button onclick="runAction('release_readiness', {{}})">Release Readiness</button>
+      <button onclick="runAction('release_check', {{}})">Release Check</button>
+      <button onclick="runAction('v2_check', {{}})">V2 Gate</button>
+      <button onclick="runAction('avatar_mode', {{mode:'builder'}})">Avatar Builder Mode</button>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 220px auto; gap:10px; margin-bottom:10px;">
+      <input id="simAction" placeholder="Action to simulate, e.g. Run v2 release gate">
+      <input id="simTool" placeholder="Tool ID, optional">
+      <button onclick="simulateFromCockpit()">Simulate</button>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 220px 1fr auto; gap:10px; margin-bottom:10px;">
+      <input id="reqAction" placeholder="Approval request action">
+      <input id="reqTool" placeholder="Tool ID, optional">
+      <input id="reqReason" placeholder="Reason">
+      <button onclick="requestFromCockpit()">Queue Approval</button>
+    </div>
+
+    <div style="display:grid; grid-template-columns:160px 1fr 1fr 90px auto; gap:10px; margin-bottom:10px;">
+      <input id="worldType" placeholder="type" value="companion">
+      <input id="worldTitle" placeholder="World event title">
+      <input id="worldNote" placeholder="Note">
+      <input id="worldImportance" placeholder="1-5" value="3">
+      <button onclick="worldEventFromCockpit()">World Event</button>
+    </div>
+
+    <pre id="actionlog">No cockpit action yet.</pre>
+  </section>
+
 </main>
 
 <script>
@@ -608,6 +655,46 @@ async function sendChat() {{
   const data = await res.json();
   log.innerHTML += `<div style="margin-top:8px"><strong>Seed:</strong> ${{data.response}}</div>`;
   log.scrollTop = log.scrollHeight;
+}}
+
+
+async function runAction(action_id, payload) {{
+  const log = document.getElementById('actionlog');
+  log.innerText = 'Running ' + action_id + '...';
+
+  const res = await fetch('/api/cockpit/action', {{
+    method:'POST',
+    headers:{{'Content-Type':'application/json'}},
+    body:JSON.stringify({{action_id:action_id, payload:payload || {{}}}})
+  }});
+
+  const data = await res.json();
+  log.innerText = JSON.stringify(data, null, 2);
+  refresh();
+}}
+
+function simulateFromCockpit() {{
+  runAction('agency_simulate', {{
+    action_text: document.getElementById('simAction').value,
+    tool_id: document.getElementById('simTool').value
+  }});
+}}
+
+function requestFromCockpit() {{
+  runAction('agency_request', {{
+    action_text: document.getElementById('reqAction').value,
+    tool_id: document.getElementById('reqTool').value,
+    reason: document.getElementById('reqReason').value
+  }});
+}}
+
+function worldEventFromCockpit() {{
+  runAction('world_event', {{
+    event_type: document.getElementById('worldType').value,
+    title: document.getElementById('worldTitle').value,
+    note: document.getElementById('worldNote').value,
+    importance: document.getElementById('worldImportance').value
+  }});
 }}
 
 refresh();

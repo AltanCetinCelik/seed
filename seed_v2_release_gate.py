@@ -28,7 +28,12 @@ except Exception:
         "seed_companion_cockpit.py",
         "seed_companion_os_context.py",
         "seed_companion_os_commands.py",
-        "seed_v2_release_gate.py"
+        "seed_v2_release_gate.py",
+        "seed_cockpit_actions.py",
+        "seed_voice_hardening.py",
+        "seed_self_improvement_hardening.py",
+        "seed_agency_hardening.py",
+        "seed_v2_hardening_metrics.py"
     ]
     COMPANION_OS_V2_TARGET_SCORE = 85
 

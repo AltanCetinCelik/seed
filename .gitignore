@@ -38,3 +38,10 @@ seed_release_manager.json
 seed_memory_backend_state.json
 # Seed private runtime logs
 seed_logs/
+
+# Seed v1.18 hardening runtime state
+seed_v2_hardening_state.json
+seed_agency_hardening_state.json
+seed_self_improvement_hardening.json
+seed_voice_hardening_state.json
+seed_cockpit_hardening_state.json

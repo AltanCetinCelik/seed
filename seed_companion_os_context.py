@@ -50,6 +50,36 @@ def get_full_companion_os_context_for_prompt(user_prompt=""):
     trace_stats = safe_call("seed_trace_engine", "trace_stats", default={"total": 0})
     registry_stats = safe_call("seed_os_registry", "registry_stats", default={})
 
+    hardening_status = safe_call(
+        "seed_v2_hardening_metrics",
+        "hardening_status_data",
+        default={}
+    )
+
+    agency_hardening_status = safe_call(
+        "seed_agency_hardening",
+        "agency_hardening_status_data",
+        default={}
+    )
+
+    self_hardening_status_text = safe_call(
+        "seed_self_improvement_hardening",
+        "get_self_improvement_hardening_context_for_prompt",
+        default=""
+    )
+
+    voice_hardening_status = safe_call(
+        "seed_voice_hardening",
+        "voice_hardening_status_data",
+        default={}
+    )
+
+    cockpit_hardening_status = safe_call(
+        "seed_cockpit_actions",
+        "cockpit_hardening_status_data",
+        default={}
+    )
+
     release_state = safe_call(
         "seed_release_manager",
         "load_release_state",
@@ -103,6 +133,16 @@ def get_full_companion_os_context_for_prompt(user_prompt=""):
                 "privacy": voice.get("privacy")
             }
         },
+        "voice_hardening": {
+            "active_session": voice_hardening_status.get("active_session"),
+            "sessions": voice_hardening_status.get("session_count"),
+            "privacy_checks": voice_hardening_status.get("privacy_check_count"),
+            "latest_privacy_ok": voice_hardening_status.get("latest_privacy_ok"),
+            "pulse_checks": voice_hardening_status.get("pulse_check_count"),
+            "ritual_checks": voice_hardening_status.get("ritual_check_count"),
+            "transcript_placeholders": voice_hardening_status.get("transcript_placeholder_count"),
+            "stt_boundary": voice_hardening_status.get("stt_boundary")
+        },
         "continuity": {
             "relationship_notes": compact_list(continuity.get("relationship_notes", []), 6),
             "recent_timeline": compact_list(continuity.get("timeline", []), 8),
@@ -123,6 +163,15 @@ def get_full_companion_os_context_for_prompt(user_prompt=""):
             "ritual_count": len(growth.get("rituals", []))
         },
         "agency": state.get("agency", {}),
+        "agency_hardening": {
+            "autonomy": agency_hardening_status.get("current_autonomy_name"),
+            "autonomy_level": agency_hardening_status.get("current_autonomy_level"),
+            "approval_queue": agency_hardening_status.get("approval_queue_count"),
+            "pending": agency_hardening_status.get("pending_count"),
+            "simulations": agency_hardening_status.get("simulation_count"),
+            "tool_decisions": agency_hardening_status.get("tool_decision_count"),
+            "emergency_bridge": agency_hardening_status.get("emergency_bridge")
+        },
         "trust": {
             "emergency_stop": trust.get("emergency_stop"),
             "guardian_rule_count": len(trust.get("guardian_rules", [])),
@@ -144,6 +193,22 @@ def get_full_companion_os_context_for_prompt(user_prompt=""):
             "traces": trace_stats.get("total", 0),
             "registered_commands": registry_stats.get("command_count")
         },
+        "hardening": {
+            "voice": hardening_status.get("voice_score"),
+            "cockpit": hardening_status.get("cockpit_score"),
+            "agency": hardening_status.get("agency_score"),
+            "self_improvement": hardening_status.get("self_improvement_score"),
+            "presence": hardening_status.get("presence_score"),
+            "blockers": hardening_status.get("blockers")
+        },
+        "cockpit_hardening": {
+            "interactive_ready": cockpit_hardening_status.get("interactive_ready"),
+            "actions": cockpit_hardening_status.get("action_count"),
+            "action_log": cockpit_hardening_status.get("action_log_count"),
+            "last_action": cockpit_hardening_status.get("last_action_at"),
+            "available": cockpit_hardening_status.get("available")
+        },
+        "self_improvement_hardening": self_hardening_status_text,
         "recent_events": [
             {
                 "type": event.get("type"),

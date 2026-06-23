@@ -1,5 +1,20 @@
-SEED_VERSION = "v1.17.0"
+SEED_VERSION = "v1.18.0"
 
+SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
+SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
+SEED_SELF_IMPROVEMENT_HARDENING_FILE = "seed_self_improvement_hardening.json"
+SEED_VOICE_HARDENING_STATE_FILE = "seed_voice_hardening_state.json"
+SEED_COCKPIT_HARDENING_STATE_FILE = "seed_cockpit_hardening_state.json"
+
+V118_TARGET_SCORE = 85
+
+V118_REQUIRED_MODULES = [
+    "seed_v2_hardening_metrics.py",
+    "seed_agency_hardening.py",
+    "seed_self_improvement_hardening.py",
+    "seed_voice_hardening.py",
+    "seed_cockpit_actions.py"
+]
 SEED_MEMORY_BACKEND_STATE_FILE = "seed_memory_backend_state.json"
 
 MEMORY_BACKEND_ACTIVE = "json_semantic"
@@ -28,6 +43,7 @@ V2_REQUIRED_MODULES = [
     "seed_companion_os_context.py",
     "seed_companion_os_commands.py",
     "seed_v2_release_gate.py"
+    
 ]
 
 SELF_IMPROVEMENT_TEST_COMMANDS = [
@@ -56,6 +72,8 @@ SELF_IMPROVEMENT_TEST_COMMANDS = [
     "python -m py_compile seed_commands.py",
     "python -m py_compile seed_visuals.py",
     "python -m py_compile seed_config.py"
+    "python -m py_compile seed_voice_hardening.py",
+    "python -m py_compile seed_cockpit_actions.py",
 ]
 
 

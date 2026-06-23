@@ -113,6 +113,40 @@ def print_companion_os_help():
     print("/v2-blockers = show v2 blockers")
     print("/v2-pass-report = show full v2 report")
     print("/v2-release-notes = draft v2 release notes")
+    print("/agency-hardening = show Agency hardening status")
+    print("/agency-queue = show approval queue")
+    print("/agency-request = queue action approval request")
+    print("/agency-approve = approve queued request without executing")
+    print("/agency-reject = reject queued request")
+    print("/agency-simulate = dry-run action simulation")
+    print("/agency-simulations = show action simulation history")
+    print("/autonomy-ladder = show autonomy ladder")
+    print("/autonomy-set = set allowed autonomy level")
+    print("/agency-emergency = show emergency bridge")
+    print("/agency-tool-decision = explain tool decision")
+    print("/self-hardening = show self-improvement hardening status")
+    print("/module-health = build/show module health matrix")
+    print("/test-matrix = run self-improvement test matrix")
+    print("/repair-plan = build self-improvement repair plan")
+    print("/release-readiness = build self-improvement release readiness report")
+    print("/hardening-suite = run self-improvement hardening suite")
+    print("/voice-hardening = show voice hardening status")
+    print("/voice-hardening-suite = run voice hardening suite")
+    print("/voice-privacy = run voice privacy check")
+    print("/voice-capabilities = show voice capability report")
+    print("/voice-session-start = start explicit voice session")
+    print("/voice-session-end = end explicit voice session")
+    print("/voice-sessions = show voice hardening sessions")
+    print("/voice-transcript-add = add transcript placeholder")
+    print("/voice-transcripts = show transcript placeholders")
+    print("/voice-pulse-dry = dry-run voice pulse without speaking")
+    print("/voice-ritual-check = dry-run voice ritual support")
+    print("/voice-output-check = optional spoken output check")
+    print("/cockpit-hardening = show cockpit hardening status")
+    print("/cockpit-actions = show cockpit action definitions")
+    print("/cockpit-action = run cockpit action from CLI")
+    print("/cockpit-log = show cockpit action log")
+    print("/cockpit-self-test = run cockpit hardening self-test")
 
 
 def handle_companion_os_command(command, chat_state=None):
@@ -229,6 +263,36 @@ def handle_companion_os_command(command, chat_state=None):
         "/v2-blockers": ("seed_v2_release_gate", "show_v2_blockers"),
         "/v2-pass-report": ("seed_v2_release_gate", "show_v2_pass_report"),
         "/v2-release-notes": ("seed_v2_release_gate", "generate_v2_release_notes"),
+        "/agency-hardening": ("seed_agency_hardening", "show_agency_hardening_status"),
+        "/agency-queue": ("seed_agency_hardening", "show_approval_queue"),
+        "/agency-request": ("seed_agency_hardening", "request_action_approval_interactive"),
+        "/agency-approve": ("seed_agency_hardening", "approve_request_interactive"),
+        "/agency-reject": ("seed_agency_hardening", "reject_request_interactive"),
+        "/agency-simulate": ("seed_agency_hardening", "simulate_action_interactive"),
+        "/agency-simulations": ("seed_agency_hardening", "show_simulation_history"),
+        "/autonomy-ladder": ("seed_agency_hardening", "show_autonomy_ladder"),
+        "/autonomy-set": ("seed_agency_hardening", "set_autonomy_level_interactive"),
+        "/agency-emergency": ("seed_agency_hardening", "show_emergency_bridge"),
+        "/agency-tool-decision": ("seed_agency_hardening", "tool_decision_interactive"),
+        "/self-hardening": ("seed_self_improvement_hardening", "show_self_improvement_hardening_status"),
+        "/module-health": ("seed_self_improvement_hardening", "show_module_health_matrix"),
+        "/test-matrix": ("seed_self_improvement_hardening", "show_test_matrix"),
+        "/release-readiness": ("seed_self_improvement_hardening", "show_release_readiness_report"),
+        "/voice-hardening": ("seed_voice_hardening", "show_voice_hardening_status"),
+        "/voice-privacy": ("seed_voice_hardening", "show_voice_privacy_check"),
+        "/voice-capabilities": ("seed_voice_hardening", "show_voice_capability_report"),
+        "/voice-session-start": ("seed_voice_hardening", "start_voice_session_interactive"),
+        "/voice-session-end": ("seed_voice_hardening", "end_voice_session_interactive"),
+        "/voice-sessions": ("seed_voice_hardening", "show_voice_sessions"),
+        "/voice-transcript-add": ("seed_voice_hardening", "add_transcript_placeholder_interactive"),
+        "/voice-transcripts": ("seed_voice_hardening", "show_transcript_placeholders"),
+        "/voice-ritual-check": ("seed_voice_hardening", "ritual_check"),
+        "/voice-output-check": ("seed_voice_hardening", "voice_output_check_interactive"),
+        "/cockpit-hardening": ("seed_cockpit_actions", "show_cockpit_hardening_status"),
+        "/cockpit-actions": ("seed_cockpit_actions", "show_cockpit_actions"),
+        "/cockpit-action": ("seed_cockpit_actions", "execute_cockpit_action_interactive"),
+        "/cockpit-log": ("seed_cockpit_actions", "show_cockpit_action_log"),
+        "/cockpit-self-test": ("seed_cockpit_actions", "show_cockpit_self_test"),
     }
 
     chat_commands = {
@@ -245,6 +309,10 @@ def handle_companion_os_command(command, chat_state=None):
         "/test-plan": ("seed_self_improvement_engine", "test_plan_interactive"),
         "/release-draft": ("seed_release_manager", "draft_release_interactive"),
         "/voice-pulse": ("seed_voice_session", "voice_pulse"),
+        "/repair-plan": ("seed_self_improvement_hardening", "show_repair_plan"),
+        "/hardening-suite": ("seed_self_improvement_hardening", "run_self_improvement_hardening_suite"),
+        "/voice-hardening-suite": ("seed_voice_hardening", "run_voice_hardening_suite"),
+        "/voice-pulse-dry": ("seed_voice_hardening", "dry_run_voice_pulse"),
     }
 
     if command in no_arg_commands:
