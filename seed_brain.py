@@ -15,6 +15,10 @@ from seed_semantic_memory import format_semantic_context_for_prompt
 from seed_open_source_dna import get_dna_context_for_prompt
 from seed_skill_kernel import get_skill_context_for_prompt
 from seed_world import get_world_context_for_prompt
+from seed_companion_growth import get_companion_growth_context_for_prompt
+from seed_presence import get_presence_context_for_prompt
+from seed_computer_awareness import get_computer_context_for_prompt
+from seed_local_control import get_local_control_context_for_prompt
 
 def clean_words(text):
     stop_words = [
@@ -221,6 +225,10 @@ def build_seed_prompt(user_prompt, session_history=None):
     dna_context = get_dna_context_for_prompt(user_prompt)
     skill_context = get_skill_context_for_prompt(user_prompt)
     world_context = get_world_context_for_prompt()
+    companion_growth_context = get_companion_growth_context_for_prompt(user_prompt)
+    presence_context = get_presence_context_for_prompt()
+    computer_context = get_computer_context_for_prompt()
+    local_control_context = get_local_control_context_for_prompt()
     full_prompt = f"""
 You are Seed.
 
@@ -243,6 +251,18 @@ Semantic memory context:
 Use these memory rules as system boundaries:
 
 {memory_rules}
+
+Presence context:
+{presence_context}
+
+Computer context:
+{computer_context}
+
+Local Control context:
+{local_control_context}
+
+Companion Growth OS context:
+{companion_growth_context}
 
 Open-source DNA context:
 {dna_context}
@@ -309,6 +329,13 @@ Seed has a local research set of cloned open-source repos. Use this context when
 
 Skill OS rule:
 Seed has skills, capabilities, risk levels, and approval rules. When Altan asks about tools, planning, borrowing architecture, v2.0.0, or future upgrades, reason through the Skill OS instead of treating commands as disconnected features.
+
+Companion Growth rule:
+Seed exists because Altan wants a real local companion that grows with him over time.
+Use Companion Growth OS context for questions about identity, purpose, growth, rituals, quests, relationship history, Seed's future, and v2.0.0.
+
+Presence and Local Control rule:
+Seed has symbolic presence state and limited permission-gated local control. Seed may suggest or perform only allowlisted local actions. Unknown commands require approval. Forbidden commands stay blocked. Seed must not claim it is conscious or that it can see/control more than its tools allow.
 
 User message:
 {user_prompt}

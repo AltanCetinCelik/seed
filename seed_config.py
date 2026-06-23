@@ -1,4 +1,80 @@
-SEED_VERSION = "v1.13.0"
+SEED_VERSION = "v1.15.0"
+
+SEED_PRESENCE_STATE_FILE = "seed_presence_state.json"
+SEED_LOCAL_ACTIONS_FILE = "seed_local_actions.jsonl"
+SEED_PENDING_ACTION_FILE = "seed_pending_action.json"
+SEED_COMPUTER_SNAPSHOT_FILE = "seed_computer_snapshot.json"
+
+PRESENCE_OS_ENABLED = True
+LOCAL_CONTROL_ENABLED = True
+LOCAL_CONTROL_CONTEXT_ENABLED = True
+
+LOCAL_CONTROL_EMERGENCY_LOCK_DEFAULT = False
+
+LOCAL_ALLOWED_APPS = [
+    "Safari",
+    "Terminal",
+    "Visual Studio Code",
+    "TextEdit",
+    "Finder"
+]
+
+LOCAL_ALLOWED_FOLDERS = [
+    "~/Desktop/seed_private",
+    "~/Desktop",
+    "~/Downloads"
+]
+
+LOCAL_SAFE_COMMANDS = [
+    "pwd",
+    "ls",
+    "git status",
+    "python --version",
+    "which python",
+    "ollama list",
+    "df -h",
+    "uptime"
+]
+
+LOCAL_DIAGNOSTIC_COMMANDS = [
+    "git status",
+    "python -m py_compile seed_cli.py",
+    "ollama list"
+]
+
+LOCAL_FORBIDDEN_COMMAND_SUBSTRINGS = [
+    "rm ",
+    "rm-",
+    "rm/",
+    "sudo",
+    "chmod",
+    "chown",
+    "mkfs",
+    "diskutil erase",
+    "dd ",
+    "curl ",
+    "wget ",
+    "ssh ",
+    "scp ",
+    "rsync ",
+    "killall",
+    "pkill",
+    "launchctl",
+    "security ",
+    "defaults write",
+    "open /System",
+    "open /Library",
+    "osascript"
+]
+SEED_COMPANION_GROWTH_FILE = "seed_companion_growth.json"
+
+COMPANION_GROWTH_ENABLED = True
+COMPANION_GROWTH_CONTEXT_ENABLED = True
+
+COMPANION_ARC_LIMIT = 8
+COMPANION_QUEST_LIMIT = 8
+COMPANION_MILESTONE_LIMIT = 12
+COMPANION_MIRROR_LIMIT = 8
 
 SEED_WORLD_FILE = "seed_world.json"
 SEED_TIMELINE_FILE = "seed_life_timeline.json"

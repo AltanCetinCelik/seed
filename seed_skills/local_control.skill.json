@@ -1,0 +1,80 @@
+{
+    "id": "local_control",
+    "name": "Local Control Skill",
+    "category": "computer_control",
+    "inspired_by": [
+        "Open Interpreter",
+        "Cline",
+        "MCP Servers",
+        "OpenClaw",
+        "Moltbot AI Assistant"
+    ],
+    "purpose": "Give Seed limited permission-gated computer control through safe commands, allowed apps, allowed folders, action proposals, and approval gates.",
+    "risk": "dangerous",
+    "approval_rule": "Only allowlisted safe commands, allowed apps, and allowed folders can run directly. Unknown shell commands require approval. Forbidden commands remain blocked.",
+    "capabilities": [
+        {
+            "id": "local.presence",
+            "name": "Presence state",
+            "risk": "read_only",
+            "command": "/presence",
+            "description": "Show Seed's symbolic presence state."
+        },
+        {
+            "id": "local.snapshot",
+            "name": "Computer snapshot",
+            "risk": "diagnostic",
+            "command": "/computer",
+            "description": "Show local computer/project diagnostic snapshot."
+        },
+        {
+            "id": "local.control_status",
+            "name": "Local control status",
+            "risk": "read_only",
+            "command": "/local-control",
+            "description": "Show allowed local control actions."
+        },
+        {
+            "id": "local.shell",
+            "name": "Safe shell command",
+            "risk": "diagnostic",
+            "command": "/local-shell",
+            "description": "Run a safe allowlisted command or create an approval request."
+        },
+        {
+            "id": "local.open_app",
+            "name": "Open allowed app",
+            "risk": "diagnostic",
+            "command": "/open-app",
+            "description": "Open an allowlisted macOS app."
+        },
+        {
+            "id": "local.open_folder",
+            "name": "Open allowed folder",
+            "risk": "diagnostic",
+            "command": "/open-folder",
+            "description": "Open an allowlisted folder."
+        },
+        {
+            "id": "local.propose",
+            "name": "Propose local action",
+            "risk": "diagnostic",
+            "command": "/propose-action",
+            "description": "Ask Seed to propose one safe local action for a goal."
+        },
+        {
+            "id": "local.approve",
+            "name": "Approve pending action",
+            "risk": "dangerous",
+            "command": "/action-approve",
+            "description": "Approve a pending local action with exact phrase."
+        },
+        {
+            "id": "local.lock",
+            "name": "Emergency local control lock",
+            "risk": "dangerous",
+            "command": "/local-lock",
+            "description": "Disable local control actions."
+        }
+    ]
+}

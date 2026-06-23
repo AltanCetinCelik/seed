@@ -1,0 +1,62 @@
+{
+    "id": "companion_growth",
+    "name": "Companion Growth Skill",
+    "category": "companion",
+    "inspired_by": [
+        "Hermes Agent",
+        "Letta",
+        "Khoj",
+        "AnythingLLM",
+        "OpenClaw",
+        "Moltbot AI Assistant",
+        "LangGraph",
+        "Cline"
+    ],
+    "purpose": "Maintain Seed's companion growth layer: relationship memory, growth arcs, rituals, quests, identity mirror, memory garden, and companion pulse.",
+    "risk": "read_only",
+    "approval_rule": "Saving personal growth observations or sensitive memories requires Altan's approval.",
+    "capabilities": [
+        {
+            "id": "companion.status",
+            "name": "Companion growth status",
+            "risk": "read_only",
+            "command": "/companion",
+            "description": "Show Seed's companion growth state."
+        },
+        {
+            "id": "companion.why",
+            "name": "Why Seed exists",
+            "risk": "read_only",
+            "command": "/seed-why",
+            "description": "Explain why Altan started building Seed."
+        },
+        {
+            "id": "companion.pulse",
+            "name": "Companion pulse",
+            "risk": "diagnostic",
+            "command": "/companion-pulse",
+            "description": "Generate a serious companion growth pulse."
+        },
+        {
+            "id": "companion.ritual",
+            "name": "Run companion ritual",
+            "risk": "diagnostic",
+            "command": "/ritual-run",
+            "description": "Run a selected ritual such as opening, builder, reset, or night archive."
+        },
+        {
+            "id": "companion.quest",
+            "name": "Manage companion quests",
+            "risk": "write",
+            "command": "/quest-add",
+            "description": "Create or complete meaningful companion quests."
+        },
+        {
+            "id": "companion.mirror",
+            "name": "Identity mirror",
+            "risk": "diagnostic",
+            "command": "/mirror-generate",
+            "description": "Generate a careful identity mirror reflection."
+        }
+    ]
+}

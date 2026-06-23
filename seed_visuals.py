@@ -27,6 +27,9 @@ from seed_tool_kernel import TOOL_REGISTRY
 from seed_open_source_dna import load_dna_data
 from seed_skill_kernel import load_all_skills, get_all_capabilities
 from seed_world import get_world_summary
+from seed_companion_growth import get_growth_hud_lines
+from seed_presence import get_presence_hud_lines
+from seed_local_control import load_pending_action, emergency_lock_is_active
 
 try:
     from rich.console import Console
@@ -64,6 +67,24 @@ def make_dna_panel():
         box=box.ROUNDED
     )
 
+def make_presence_control_panel():
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    for label, value in get_presence_hud_lines():
+        table.add_row(label, str(value))
+
+    pending = load_pending_action()
+    table.add_row("Pending action", "yes" if pending is not None else "no")
+    table.add_row("Local lock", str(emergency_lock_is_active()))
+
+    return Panel(
+        table,
+        title="PRESENCE + LOCAL CONTROL",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
 
 def make_world_panel():
     summary = get_world_summary()
@@ -191,6 +212,21 @@ def make_memory_panel(chat_state=None):
     return Panel(
         table,
         title=f"MEMORY CORE • total {total}",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
+def make_companion_growth_panel():
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    for label, value in get_growth_hud_lines():
+        table.add_row(label, str(value))
+
+    return Panel(
+        table,
+        title="COMPANION GROWTH OS",
         border_style=VISUAL_ACCENT,
         box=box.ROUNDED
     )
@@ -454,6 +490,9 @@ def show_seed_hud(chat_state=None):
     dna_panel = make_dna_panel()
     skill_os_panel = make_skill_os_panel(chat_state)
     world_panel = make_world_panel()
+    companion_growth_panel = make_companion_growth_panel()
+    presence_control_panel = make_presence_control_panel()
+    
 
     console.print(
         Columns(
@@ -464,7 +503,21 @@ def show_seed_hud(chat_state=None):
     )
     console.print(
         Columns(
+            [companion_growth_panel, presence_control_panel],
+            equal=True,
+            expand=True
+        )
+    )
+    console.print(
+        Columns(
             [world_panel, skill_os_panel],
+            equal=True,
+            expand=True
+        )
+    )
+    console.print(
+        Columns(
+            [companion_growth_panel, skill_os_panel],
             equal=True,
             expand=True
         )

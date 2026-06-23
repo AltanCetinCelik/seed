@@ -13,3 +13,8 @@ seed_world.json
 seed_life_timeline.json
 seed_quests.json
 seed_rituals.json
+seed_companion_growth.json
+seed_presence_state.json
+seed_local_actions.jsonl
+seed_pending_action.json
+seed_computer_snapshot.json

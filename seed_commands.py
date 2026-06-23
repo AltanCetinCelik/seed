@@ -121,6 +121,48 @@ from seed_world import (
     adjust_world_after_event
 )
 from seed_cockpit import run_cockpit
+from seed_companion_growth import (
+    show_growth_status,
+    show_why_seed_exists,
+    show_companion_contract,
+    show_growth_arcs,
+    add_growth_arc_interactive,
+    complete_growth_arc_interactive,
+    show_rituals,
+    run_ritual_interactive,
+    show_quests,
+    add_quest_interactive,
+    complete_quest_interactive,
+    show_milestones,
+    add_milestone_interactive,
+    show_memory_garden,
+    show_identity_mirror,
+    add_mirror_interactive,
+    generate_identity_mirror,
+    generate_companion_pulse,
+    show_repo_influences
+)
+
+from seed_presence import (
+    show_presence_state,
+    set_presence_mode_interactive,
+    set_emergency_lock
+)
+from seed_computer_awareness import (
+    show_computer_snapshot,
+    refresh_computer_snapshot
+)
+from seed_local_control import (
+    show_local_control_status,
+    run_shell_interactive,
+    open_app_interactive,
+    open_folder_interactive,
+    show_pending_action,
+    approve_pending_action,
+    reject_pending_action,
+    show_action_history
+)
+from seed_action_proposer import propose_local_action_interactive
 
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
@@ -222,6 +264,40 @@ def show_chat_help():
     print("/rituals = show rituals")
     print("/world-event = adjust world after symbolic event")
     print("/cockpit = launch local web cockpit")
+    print("/companion = show Companion Growth OS")
+    print("/seed-why = explain why Seed exists")
+    print("/companion-contract = show companion contract")
+    print("/growth-arcs = show growth arcs")
+    print("/growth-arc-add = add growth arc")
+    print("/growth-arc-done = complete growth arc")
+    print("/rituals = show companion rituals")
+    print("/ritual-run = run companion ritual")
+    print("/quests = show companion quests")
+    print("/quest-add = add companion quest")
+    print("/quest-done = complete companion quest")
+    print("/milestones = show companion milestones")
+    print("/milestone-add = add companion milestone")
+    print("/memory-garden = show memory garden")
+    print("/mirror = show identity mirror")
+    print("/mirror-add = add mirror observation")
+    print("/mirror-generate = generate identity mirror")
+    print("/companion-pulse = generate companion pulse")
+    print("/repo-influences = show how cloned repos shape Seed")
+    print("/presence = show Seed presence state")
+    print("/presence-mode = set Seed presence mode")
+    print("/computer = show computer snapshot")
+    print("/computer-refresh = refresh computer snapshot")
+    print("/local-control = show local control status")
+    print("/local-shell = run safe/approval-gated local shell command")
+    print("/open-app = open allowlisted app")
+    print("/open-folder = open allowlisted folder")
+    print("/propose-action = Seed proposes one local action for a goal")
+    print("/pending-action = show pending local action")
+    print("/action-approve = approve pending local action")
+    print("/action-reject = reject pending local action")
+    print("/action-history = show local action history")
+    print("/local-lock = enable emergency local control lock")
+    print("/local-unlock = disable emergency local control lock")
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -959,6 +1035,144 @@ def handle_chat_command(user_message, session_history, chat_state):
 
     if command == "/cockpit":
         run_cockpit()
+        return "handled"
+    
+    if command == "/companion":
+        show_growth_status()
+        return "handled"
+
+    if command == "/seed-why":
+        show_why_seed_exists()
+        return "handled"
+
+    if command == "/companion-contract":
+        show_companion_contract()
+        return "handled"
+
+    if command == "/growth-arcs":
+        show_growth_arcs()
+        return "handled"
+
+    if command == "/growth-arc-add":
+        add_growth_arc_interactive()
+        return "handled"
+
+    if command == "/growth-arc-done":
+        complete_growth_arc_interactive()
+        return "handled"
+
+    if command == "/rituals":
+        show_rituals()
+        return "handled"
+
+    if command == "/ritual-run":
+        run_ritual_interactive(chat_state)
+        return "handled"
+
+    if command == "/quests":
+        show_quests()
+        return "handled"
+
+    if command == "/quest-add":
+        add_quest_interactive()
+        return "handled"
+
+    if command == "/quest-done":
+        complete_quest_interactive()
+        return "handled"
+
+    if command == "/milestones":
+        show_milestones()
+        return "handled"
+
+    if command == "/milestone-add":
+        add_milestone_interactive()
+        return "handled"
+
+    if command == "/memory-garden":
+        show_memory_garden()
+        return "handled"
+
+    if command == "/mirror":
+        show_identity_mirror()
+        return "handled"
+
+    if command == "/mirror-add":
+        add_mirror_interactive()
+        return "handled"
+
+    if command == "/mirror-generate":
+        generate_identity_mirror(chat_state)
+        return "handled"
+
+    if command == "/companion-pulse":
+        generate_companion_pulse(chat_state)
+        return "handled"
+
+    if command == "/repo-influences":
+        show_repo_influences()
+        return "handled"
+    
+    if command == "/presence":
+        show_presence_state()
+        return "handled"
+
+    if command == "/presence-mode":
+        set_presence_mode_interactive()
+        return "handled"
+
+    if command == "/computer":
+        show_computer_snapshot()
+        return "handled"
+
+    if command == "/computer-refresh":
+        refresh_computer_snapshot()
+        return "handled"
+
+    if command == "/local-control":
+        show_local_control_status()
+        return "handled"
+
+    if command == "/local-shell":
+        run_shell_interactive()
+        return "handled"
+
+    if command == "/open-app":
+        open_app_interactive()
+        return "handled"
+
+    if command == "/open-folder":
+        open_folder_interactive()
+        return "handled"
+
+    if command == "/propose-action":
+        propose_local_action_interactive(chat_state)
+        return "handled"
+
+    if command == "/pending-action":
+        show_pending_action()
+        return "handled"
+
+    if command == "/action-approve":
+        approve_pending_action()
+        return "handled"
+
+    if command == "/action-reject":
+        reject_pending_action()
+        return "handled"
+
+    if command == "/action-history":
+        show_action_history()
+        return "handled"
+
+    if command == "/local-lock":
+        set_emergency_lock(True)
+        print("Emergency local control lock enabled.")
+        return "handled"
+
+    if command == "/local-unlock":
+        set_emergency_lock(False)
+        print("Emergency local control lock disabled.")
         return "handled"
 
     if command.startswith("/"):
