@@ -36,3 +36,5 @@ seed_document_registry.json
 seed_voice_session.json
 seed_release_manager.json
 seed_memory_backend_state.json
+# Seed private runtime logs
+seed_logs/

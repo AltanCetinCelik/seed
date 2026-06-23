@@ -51,8 +51,13 @@ SELF_IMPROVEMENT_TEST_COMMANDS = [
     "python -m py_compile seed_companion_cockpit.py",
     "python -m py_compile seed_companion_os_context.py",
     "python -m py_compile seed_companion_os_commands.py",
-    "python -m py_compile seed_v2_release_gate.py"
+    "python -m py_compile seed_v2_release_gate.py",
+    "python -m py_compile seed_brain.py",
+    "python -m py_compile seed_commands.py",
+    "python -m py_compile seed_visuals.py",
+    "python -m py_compile seed_config.py"
 ]
+
 
 DOCUMENT_REGISTRY_SUMMARY_CHAR_LIMIT = 12000
 DOCUMENT_REGISTRY_SEARCH_LIMIT = 12
