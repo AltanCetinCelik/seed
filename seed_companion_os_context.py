@@ -246,3 +246,46 @@ def print_full_companion_os_context(user_prompt=""):
 
 if __name__ == "__main__":
     print_full_companion_os_context("what are you now")
+
+
+
+# v1.19 Arsenal Integration context wrapper
+try:
+    _original_v119_arsenal_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v119_arsenal_context_function(user_prompt)
+
+        extras = []
+
+        try:
+            from seed_repo_arsenal import get_repo_arsenal_context_for_prompt
+            extras.append(get_repo_arsenal_context_for_prompt())
+        except Exception:
+            pass
+
+        try:
+            from seed_tool_router import get_tool_router_context_for_prompt
+            extras.append(get_tool_router_context_for_prompt(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_capability_planner import get_capability_planner_context_for_prompt
+            extras.append(get_capability_planner_context_for_prompt(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_integration_gate import get_integration_gate_context_for_prompt
+            extras.append(get_integration_gate_context_for_prompt())
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+

@@ -1,4 +1,4 @@
-SEED_VERSION = "v1.18.0"
+SEED_VERSION = "v1.19.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -483,5 +483,38 @@ try:
 except NameError:
     SELF_IMPROVEMENT_TEST_COMMANDS = [
         f"python -m py_compile {module}" for module in V2_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v1.19.0 Arsenal Integration Gate
+SEED_REPO_ARSENAL_STATE_FILE = "seed_repo_arsenal_state.json"
+SEED_FRIEND_ADVICE_REGISTRY_FILE = "seed_friend_advice_registry.json"
+SEED_TOOL_ROUTER_TRACE_FILE = "seed_tool_router_trace.jsonl"
+SEED_INTEGRATION_GATE_REPORT_FILE = "seed_integration_gate_report.json"
+
+V119_REQUIRED_MODULES = [
+    "seed_friend_advice_registry.py",
+    "seed_repo_arsenal.py",
+    "seed_tool_router.py",
+    "seed_capability_planner.py",
+    "seed_integration_gate.py",
+    "seed_arsenal_commands.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V119_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V119_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V119_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V119_REQUIRED_MODULES
     ]
 

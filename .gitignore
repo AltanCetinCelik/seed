@@ -45,3 +45,9 @@ seed_agency_hardening_state.json
 seed_self_improvement_hardening.json
 seed_voice_hardening_state.json
 seed_cockpit_hardening_state.json
+
+# Seed v1.19 Arsenal Integration runtime state
+seed_repo_arsenal_state.json
+seed_friend_advice_registry.json
+seed_tool_router_trace.jsonl
+seed_integration_gate_report.json

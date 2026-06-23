@@ -316,3 +316,38 @@ Current limitations:
 - No semantic/vector memory search yet
 - No automatic conversation saving yet
 - No GUI yet
+
+## Seed v1.19.0 Arsenal Integration Gate
+
+Seed v1.19.0 adds the repo/tool arsenal layer before the real v2.0.0 label.
+
+It adds:
+
+- Friend advice registry
+- Repo/tool arsenal map
+- Capability router
+- Capability planner
+- Sandbox/approval planner
+- Arsenal integration gate
+- Arsenal commands inside Seed
+
+Purpose:
+
+Seed should know about the important repos and tool families Altan collected, including agent graph frameworks, memory systems, voice tools, avatar/world tools, product UI references, MCP/browser tools, coding agents, safety tools, and observability tools.
+
+Seed must not install, run, or merge these blindly.
+
+Rules:
+
+- Seed may recommend tools.
+- Seed may route tasks to capabilities.
+- Seed may explain risk and approval needs.
+- Seed may build sandbox plans.
+- Seed must not execute risky tools without Altan's approval.
+- Coding agents require branch/backup/tests/rollback.
+- Browser/account actions require explicit approval.
+- Voice input must not be secretly always-listening.
+- Memory migrations require backup.
+- Altan remains in control.
+
+v1.19.0 prepares the final v2.0.0 release by making Seed aware of its external arsenal without making it unsafe.

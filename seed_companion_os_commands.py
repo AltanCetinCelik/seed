@@ -1,3 +1,16 @@
+
+try:
+    from seed_arsenal_commands import handle_arsenal_command, print_arsenal_help
+    ARSENAL_COMMANDS_AVAILABLE = True
+except Exception:
+    ARSENAL_COMMANDS_AVAILABLE = False
+
+    def handle_arsenal_command(command, chat_state=None):
+        return None
+
+    def print_arsenal_help():
+        pass
+
 import importlib
 
 
@@ -150,6 +163,14 @@ def print_companion_os_help():
 
 
 def handle_companion_os_command(command, chat_state=None):
+    try:
+        arsenal_result = handle_arsenal_command(command, chat_state)
+        if arsenal_result == "handled":
+            return "handled"
+    except Exception as error:
+        print(f"Arsenal command error: {error}")
+        return "handled"
+
     command = command.strip()
 
     no_arg_commands = {
