@@ -458,3 +458,30 @@ SELF_EDIT_PROTECTED_FOLDERS = [
     "seed_logs",
     "seed_edit_backups"
 ]
+
+
+# v1.18.0 hardening modules must be part of the v2 release gate.
+V118_REQUIRED_MODULES = [
+    "seed_v2_hardening_metrics.py",
+    "seed_agency_hardening.py",
+    "seed_self_improvement_hardening.py",
+    "seed_voice_hardening.py",
+    "seed_cockpit_actions.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V118_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V118_REQUIRED_MODULES)
+
+# Keep release/safe tests aligned with the actual v2 module gate.
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V2_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V2_REQUIRED_MODULES
+    ]
+

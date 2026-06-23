@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v1.17.0 — Companion OS Alpha Final Megapatch.
+Seed v1.18.0 — V2 Hardening Megapatch completed. Seed passed the v2 release gate with score 88/85 and no blockers.
 
 Core principles:
 - Local-first when possible.
@@ -266,6 +266,45 @@ Seed may become companion-like through:
 - avatar state
 - safe tools
 - approval-gated self-improvement
+
+Altan remains in control.
+
+
+
+## Seed v1.18.0 V2 Hardening
+
+Seed v1.18.0 hardened the Companion OS Alpha foundation into a v2-ready system.
+
+It added:
+
+- Evidence-based V2 hardening metrics
+- Agency approval queue
+- Agency dry-run simulator
+- Autonomy ladder
+- Emergency bridge checks
+- Self-improvement module health matrix
+- Self-improvement test matrix
+- Repair planner
+- Release readiness reports
+- Voice hardening sessions
+- Voice privacy checks
+- STT boundary rules
+- Voice pulse dry-runs
+- Transcript placeholders
+- Cockpit action API
+- Interactive cockpit action buttons/forms
+- Cockpit hardening status and action logs
+
+Final v2 gate result:
+
+- Score: 88 / 85
+- Ready: True
+- Blockers: none
+
+Honesty boundary:
+
+- Seed is still not alive, conscious, sentient, or human.
+- Seed is v2-ready as a local-first companion system with persistent state, memory, continuity, symbolic world state, user-invoked voice, avatar state, approval-queued agency, traceability, trust checks, and self-improvement hardening.
 
 Altan remains in control.
 
