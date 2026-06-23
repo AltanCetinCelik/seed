@@ -58,6 +58,24 @@ except Exception:
 _WHISPER_MODEL = None
 
 
+
+try:
+    from seed_config import (
+        ACTIVE_VOICE_DIRECT_COMMAND_MODE,
+        ACTIVE_VOICE_WAKE_WORD_OPTIONAL,
+        ACTIVE_VOICE_MIN_TRANSCRIPT_WORDS,
+        ACTIVE_VOICE_FUZZY_WAKE_WORDS
+    )
+except Exception:
+    ACTIVE_VOICE_DIRECT_COMMAND_MODE = True
+    ACTIVE_VOICE_WAKE_WORD_OPTIONAL = True
+    ACTIVE_VOICE_MIN_TRANSCRIPT_WORDS = 2
+    ACTIVE_VOICE_FUZZY_WAKE_WORDS = [
+        "seed", "sead", "seat", "sit", "sid", "said", "see", "cede", "ceed",
+        "hey seed", "yo seed"
+    ]
+
+
 def now_timestamp():
     return datetime.now().isoformat(timespec="seconds")
 
@@ -294,9 +312,24 @@ def transcribe_local(audio_path):
 
 def wake_detected(text):
     lowered = (text or "").lower()
-    for word in ACTIVE_VOICE_WAKE_WORDS:
+
+    wake_words = []
+    try:
+        wake_words.extend(ACTIVE_VOICE_WAKE_WORDS)
+    except Exception:
+        pass
+
+    try:
+        wake_words.extend(ACTIVE_VOICE_FUZZY_WAKE_WORDS)
+    except Exception:
+        pass
+
+    wake_words = list(dict.fromkeys(wake_words))
+
+    for word in wake_words:
         if word.lower() in lowered:
             return True
+
     return False
 
 
@@ -425,9 +458,11 @@ def active_voice_loop():
     print("\n=== SEED v2.1 ACTIVE VOICE LISTENER ===")
     print("This is explicit local listening only while this window is open.")
     print("No secret always-listening.")
-    print("Say one of:", ", ".join(ACTIVE_VOICE_WAKE_WORDS))
-    print("Best use: say the wake word and command in one sentence, e.g. 'Seed what are you now?'")
-    print("Say 'Seed stop' or press CTRL+C to stop.")
+    print("Direct command mode: ON")
+    print("You do not have to say Seed every time.")
+    print("Just speak normally after launching this window.")
+    print("Examples: 'what are you now?' or 'Seed what are you now?'")
+    print("Say 'stop', 'quit', or 'exit' to close, or press CTRL+C.")
     print(f"Active voice ready: {check['active_voice_ready']}")
 
     if not check["active_voice_ready"]:
@@ -451,6 +486,27 @@ def active_voice_loop():
                 print("Heard:", text)
 
             if not transcript.get("ok") or not text:
+                continue
+
+            direct_mode = bool(ACTIVE_VOICE_DIRECT_COMMAND_MODE)
+
+            if direct_mode:
+                command_text = strip_wake_words(text) if wake_detected(text) else text
+                lowered_command = command_text.lower().strip()
+
+                if lowered_command in ["stop", "quit", "exit", "seed stop", "seed quit", "seed exit"]:
+                    speak_answer("Active voice listener stopped.", reason="active_voice_stop")
+                    print("Stopped.")
+                    break
+
+                min_words = int(ACTIVE_VOICE_MIN_TRANSCRIPT_WORDS)
+                if len(command_text.split()) < min_words:
+                    print("Ignored short/noisy transcript.")
+                    continue
+
+                result = answer_and_speak(command_text, source="active_voice_direct")
+                print("\nSeed:")
+                print(result.get("answer"))
                 continue
 
             if wake_detected(text):

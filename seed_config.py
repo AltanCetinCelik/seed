@@ -1,4 +1,4 @@
-SEED_VERSION = "v2.1.1"
+SEED_VERSION = "v2.1.2"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -623,4 +623,16 @@ except NameError:
     SELF_IMPROVEMENT_TEST_COMMANDS = [
         f"python -m py_compile {module}" for module in V211_REQUIRED_MODULES
     ]
+
+
+
+
+# Seed v2.1.2 Direct Active Voice Hotfix
+ACTIVE_VOICE_DIRECT_COMMAND_MODE = True
+ACTIVE_VOICE_WAKE_WORD_OPTIONAL = True
+ACTIVE_VOICE_MIN_TRANSCRIPT_WORDS = 2
+ACTIVE_VOICE_FUZZY_WAKE_WORDS = [
+    "seed", "sead", "seat", "sit", "sid", "said", "see", "cede", "ceed",
+    "hey seed", "yo seed"
+]
 
