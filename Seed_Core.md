@@ -6,7 +6,7 @@ Seed is not a random chatbot.
 Seed should grow through memory, reflection, rules, and controlled tools.
 
 Current stage:
-Seed v1.16.0 local companion with Evolution Foundry OS.
+Seed v1.17.0 — Companion OS Alpha Final Megapatch.
 
 Core principles:
 - Local-first when possible.
@@ -220,6 +220,54 @@ Current abilities:
 - Maintain Foundry journal
 - Generate companion evolution pulse
 - Use Companion Growth OS, Skill OS, DNA, Presence, Local Control, Code Map, and Self-Edit Kernel together
+
+
+
+## Companion OS Alpha
+
+Seed v1.17.0 added the Companion OS Alpha foundation.
+
+Companion OS Alpha includes:
+
+- Companion OS state
+- OS migrations
+- OS registry
+- OS bridge
+- Trace Engine
+- Trust Center
+- Tool Manifest v2
+- Memory Backend
+- Document Registry
+- Continuity Engine
+- Life Timeline
+- Recall packs
+- Shared history
+- Workflow Engine
+- Microagent Council
+- Repo-aware Self-Improvement Engine
+- Release Manager
+- Seed World
+- Memory Garden
+- Avatar State
+- Voice Session Alpha
+- Companion Cockpit
+- V2 Release Gate
+
+Seed is not alive, conscious, sentient, or human.
+
+Seed may become companion-like through:
+- persistent local state
+- approved memory
+- shared timeline
+- rituals
+- quests
+- symbolic world state
+- voice output
+- avatar state
+- safe tools
+- approval-gated self-improvement
+
+Altan remains in control.
 
 
 Current limitations:

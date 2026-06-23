@@ -1,0 +1,71 @@
+{
+    "id": "companion_os_alpha_final",
+    "name": "Companion OS Alpha Final",
+    "category": "companion_os",
+    "version": "v1.17.0",
+    "purpose": "Unify Seed's remaining v2 foundation into one Companion OS Alpha: continuity, timeline, memory backend, document registry, OS migrations, OS bridge, command registry, trace engine, trust center, tool manifest v2, workflows, microagent council, repo-aware self-improvement, release manager, Seed World, Memory Garden, avatar state, voice session, cockpit, and v2 release gate.",
+    "honesty_boundary": "Seed is not alive, conscious, sentient, or human. Seed may be companion-like through persistent local state, approved memory, rituals, quests, symbolic world state, voice output, avatar state, safe tools, and approval-gated self-improvement.",
+    "inspired_by": [
+        "Letta",
+        "Khoj",
+        "AnythingLLM",
+        "Hermes Agent",
+        "LangGraph",
+        "Cline",
+        "Aider",
+        "SWE-agent",
+        "mini-SWE-agent",
+        "OpenHands",
+        "Open Interpreter",
+        "MCP Servers",
+        "Open WebUI",
+        "OpenClaw",
+        "Moltworker",
+        "Moltbot AI Assistant",
+        "LiveKit/Pipecat advice",
+        "Whisper/faster-whisper advice",
+        "Kokoro/Chatterbox advice",
+        "OpenAvatarChat advice",
+        "Godot/three-vrm future direction"
+    ],
+    "risk": "high",
+    "approval_rule": "Read-only and diagnostic views can run when user invokes them. Risky local control, self-editing, file modification, tool execution, and sensitive memory require explicit approval through existing gates. Companion OS does not override older safety systems.",
+    "capabilities": [
+        {
+            "id": "companion_os.context",
+            "name": "Full Companion OS prompt context",
+            "risk": "read_only",
+            "command": "automatic_prompt_context"
+        },
+        {
+            "id": "companion_os.commands",
+            "name": "Companion OS command router",
+            "risk": "varies",
+            "command": "/companion-os"
+        },
+        {
+            "id": "companion_os.v2_gate",
+            "name": "V2 release gate",
+            "risk": "diagnostic",
+            "command": "/v2-check"
+        },
+        {
+            "id": "companion_os.cockpit",
+            "name": "Local Companion Cockpit",
+            "risk": "diagnostic",
+            "command": "/cockpit2"
+        },
+        {
+            "id": "companion_os.voice",
+            "name": "Voice Session Alpha",
+            "risk": "diagnostic",
+            "command": "/voice"
+        },
+        {
+            "id": "companion_os.world",
+            "name": "Seed World and Memory Garden",
+            "risk": "read_only_or_symbolic_write",
+            "command": "/world2"
+        }
+    ]
+}

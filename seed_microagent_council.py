@@ -67,34 +67,47 @@ def now_timestamp():
 def council_context(goal):
     state = load_companion_os_state()
 
+    world = state.get("world", {})
+    garden = world.get("memory_garden", {})
+    continuity = state.get("continuity", {})
+    growth = state.get("growth", {})
+
     context = {
         "goal": goal,
         "mission": state.get("mission"),
         "truth": state.get("truth"),
         "microagents": MICROAGENTS,
         "v2": state.get("v2", {}),
-        "active_arcs": state.get("growth", {}).get("active_arcs", []),
-        "quests": state.get("growth", {}).get("quests", []),
-        "world": state.get("world", {})
+        "world": {
+            "place": world.get("current_place"),
+            "season": world.get("season"),
+            "weather": world.get("weather"),
+            "garden": {
+                "seeds": garden.get("seeds"),
+                "trees": garden.get("trees"),
+                "stones": garden.get("stones"),
+                "lights": garden.get("lights"),
+                "artifacts": len(garden.get("artifacts", []))
+            }
+        },
+        "recent_timeline": continuity.get("timeline", [])[-8:],
+        "relationship_notes": continuity.get("relationship_notes", [])[-6:],
+        "active_arcs": [
+            {
+                "id": arc.get("id"),
+                "title": arc.get("title"),
+                "pillars": arc.get("v2_pillars", []),
+                "success_condition": arc.get("success_condition")
+            }
+            for arc in growth.get("active_arcs", [])
+            if arc.get("status") == "active"
+        ],
+        "quest_count": len(growth.get("quests", [])),
+        "ritual_count": len(growth.get("rituals", [])),
+        "workflow_count": len(state.get("workflows", [])),
+        "trace_count": len(state.get("trust", {}).get("answer_traces", [])) + len(state.get("trust", {}).get("permission_traces", [])),
+        "release_draft_count": len(state.get("self_improvement", {}).get("release_drafts", []))
     }
-
-    if CONTINUITY_AVAILABLE:
-        try:
-            context["continuity"] = build_continuity_context(goal)
-        except Exception as error:
-            context["continuity_error"] = str(error)
-
-    if REGISTRY_AVAILABLE:
-        try:
-            context["registry"] = get_registry_context_for_prompt()
-        except Exception as error:
-            context["registry_error"] = str(error)
-
-    if TOOL_MANIFEST_AVAILABLE:
-        try:
-            context["tool_manifest"] = get_tool_manifest_context_for_prompt()
-        except Exception as error:
-            context["tool_manifest_error"] = str(error)
 
     return context
 
@@ -169,6 +182,9 @@ Tone: direct, serious, useful.
 """
 
         response = ask_llm(prompt, task_type="debug", runtime_context=chat_state)
+
+        if isinstance(response, str) and "timed out" in response.lower():
+            response = fallback_council(goal)
     else:
         response = fallback_council(goal)
 

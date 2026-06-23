@@ -182,6 +182,21 @@ from seed_evolution_foundry import (
     show_foundry_journal
 )
 
+try:
+    from seed_companion_os_commands import (
+        handle_companion_os_command,
+        print_companion_os_help
+    )
+    COMPANION_OS_COMMANDS_AVAILABLE = True
+except Exception:
+    COMPANION_OS_COMMANDS_AVAILABLE = False
+
+    def handle_companion_os_command(command, chat_state=None):
+        return None
+
+    def print_companion_os_help():
+        pass
+
 
 def show_chat_help():
     print("\n=== CHAT COMMANDS ===")
@@ -336,6 +351,7 @@ def show_chat_help():
     print("/event-add = add runtime event")
     print("/code-map-build = build repo-aware code map")
     print("/code-map = show repo-aware code map")
+    print_companion_os_help()
 
 def save_memory_from_chat():
     print("\n=== SAVE MEMORY FROM CHAT ===")
@@ -1289,6 +1305,11 @@ def handle_chat_command(user_message, session_history, chat_state):
 
     if command == "/code-map":
         show_code_map()
+        return "handled"
+
+    companion_os_result = handle_companion_os_command(command, chat_state)
+
+    if companion_os_result == "handled":
         return "handled"
 
     if command.startswith("/"):

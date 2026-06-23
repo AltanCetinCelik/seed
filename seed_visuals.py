@@ -33,6 +33,15 @@ from seed_local_control import load_pending_action, emergency_lock_is_active
 from seed_evolution_foundry import get_foundry_hud_lines
 
 try:
+    from seed_companion_os import get_companion_os_hud_lines
+    COMPANION_OS_HUD_AVAILABLE = True
+except Exception:
+    COMPANION_OS_HUD_AVAILABLE = False
+
+    def get_companion_os_hud_lines():
+        return []
+
+try:
     from rich.console import Console
     from rich.panel import Panel
     from rich.table import Table
@@ -83,6 +92,24 @@ def make_presence_control_panel():
     return Panel(
         table,
         title="PRESENCE + LOCAL CONTROL",
+        border_style=VISUAL_ACCENT,
+        box=box.ROUNDED
+    )
+
+def make_companion_os_panel():
+    table = Table.grid(padding=(0, 2))
+    table.add_column(style="grey70")
+    table.add_column(style="white")
+
+    if not COMPANION_OS_HUD_AVAILABLE:
+        table.add_row("Companion OS", "unavailable")
+    else:
+        for label, value in get_companion_os_hud_lines():
+            table.add_row(str(label), str(value))
+
+    return Panel(
+        table,
+        title="COMPANION OS ALPHA",
         border_style=VISUAL_ACCENT,
         box=box.ROUNDED
     )
@@ -508,6 +535,11 @@ def show_seed_hud(chat_state=None):
     companion_growth_panel = make_companion_growth_panel()
     presence_control_panel = make_presence_control_panel()
     evolution_foundry_panel = make_evolution_foundry_panel()
+    companion_os_panel = make_companion_os_panel()
+    
+    
+    console.print(companion_os_panel)
+
     
 
     console.print(

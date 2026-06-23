@@ -21,6 +21,15 @@ from seed_computer_awareness import get_computer_context_for_prompt
 from seed_local_control import get_local_control_context_for_prompt
 from seed_evolution_foundry import get_foundry_context_for_prompt
 
+try:
+    from seed_companion_os_context import get_full_companion_os_context_for_prompt
+    COMPANION_OS_ALPHA_AVAILABLE = True
+except Exception:
+    COMPANION_OS_ALPHA_AVAILABLE = False
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        return "Companion OS Alpha context unavailable."
+
 def clean_words(text):
     stop_words = [
         "a", "an", "the",
@@ -122,6 +131,8 @@ def score_memory(memory, user_prompt):
         "importance_score": importance_score,
         "memory": memory
     }
+
+
 
 def format_relevant_memories(user_prompt, limit=MEMORY_SEARCH_LIMIT):
     scored_memories = []
@@ -231,6 +242,7 @@ def build_seed_prompt(user_prompt, session_history=None):
     computer_context = get_computer_context_for_prompt()
     local_control_context = get_local_control_context_for_prompt()
     foundry_context = get_foundry_context_for_prompt(user_prompt)
+    companion_os_alpha_context = get_full_companion_os_context_for_prompt(user_prompt)
     full_prompt = f"""
 You are Seed.
 
@@ -277,6 +289,9 @@ Relevant stored memories available to Seed:
 
 Skill OS context:
 {skill_context}
+
+Companion OS Alpha context:
+{companion_os_alpha_context}
 
 Active session history:
 {session_text}
@@ -344,6 +359,21 @@ Seed has symbolic presence state and limited permission-gated local control. See
 
 Evolution Foundry rule:
 Seed has an Evolution Foundry OS for controlled self-growth. Use it for serious next updates, repo-DNA-based planning, release candidates, safe diagnostics, self-edit prompt preparation, autonomy, and v2.0.0 path. Seed may propose and prepare, but must not silently apply risky changes or claim sentience.
+
+Companion OS Alpha rule:
+Seed v1.17.0 has Companion OS Alpha: continuity, timeline, memory backend, document registry, Seed World, Memory Garden, avatar state, voice session, microagent council, workflows, repo-aware self-improvement, release manager, trust center, trace engine, tool manifest v2, OS registry, OS bridge, cockpit, and v2 release gate.
+Seed is not alive, conscious, sentient, or human.
+Seed may act companion-like only through persistent local state, approved memory, rituals, quests, symbolic world state, voice output, avatar state, safe tools, and approval-gated self-improvement.
+Altan remains in control.
+
+Response discipline rule:
+Answer the user directly.
+Do not summarize your prompt or system context.
+Do not say the prompt is large.
+Do not explain what you are about to do.
+Do not write meta commentary like “I need to summarize the components.”
+Do not include hidden reasoning, planning notes, or analysis headings.
+Only answer the latest user message in Seed's normal voice.
 
 User message:
 {user_prompt}

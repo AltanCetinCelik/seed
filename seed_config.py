@@ -6,6 +6,54 @@ MEMORY_BACKEND_ACTIVE = "json_semantic"
 MEMORY_BACKEND_VECTOR_READY = True
 MEMORY_BACKEND_DOCUMENT_READY = True
 
+V2_REQUIRED_MODULES = [
+    "seed_companion_os.py",
+    "seed_os_migrations.py",
+    "seed_os_registry.py",
+    "seed_os_bridge.py",
+    "seed_trace_engine.py",
+    "seed_tool_manifest_v2.py",
+    "seed_trust_center.py",
+    "seed_memory_backend.py",
+    "seed_document_registry.py",
+    "seed_continuity_engine.py",
+    "seed_workflow_engine.py",
+    "seed_microagent_council.py",
+    "seed_self_improvement_engine.py",
+    "seed_release_manager.py",
+    "seed_world_engine.py",
+    "seed_avatar_state.py",
+    "seed_voice_session.py",
+    "seed_companion_cockpit.py",
+    "seed_companion_os_context.py",
+    "seed_companion_os_commands.py",
+    "seed_v2_release_gate.py"
+]
+
+SELF_IMPROVEMENT_TEST_COMMANDS = [
+    "python -m py_compile seed_companion_os.py",
+    "python -m py_compile seed_os_migrations.py",
+    "python -m py_compile seed_os_registry.py",
+    "python -m py_compile seed_os_bridge.py",
+    "python -m py_compile seed_trace_engine.py",
+    "python -m py_compile seed_tool_manifest_v2.py",
+    "python -m py_compile seed_trust_center.py",
+    "python -m py_compile seed_memory_backend.py",
+    "python -m py_compile seed_document_registry.py",
+    "python -m py_compile seed_continuity_engine.py",
+    "python -m py_compile seed_workflow_engine.py",
+    "python -m py_compile seed_microagent_council.py",
+    "python -m py_compile seed_self_improvement_engine.py",
+    "python -m py_compile seed_release_manager.py",
+    "python -m py_compile seed_world_engine.py",
+    "python -m py_compile seed_avatar_state.py",
+    "python -m py_compile seed_voice_session.py",
+    "python -m py_compile seed_companion_cockpit.py",
+    "python -m py_compile seed_companion_os_context.py",
+    "python -m py_compile seed_companion_os_commands.py",
+    "python -m py_compile seed_v2_release_gate.py"
+]
+
 DOCUMENT_REGISTRY_SUMMARY_CHAR_LIMIT = 12000
 DOCUMENT_REGISTRY_SEARCH_LIMIT = 12
 CONTINUITY_RECALL_LIMIT = 12
