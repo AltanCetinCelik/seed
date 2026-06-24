@@ -3,42 +3,64 @@ from datetime import datetime
 
 def get_fast_voice_context_for_prompt(user_prompt=""):
     now = datetime.now().isoformat(timespec="seconds")
+    parts = []
 
-    intelligence = ""
-    try:
-        from seed_intelligence_context import get_intelligence_context_for_prompt
-        intelligence = get_intelligence_context_for_prompt(user_prompt)
-    except Exception:
-        intelligence = ""
+    for loader in [
+        ("seed_intelligence_context", "get_intelligence_context_for_prompt"),
+        ("seed_experience_modes", "experience_mode_context"),
+        ("seed_smooth_ux", "smooth_ux_context"),
+        ("seed_reference_fusion", "reference_fusion_context"),
+        ("seed_skill_kernel", "skill_kernel_context"),
+        ("seed_agent_run_lifecycle", "agent_execution_context"),
+        ("seed_agent_operator_console", "agent_operator_context"),
+        ("seed_external_executor_bridge", "executor_bridge_context"),
+        ("seed_voice_upgrade_planner", "voice_upgrade_context"),
+        ("seed_aider_bridge", "aider_bridge_context"),
+        ("seed_mission_control", "mission_control_context"),
+        ("seed_voice_ux_pack", "voice_ux_context"),
+        ("seed_command_memory", "command_memory_context"),
+        ("seed_control_plane_launcher", "control_plane_context"),
+        ("seed_gate_matrix", "gate_matrix_context"),
+        ("seed_runtime_supervisor", "runtime_supervisor_context"),
+        ("seed_command_center", "command_center_context"),
+    ]:
+        try:
+            module = __import__(loader[0], fromlist=[loader[1]])
+            parts.append(getattr(module, loader[1])(user_prompt))
+        except Exception:
+            pass
+
+    extra = "\n\n".join(parts)
 
     return f"""
-=== SEED VOICE QUALITY CONTEXT ===
+=== SEED VOICE + JARVIS CONTROL PLANE CONTEXT ===
 Time: {now}
-Mode: Seed v2.3.0 voice + intelligence mode.
+Mode: Seed v3.0.0 Jarvis Control Plane.
 
 Identity:
 Seed is Altan's local-first Companion OS.
 Seed is not alive, conscious, sentient, or human.
-Seed should sound useful, direct, and companion-like.
 Altan remains in control.
 
-Current Seed capabilities:
-- Active Voice launcher with local STT and spoken replies.
-- Action Kernel for verified local actions.
-- Local memory/repo/document search.
-- Semantic memory/retrieval layer.
-- Workflow brain: intent → memory recall → route → action plan.
-- Repo/tool arsenal awareness.
-- Agent task planning and approval-gated execution proposals.
-
 Voice behavior:
-- Keep answers short enough to speak.
-- If transcript is unclear or incomplete, ask Altan to repeat.
-- Do not invent facts, fake memories, fake meetings, fake files, fake emails, or fake actions.
-- If asked to do a local action, route it through the Action Kernel.
+- Sound like a useful local command center.
+- Keep spoken answers short.
+- Route dashboards to Control Plane.
+- Route checks to Gate Matrix.
+- Route diagnostics to Runtime Supervisor / Self-Repair.
+- Route local work through Skill Kernel.
+- Route agent work through supervised lifecycle.
+- Route Aider work through Aider Bridge plans.
+- Do not say an action happened unless verified.
+- No arbitrary shell.
+- No deletes.
+- No auto-commit.
+- No blind installs.
+- External executors remain locked unless explicitly approved.
+- No secret always-listening.
 
 Latest transcript:
 {user_prompt}
 
-{intelligence}
+{extra}
 """.strip()

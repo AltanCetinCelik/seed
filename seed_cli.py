@@ -4,6 +4,7 @@ from seed_journal import write_journal, read_journal
 from seed_status import show_seed_status
 from seed_brain import ask_seed
 from seed_commands import handle_chat_command, handle_memory_suggestion
+from seed_terminal_guard import looks_like_terminal_block, terminal_block_message
 from seed_config import SEED_VERSION, AUTOSUGGEST_DEFAULT, DEFAULT_CHAT_MODEL
 from seed_chat_logger import (
     create_chat_log,
@@ -64,6 +65,10 @@ def talk_to_seed():
         log_user_message(log_path, user_message)
 
         print("\nSeed is thinking...")
+
+        if looks_like_terminal_block(user_message):
+            print(terminal_block_message(user_message))
+            continue
 
         answer = ask_seed(user_message, session_history, chat_state)
 
@@ -163,4 +168,5 @@ def main():
             print("Invalid choice. Please try again.")
 
 
-main()
+if __name__ == "__main__":
+    main()

@@ -177,3 +177,23 @@ def get_agent_orchestrator_context_for_prompt(user_prompt=""):
 
 if __name__ == "__main__":
     run_agent_task_interactive()
+
+# v5.0.1 compatibility: skip heavy agent context for pasted terminal commands.
+try:
+    _seed_v501_original_agent_context = get_agent_orchestrator_context_for_prompt
+
+    def get_agent_orchestrator_context_for_prompt(user_prompt=""):
+        try:
+            from seed_terminal_guard import looks_like_terminal_block
+            if looks_like_terminal_block(user_prompt):
+                return (
+                    "=== SEED AGENT ORCHESTRATOR ===\n"
+                    "Skipped heavy repo scan because the user pasted terminal commands.\n"
+                    "Terminal commands should be run in macOS Terminal, not Seed chat.\n"
+                )
+        except Exception:
+            pass
+
+        return _seed_v501_original_agent_context(user_prompt)
+except Exception:
+    pass

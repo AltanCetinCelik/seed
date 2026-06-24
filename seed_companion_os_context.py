@@ -435,3 +435,246 @@ try:
 except Exception:
     pass
 
+
+
+
+# v2.4 Experience Fusion context wrapper
+try:
+    _original_v24_experience_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v24_experience_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_experience_modes import experience_mode_context
+            extras.append(experience_mode_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_reference_fusion import reference_fusion_context
+            extras.append(reference_fusion_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_smooth_ux import smooth_ux_context
+            extras.append(smooth_ux_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.5 Real Skill System context wrapper
+try:
+    _original_v25_skill_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v25_skill_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_skill_kernel import skill_kernel_context
+            extras.append(skill_kernel_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.6 Supervised Agent Execution context wrapper
+try:
+    _original_v26_agent_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v26_agent_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_agent_run_lifecycle import agent_execution_context
+            extras.append(agent_execution_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_agent_operator_console import agent_operator_context
+            extras.append(agent_operator_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.7 Executor Bridge + Repo Doctor + Voice Planner context wrapper
+try:
+    _original_v27_executor_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v27_executor_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_external_executor_bridge import executor_bridge_context
+            extras.append(executor_bridge_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_repo_doctor import repo_doctor_context
+            extras.append(repo_doctor_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_voice_upgrade_planner import voice_upgrade_context
+            extras.append(voice_upgrade_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.8 Aider First Executor Bridge context wrapper
+try:
+    _original_v28_aider_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v28_aider_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_aider_bridge import aider_bridge_context
+            extras.append(aider_bridge_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.9 Mission Control MegaPack context wrapper
+try:
+    _original_v29_mission_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v29_mission_context_function(user_prompt)
+        extras = []
+
+        for module_name, fn_name in [
+            ("seed_mission_control", "mission_control_context"),
+            ("seed_release_orchestrator", "release_orchestrator_context"),
+            ("seed_voice_ux_pack", "voice_ux_context"),
+            ("seed_self_repair_planner", "self_repair_context"),
+            ("seed_command_memory", "command_memory_context"),
+            ("seed_local_app_manifest", "app_manifest_context"),
+        ]:
+            try:
+                module = __import__(module_name, fromlist=[fn_name])
+                extras.append(getattr(module, fn_name)(user_prompt))
+            except Exception:
+                pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v3.0 Jarvis Control Plane context wrapper
+try:
+    _original_v30_control_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v30_control_context_function(user_prompt)
+        extras = []
+
+        for module_name, fn_name in [
+            ("seed_control_plane_launcher", "control_plane_context"),
+            ("seed_gate_matrix", "gate_matrix_context"),
+            ("seed_runtime_supervisor", "runtime_supervisor_context"),
+            ("seed_session_timeline", "timeline_context"),
+            ("seed_command_center", "command_center_context"),
+        ]:
+            try:
+                module = __import__(module_name, fromlist=[fn_name])
+                extras.append(getattr(module, fn_name)(user_prompt))
+            except Exception:
+                pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v3.5 Omega Integration Pack context wrapper
+try:
+    _original_v35_omega_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v35_omega_context_function(user_prompt)
+        extras = []
+
+        for module_name, fn_name in [
+            ("seed_repo_dna_engine", "repo_dna_context"),
+            ("seed_integration_fusion_engine", "integration_fusion_context"),
+            ("seed_omega_planner", "omega_plan_context"),
+            ("seed_voice_one_shot", "voice_one_shot_context"),
+        ]:
+            try:
+                module = __import__(module_name, fromlist=[fn_name])
+                extras.append(getattr(module, fn_name)(user_prompt))
+            except Exception:
+                pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+

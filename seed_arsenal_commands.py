@@ -1,4 +1,5 @@
 def print_arsenal_help():
+    print("/final-gates = run v50/v40/v36/v35/v30/release gates")
     print("/policy = show v5 execution policy")
     print("/policy-check = check action policy")
     print("/capability-graph = show capability graph")
@@ -932,6 +933,13 @@ def handle_arsenal_command(command, chat_state=None):
     if command == "/v50-check":
         from seed_v50_operator_gate import show_v50_gate
         show_v50_gate()
+        return "handled"
+
+
+
+    if command == "/final-gates":
+        from seed_final_gate_runner import show_final_gates
+        show_final_gates()
         return "handled"
 
 

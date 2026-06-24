@@ -489,6 +489,22 @@ def ask_seed_text(user_text):
         return "I did not receive a command."
 
     try:
+        from seed_smooth_ux import maybe_handle_smooth_request
+        smooth_answer = maybe_handle_smooth_request(user_text)
+        if smooth_answer:
+            return smooth_answer
+    except Exception:
+        pass
+
+    try:
+        from seed_experience_modes import maybe_switch_mode_from_text
+        mode_answer = maybe_switch_mode_from_text(user_text)
+        if mode_answer:
+            return mode_answer
+    except Exception:
+        pass
+
+    try:
         from seed_action_kernel import maybe_handle_action_text
         action_answer = maybe_handle_action_text(user_text)
         if action_answer:

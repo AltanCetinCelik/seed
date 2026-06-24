@@ -433,3 +433,659 @@ def get_action_kernel_context():
 
 if __name__ == "__main__":
     show_action_kernel()
+
+# v2.5 Real Skill System integration.
+try:
+    _v25_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v25_previous_route_action_from_text = None
+
+try:
+    _v25_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v25_previous_maybe_handle_action_text = None
+
+
+def route_action_from_text(text):
+    if _v25_previous_route_action_from_text:
+        action_id, args = _v25_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    try:
+        from seed_skill_kernel import route_skill_from_text
+        skill_id, operation, skill_args = route_skill_from_text(text)
+        if skill_id:
+            return "run_skill", {
+                "skill_id": skill_id,
+                "operation": operation,
+                "args": skill_args or {}
+            }
+    except Exception:
+        pass
+
+    return None, None
+
+
+def action_run_skill(args=None):
+    args = args or {}
+    try:
+        from seed_skill_kernel import run_skill
+        result = run_skill(
+            args.get("skill_id"),
+            args.get("operation"),
+            args.get("args") or {}
+        )
+
+        return action_result(
+            "run_skill",
+            ok=result.get("ok"),
+            verified=result.get("verified"),
+            risk=result.get("risk", "skill"),
+            spoken_message=result.get("spoken_message", "I ran the skill."),
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "run_skill",
+            ok=False,
+            verified=False,
+            risk="skill",
+            spoken_message=f"Skill execution failed: {error}",
+            data={"error": str(error), "args": args}
+        )
+
+
+try:
+    ACTIONS["run_skill"] = {
+        "handler": action_run_skill,
+        "risk": "skill",
+        "approval_required": False,
+        "description": "Run a verified Seed real skill through the skill kernel."
+    }
+except Exception:
+    pass
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v25_previous_maybe_handle_action_text:
+        return _v25_previous_maybe_handle_action_text(text)
+
+    return None
+
+# v2.6 supervised agent execution action integration.
+try:
+    _v26_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v26_previous_route_action_from_text = None
+
+try:
+    _v26_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v26_previous_maybe_handle_action_text = None
+
+
+def action_agent_run_create(args=None):
+    args = args or {}
+    try:
+        from seed_agent_run_lifecycle import create_agent_run
+        result = create_agent_run(args.get("task", "unspecified agent task"))
+        return action_result(
+            "agent_run_create",
+            ok=result.get("ok"),
+            verified=result.get("ok"),
+            risk="agent_preparation",
+            spoken_message=f"I created a supervised agent run: {result.get('run_id')}. Approval token is {result.get('approval_token')}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "agent_run_create",
+            ok=False,
+            verified=False,
+            risk="agent_preparation",
+            spoken_message=f"Could not create supervised agent run: {error}",
+            data={"error": str(error)}
+        )
+
+
+def action_agent_run_list(args=None):
+    try:
+        from seed_agent_run_lifecycle import list_agent_runs
+        result = list_agent_runs()
+        return action_result(
+            "agent_run_list",
+            ok=result.get("ok"),
+            verified=result.get("ok"),
+            risk="read_only",
+            spoken_message=f"I found {result.get('count', 0)} supervised agent runs.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "agent_run_list",
+            ok=False,
+            verified=False,
+            risk="read_only",
+            spoken_message=f"Could not list supervised agent runs: {error}",
+            data={"error": str(error)}
+        )
+
+
+try:
+    ACTIONS["agent_run_create"] = {
+        "handler": action_agent_run_create,
+        "risk": "agent_preparation",
+        "approval_required": False,
+        "description": "Create a supervised approval-gated agent run."
+    }
+    ACTIONS["agent_run_list"] = {
+        "handler": action_agent_run_list,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "List supervised agent runs."
+    }
+except Exception:
+    pass
+
+
+def route_action_from_text(text):
+    lowered = (text or "").lower()
+
+    if _v26_previous_route_action_from_text:
+        action_id, args = _v26_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    if "create agent run" in lowered or "prepare agent run" in lowered or "supervised agent run" in lowered:
+        return "agent_run_create", {"task": text}
+
+    if "list agent runs" in lowered or "show agent runs" in lowered:
+        return "agent_run_list", {}
+
+    return None, None
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v26_previous_maybe_handle_action_text:
+        return _v26_previous_maybe_handle_action_text(text)
+
+    return None
+
+# v2.7 executor bridge / repo doctor / voice upgrade natural action integration.
+try:
+    _v27_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v27_previous_route_action_from_text = None
+
+try:
+    _v27_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v27_previous_maybe_handle_action_text = None
+
+
+def action_executor_plan(args=None):
+    args = args or {}
+    try:
+        from seed_external_executor_bridge import create_executor_plan
+        result = create_executor_plan(args.get("task", "unspecified executor task"))
+        return action_result(
+            "executor_plan",
+            ok=result.get("ok"),
+            verified=result.get("ok"),
+            risk="external_agent_plan",
+            spoken_message=f"I created a manual executor plan: {result.get('plan_id')}. External execution is still locked.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "executor_plan",
+            ok=False,
+            verified=False,
+            risk="external_agent_plan",
+            spoken_message=f"Could not create executor plan: {error}",
+            data={"error": str(error)}
+        )
+
+
+def action_repo_doctor(args=None):
+    try:
+        from seed_repo_doctor import run_repo_doctor
+        result = run_repo_doctor()
+        return action_result(
+            "repo_doctor",
+            ok=result.get("ok"),
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Repo Doctor finished. Findings: {len(result.get('findings', []))}. Recommendations: {len(result.get('recommendations', []))}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "repo_doctor",
+            ok=False,
+            verified=False,
+            risk="read_only",
+            spoken_message=f"Repo Doctor failed: {error}",
+            data={"error": str(error)}
+        )
+
+
+def action_voice_upgrade_plan(args=None):
+    try:
+        from seed_voice_upgrade_planner import build_voice_upgrade_plan
+        result = build_voice_upgrade_plan()
+        return action_result(
+            "voice_upgrade_plan",
+            ok=result.get("ok"),
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Voice upgrade plan created. Recommended next patch: {result.get('recommended_next_patch')}",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "voice_upgrade_plan",
+            ok=False,
+            verified=False,
+            risk="read_only",
+            spoken_message=f"Voice upgrade planning failed: {error}",
+            data={"error": str(error)}
+        )
+
+
+try:
+    ACTIONS["executor_plan"] = {
+        "handler": action_executor_plan,
+        "risk": "external_agent_plan",
+        "approval_required": False,
+        "description": "Create a manual-only external executor plan."
+    }
+    ACTIONS["repo_doctor"] = {
+        "handler": action_repo_doctor,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Run read-only repo doctor."
+    }
+    ACTIONS["voice_upgrade_plan"] = {
+        "handler": action_voice_upgrade_plan,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Create read-only voice upgrade plan."
+    }
+except Exception:
+    pass
+
+
+def route_action_from_text(text):
+    lowered = (text or "").lower()
+
+    if _v27_previous_route_action_from_text:
+        action_id, args = _v27_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    if "repo doctor" in lowered or "diagnose repo" in lowered:
+        return "repo_doctor", {}
+
+    if "voice upgrade" in lowered or "improve voice plan" in lowered or "voice improvement plan" in lowered:
+        return "voice_upgrade_plan", {}
+
+    if "executor plan" in lowered or "external executor" in lowered or "aider plan" in lowered or "openhands plan" in lowered:
+        return "executor_plan", {"task": text}
+
+    return None, None
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v27_previous_maybe_handle_action_text:
+        return _v27_previous_maybe_handle_action_text(text)
+
+    return None
+
+# v2.8 Aider first executor bridge natural action integration.
+try:
+    _v28_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v28_previous_route_action_from_text = None
+
+try:
+    _v28_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v28_previous_maybe_handle_action_text = None
+
+
+def action_aider_plan(args=None):
+    args = args or {}
+    try:
+        from seed_aider_bridge import create_aider_plan
+        result = create_aider_plan(args.get("task", "unspecified Aider task"))
+        return action_result(
+            "aider_plan",
+            ok=result.get("ok"),
+            verified=result.get("ok"),
+            risk="file_write_agent_plan",
+            spoken_message=f"I created a manual-only Aider plan: {result.get('plan_id')}. Aider execution is still locked.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "aider_plan",
+            ok=False,
+            verified=False,
+            risk="file_write_agent_plan",
+            spoken_message=f"Could not create Aider plan: {error}",
+            data={"error": str(error)}
+        )
+
+
+def action_aider_status(args=None):
+    try:
+        from seed_aider_bridge import detect_aider
+        result = detect_aider()
+        return action_result(
+            "aider_status",
+            ok=True,
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Aider available: {result.get('aider_available')}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result(
+            "aider_status",
+            ok=False,
+            verified=False,
+            risk="read_only",
+            spoken_message=f"Could not check Aider status: {error}",
+            data={"error": str(error)}
+        )
+
+
+try:
+    ACTIONS["aider_plan"] = {
+        "handler": action_aider_plan,
+        "risk": "file_write_agent_plan",
+        "approval_required": False,
+        "description": "Create a manual-only Aider plan."
+    }
+    ACTIONS["aider_status"] = {
+        "handler": action_aider_status,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Check Aider availability."
+    }
+except Exception:
+    pass
+
+
+def route_action_from_text(text):
+    lowered = (text or "").lower()
+
+    if _v28_previous_route_action_from_text:
+        action_id, args = _v28_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    if "aider status" in lowered or "is aider installed" in lowered:
+        return "aider_status", {}
+
+    if "aider plan" in lowered or "use aider" in lowered or "prepare aider" in lowered:
+        return "aider_plan", {"task": text}
+
+    return None, None
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v28_previous_maybe_handle_action_text:
+        return _v28_previous_maybe_handle_action_text(text)
+
+    return None
+
+# v2.9 Mission Control MegaPack natural action integration.
+try:
+    _v29_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v29_previous_route_action_from_text = None
+
+try:
+    _v29_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v29_previous_maybe_handle_action_text = None
+
+
+def action_mission_control(args=None):
+    try:
+        from seed_mission_control import mission_control_snapshot
+        result = mission_control_snapshot()
+        return action_result(
+            "mission_control",
+            ok=result.get("ok"),
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Mission Control is ready. Next actions: {len(result.get('next_actions', []))}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("mission_control", False, False, "read_only", f"Mission Control failed: {error}", {"error": str(error)})
+
+
+def action_self_repair_plan(args=None):
+    try:
+        from seed_self_repair_planner import build_self_repair_plan
+        result = build_self_repair_plan()
+        return action_result(
+            "self_repair_plan",
+            ok=True,
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Self-repair plan built. Failures: {len(result.get('failures', []))}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("self_repair_plan", False, False, "read_only", f"Self-repair planner failed: {error}", {"error": str(error)})
+
+
+def action_voice_ux(args=None):
+    try:
+        from seed_voice_ux_pack import voice_ux_snapshot
+        result = voice_ux_snapshot()
+        return action_result(
+            "voice_ux",
+            ok=result.get("ok"),
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Voice UX pack is ready. Next voice patch has {len(result.get('next_voice_patch', []))} items.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("voice_ux", False, False, "read_only", f"Voice UX failed: {error}", {"error": str(error)})
+
+
+try:
+    ACTIONS["mission_control"] = {
+        "handler": action_mission_control,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Show Seed Mission Control."
+    }
+    ACTIONS["self_repair_plan"] = {
+        "handler": action_self_repair_plan,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Build self-repair plan."
+    }
+    ACTIONS["voice_ux"] = {
+        "handler": action_voice_ux,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Show voice UX status."
+    }
+except Exception:
+    pass
+
+
+def route_action_from_text(text):
+    lowered = (text or "").lower()
+
+    if _v29_previous_route_action_from_text:
+        action_id, args = _v29_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    if "mission control" in lowered or "command center" in lowered or "seed dashboard" in lowered:
+        return "mission_control", {}
+
+    if "self repair" in lowered or "repair plan" in lowered or "fix import" in lowered:
+        return "self_repair_plan", {}
+
+    if "voice ux" in lowered or "voice debug" in lowered:
+        return "voice_ux", {}
+
+    return None, None
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v29_previous_maybe_handle_action_text:
+        return _v29_previous_maybe_handle_action_text(text)
+
+    return None
+
+# v3.0 Jarvis Control Plane natural action integration.
+try:
+    _v30_previous_route_action_from_text = route_action_from_text
+except Exception:
+    _v30_previous_route_action_from_text = None
+
+try:
+    _v30_previous_maybe_handle_action_text = maybe_handle_action_text
+except Exception:
+    _v30_previous_maybe_handle_action_text = None
+
+
+def action_control_plane_status(args=None):
+    try:
+        from seed_control_plane_launcher import control_plane_status
+        result = control_plane_status()
+        return action_result(
+            "control_plane_status",
+            ok=True,
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Control Plane is configured at {result.get('url')}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("control_plane_status", False, False, "read_only", f"Control Plane status failed: {error}", {"error": str(error)})
+
+
+def action_gate_matrix(args=None):
+    try:
+        from seed_gate_matrix import run_gate_matrix
+        result = run_gate_matrix()
+        return action_result(
+            "gate_matrix",
+            ok=result.get("ok"),
+            verified=True,
+            risk="diagnostic",
+            spoken_message=f"Gate Matrix finished. Passed {result.get('passed')}/{result.get('count')}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("gate_matrix", False, False, "diagnostic", f"Gate Matrix failed: {error}", {"error": str(error)})
+
+
+def action_runtime_supervisor(args=None):
+    try:
+        from seed_runtime_supervisor import runtime_supervisor_snapshot
+        result = runtime_supervisor_snapshot()
+        return action_result(
+            "runtime_supervisor",
+            ok=result.get("ok"),
+            verified=True,
+            risk="read_only",
+            spoken_message=f"Runtime Supervisor finished. OK: {result.get('ok')}.",
+            data=result
+        )
+    except Exception as error:
+        return action_result("runtime_supervisor", False, False, "read_only", f"Runtime Supervisor failed: {error}", {"error": str(error)})
+
+
+try:
+    ACTIONS["control_plane_status"] = {
+        "handler": action_control_plane_status,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Show Control Plane status."
+    }
+    ACTIONS["gate_matrix"] = {
+        "handler": action_gate_matrix,
+        "risk": "diagnostic",
+        "approval_required": False,
+        "description": "Run full gate matrix."
+    }
+    ACTIONS["runtime_supervisor"] = {
+        "handler": action_runtime_supervisor,
+        "risk": "read_only",
+        "approval_required": False,
+        "description": "Show runtime supervisor."
+    }
+except Exception:
+    pass
+
+
+def route_action_from_text(text):
+    lowered = (text or "").lower()
+
+    if _v30_previous_route_action_from_text:
+        action_id, args = _v30_previous_route_action_from_text(text)
+        if action_id:
+            return action_id, args
+
+    if "control plane" in lowered or "jarvis dashboard" in lowered or "local dashboard" in lowered:
+        return "control_plane_status", {}
+
+    if "gate matrix" in lowered or "run all gates" in lowered or "full check" in lowered:
+        return "gate_matrix", {}
+
+    if "runtime supervisor" in lowered or "runtime status" in lowered:
+        return "runtime_supervisor", {}
+
+    return None, None
+
+
+def maybe_handle_action_text(text):
+    action_id, args = route_action_from_text(text)
+    if action_id:
+        result = run_action(action_id, args)
+        return result.get("spoken_message")
+
+    if _v30_previous_maybe_handle_action_text:
+        return _v30_previous_maybe_handle_action_text(text)
+
+    return None
