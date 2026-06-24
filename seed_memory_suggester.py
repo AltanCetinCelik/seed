@@ -15,6 +15,8 @@ PROGRESS_KEYWORDS = [
 
 
 def should_suggest_memory(user_message, seed_answer):
+    user_message = user_message or ""
+    seed_answer = seed_answer or ""
     combined_text = (user_message + " " + seed_answer).lower()
 
     for keyword in PROGRESS_KEYWORDS:
@@ -56,6 +58,8 @@ def build_memory_content(user_message, seed_answer):
 
 
 def suggest_memory(user_message, seed_answer):
+    user_message = user_message or ""
+    seed_answer = seed_answer or ""
     if not should_suggest_memory(user_message, seed_answer):
         return None
 

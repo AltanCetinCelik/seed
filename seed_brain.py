@@ -458,3 +458,118 @@ def memory_debug_report(user_prompt, limit=None):
 
 def search_memory_context(user_prompt, limit=8):
     return format_relevant_memories(user_prompt, limit)
+# v5.2 Fast Chat Runtime
+# Overrides heavy prompt building during normal chat.
+try:
+    _seed_v520_slow_build_seed_prompt = build_seed_prompt
+except Exception:
+    _seed_v520_slow_build_seed_prompt = None
+
+
+def build_seed_prompt(user_prompt, session_history=None):
+    try:
+        from seed_context_accelerator import get_fast_companion_context
+        context = get_fast_companion_context(user_prompt)
+    except Exception as error:
+        context = (
+            "Seed fast context failed. "
+            "Seed is Altan's local-first Companion OS. "
+            "Safety: no arbitrary shell, no delete, no auto-commit. "
+            f"Error: {error}"
+        )
+
+    history_lines = []
+    if session_history:
+        try:
+            for item in session_history[-6:]:
+                if isinstance(item, dict):
+                    role = item.get("role", "unknown")
+                    content = str(item.get("content", ""))[:500]
+                    history_lines.append(f"{role}: {content}")
+                else:
+                    history_lines.append(str(item)[:500])
+        except Exception:
+            pass
+
+    return f"""You are Seed, Altan's local-first Companion OS assistant.
+
+Rules:
+- Never claim Seed is alive, conscious, sentient, human, or that it has real experiences.
+- Be direct, practical, and concise.
+- For shell commands, tell Altan to run them in macOS Terminal.
+- Slash commands are for Seed chat.
+- Do not invent success. Ask for logs when needed.
+- Prefer fast answers. Do not over-explain.
+
+{context}
+
+Recent chat:
+{chr(10).join(history_lines)}
+
+Altan:
+{user_prompt}
+
+Answer in under 160 words unless code is needed.
+"""
+
+
+try:
+    _seed_v520_original_ask_seed = ask_seed
+
+    def ask_seed(user_prompt, session_history=None, chat_state=None):
+        try:
+            from seed_chat_fastpath import fast_reply_for_message
+            fast = fast_reply_for_message(user_prompt)
+            if fast:
+                return fast
+        except Exception:
+            pass
+
+        return _seed_v520_original_ask_seed(user_prompt, session_history, chat_state)
+except Exception:
+    pass
+
+# v20.0.1 None-answer hardening.
+try:
+    _seed_v2001_previous_ask_seed = ask_seed
+
+    def _seed_v2001_fallback_answer(user_prompt=""):
+        text = (user_prompt or "").lower()
+
+        if "what changed" in text or "what has changed" in text:
+            return (
+                "Seed changed into v20 Sovereign Companion OS MegaCore: memory v2, voice runtime, workflow graph, "
+                "browser sandbox, MCP marketplace, OpenHands sandbox, project/life OS, Seed World, avatar presence, "
+                "agent council, self-improvement lab, multi-device hub, and v20 Control Plane support. "
+                "The current hotfix prevents None answers from crashing memory suggestions."
+            )
+
+        return (
+            "I hit an empty local-LLM response, but Seed is still running. "
+            "Use `/latency`, `/v20-check`, `/quick-gates`, or paste the latest traceback so we can patch it."
+        )
+
+    def ask_seed(user_prompt, session_history=None, chat_state=None):
+        try:
+            from seed_chat_fastpath import fast_reply_for_message
+            fast = fast_reply_for_message(user_prompt)
+            if fast:
+                return fast
+        except Exception:
+            pass
+
+        try:
+            answer = _seed_v2001_previous_ask_seed(user_prompt, session_history, chat_state)
+        except Exception as error:
+            return f"Seed hit an internal chat error: {error}. Run `/latency` and `/v20-check`."
+
+        if answer is None:
+            return _seed_v2001_fallback_answer(user_prompt)
+
+        answer_text = str(answer).strip()
+        if not answer_text or answer_text == "None":
+            return _seed_v2001_fallback_answer(user_prompt)
+
+        return answer
+except Exception:
+    pass
