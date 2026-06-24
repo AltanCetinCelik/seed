@@ -1,4 +1,4 @@
-SEED_VERSION = "v2.3.0"
+SEED_VERSION = "v5.0.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -784,5 +784,474 @@ try:
 except NameError:
     SELF_IMPROVEMENT_TEST_COMMANDS = [
         f"python -m py_compile {module}" for module in V23_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.4.0 Experience Fusion Layer
+SEED_REFERENCE_FUSION_STATE_FILE = "seed_reference_fusion_state.json"
+SEED_EXPERIENCE_MODE_FILE = "seed_experience_mode.json"
+SEED_SMOOTH_UX_STATE_FILE = "seed_smooth_ux_state.json"
+SEED_V24_GATE_REPORT_FILE = "seed_v24_gate_report.json"
+
+SEED_DEFAULT_EXPERIENCE_MODE = "companion"
+SEED_EXPERIENCE_NO_BLIND_INSTALLS = True
+SEED_EXPERIENCE_APPROVAL_FOR_RISKY_TOOLS = True
+SEED_EXPERIENCE_VOICE_STYLE = "short_direct_companion"
+SEED_EXPERIENCE_REFERENCE_STACK_ENABLED = True
+
+V24_REQUIRED_MODULES = [
+    "seed_reference_fusion.py",
+    "seed_experience_modes.py",
+    "seed_smooth_ux.py",
+    "seed_v24_experience_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V24_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V24_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V24_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V24_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.5.0 Real Skill System
+SEED_SKILL_STATE_FILE = "seed_skill_state.json"
+SEED_SKILL_HISTORY_FILE = "seed_skill_history.jsonl"
+SEED_SKILL_APPROVAL_FILE = "seed_skill_approval_state.json"
+SEED_SKILL_PROJECT_ROOT = "."
+SEED_SKILL_MAX_READ_BYTES = 12000
+SEED_SKILL_MAX_SEARCH_RESULTS = 20
+SEED_SKILL_SAFE_TIMEOUT_SECONDS = 12
+SEED_BROWSER_READ_MAX_BYTES = 150000
+SEED_V25_GATE_REPORT_FILE = "seed_v25_gate_report.json"
+
+SEED_SKILLS_NO_ARBITRARY_SHELL = True
+SEED_SKILLS_NO_DELETE = True
+SEED_SKILLS_NO_AUTO_COMMIT = True
+SEED_SKILLS_APPROVAL_FOR_RISKY = True
+SEED_SKILLS_VERIFY_RESULTS = True
+
+V25_REQUIRED_MODULES = [
+    "seed_skill_kernel.py",
+    "seed_filesystem_skill.py",
+    "seed_git_skill.py",
+    "seed_repo_inspection_skill.py",
+    "seed_safe_shell_skill.py",
+    "seed_browser_skill.py",
+    "seed_coding_prep_skill.py",
+    "seed_v25_skill_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V25_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V25_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V25_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V25_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.6.0 Supervised Agent Execution Layer
+SEED_AGENT_RUN_LIFECYCLE_DIR = "seed_agent_runs"
+SEED_AGENT_RUN_STATE_FILE = "seed_agent_run_state.json"
+SEED_AGENT_RUN_HISTORY_FILE = "seed_agent_run_history.jsonl"
+SEED_AGENT_OPERATOR_STATE_FILE = "seed_agent_operator_state.json"
+SEED_V26_GATE_REPORT_FILE = "seed_v26_gate_report.json"
+
+SEED_AGENT_EXECUTION_SUPERVISED_ONLY = True
+SEED_AGENT_EXECUTION_REQUIRE_APPROVAL = True
+SEED_AGENT_EXECUTION_NO_AUTO_EDIT = True
+SEED_AGENT_EXECUTION_NO_AUTO_COMMIT = True
+SEED_AGENT_EXECUTION_NO_EXTERNAL_AGENT_BY_DEFAULT = True
+SEED_AGENT_EXECUTION_SAFE_INTERNAL_ONLY = True
+
+V26_REQUIRED_MODULES = [
+    "seed_agent_run_lifecycle.py",
+    "seed_agent_operator_console.py",
+    "seed_v26_agent_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V26_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V26_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V26_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V26_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.7.0 Executor Bridge + Repo Doctor + Voice Upgrade Planner
+SEED_EXECUTOR_BRIDGE_STATE_FILE = "seed_executor_bridge_state.json"
+SEED_EXECUTOR_BRIDGE_HISTORY_FILE = "seed_executor_bridge_history.jsonl"
+SEED_REPO_DOCTOR_REPORT_FILE = "seed_repo_doctor_report.json"
+SEED_VOICE_UPGRADE_PLAN_FILE = "seed_voice_upgrade_plan.json"
+SEED_V27_GATE_REPORT_FILE = "seed_v27_gate_report.json"
+
+SEED_EXECUTOR_BRIDGE_NO_AUTO_INSTALL = True
+SEED_EXECUTOR_BRIDGE_NO_EXTERNAL_RUN_BY_DEFAULT = True
+SEED_EXECUTOR_BRIDGE_REQUIRE_APPROVAL = True
+SEED_EXECUTOR_BRIDGE_MANUAL_COMMANDS_ONLY = True
+SEED_REPO_DOCTOR_READ_ONLY = True
+SEED_VOICE_UPGRADE_PLANNER_READ_ONLY = True
+
+V27_REQUIRED_MODULES = [
+    "seed_external_executor_bridge.py",
+    "seed_repo_doctor.py",
+    "seed_voice_upgrade_planner.py",
+    "seed_v27_executor_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V27_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V27_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V27_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V27_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.8.0 Aider First Executor Bridge
+SEED_AIDER_BRIDGE_STATE_FILE = "seed_aider_bridge_state.json"
+SEED_AIDER_BRIDGE_HISTORY_FILE = "seed_aider_bridge_history.jsonl"
+SEED_AIDER_RUNS_DIR = "seed_agent_runs"
+SEED_V28_GATE_REPORT_FILE = "seed_v28_gate_report.json"
+
+SEED_AIDER_NO_AUTO_INSTALL = True
+SEED_AIDER_NO_AUTO_EXECUTE = True
+SEED_AIDER_REQUIRE_APPROVAL = True
+SEED_AIDER_REQUIRE_TARGET_FILES = True
+SEED_AIDER_REQUIRE_CLEAN_GIT = False
+SEED_AIDER_EXECUTION_LOCKED = True
+SEED_AIDER_SAFE_DEFAULT_MODE = "plan_only"
+
+V28_REQUIRED_MODULES = [
+    "seed_aider_bridge.py",
+    "seed_v28_aider_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V28_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V28_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V28_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V28_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.9.0 Mission Control MegaPack
+SEED_MISSION_CONTROL_STATE_FILE = "seed_mission_control_state.json"
+SEED_RELEASE_ORCHESTRATOR_REPORT_FILE = "seed_release_orchestrator_report.json"
+SEED_VOICE_UX_STATE_FILE = "seed_voice_ux_state.json"
+SEED_TRANSCRIPT_JOURNAL_FILE = "seed_transcript_journal.jsonl"
+SEED_SELF_REPAIR_PLAN_FILE = "seed_self_repair_plan.json"
+SEED_COMMAND_MEMORY_FILE = "seed_command_memory.json"
+SEED_APP_MANIFEST_FILE = "seed_local_app_manifest.json"
+SEED_V29_GATE_REPORT_FILE = "seed_v29_gate_report.json"
+
+SEED_MISSION_CONTROL_READ_ONLY = True
+SEED_RELEASE_ORCHESTRATOR_SAFE_ONLY = True
+SEED_SELF_REPAIR_PLAN_ONLY = True
+SEED_VOICE_UX_NO_SECRET_LISTENING = True
+SEED_COMMAND_MEMORY_NO_AUTO_EXECUTE = True
+
+V29_REQUIRED_MODULES = [
+    "seed_mission_control.py",
+    "seed_release_orchestrator.py",
+    "seed_voice_ux_pack.py",
+    "seed_self_repair_planner.py",
+    "seed_command_memory.py",
+    "seed_local_app_manifest.py",
+    "seed_v29_mission_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V29_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V29_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V29_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V29_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v3.0.0 Jarvis Control Plane + Local Command Center
+SEED_CONTROL_PLANE_HOST = "127.0.0.1"
+SEED_CONTROL_PLANE_PORT = 8790
+SEED_CONTROL_PLANE_URL = "http://127.0.0.1:8790"
+SEED_CONTROL_PLANE_STATE_FILE = "seed_control_plane_state.json"
+SEED_GATE_MATRIX_REPORT_FILE = "seed_gate_matrix_report.json"
+SEED_RUNTIME_SUPERVISOR_STATE_FILE = "seed_runtime_supervisor_state.json"
+SEED_SESSION_TIMELINE_FILE = "seed_session_timeline.json"
+SEED_COMMAND_CENTER_FILE = "seed_command_center.json"
+SEED_V30_GATE_REPORT_FILE = "seed_v30_gate_report.json"
+
+SEED_CONTROL_PLANE_LOCAL_ONLY = True
+SEED_CONTROL_PLANE_READ_ONLY_DEFAULT = True
+SEED_CONTROL_PLANE_NO_REMOTE_BIND = True
+SEED_CONTROL_PLANE_NO_SECRETS = True
+SEED_CONTROL_PLANE_NO_AUTO_EXECUTE = True
+
+V30_REQUIRED_MODULES = [
+    "seed_gate_matrix.py",
+    "seed_runtime_supervisor.py",
+    "seed_session_timeline.py",
+    "seed_command_center.py",
+    "seed_control_plane_ui.py",
+    "seed_control_plane_server.py",
+    "seed_control_plane_launcher.py",
+    "seed_v30_control_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V30_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V30_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V30_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V30_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v3.5.0 Omega Integration Pack
+SEED_REPO_DNA_FILE = "seed_repo_dna.json"
+SEED_INTEGRATION_FUSION_FILE = "seed_integration_fusion.json"
+SEED_OMEGA_PLAN_FILE = "seed_omega_plan.json"
+SEED_CONTROL_ACTION_HISTORY_FILE = "seed_control_action_history.jsonl"
+SEED_VOICE_ONE_SHOT_HISTORY_FILE = "seed_voice_one_shot_history.jsonl"
+SEED_V35_GATE_REPORT_FILE = "seed_v35_gate_report.json"
+
+SEED_CONTROL_ACTION_REQUIRE_HEADER = True
+SEED_CONTROL_ACTION_HEADER_NAME = "X-Seed-Action"
+SEED_CONTROL_ACTION_HEADER_VALUE = "local-control-plane"
+SEED_CONTROL_ACTION_ALLOWLIST_ONLY = True
+SEED_OMEGA_NO_AUTO_INSTALL = True
+SEED_OMEGA_NO_AUTO_EXTERNAL_EXECUTION = True
+SEED_OMEGA_NO_AUTO_COMMIT = True
+SEED_OMEGA_CONTROLLED_RISK = True
+
+V35_REQUIRED_MODULES = [
+    "seed_repo_dna_engine.py",
+    "seed_integration_fusion_engine.py",
+    "seed_omega_planner.py",
+    "seed_control_plane_actions.py",
+    "seed_voice_one_shot.py",
+    "seed_control_plane_ui_omega.py",
+    "seed_v35_omega_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V35_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V35_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V35_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V35_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v3.6.0 Real Integration Runtime
+SEED_MCP_SKILL_SERVER_MANIFEST_FILE = "seed_mcp_skill_manifest.json"
+SEED_MCP_SKILL_SERVER_STATE_FILE = "seed_mcp_skill_server_state.json"
+SEED_AIDER_UNLOCK_STATE_FILE = "seed_aider_unlock_state.json"
+SEED_AIDER_UNLOCK_HISTORY_FILE = "seed_aider_unlock_history.jsonl"
+SEED_INTEGRATION_SANDBOX_STATE_FILE = "seed_integration_sandbox_state.json"
+SEED_V36_GATE_REPORT_FILE = "seed_v36_gate_report.json"
+
+SEED_MCP_SKILL_SERVER_LOCAL_ONLY = True
+SEED_MCP_SKILL_SERVER_NO_ARBITRARY_SHELL = True
+SEED_AIDER_REAL_EXECUTION_LOCKED_BY_DEFAULT = True
+SEED_AIDER_DRY_RUN_FIRST = True
+SEED_AIDER_REQUIRE_EXPLICIT_REAL_RUN_PHRASE = True
+SEED_AIDER_REAL_RUN_PHRASE = "I UNDERSTAND AIDER CAN EDIT FILES"
+SEED_AIDER_NO_AUTO_COMMITS = True
+SEED_AIDER_NO_DIRTY_COMMITS = True
+SEED_AIDER_TARGET_FILES_ONLY = True
+SEED_INTEGRATION_SANDBOX_NO_AUTO_EXTERNAL_RUN = True
+
+V36_REQUIRED_MODULES = [
+    "seed_mcp_skill_server.py",
+    "seed_mcp_skill_manifest.py",
+    "seed_aider_execution_unlock.py",
+    "seed_integration_sandbox.py",
+    "seed_v36_integration_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V36_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V36_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V36_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V36_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v4.0.0 Runtime OS Upgrade
+SEED_EVENT_BUS_FILE = "seed_event_bus.jsonl"
+SEED_SERVICE_MANAGER_STATE_FILE = "seed_service_manager_state.json"
+SEED_WORKFLOW_AUTOMATION_STATE_FILE = "seed_workflow_automation_state.json"
+SEED_ROLLBACK_STATE_FILE = "seed_rollback_state.json"
+SEED_MEMORY_DISTILL_FILE = "seed_memory_distill.json"
+SEED_AIDER_PATCH_FLOW_STATE_FILE = "seed_aider_patch_flow_state.json"
+SEED_V40_GATE_REPORT_FILE = "seed_v40_gate_report.json"
+SEED_CHECKPOINT_DIR = "seed_checkpoints"
+
+SEED_RUNTIME_OS_LOCAL_ONLY = True
+SEED_RUNTIME_OS_NO_ARBITRARY_SHELL = True
+SEED_RUNTIME_OS_NO_DELETE = True
+SEED_RUNTIME_OS_NO_AUTO_COMMIT = True
+SEED_RUNTIME_OS_APPROVAL_FOR_RESTORE = True
+SEED_RUNTIME_OS_APPROVAL_FOR_AIDER_REAL = True
+
+V40_REQUIRED_MODULES = [
+    "seed_event_bus.py",
+    "seed_service_manager.py",
+    "seed_mcp_client.py",
+    "seed_workflow_automation.py",
+    "seed_patch_rollback.py",
+    "seed_aider_patch_flow.py",
+    "seed_memory_distiller.py",
+    "seed_v40_os_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V40_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V40_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V40_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V40_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v5.0.0 Autonomous Operator Core
+SEED_GOAL_ENGINE_STATE_FILE = "seed_goal_engine_state.json"
+SEED_TASK_OS_FILE = "seed_task_os.json"
+SEED_CAPABILITY_GRAPH_FILE = "seed_capability_graph.json"
+SEED_EXECUTION_POLICY_FILE = "seed_execution_policy.json"
+SEED_OPERATOR_RUNTIME_STATE_FILE = "seed_operator_runtime_state.json"
+SEED_OPERATOR_INBOX_FILE = "seed_operator_inbox.jsonl"
+SEED_V50_GATE_REPORT_FILE = "seed_v50_gate_report.json"
+
+SEED_OPERATOR_MANUAL_TICK_ONLY = True
+SEED_OPERATOR_NO_BACKGROUND_AUTONOMY = True
+SEED_OPERATOR_NO_ARBITRARY_SHELL = True
+SEED_OPERATOR_NO_DELETE = True
+SEED_OPERATOR_NO_AUTO_COMMIT = True
+SEED_OPERATOR_AIDER_DRY_RUN_FIRST = True
+SEED_OPERATOR_CONTROLLED_RISK = True
+
+V50_REQUIRED_MODULES = [
+    "seed_execution_policy.py",
+    "seed_capability_graph.py",
+    "seed_task_os.py",
+    "seed_goal_engine.py",
+    "seed_operator_inbox.py",
+    "seed_operator_runtime.py",
+    "seed_control_plane_ui_v5.py",
+    "seed_v50_operator_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V50_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V50_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V50_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V50_REQUIRED_MODULES
     ]
 

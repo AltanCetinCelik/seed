@@ -497,3 +497,282 @@ Rules:
 - Seed should not invent memories, meetings, files, emails, or completed work.
 - Risky tools still require approval, sandboxing, tests, and rollback.
 - Altan remains in control.
+
+## Seed v2.4.0 — Experience Fusion Layer
+
+Seed v2.4.0 makes Seed feel less like a CLI and more like a local-first companion command center.
+
+Added systems:
+
+- Reference Fusion
+- Friend-advice policy fusion
+- Public repo/tool reference stack
+- Experience Modes
+- Smooth UX home screen
+- Natural request routing for mode/home/perfect-plan/reference-fusion requests
+- Voice context upgraded with experience mode and reference fusion
+- v2.4 experience gate
+
+Reference goals:
+
+- Jarvis-style command center
+- Hermes-style routing
+- Moltbot/OpenClaw-style local companion control plane
+- OpenHands-style agent/workflow canvas ideas
+- AnythingLLM/Open WebUI/LibreChat-style cockpit and workspace ideas
+- Mem0/Qdrant-style long-term memory path
+- Pipecat/LiveKit-style future realtime voice path
+- MCP as the official future skill/plugin system
+
+Safety rules:
+
+- Do not blindly install everything.
+- Do not copy repo code without license review.
+- Borrow patterns first.
+- Coding/browser/MCP actions need approval.
+- Voice remains explicit.
+- Seed must not claim it did actions unless verified.
+- Altan remains in control.
+
+## Seed v2.5.0 — Real Skill System
+
+Seed v2.5.0 adds real controlled skills.
+
+Added skills:
+
+- Filesystem skill
+- Git skill
+- Repo inspection skill
+- Safe shell diagnostic skill
+- Browser open/read skill
+- Coding-agent preparation skill
+- Skill Kernel
+- Skill history
+- Action Kernel skill routing
+- Voice/context skill awareness
+- v2.5 skill gate
+
+Rules:
+
+- No arbitrary shell.
+- No delete operations.
+- No auto-commit.
+- No blind installs.
+- Browser/account/external risky actions require approval.
+- Coding agents only run after approval, branch/backup, tests, diff, and rollback plan.
+- Seed must verify skill results before claiming success.
+- Altan remains in control.
+
+## Seed v2.6.0 — Supervised Agent Execution Layer
+
+Seed v2.6.0 adds supervised agent run lifecycle.
+
+Added systems:
+
+- Agent run lifecycle
+- Agent tool detection
+- Agent operator console
+- Approval token workflow
+- Supervised internal execution
+- External agent lock
+- Agent run history/state
+- v2.6 agent execution gate
+
+Rules:
+
+- No external agent by default.
+- No arbitrary shell.
+- No auto-edit.
+- No auto-commit.
+- Approval token required before execution.
+- Supervised execution runs safe internal verification first.
+- Aider/OpenHands/browser-use/MCP execution stays locked until explicit approval and later hardening.
+- Altan remains in control.
+
+## Seed v2.7.0 — Executor Bridge + Repo Doctor + Voice Upgrade Planner
+
+Seed v2.7.0 adds the bridge toward external executors.
+
+Added systems:
+
+- External executor registry
+- Aider/OpenHands/SWE-agent/browser-use/MCP detection
+- Manual executor plan generation
+- Repo Doctor
+- Voice Upgrade Planner
+- Natural routing for executor/repo/voice planning
+- v2.7 executor bridge gate
+
+Rules:
+
+- No blind installs.
+- No external agent execution by default.
+- No auto-edit.
+- No auto-commit.
+- Executor plans are manual-only until one executor is hardened.
+- Repo Doctor is read-only.
+- Voice Upgrade Planner is read-only.
+- Altan remains in control.
+
+## Seed v2.8.0 — Aider First Executor Bridge
+
+Seed v2.8.0 adds the first specific external executor bridge.
+
+Added systems:
+
+- Aider detection
+- Aider install plan
+- Aider preflight
+- Target-file validation
+- Aider manual command preview
+- Aider plan folders
+- Aider bridge context
+- Natural routing for Aider status/plans
+- v2.8 Aider bridge gate
+
+Rules:
+
+- No auto-install.
+- No automatic Aider execution.
+- Aider can edit files, so execution remains locked by default.
+- Target files are required.
+- Approval token is required before any future execution.
+- No auto-commit.
+- Manual command preview only.
+- Altan remains in control.
+
+## Seed v2.9.0 — Mission Control MegaPack
+
+Seed v2.9.0 adds a large control layer.
+
+Added systems:
+
+- Mission Control dashboard
+- Release Orchestrator
+- Voice UX Pack
+- Transcript Journal
+- Self-Repair Planner
+- Command Memory
+- Command Suggestions
+- Local App Manifest
+- Natural routing for Mission Control, Self-Repair, and Voice UX
+- v2.9 Mission Gate
+
+Rules:
+
+- Mission Control is read-only.
+- Release Orchestrator runs safe gates only.
+- Self-Repair Planner is plan-only.
+- Voice UX keeps explicit voice policy only.
+- Command Memory never auto-executes commands.
+- Local App Manifest never installs tools.
+- Altan remains in control.
+
+## Seed v3.0.0 — Jarvis Control Plane + Local Command Center
+
+Seed v3.0.0 adds a local web command center.
+
+Added systems:
+
+- Local-only Control Plane server
+- Browser dashboard UI
+- JSON APIs for status, mission, gates, commands, timeline, voice, agents, Aider, apps
+- Gate Matrix
+- Runtime Supervisor
+- Session Timeline
+- Command Center catalog
+- Control Plane launcher
+- Natural routing for Control Plane, Gate Matrix, and Runtime Supervisor
+- v3.0 Control Plane gate
+
+Rules:
+
+- Control Plane binds to 127.0.0.1 only.
+- Control Plane is read-only by default.
+- No remote bind.
+- No secrets.
+- No auto-execute.
+- Agent/executor actions remain inside approval-gated CLI flow.
+- Altan remains in control.
+
+## Seed v3.6.0 — Real Integration Runtime
+
+Seed v3.6.0 adds the first real integration runtime.
+
+Added systems:
+
+- MCP-style Seed Skill Server over stdio JSON-RPC
+- MCP manifest generator
+- Aider runtime detection
+- Aider supervised dry-run and real-run unlock layer
+- Aider target-file validation
+- Aider approval token and real-run phrase
+- Integration sandbox manager
+- Control Plane safe actions for MCP and v3.6 gates
+- v3.6 real integration gate
+
+Rules:
+
+- MCP exposes allowlisted Seed skills only.
+- No arbitrary shell.
+- No delete.
+- No automatic external execution.
+- Aider dry-run first.
+- Aider real-run requires approval token and exact real-run phrase.
+- Aider uses target files only.
+- Aider uses no auto-commits and no dirty commits.
+- Altan remains in control.
+
+## Seed v4.0.0 — Runtime OS Upgrade
+
+Seed v4.0.0 converts Seed from a set of modules into a local runtime OS.
+
+Added systems:
+
+- Event Bus
+- Service Manager
+- MCP Client
+- Workflow Automation
+- Checkpoint / Rollback Engine
+- Aider Patch Flow Manager
+- Memory Distiller
+- v4 Runtime OS Gate
+
+Rules:
+
+- Services are allowlisted.
+- Workflows are allowlisted.
+- MCP tools are allowlisted.
+- Rollback restore requires checkpoint token.
+- Aider patch flow creates checkpoint first.
+- Aider dry-run first.
+- No arbitrary shell.
+- No deletes.
+- No auto-commit.
+- Altan remains in control.
+
+## Seed v5.0.0 — Autonomous Operator Core
+
+Seed v5.0.0 adds a local manual-tick operator layer.
+
+Added systems:
+
+- Execution Policy
+- Capability Graph
+- Persistent Task OS
+- Goal Engine
+- Operator Inbox
+- Operator Runtime
+- Control Plane v5 Operator panel
+- v5 Operator Core Gate
+
+Rules:
+
+- Manual tick only.
+- No background autonomy.
+- No arbitrary shell.
+- No delete.
+- No auto-commit.
+- Aider dry-run first.
+- Risky actions remain approval-gated.
+- Altan remains in control.

@@ -83,3 +83,86 @@ seed_semantic_memory.json
 seed_semantic_index.json
 seed_workflow_brain_state.json
 seed_v23_gate_report.json
+
+# Seed v2.4 experience fusion runtime state
+seed_reference_fusion_state.json
+seed_experience_mode.json
+seed_smooth_ux_state.json
+seed_v24_gate_report.json
+
+# Seed v2.5 skill runtime state
+seed_skill_state.json
+seed_skill_history.jsonl
+seed_skill_approval_state.json
+seed_v25_gate_report.json
+
+# Seed v2.6 supervised agent execution runtime state
+seed_agent_run_state.json
+seed_agent_run_history.jsonl
+seed_agent_operator_state.json
+seed_v26_gate_report.json
+
+# Seed v2.7 executor bridge runtime state
+seed_executor_bridge_state.json
+seed_executor_bridge_history.jsonl
+seed_repo_doctor_report.json
+seed_voice_upgrade_plan.json
+seed_v27_gate_report.json
+
+# Seed v2.8 Aider bridge runtime state
+seed_aider_bridge_state.json
+seed_aider_bridge_history.jsonl
+seed_v28_gate_report.json
+
+# Seed v2.9 mission control runtime state
+seed_mission_control_state.json
+seed_release_orchestrator_report.json
+seed_voice_ux_state.json
+seed_transcript_journal.jsonl
+seed_self_repair_plan.json
+seed_command_memory.json
+seed_local_app_manifest.json
+seed_v29_gate_report.json
+
+# Seed v3.0 control plane runtime state
+seed_control_plane_state.json
+seed_gate_matrix_report.json
+seed_runtime_supervisor_state.json
+seed_session_timeline.json
+seed_command_center.json
+seed_v30_gate_report.json
+
+# Seed v3.5 Omega Integration Pack runtime state
+seed_repo_dna.json
+seed_integration_fusion.json
+seed_omega_plan.json
+seed_control_action_history.jsonl
+seed_voice_one_shot_history.jsonl
+seed_v35_gate_report.json
+
+# Seed v3.6 real integration runtime state
+seed_mcp_skill_manifest.json
+seed_mcp_skill_server_state.json
+seed_aider_unlock_state.json
+seed_aider_unlock_history.jsonl
+seed_integration_sandbox_state.json
+seed_v36_gate_report.json
+
+# Seed v4 runtime OS state
+seed_event_bus.jsonl
+seed_service_manager_state.json
+seed_workflow_automation_state.json
+seed_rollback_state.json
+seed_memory_distill.json
+seed_aider_patch_flow_state.json
+seed_v40_gate_report.json
+seed_checkpoints/
+
+# Seed v5 Operator Core runtime state
+seed_goal_engine_state.json
+seed_task_os.json
+seed_capability_graph.json
+seed_execution_policy.json
+seed_operator_runtime_state.json
+seed_operator_inbox.jsonl
+seed_v50_gate_report.json
