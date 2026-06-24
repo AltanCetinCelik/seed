@@ -1,4 +1,4 @@
-SEED_VERSION = "v2.1.2"
+SEED_VERSION = "v2.3.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -567,8 +567,8 @@ SEED_AGENT_ORCHESTRATOR_TRACE_FILE = "seed_agent_orchestrator_trace.jsonl"
 SEED_V21_GATE_REPORT_FILE = "seed_v21_gate_report.json"
 
 ACTIVE_VOICE_WAKE_WORDS = ["seed", "hey seed", "yo seed"]
-ACTIVE_VOICE_LISTEN_SECONDS = 6
-ACTIVE_VOICE_COMMAND_SECONDS = 6
+ACTIVE_VOICE_LISTEN_SECONDS = 8
+ACTIVE_VOICE_COMMAND_SECONDS = 8
 ACTIVE_VOICE_NO_SECRET_ALWAYS_LISTENING = True
 ACTIVE_VOICE_REQUIRE_EXPLICIT_LAUNCH = True
 
@@ -601,8 +601,8 @@ except NameError:
 # Seed v2.1.1 Voice Speed Hotfix
 SEED_FAST_VOICE_CONTEXT_ENABLED = True
 SEED_VOICE_FAST_MODE = True
-SEED_VOICE_WHISPER_MODEL = "tiny"
-SEED_VOICE_TRANSCRIBE_BEAM_SIZE = 1
+SEED_VOICE_WHISPER_MODEL = "small"
+SEED_VOICE_TRANSCRIBE_BEAM_SIZE = 5
 SEED_VOICE_SKIP_HEAVY_CONTEXT_IN_VOICE = True
 
 V211_REQUIRED_MODULES = [
@@ -635,4 +635,154 @@ ACTIVE_VOICE_FUZZY_WAKE_WORDS = [
     "seed", "sead", "seat", "sit", "sid", "said", "see", "cede", "ceed",
     "hey seed", "yo seed"
 ]
+
+
+
+
+# Seed v2.1.3 Voice Reliability Hotfix
+SEED_ACTIVE_VOICE_TMP_DIR = "/tmp/seed_active_voice"
+SEED_VOICE_VAD_FILTER = True
+SEED_VOICE_CONDITION_ON_PREVIOUS_TEXT = False
+ACTIVE_VOICE_CLARIFY_INCOMPLETE_TRANSCRIPTS = True
+ACTIVE_VOICE_NO_FACT_INVENTION = True
+ACTIVE_VOICE_INCOMPLETE_PHRASES = [
+    "all right so tell me",
+    "all right tell me",
+    "so tell me",
+    "tell me",
+    "okay tell me",
+    "alright tell me",
+    "what about",
+    "can you",
+    "could you",
+    "so",
+    "and",
+    "but"
+]
+
+
+
+
+# Seed v2.1.4 Voice Accuracy + Voice Brain Quality Hotfix
+SEED_VOICE_AUDIO_CLEANUP_ENABLED = True
+SEED_VOICE_LANGUAGE_HINT = None
+SEED_VOICE_INITIAL_PROMPT = "Altan is talking to Seed, a local AI companion. Common words: Seed, Altan, Ollama, repo, GitHub, agent, browser, memory, voice, MacBook, Raspberry Pi, Turkish, English."
+SEED_VOICE_LOW_CONFIDENCE_RERUN = True
+SEED_VOICE_LOW_CONFIDENCE_MODEL = "small"
+SEED_VOICE_MAX_SPOKEN_ANSWER_SENTENCES = 4
+SEED_VOICE_QUALITY_MODE = True
+
+
+
+
+# Seed v2.1.5 Cockpit Browser Action Hotfix
+SEED_COCKPIT_URL = "http://127.0.0.1:8770"
+SEED_COCKPIT_HOST = "127.0.0.1"
+SEED_COCKPIT_PORT = 8770
+SEED_COCKPIT_OPEN_BROWSER_TIMEOUT = 8
+
+V215_REQUIRED_MODULES = [
+    "seed_cockpit_server_runner.py",
+    "seed_cockpit_browser_action.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V215_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V215_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V215_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V215_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.2.0 Action Kernel + Memory Index + Tool Gateway Mega Update
+SEED_ACTION_KERNEL_HISTORY_FILE = "seed_action_kernel_history.jsonl"
+SEED_ACTION_KERNEL_STATE_FILE = "seed_action_kernel_state.json"
+SEED_CAPABILITY_MEMORY_FILE = "seed_capability_memory.json"
+SEED_CAPABILITY_MEMORY_INDEX_FILE = "seed_capability_memory_index.json"
+SEED_MCP_GATEWAY_STATE_FILE = "seed_mcp_gateway_state.json"
+SEED_CODING_GATEWAY_STATE_FILE = "seed_coding_gateway_state.json"
+SEED_BROWSER_GATEWAY_STATE_FILE = "seed_browser_gateway_state.json"
+SEED_VOICE_QUALITY_STATE_FILE = "seed_voice_quality_state.json"
+SEED_V22_GATE_REPORT_FILE = "seed_v22_gate_report.json"
+
+SEED_ACTION_KERNEL_VERIFY_RESULTS = True
+SEED_ACTION_KERNEL_NO_FAKE_ACTIONS = True
+SEED_TOOL_GATEWAYS_PLAN_ONLY_BY_DEFAULT = True
+SEED_MEMORY_INDEX_MAX_FILES = 500
+SEED_MEMORY_INDEX_MAX_FILE_BYTES = 250000
+SEED_MEMORY_SEARCH_MAX_RESULTS = 8
+
+V22_REQUIRED_MODULES = [
+    "seed_action_kernel.py",
+    "seed_capability_memory.py",
+    "seed_mcp_gateway.py",
+    "seed_coding_agent_gateway.py",
+    "seed_browser_agent_gateway.py",
+    "seed_voice_quality_router.py",
+    "seed_v22_mega_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V22_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V22_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V22_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V22_REQUIRED_MODULES
+    ]
+
+
+
+
+# Seed v2.3.0 Real Intelligence Layer
+SEED_SEMANTIC_MEMORY_FILE = "seed_semantic_memory.json"
+SEED_SEMANTIC_INDEX_FILE = "seed_semantic_index.json"
+SEED_WORKFLOW_BRAIN_STATE_FILE = "seed_workflow_brain_state.json"
+SEED_V23_GATE_REPORT_FILE = "seed_v23_gate_report.json"
+
+SEED_EMBEDDING_PROVIDER = "ollama_then_local_fallback"
+SEED_OLLAMA_EMBED_MODEL = "nomic-embed-text"
+SEED_OLLAMA_EMBED_URL = "http://localhost:11434/api/embeddings"
+SEED_SEMANTIC_INDEX_MAX_FILES = 700
+SEED_SEMANTIC_INDEX_MAX_FILE_BYTES = 300000
+SEED_SEMANTIC_SEARCH_RESULTS = 8
+SEED_WORKFLOW_BRAIN_PLAN_ONLY_BY_DEFAULT = True
+
+V23_REQUIRED_MODULES = [
+    "seed_semantic_memory.py",
+    "seed_workflow_brain.py",
+    "seed_intelligence_context.py",
+    "seed_v23_intelligence_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V23_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V23_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V23_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V23_REQUIRED_MODULES
+    ]
 

@@ -420,3 +420,80 @@ Seed may route tasks to Aider, OpenHands, SWE-agent, browser-use, MCP, and other
 Seed must not run file-writing, shell, browser, or external agents without approval.
 Agent work requires sandbox/branch/backup/tests/rollback.
 Altan remains in control.
+
+## Seed v2.2.0 — Action Kernel + Memory Index + Tool Gateway Mega Update
+
+Seed v2.2.0 adds the next major capability layer.
+
+Added systems:
+
+- Real Action Kernel
+- Verified local action execution
+- Action history
+- Local memory/repo/document search index
+- MCP gateway planning
+- Coding-agent gateway planning
+- Browser-agent gateway planning
+- Voice quality router
+- Voice-to-action dispatch
+- v2.2 mega capability gate
+
+Purpose:
+
+Seed should stop pretending actions happened. When possible, Seed routes a command into the Action Kernel, executes a real local action, verifies the result, and only then says it happened.
+
+Seed can now index local Seed files, memory notes, repo files, and docs for lightweight local search. This is not a full vector DB yet, but it gives Seed a safer local retrieval layer before heavier Qdrant/Mem0 integration.
+
+Tool gateways are plan-only by default:
+
+- MCP gateway
+- Coding-agent gateway
+- Browser-agent gateway
+
+These gateways prepare future tool execution without letting Seed blindly run external agents. File-writing, shell, browser, account, and external actions still require approval, sandboxing, tests, and rollback.
+
+Rules:
+
+- Seed must not fake local actions.
+- Seed must verify actions where possible.
+- Seed may build plans for MCP, browser-use, Aider, OpenHands, SWE-agent, and other tools.
+- Seed must not execute risky tools without Altan's approval.
+- Seed must not invent memories, files, emails, meetings, or completed work.
+- Altan remains in control.
+
+## Seed v2.3.0 — Real Intelligence Layer
+
+Seed v2.3.0 adds the first real intelligence layer above the Action Kernel.
+
+Added systems:
+
+- Semantic memory
+- Local embedding index
+- Ollama embedding support with local hash fallback
+- Semantic repo/document search
+- Workflow brain
+- Intelligence context
+- Voice context integration
+- v2.3 intelligence gate
+
+Purpose:
+
+Seed should stop relying only on raw prompt context. It now has a retrieval layer and a workflow brain.
+
+Workflow:
+
+intent
+→ semantic memory recall
+→ capability route
+→ action candidate
+→ approval if needed
+→ verified response
+
+Rules:
+
+- Seed should retrieve before guessing.
+- Seed should use the Action Kernel for local actions.
+- Seed should not say an action happened unless verified.
+- Seed should not invent memories, meetings, files, emails, or completed work.
+- Risky tools still require approval, sandboxing, tests, and rollback.
+- Altan remains in control.

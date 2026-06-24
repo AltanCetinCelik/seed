@@ -363,3 +363,75 @@ try:
 except Exception:
     pass
 
+
+
+
+# v2.2 Action Kernel + Memory + Tool Gateway context wrapper
+try:
+    _original_v22_mega_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v22_mega_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_action_kernel import get_action_kernel_context
+            extras.append(get_action_kernel_context())
+        except Exception:
+            pass
+
+        try:
+            from seed_capability_memory import memory_context
+            extras.append(memory_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_mcp_gateway import get_mcp_context
+            extras.append(get_mcp_context())
+        except Exception:
+            pass
+
+        try:
+            from seed_coding_agent_gateway import get_coding_context
+            extras.append(get_coding_context(user_prompt))
+        except Exception:
+            pass
+
+        try:
+            from seed_browser_agent_gateway import get_browser_context
+            extras.append(get_browser_context(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+
+
+
+
+# v2.3 Real Intelligence Layer context wrapper
+try:
+    _original_v23_intelligence_context_function = get_full_companion_os_context_for_prompt
+
+    def get_full_companion_os_context_for_prompt(user_prompt=""):
+        base = _original_v23_intelligence_context_function(user_prompt)
+        extras = []
+
+        try:
+            from seed_intelligence_context import get_intelligence_context_for_prompt
+            extras.append(get_intelligence_context_for_prompt(user_prompt))
+        except Exception:
+            pass
+
+        if extras:
+            return str(base) + "\n\n" + "\n\n".join(extras)
+
+        return base
+except Exception:
+    pass
+

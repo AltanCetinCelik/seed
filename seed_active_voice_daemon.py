@@ -76,6 +76,107 @@ except Exception:
     ]
 
 
+
+try:
+    from seed_config import (
+        SEED_ACTIVE_VOICE_TMP_DIR,
+        ACTIVE_VOICE_CLARIFY_INCOMPLETE_TRANSCRIPTS,
+        ACTIVE_VOICE_NO_FACT_INVENTION,
+        ACTIVE_VOICE_INCOMPLETE_PHRASES
+    )
+except Exception:
+    SEED_ACTIVE_VOICE_TMP_DIR = "/tmp/seed_active_voice"
+    ACTIVE_VOICE_CLARIFY_INCOMPLETE_TRANSCRIPTS = True
+    ACTIVE_VOICE_NO_FACT_INVENTION = True
+    ACTIVE_VOICE_INCOMPLETE_PHRASES = [
+        "all right so tell me",
+        "all right tell me",
+        "so tell me",
+        "tell me",
+        "okay tell me",
+        "alright tell me",
+        "what about",
+        "can you",
+        "could you",
+        "so",
+        "and",
+        "but"
+    ]
+
+
+def runtime_audio_path(filename):
+    folder = Path(SEED_ACTIVE_VOICE_TMP_DIR)
+    folder.mkdir(parents=True, exist_ok=True)
+    return str(folder / filename)
+
+
+def transcript_looks_like_garbage(text):
+    cleaned = (text or "").strip()
+    lowered = cleaned.lower()
+
+    if not cleaned:
+        return True
+
+    # Whisper sometimes outputs subtitle junk or hallucinated filler.
+    bad_fragments = [
+        "thanks for watching",
+        "thank you for watching",
+        "subscribe",
+        "music",
+        "[music]",
+        "foreign",
+        "you you",
+        "uh uh"
+    ]
+
+    if any(fragment in lowered for fragment in bad_fragments):
+        return True
+
+    # Mostly punctuation/noise.
+    letters = [c for c in cleaned if c.isalpha()]
+    if len(letters) < 3:
+        return True
+
+    return False
+
+
+def transcript_needs_clarification(text):
+    if not ACTIVE_VOICE_CLARIFY_INCOMPLETE_TRANSCRIPTS:
+        return False
+
+    cleaned = (text or "").lower().strip(" ,.!?:;-")
+    words = cleaned.split()
+
+    if len(words) < 3:
+        return True
+
+    for phrase in ACTIVE_VOICE_INCOMPLETE_PHRASES:
+        phrase = phrase.lower().strip()
+        if cleaned == phrase:
+            return True
+        if cleaned.endswith(" " + phrase):
+            return True
+
+    incomplete_endings = ["tell me", "can you", "could you", "what about", "so", "and", "but", "because"]
+    if any(cleaned.endswith(ending) for ending in incomplete_endings):
+        return True
+
+    return False
+
+
+def ask_repeat_for_unclear(command_text):
+    heard = command_text.strip() or "nothing clear"
+    message = f"I heard: {heard}. Can you repeat the full command?"
+    speak_answer(message, reason="active_voice_clarify")
+    print("\nSeed:")
+    print(message)
+    return {
+        "ok": False,
+        "clarification_requested": True,
+        "heard": heard
+    }
+
+
 def now_timestamp():
     return datetime.now().isoformat(timespec="seconds")
 
@@ -419,7 +520,7 @@ def active_voice_once():
     print("\nSay: Seed + your command.")
     print(f"Listening for {ACTIVE_VOICE_COMMAND_SECONDS} seconds...")
 
-    recording = record_audio(ACTIVE_VOICE_COMMAND_SECONDS, SEED_ACTIVE_VOICE_COMMAND_FILE)
+    recording = record_audio(ACTIVE_VOICE_COMMAND_SECONDS, runtime_audio_path(SEED_ACTIVE_VOICE_COMMAND_FILE))
 
     if not recording.get("ok"):
         print(json.dumps(recording, indent=4))
@@ -429,7 +530,7 @@ def active_voice_once():
             "recording": recording
         }
 
-    transcript = transcribe_local(SEED_ACTIVE_VOICE_COMMAND_FILE)
+    transcript = transcribe_local(runtime_audio_path(SEED_ACTIVE_VOICE_COMMAND_FILE))
     print("\nTranscript:")
     print(transcript.get("text"))
 
@@ -458,7 +559,7 @@ def active_voice_loop():
     print("\n=== SEED v2.1 ACTIVE VOICE LISTENER ===")
     print("This is explicit local listening only while this window is open.")
     print("No secret always-listening.")
-    print("Direct command mode: ON")
+    print("Direct command mode: ON — reliability hotfix active")
     print("You do not have to say Seed every time.")
     print("Just speak normally after launching this window.")
     print("Examples: 'what are you now?' or 'Seed what are you now?'")
@@ -473,14 +574,14 @@ def active_voice_loop():
     try:
         while True:
             print("\nListening for wake word...")
-            recording = record_audio(ACTIVE_VOICE_LISTEN_SECONDS, SEED_ACTIVE_VOICE_INPUT_FILE)
+            recording = record_audio(ACTIVE_VOICE_LISTEN_SECONDS, runtime_audio_path(SEED_ACTIVE_VOICE_INPUT_FILE))
 
             if not recording.get("ok"):
                 print("Recording failed:")
                 print(json.dumps(recording, indent=4))
                 break
 
-            transcript = transcribe_local(SEED_ACTIVE_VOICE_INPUT_FILE)
+            transcript = transcribe_local(runtime_audio_path(SEED_ACTIVE_VOICE_INPUT_FILE))
             text = transcript.get("text", "").strip()
             if text:
                 print("Heard:", text)
@@ -500,8 +601,16 @@ def active_voice_loop():
                     break
 
                 min_words = int(ACTIVE_VOICE_MIN_TRANSCRIPT_WORDS)
+                if transcript_looks_like_garbage(command_text):
+                    ask_repeat_for_unclear(command_text)
+                    continue
+
                 if len(command_text.split()) < min_words:
-                    print("Ignored short/noisy transcript.")
+                    ask_repeat_for_unclear(command_text)
+                    continue
+
+                if transcript_needs_clarification(command_text):
+                    ask_repeat_for_unclear(command_text)
                     continue
 
                 result = answer_and_speak(command_text, source="active_voice_direct")

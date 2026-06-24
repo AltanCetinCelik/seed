@@ -273,6 +273,61 @@ def record_audio_push_to_talk(seconds=None, output_path=None):
     }
 
 
+def clean_audio_for_transcription(audio_path):
+    """
+    Create a cleaner 16k mono WAV for STT.
+    Uses ffmpeg filters when available.
+    """
+    try:
+        from seed_config import SEED_VOICE_AUDIO_CLEANUP_ENABLED
+        enabled = bool(SEED_VOICE_AUDIO_CLEANUP_ENABLED)
+    except Exception:
+        enabled = True
+
+    if not enabled:
+        return audio_path
+
+    try:
+        import shutil
+        import subprocess
+        from pathlib import Path
+
+        if shutil.which("ffmpeg") is None:
+            return audio_path
+
+        source = Path(audio_path)
+        if not source.exists():
+            return audio_path
+
+        cleaned = source.with_name(source.stem + "_clean.wav")
+
+        command = [
+            "ffmpeg",
+            "-y",
+            "-hide_banner",
+            "-loglevel",
+            "error",
+            "-i",
+            str(source),
+            "-af",
+            "highpass=f=80,lowpass=f=7800,dynaudnorm,loudnorm",
+            "-ar",
+            "16000",
+            "-ac",
+            "1",
+            str(cleaned)
+        ]
+
+        result = subprocess.run(command, capture_output=True, text=True)
+
+        if result.returncode == 0 and cleaned.exists():
+            return str(cleaned)
+
+        return audio_path
+    except Exception:
+        return audio_path
+
+
 def transcribe_audio(audio_path=None):
     audio_path = audio_path or SEED_VOICE_COMMAND_INPUT_AUDIO_FILE
 
@@ -283,6 +338,8 @@ def transcribe_audio(audio_path=None):
             "text": ""
         }
 
+    audio_path = clean_audio_for_transcription(audio_path)
+
     if faster_whisper_import_available():
         try:
             try:
@@ -291,8 +348,33 @@ def transcribe_audio(audio_path=None):
             except Exception:
                 beam_size = 1
 
+            try:
+                from seed_config import (
+                    SEED_VOICE_VAD_FILTER,
+                    SEED_VOICE_CONDITION_ON_PREVIOUS_TEXT,
+                    SEED_VOICE_LANGUAGE_HINT,
+                    SEED_VOICE_INITIAL_PROMPT
+                )
+                vad_filter = bool(SEED_VOICE_VAD_FILTER)
+                condition_on_previous_text = bool(SEED_VOICE_CONDITION_ON_PREVIOUS_TEXT)
+                language_hint = SEED_VOICE_LANGUAGE_HINT
+                initial_prompt = SEED_VOICE_INITIAL_PROMPT
+            except Exception:
+                vad_filter = True
+                condition_on_previous_text = False
+                language_hint = None
+                initial_prompt = "Altan is talking to Seed."
+
             model = get_cached_whisper_model()
-            segments, info = model.transcribe(audio_path, beam_size=beam_size)
+            segments, info = model.transcribe(
+                audio_path,
+                beam_size=beam_size,
+                vad_filter=vad_filter,
+                condition_on_previous_text=condition_on_previous_text,
+                temperature=0,
+                language=language_hint,
+                initial_prompt=initial_prompt
+            )
             text = " ".join(segment.text.strip() for segment in segments).strip()
 
             Path(SEED_VOICE_COMMAND_TRANSCRIPT_FILE).write_text(text)
@@ -405,6 +487,24 @@ def ask_seed_text(user_text):
 
     if not user_text:
         return "I did not receive a command."
+
+    try:
+        from seed_action_kernel import maybe_handle_action_text
+        action_answer = maybe_handle_action_text(user_text)
+        if action_answer:
+            return action_answer
+    except Exception as error:
+        if any(word in user_text.lower() for word in ["open", "cockpit", "browser", "memory", "agent", "mcp"]):
+            return f"I tried to route that through the action kernel, but it failed: {error}"
+
+    try:
+        from seed_cockpit_browser_action import maybe_handle_cockpit_voice_action
+        cockpit_action_answer = maybe_handle_cockpit_voice_action(user_text)
+        if cockpit_action_answer:
+            return cockpit_action_answer
+    except Exception as error:
+        if "cockpit" in user_text.lower() or "dashboard" in user_text.lower():
+            return f"I tried to open Cockpit, but the local action failed: {error}"
 
     if user_text.startswith("/") and COMMANDS_AVAILABLE:
         try:

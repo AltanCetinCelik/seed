@@ -66,3 +66,20 @@ seed_agent_tool_profiles.json
 seed_agent_runs/
 seed_agent_orchestrator_trace.jsonl
 seed_v21_gate_report.json
+
+# Seed v2.2 mega capability runtime state
+seed_action_kernel_history.jsonl
+seed_action_kernel_state.json
+seed_capability_memory.json
+seed_capability_memory_index.json
+seed_mcp_gateway_state.json
+seed_coding_gateway_state.json
+seed_browser_gateway_state.json
+seed_voice_quality_state.json
+seed_v22_gate_report.json
+
+# Seed v2.3 real intelligence runtime state
+seed_semantic_memory.json
+seed_semantic_index.json
+seed_workflow_brain_state.json
+seed_v23_gate_report.json

@@ -1,4 +1,25 @@
 def print_arsenal_help():
+    print("/semantic-index = build semantic memory/repo index")
+    print("/semantic-search = semantic search memory/repo/docs")
+    print("/semantic-add = add semantic memory note")
+    print("/workflow-plan = show workflow brain plan")
+    print("/workflow-context = show workflow brain context")
+    print("/v23-check = run v2.3 real intelligence gate")
+    print("/action-kernel = show registered verified actions")
+    print("/action-test = run action kernel safe diagnostic")
+    print("/action-history = show verified action history")
+    print("/memory-index = build local memory/repo search index")
+    print("/memory-search = search local memory/repo/docs")
+    print("/memory-add = add local capability memory note")
+    print("/mcp-gateway = show MCP gateway")
+    print("/mcp-plan = build MCP plan")
+    print("/coding-gateway = show coding-agent gateway")
+    print("/coding-plan = build coding-agent plan")
+    print("/browser-gateway = show browser-agent gateway")
+    print("/browser-plan = build browser-agent plan")
+    print("/voice-quality = classify voice transcript quality")
+    print("/v22-check = run v2.2 mega capability gate")
+    print("/open-cockpit = start/open Cockpit in browser")
     print("/active-voice-check = check real active voice readiness")
     print("/active-voice = start real active voice wake loop")
     print("/active-voice-once = record one voice command")
@@ -198,6 +219,117 @@ def handle_arsenal_command(command, chat_state=None):
     if command == "/v21-check":
         from seed_v21_capability_gate import show_v21_gate
         show_v21_gate()
+        return "handled"
+
+
+
+    if command == "/open-cockpit":
+        from seed_cockpit_browser_action import show_open_cockpit_browser
+        show_open_cockpit_browser()
+        return "handled"
+
+
+
+    if command == "/action-kernel":
+        from seed_action_kernel import show_action_kernel
+        show_action_kernel()
+        return "handled"
+
+    if command == "/action-test":
+        from seed_action_kernel import show_action_test
+        show_action_test()
+        return "handled"
+
+    if command == "/action-history":
+        from seed_action_kernel import show_action_history
+        show_action_history()
+        return "handled"
+
+    if command == "/memory-index":
+        from seed_capability_memory import show_memory_index
+        show_memory_index()
+        return "handled"
+
+    if command == "/memory-search":
+        from seed_capability_memory import show_memory_search
+        show_memory_search()
+        return "handled"
+
+    if command == "/memory-add":
+        from seed_capability_memory import show_memory_add
+        show_memory_add()
+        return "handled"
+
+    if command == "/mcp-gateway":
+        from seed_mcp_gateway import show_mcp_gateway
+        show_mcp_gateway()
+        return "handled"
+
+    if command == "/mcp-plan":
+        from seed_mcp_gateway import show_mcp_plan
+        show_mcp_plan()
+        return "handled"
+
+    if command == "/coding-gateway":
+        from seed_coding_agent_gateway import show_coding_gateway
+        show_coding_gateway()
+        return "handled"
+
+    if command == "/coding-plan":
+        from seed_coding_agent_gateway import show_coding_plan
+        show_coding_plan()
+        return "handled"
+
+    if command == "/browser-gateway":
+        from seed_browser_agent_gateway import show_browser_gateway
+        show_browser_gateway()
+        return "handled"
+
+    if command == "/browser-plan":
+        from seed_browser_agent_gateway import show_browser_plan
+        show_browser_plan()
+        return "handled"
+
+    if command == "/voice-quality":
+        from seed_voice_quality_router import show_voice_quality
+        show_voice_quality()
+        return "handled"
+
+    if command == "/v22-check":
+        from seed_v22_mega_gate import show_v22_gate
+        show_v22_gate()
+        return "handled"
+
+
+
+    if command == "/semantic-index":
+        from seed_semantic_memory import show_semantic_index
+        show_semantic_index()
+        return "handled"
+
+    if command == "/semantic-search":
+        from seed_semantic_memory import show_semantic_search
+        show_semantic_search()
+        return "handled"
+
+    if command == "/semantic-add":
+        from seed_semantic_memory import show_semantic_add
+        show_semantic_add()
+        return "handled"
+
+    if command == "/workflow-plan":
+        from seed_workflow_brain import show_workflow_plan
+        show_workflow_plan()
+        return "handled"
+
+    if command == "/workflow-context":
+        from seed_workflow_brain import show_workflow_context
+        show_workflow_context()
+        return "handled"
+
+    if command == "/v23-check":
+        from seed_v23_intelligence_gate import show_v23_gate
+        show_v23_gate()
         return "handled"
 
 

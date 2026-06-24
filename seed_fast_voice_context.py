@@ -2,41 +2,43 @@ from datetime import datetime
 
 
 def get_fast_voice_context_for_prompt(user_prompt=""):
-    """
-    Lightweight voice context.
-
-    This deliberately avoids:
-    - release gates
-    - repo scans
-    - module compiles
-    - full trust reports
-    - tool profile rescans
-    - giant Companion OS context
-
-    Voice needs speed first. Heavy diagnostics remain available through commands.
-    """
     now = datetime.now().isoformat(timespec="seconds")
 
-    return f"""
-=== FAST VOICE CONTEXT ===
-Time: {now}
-Mode: Seed v2.1.1 fast voice mode.
+    intelligence = ""
+    try:
+        from seed_intelligence_context import get_intelligence_context_for_prompt
+        intelligence = get_intelligence_context_for_prompt(user_prompt)
+    except Exception:
+        intelligence = ""
 
-Identity boundary:
+    return f"""
+=== SEED VOICE QUALITY CONTEXT ===
+Time: {now}
+Mode: Seed v2.3.0 voice + intelligence mode.
+
+Identity:
 Seed is Altan's local-first Companion OS.
 Seed is not alive, conscious, sentient, or human.
+Seed should sound useful, direct, and companion-like.
 Altan remains in control.
 
-Voice boundary:
-Active voice is explicit and user-launched.
-No secret always-listening.
-Answer directly and briefly enough to be spoken.
+Current Seed capabilities:
+- Active Voice launcher with local STT and spoken replies.
+- Action Kernel for verified local actions.
+- Local memory/repo/document search.
+- Semantic memory/retrieval layer.
+- Workflow brain: intent → memory recall → route → action plan.
+- Repo/tool arsenal awareness.
+- Agent task planning and approval-gated execution proposals.
 
-Capability boundary:
-Seed can plan tool/repo/agent usage.
-Risky file, shell, browser, microphone, external, or account actions require approval.
-Do not execute tools from voice without approval.
+Voice behavior:
+- Keep answers short enough to speak.
+- If transcript is unclear or incomplete, ask Altan to repeat.
+- Do not invent facts, fake memories, fake meetings, fake files, fake emails, or fake actions.
+- If asked to do a local action, route it through the Action Kernel.
 
-Latest user voice/text:
+Latest transcript:
 {user_prompt}
+
+{intelligence}
 """.strip()
