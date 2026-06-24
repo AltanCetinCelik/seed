@@ -73,6 +73,18 @@ def api_payload(path):
     if path == "/api/operator-inbox":
         return safe_json(lambda: {"ok": True, "items": __import__("seed_operator_inbox", fromlist=["read_inbox"]).read_inbox(limit=30)})
 
+
+    if path == "/api/v20":
+        return safe_json(lambda: __import__("seed_v20_sovereign_os", fromlist=["build_v20_state"]).build_v20_state())
+
+    if path == "/api/presence":
+        return safe_json(lambda: {
+            "status": __import__("seed_presence", fromlist=["load_state"]).load_state(),
+            "policy": __import__("seed_interrupt_policy", fromlist=["load_policy"]).load_policy(),
+            "pending": __import__("seed_notification_queue", fromlist=["read_notifications"]).read_notifications(limit=20, status="pending")
+        })
+
+
     if path == "/api/home-bundle":
         return safe_json(build_home_bundle)
 
@@ -97,7 +109,9 @@ def build_home_bundle():
         "tasks": api_payload("/api/tasks"),
         "capability_graph": api_payload("/api/capability-graph"),
         "execution_policy": api_payload("/api/execution-policy"),
-        "operator_inbox": api_payload("/api/operator-inbox")
+        "operator_inbox": api_payload("/api/operator-inbox"),
+        "v20": api_payload("/api/v20"),
+        "presence": api_payload("/api/presence")
     }
 
 
@@ -179,11 +193,26 @@ def compact_home_bundle_for_ui(bundle):
         "items": (inbox.get("items", []) or [])[-12:]
     }
 
+
+    v20 = compact.get("v20", {}) or {}
+    v20_data = v20.get("data", v20) if isinstance(v20, dict) else {}
+    modules = v20_data.get("modules", {}) if isinstance(v20_data, dict) else {}
+    compact["v20"] = {
+        "ok": v20_data.get("ok"),
+        "data": {
+            "ok": v20_data.get("ok"),
+            "release": v20_data.get("release"),
+            "major_capabilities": v20_data.get("major_capabilities", []),
+            "modules": {name: {"ok": result.get("ok") if isinstance(result, dict) else None} for name, result in modules.items()},
+            "policy": v20_data.get("policy", {})
+        }
+    }
+
     return compact
 
 
 def render_home():
-    from seed_control_plane_ui_v5 import render_control_plane_ui
+    from seed_control_plane_ui_v20 import render_control_plane_ui
     return render_control_plane_ui(compact_home_bundle_for_ui(build_home_bundle()))
 
 

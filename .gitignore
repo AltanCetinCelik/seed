@@ -166,3 +166,29 @@ seed_execution_policy.json
 seed_operator_runtime_state.json
 seed_operator_inbox.jsonl
 seed_v50_gate_report.json
+
+# Seed v5.1 performance state
+seed_v51_performance_gate.json
+
+# Seed v20 Sovereign Companion OS runtime state
+seed_v20_sovereign_state.json
+seed_v20_gate_report.json
+seed_memory_v2.json
+seed_voice_runtime_v6.json
+seed_workflow_graph_v9.json
+seed_browser_sandbox_v10.json
+seed_mcp_marketplace_v11.json
+seed_openhands_sandbox_v12.json
+seed_project_life_os_v14.json
+seed_world_avatar_v16.json
+seed_agent_council_v17.json
+seed_self_improvement_lab_v18.json
+seed_multidevice_hub_v19.json
+
+# Seed v20.3 Presence Runtime
+seed_notification_queue.jsonl
+seed_presence_policy.json
+seed_presence_state.json
+seed_presence_daemon.pid
+seed_presence_daemon.log
+seed_v203_presence_gate.json

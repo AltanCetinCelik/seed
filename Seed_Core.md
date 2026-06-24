@@ -776,3 +776,37 @@ Rules:
 - Aider dry-run first.
 - Risky actions remain approval-gated.
 - Altan remains in control.
+
+## Seed v20.0.0 — Sovereign Companion OS MegaCore
+
+Seed v20 merges the v6-v20 roadmap into one local-first operating layer.
+
+Included subsystems:
+
+- v6 Live Dashboard + Voice Runtime
+- v7 Aider Patch Review
+- v8 Memory Engine 2.0
+- v9 Workflow Graph Brain
+- v10 Browser Sandbox
+- v11 MCP Marketplace
+- v12 OpenHands Sandbox
+- v13 Project Manager OS
+- v14 Personal Life OS
+- v15 Seed World / Memory Garden
+- v16 Avatar Presence
+- v17 Multi-Agent Council
+- v18 Self-Improvement Lab
+- v19 Multi-Device Hub
+- v20 Unified Companion OS Release
+
+Rules:
+
+- Seed is not alive, conscious, sentient, or human.
+- Seed is Altan's local-first Companion OS.
+- Adapter-first.
+- Sandbox high-risk tools.
+- No arbitrary shell.
+- No delete.
+- No auto-commit.
+- Manual tick only.
+- Risky actions require approval.

@@ -1339,3 +1339,20 @@ def show_config():
     print(f"Session history limit: {SESSION_HISTORY_LIMIT}")
     print(f"Autosuggest default: {AUTOSUGGEST_DEFAULT}")
     print(f"Mode: {SEED_MODE}")
+# v20.3 Presence Runtime command wrapper.
+try:
+    _seed_v203_original_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_presence_commands import handle_presence_command
+            handled = handle_presence_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"Presence command error: {error}")
+            return "handled"
+
+        return _seed_v203_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass

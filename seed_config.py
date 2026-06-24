@@ -1,4 +1,4 @@
-SEED_VERSION = "v5.0.0"
+SEED_VERSION = "v20.3.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -1255,3 +1255,82 @@ except NameError:
         f"python -m py_compile {module}" for module in V50_REQUIRED_MODULES
     ]
 
+
+
+# Seed v5.1.0 Performance Kernel
+SEED_PERFORMANCE_KERNEL_ENABLED = True
+SEED_FAST_CONTEXT_DEFAULT = True
+SEED_HEAVY_CONTEXT_OPT_IN = True
+SEED_V51_GATE_REPORT_FILE = "seed_v51_performance_gate.json"
+
+
+# Seed v5.2 Fast Chat Runtime
+SEED_FAST_CHAT_RUNTIME = True
+SEED_FASTPATH_REPLIES = True
+SEED_OLLAMA_TIMEOUT_CAP_SECONDS = 20
+
+
+
+# Seed v20.0.0 Sovereign Companion OS MegaCore
+SEED_V20_STATE_FILE = "seed_v20_sovereign_state.json"
+SEED_V20_GATE_REPORT_FILE = "seed_v20_gate_report.json"
+SEED_MEMORY_V2_FILE = "seed_memory_v2.json"
+SEED_VOICE_RUNTIME_FILE = "seed_voice_runtime_v6.json"
+SEED_WORKFLOW_GRAPH_FILE = "seed_workflow_graph_v9.json"
+SEED_BROWSER_SANDBOX_FILE = "seed_browser_sandbox_v10.json"
+SEED_MCP_MARKETPLACE_FILE = "seed_mcp_marketplace_v11.json"
+SEED_OPENHANDS_SANDBOX_FILE = "seed_openhands_sandbox_v12.json"
+SEED_PROJECT_LIFE_OS_FILE = "seed_project_life_os_v14.json"
+SEED_WORLD_AVATAR_FILE = "seed_world_avatar_v16.json"
+SEED_AGENT_COUNCIL_V17_FILE = "seed_agent_council_v17.json"
+SEED_SELF_IMPROVEMENT_LAB_FILE = "seed_self_improvement_lab_v18.json"
+SEED_MULTIDEVICE_HUB_FILE = "seed_multidevice_hub_v19.json"
+
+SEED_V20_NO_BLIND_INSTALLS = True
+SEED_V20_ADAPTER_FIRST = True
+SEED_V20_SANDBOX_HIGH_RISK_TOOLS = True
+SEED_V20_NO_ARBITRARY_SHELL = True
+SEED_V20_NO_DELETE = True
+SEED_V20_NO_AUTO_COMMIT = True
+SEED_V20_MANUAL_TICK_ONLY = True
+SEED_V20_LOCAL_FIRST = True
+
+V20_REQUIRED_MODULES = [
+    "seed_memory_engine_v2.py",
+    "seed_voice_runtime_v6.py",
+    "seed_workflow_graph_v9.py",
+    "seed_browser_sandbox_v10.py",
+    "seed_mcp_marketplace_v11.py",
+    "seed_openhands_sandbox_v12.py",
+    "seed_project_life_os_v14.py",
+    "seed_world_avatar_v16.py",
+    "seed_agent_council_v17.py",
+    "seed_self_improvement_lab_v18.py",
+    "seed_multidevice_hub_v19.py",
+    "seed_v20_sovereign_os.py",
+    "seed_control_plane_ui_v20.py",
+    "seed_v20_sovereign_gate.py"
+]
+
+try:
+    V2_REQUIRED_MODULES = list(dict.fromkeys(V2_REQUIRED_MODULES + V20_REQUIRED_MODULES))
+except NameError:
+    V2_REQUIRED_MODULES = list(V20_REQUIRED_MODULES)
+
+try:
+    SELF_IMPROVEMENT_TEST_COMMANDS = list(dict.fromkeys(
+        SELF_IMPROVEMENT_TEST_COMMANDS
+        + [f"python -m py_compile {module}" for module in V20_REQUIRED_MODULES]
+    ))
+except NameError:
+    SELF_IMPROVEMENT_TEST_COMMANDS = [
+        f"python -m py_compile {module}" for module in V20_REQUIRED_MODULES
+    ]
+
+
+
+# Seed v20.3 Presence Runtime + Curiosity Loop
+SEED_PRESENCE_RUNTIME_ENABLED = True
+SEED_PRESENCE_QUEUE_ONLY = True
+SEED_PRESENCE_NO_RANDOM_CHATTER = True
+SEED_PRESENCE_DEFAULT_INTERVAL_SECONDS = 300

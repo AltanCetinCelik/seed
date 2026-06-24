@@ -678,3 +678,29 @@ try:
 except Exception:
     pass
 
+
+# v5.1 Performance Kernel: fast context override.
+# Heavy historical context wrappers are intentionally bypassed during normal chat.
+try:
+    _seed_v510_slow_companion_context = get_full_companion_os_context_for_prompt
+except Exception:
+    _seed_v510_slow_companion_context = None
+
+
+def get_full_companion_os_context_for_prompt(user_prompt=""):
+    try:
+        from seed_context_accelerator import get_fast_companion_context
+        return get_fast_companion_context(user_prompt)
+    except Exception as error:
+        return (
+            "=== SEED FAST CONTEXT FALLBACK ===\n"
+            "Seed is Altan's local-first Companion OS.\n"
+            "Safety: no arbitrary shell, no delete, no auto-commit, approval for risky actions.\n"
+            f"Fast context error: {error}\n"
+        )
+
+
+def get_full_companion_os_slow_context_for_prompt(user_prompt=""):
+    if _seed_v510_slow_companion_context:
+        return _seed_v510_slow_companion_context(user_prompt)
+    return get_full_companion_os_context_for_prompt(user_prompt)

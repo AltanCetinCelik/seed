@@ -43,20 +43,7 @@ def talk_to_seed():
     log_system_event(log_path, "Talk to Seed session started.")
 
     while True:
-        try:
-            from seed_notification_queue import pop_next_notification_for_cli
-            pop_next_notification_for_cli()
-        except Exception:
-            pass
-
-        try:
-            user_message = input("\nYou: ")
-        except KeyboardInterrupt:
-            print("\n\nSeed chat interrupted. Returning to main menu.")
-            return
-        except EOFError:
-            print("\n\nInput stream closed. Returning to main menu.")
-            return
+        user_message = input("\nYou: ")
 
         if user_message == "":
             print("Message cannot be empty.")

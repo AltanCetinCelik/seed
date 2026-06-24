@@ -16,6 +16,19 @@ COMMAND_CATALOG = {
         "/command-center"
     ],
     "mission": [
+        "/v20-status",
+        "/memory-v2",
+        "/voice-runtime",
+        "/workflow-graph",
+        "/browser-sandbox",
+        "/mcp-marketplace",
+        "/openhands-sandbox",
+        "/project-life",
+        "/seed-world",
+        "/agent-council",
+        "/self-improvement-lab",
+        "/multidevice-hub",
+        "/aider-review",
         "/operator-goal",
         "/operator-status",
         "/operator-tick",
@@ -46,6 +59,7 @@ COMMAND_CATALOG = {
         "/app-manifest"
     ],
     "release": [
+        "/v20-check",
         "/v50-check",
         "/v40-check",
         "/v36-check",

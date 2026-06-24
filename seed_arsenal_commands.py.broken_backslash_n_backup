@@ -984,6 +984,7 @@ def handle_arsenal_command(command, chat_state=None):
         show_latency_probe()
         return "handled"
 
+\n
     if command == "/v20-check":
         from seed_v20_sovereign_gate import show_v20_gate
         show_v20_gate()

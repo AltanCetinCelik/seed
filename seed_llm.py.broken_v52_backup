@@ -172,25 +172,25 @@ def ask_llm(prompt, task_type="chat", runtime_context=None):
     }
 
     try:
+    try:
         payload.setdefault("options", {})
         payload["options"].setdefault("num_predict", 180)
         payload["options"].setdefault("temperature", 0.4)
     except Exception:
         pass
 
-        response = requests.post(
-                OLLAMA_GENERATE_URL,
-                json=payload,
-                timeout=LLM_TIMEOUT_SECONDS
-            )
+    response = requests.post(
+            OLLAMA_GENERATE_URL,
+            json=payload,
+            timeout=LLM_TIMEOUT_SECONDS
+        )
 
         response.raise_for_status()
         data = response.json()
 
-        
+        return data.get("response", "")
 
     except requests.exceptions.ConnectionError:
-        
         return (
             "Seed could not connect to Ollama. "
             "Make sure Ollama is running."

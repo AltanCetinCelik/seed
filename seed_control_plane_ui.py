@@ -50,7 +50,24 @@ def render_control_plane_ui(bundle):
     voice_commands = command_groups.get("voice", [])
     skill_commands = command_groups.get("skills", [])
 
-    data_json = json.dumps(bundle, indent=2)
+    raw_summary = {
+        "note": "Compact summary only. Full data is available through /api/home-bundle.",
+        "mission_health": (mission.get("health", {}) if isinstance(mission, dict) else {}),
+        "operator": bundle.get("operator", {}),
+        "tasks": {
+            "count": (bundle.get("tasks", {}) or {}).get("count"),
+            "items_shown": len((bundle.get("tasks", {}) or {}).get("tasks", []) or [])
+        },
+        "capability_graph": {
+            "node_count": (bundle.get("capability_graph", {}) or {}).get("node_count"),
+            "edge_count": (bundle.get("capability_graph", {}) or {}).get("edge_count")
+        },
+        "integration": {
+            "candidate_count": (bundle.get("integration_fusion", {}) or {}).get("candidate_count"),
+            "top_10": (bundle.get("integration_fusion", {}) or {}).get("top_10", [])[:5]
+        }
+    }
+    data_json = json.dumps(raw_summary, indent=2)
     now = datetime.now().strftime("%H:%M:%S")
 
     html_doc = r'''<!doctype html>
