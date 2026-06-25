@@ -1,0 +1,72 @@
+import json
+import subprocess
+from datetime import datetime
+
+
+def now_timestamp():
+    return datetime.now().isoformat(timespec="seconds")
+
+
+COMMAND_GROUPS = {
+    "Core": ["/v50-check", "/full-update", "/dust-check", "/command-map", "/latency", "/quick-gates", "/final-gates", "/v45-check", "/v30-check", "/v20-check"],
+    "Agent HQ": ["/agent-hq", "/repo-scoreboard", "/repo-to-seed-plan", "/adapter-registry"],
+    "Work": ["/workflow-status", "/workflow-new", "/workflow-tick", "/aider-cockpit", "/aider-cockpit-new"],
+    "Memory": ["/memory-brain", "/memory-index-runtime", "/memory-search"],
+    "Presence": ["/presence-status", "/curiosity", "/presence-inbox", "/presence-pop"],
+    "Voice/Browser": ["/voice-max", "/voice-say", "/browser-readonly"],
+    "Maintenance": ["/task-stats", "/task-clean-test", "/task-dedupe", "/eval-lab"]
+}
+
+
+def status_snapshot():
+    data = {"created_at": now_timestamp(), "version": "v45.0.0"}
+
+    try:
+        from seed_latency_probe import run_latency_probe
+        data["latency"] = run_latency_probe()
+    except Exception as error:
+        data["latency_error"] = str(error)
+
+    try:
+        from seed_task_hygiene_v302 import task_stats
+        data["tasks"] = task_stats()
+    except Exception as error:
+        data["task_error"] = str(error)
+
+    try:
+        from seed_agent_hq_v30 import build_agent_hq_fast
+        hq = build_agent_hq_fast()
+        data["agent_hq"] = {"agents": hq.get("agent_count"), "cache": hq.get("cache_mode")}
+    except Exception as error:
+        data["agent_hq_error"] = str(error)
+
+    return data
+
+
+def show_terminal_pro():
+    print("\n" + "=" * 60)
+    print("SEED TERMINAL PRO")
+    print("=" * 60)
+    snap = status_snapshot()
+
+    latency = snap.get("latency", {}).get("results", {})
+    tasks = snap.get("tasks", {})
+    hq = snap.get("agent_hq", {})
+
+    print(f"Version: v45.0.0")
+    print(f"Prompt build: {latency.get('prompt_build_ms')}ms")
+    print(f"Fast context: {latency.get('fast_context_ms')}ms")
+    print(f"Tasks: total={tasks.get('total')} real_ready={tasks.get('ready_real')} test_ready={tasks.get('ready_test_or_gate')}")
+    print(f"Agent HQ: agents={hq.get('agents')} cache={hq.get('cache')}")
+    print("\nNatural Companion Phrases:")\n    print("  check yourself")\n    print("  open dashboard")\n    print("  show models")\n    print("  benchmark models")\n    print("  compare Hermes Moltbot OpenClaw")\n    print("  extract memories")\n    print("  what should we improve next")\n    print("  show command palette")\n    print("\nHidden Debug Commands:")
+
+    for group, commands in COMMAND_GROUPS.items():
+        print(f"\n[{group}]")
+        print("  " + "  ".join(commands))
+
+    print("\nTip: Slash commands go inside Seed Talk mode. Shell commands go in macOS Terminal.")
+    print("=" * 60)
+
+
+if __name__ == "__main__":
+    show_terminal_pro()

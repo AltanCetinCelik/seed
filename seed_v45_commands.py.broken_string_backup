@@ -1,0 +1,97 @@
+def handle_v45_command(command):
+    cmd = (command or "").strip().split()[0].lower()
+
+
+    if cmd in {"/control-plane", "/control-plane-open", "/open-control-plane"}:
+        print("\n=== SEED CONTROL PLANE ===")
+        print("URL: http://127.0.0.1:8790")
+        print("If it is not running, use /service-start and enter: control-plane")
+        try:
+            import webbrowser
+            webbrowser.open("http://127.0.0.1:8790")
+            print("Opened Control Plane in browser.")
+        except Exception as error:
+            print(f"Could not auto-open browser: {error}")
+        return "handled"
+
+
+    if cmd == "/v45-help":
+        print("""
+=== SEED v45 COMMANDS ===
+/v45-check
+/v45-status
+/terminal-pro
+/task-stats
+/task-clean-test
+/task-dedupe
+/task-reset-demo
+/aider-cockpit
+/aider-cockpit-new
+/aider-cockpit-tests
+/memory-brain
+/memory-index-runtime
+/memory-search
+/workflow-status
+/workflow-new
+/workflow-tick
+/mcp-max
+/browser-readonly
+/voice-max
+/voice-say
+/voice-journal
+/heavy-agent-status
+/heavy-agent-new
+/ui-model
+/presence-max
+/eval-lab
+/desktop-packaging
+/multidevice-max
+/world-ui
+/self-improve
+/self-improve-new
+/control-plane = open Control Plane
+""")
+        return "handled"
+
+    mapping = {
+        "/v45-check": ("seed_v45_total_gate", "show_v45_gate"),
+        "/v45-status": ("seed_v45_total_systems", "show_v45_status"),
+        "/terminal-pro": ("seed_terminal_pro", "show_terminal_pro"),
+        "/task-stats": ("seed_task_hygiene_v302", "show_task_stats"),
+        "/task-clean-test": ("seed_task_hygiene_v302", "show_task_clean_test"),
+        "/task-dedupe": ("seed_task_hygiene_v302", "show_task_dedupe"),
+        "/task-reset-demo": ("seed_task_hygiene_v302", "show_task_reset_demo"),
+        "/aider-cockpit": ("seed_aider_cockpit_v31", "show_aider_cockpit"),
+        "/aider-cockpit-new": ("seed_aider_cockpit_v31", "show_aider_cockpit_new"),
+        "/aider-cockpit-tests": ("seed_aider_cockpit_v31", "show_aider_cockpit_tests"),
+        "/memory-brain": ("seed_memory_brain_max_v32", "show_memory_brain"),
+        "/memory-index-runtime": ("seed_memory_brain_max_v32", "show_memory_index_runtime"),
+        "/memory-search": ("seed_memory_brain_max_v32", "show_memory_search"),
+        "/workflow-status": ("seed_workflow_runtime_v33", "show_workflow_runtime"),
+        "/workflow-new": ("seed_workflow_runtime_v33", "show_workflow_new"),
+        "/workflow-tick": ("seed_workflow_runtime_v33", "show_workflow_tick"),
+        "/mcp-max": ("seed_mcp_marketplace_max_v34", "show_mcp_marketplace_max"),
+        "/browser-readonly": ("seed_browser_executor_v35", "show_browser_readonly"),
+        "/voice-max": ("seed_voice_runtime_max_v36", "show_voice_max"),
+        "/voice-say": ("seed_voice_runtime_max_v36", "show_voice_say"),
+        "/voice-journal": ("seed_voice_runtime_max_v36", "show_voice_journal"),
+        "/heavy-agent-status": ("seed_heavy_agent_sandbox_v37", "show_heavy_agent_status"),
+        "/heavy-agent-new": ("seed_heavy_agent_sandbox_v37", "show_heavy_agent_new"),
+        "/ui-model": ("seed_agent_hq_ui_model_v38", "show_ui_model"),
+        "/presence-max": ("seed_presence_max_v39", "show_presence_max"),
+        "/eval-lab": ("seed_eval_lab_v40", "show_eval_lab"),
+        "/desktop-packaging": ("seed_desktop_packaging_v42", "show_packaging"),
+        "/multidevice-max": ("seed_multidevice_hub_max_v43", "show_multidevice_max"),
+        "/world-ui": ("seed_world_ui_v44", "show_world_ui"),
+        "/self-improve": ("seed_self_improvement_loop_v45", "show_self_improve_loop"),
+        "/self-improve-new
+/control-plane = open Control Plane": ("seed_self_improvement_loop_v45", "show_self_improve_new"),
+    }
+
+    if cmd in mapping:
+        module_name, function_name = mapping[cmd]
+        module = __import__(module_name, fromlist=[function_name])
+        getattr(module, function_name)()
+        return "handled"
+
+    return None

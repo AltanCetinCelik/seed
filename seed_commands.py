@@ -1356,3 +1356,107 @@ try:
         return _seed_v203_original_handle_chat_command(user_message, *args, **kwargs)
 except Exception:
     pass
+
+# v30 Agent HQ command wrapper.
+try:
+    _seed_v30_original_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_v30_commands import handle_v30_command
+            handled = handle_v30_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v30 command error: {error}")
+            return "handled"
+
+        return _seed_v30_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+
+# v45 Total Systems command wrapper.
+try:
+    _seed_v45_original_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_v45_commands import handle_v45_command
+            handled = handle_v45_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v45 command error: {error}")
+            return "handled"
+
+        return _seed_v45_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+
+# v50 Nothing Left Behind command wrapper.
+try:
+    _seed_v50_original_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_v50_commands import handle_v50_command
+            handled = handle_v50_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v50 command error: {error}")
+            return "handled"
+
+        return _seed_v50_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+
+# v60 Natural UX wrapper.
+try:
+    _seed_v60_original_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v60 import handle_natural_intent
+            handled = handle_natural_intent(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v60 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v60_commands import handle_v60_command
+            handled = handle_v60_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v60 command error: {error}")
+            return "handled"
+
+        return _seed_v60_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+# v70 Mega Fusion natural router and debug commands.
+try:
+    _seed_v70_original_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v70 import handle_natural_intent_v70
+            handled = handle_natural_intent_v70(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v70 natural router error: {error}"); return "handled"
+        try:
+            from seed_v70_commands import handle_v70_command
+            handled = handle_v70_command(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v70 command error: {error}"); return "handled"
+        return _seed_v70_original_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass

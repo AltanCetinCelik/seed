@@ -1,4 +1,4 @@
-SEED_VERSION = "v20.3.0"
+SEED_VERSION = "v70.0.0"
 
 SEED_V2_HARDENING_STATE_FILE = "seed_v2_hardening_state.json"
 SEED_AGENCY_HARDENING_STATE_FILE = "seed_agency_hardening_state.json"
@@ -1334,3 +1334,62 @@ SEED_PRESENCE_RUNTIME_ENABLED = True
 SEED_PRESENCE_QUEUE_ONLY = True
 SEED_PRESENCE_NO_RANDOM_CHATTER = True
 SEED_PRESENCE_DEFAULT_INTERVAL_SECONDS = 300
+
+
+
+# Seed v30.0.0 Repo Assimilation + Agent HQ MegaPatch
+SEED_V30_STATE_FILE = "seed_v30_agent_hq_state.json"
+SEED_V30_GATE_REPORT_FILE = "seed_v30_megapatch_gate.json"
+SEED_REPO_ASSIMILATION_FILE = "seed_repo_assimilation_report.json"
+SEED_REPO_SCOREBOARD_FILE = "seed_integration_scoreboard.json"
+SEED_EXTERNAL_ADAPTER_REGISTRY_FILE = "seed_external_adapter_registry.json"
+SEED_REPO_TO_SEED_PLAN_FILE = "seed_repo_to_seed_plan.json"
+SEED_AGENT_HQ_FILE = "seed_agent_hq_v30.json"
+
+SEED_V30_ADAPTER_FIRST = True
+SEED_V30_NO_BLIND_INSTALLS = True
+SEED_V30_SANDBOX_FIRST = True
+SEED_V30_PROMOTE_ONLY_AFTER_GATES = True
+SEED_V30_NO_DIRECT_EXTERNAL_AGENT_CORE_MUTATION = True
+
+V30_REQUIRED_MODULES = [
+    "seed_external_adapter_registry.py",
+    "seed_repo_pattern_extractor.py",
+    "seed_repo_risk_scanner.py",
+    "seed_repo_assimilation_engine.py",
+    "seed_integration_scoreboard.py",
+    "seed_repo_to_seed_planner.py",
+    "seed_agent_hq_v30.py",
+    "seed_control_plane_ui_v30.py",
+    "seed_v30_megapatch_gate.py",
+    "seed_v30_commands.py"
+]
+
+try:
+    V20_REQUIRED_MODULES = list(dict.fromkeys(V20_REQUIRED_MODULES + V30_REQUIRED_MODULES))
+except NameError:
+    V20_REQUIRED_MODULES = list(V30_REQUIRED_MODULES)
+
+
+
+# Seed v45.0.0 Total Systems Implementation MegaPatch
+SEED_V45_TOTAL_SYSTEMS = True
+SEED_TERMINAL_PRO = True
+SEED_CONTROL_PLANE_PROFESSIONAL = True
+SEED_V45_GATE_REPORT_FILE = "seed_v45_total_gate.json"
+
+
+# Seed v50.0.0 Nothing Left Behind Finalization Pack
+SEED_V50_NOTHING_LEFT_BEHIND = True
+SEED_V50_GATE_REPORT_FILE = "seed_v50_gate_report.json"
+SEED_V50_STATE_FILE = "seed_v50_nothing_left_behind_state.json"
+
+
+# Seed v60.0.0 Real Intelligence + Natural UX Fusion
+SEED_V60_REAL_INTELLIGENCE_UX = True
+SEED_V60_NATURAL_LANGUAGE_FIRST = True
+SEED_V60_GATE_REPORT_FILE = "seed_v60_gate_report.json"
+
+SEED_V70_MEGA_FUSION = True
+SEED_COMPANION_TERMINAL_DEFAULT = True
+SEED_V70_GATE_REPORT_FILE = "seed_v70_gate_report.json"

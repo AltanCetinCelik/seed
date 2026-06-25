@@ -12,6 +12,14 @@ def now_timestamp():
 
 
 def enqueue_notification(message, reason="presence", priority=0.5, source="seed_presence"):
+    # Avoid repeating the same pending message again and again.
+    for existing in read_notifications(limit=100, status="pending"):
+        if (
+            existing.get("message") == str(message).strip()
+            and existing.get("reason") == reason
+        ):
+            return existing
+
     item = {
         "id": uuid.uuid4().hex[:10],
         "created_at": now_timestamp(),

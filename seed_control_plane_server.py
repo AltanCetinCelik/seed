@@ -74,6 +74,22 @@ def api_payload(path):
         return safe_json(lambda: {"ok": True, "items": __import__("seed_operator_inbox", fromlist=["read_inbox"]).read_inbox(limit=30)})
 
 
+
+    if path == "/api/v70":
+        return safe_json(lambda: __import__("seed_v70_systems", fromlist=["build_v70_state"]).build_v70_state())
+
+    if path == "/api/v60":
+        return safe_json(lambda: __import__("seed_v60_systems", fromlist=["build_v60_state"]).build_v60_state())
+
+    if path == "/api/v50":
+        return safe_json(lambda: __import__("seed_nothing_left_behind_v50", fromlist=["build_v50_state"]).build_v50_state())
+
+    if path == "/api/v45":
+        return safe_json(lambda: __import__("seed_v45_total_systems", fromlist=["build_v45_state"]).build_v45_state())
+
+    if path == "/api/v30":
+        return safe_json(lambda: __import__("seed_agent_hq_v30", fromlist=["build_agent_hq_fast"]).build_agent_hq_fast())
+
     if path == "/api/v20":
         return safe_json(lambda: __import__("seed_v20_sovereign_os", fromlist=["build_v20_state"]).build_v20_state())
 
@@ -110,6 +126,11 @@ def build_home_bundle():
         "capability_graph": api_payload("/api/capability-graph"),
         "execution_policy": api_payload("/api/execution-policy"),
         "operator_inbox": api_payload("/api/operator-inbox"),
+        "v70": api_payload("/api/v70"),
+        "v60": api_payload("/api/v60"),
+        "v50": api_payload("/api/v50"),
+        "v45": api_payload("/api/v45"),
+        "v30": api_payload("/api/v30"),
         "v20": api_payload("/api/v20"),
         "presence": api_payload("/api/presence")
     }
@@ -212,7 +233,7 @@ def compact_home_bundle_for_ui(bundle):
 
 
 def render_home():
-    from seed_control_plane_ui_v20 import render_control_plane_ui
+    from seed_control_plane_ui_v70 import render_control_plane_ui
     return render_control_plane_ui(compact_home_bundle_for_ui(build_home_bundle()))
 
 

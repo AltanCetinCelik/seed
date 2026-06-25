@@ -1,0 +1,604 @@
+{
+    "created_at": "2026-06-25T12:21:00",
+    "version": "v30.0.0",
+    "ok": true,
+    "release": "Seed Agent HQ v30",
+    "agents": {
+        "aider_agent": {
+            "status": "ready_guarded",
+            "mission": "real patch executor",
+            "tooling": [
+                "Aider",
+                "git diff",
+                "gates"
+            ],
+            "risk": "medium",
+            "default_mode": "dry_run"
+        },
+        "browser_agent": {
+            "status": "sandbox_planned",
+            "mission": "read-only web research and page summaries",
+            "tooling": [
+                "browser-use"
+            ],
+            "risk": "high",
+            "default_mode": "read_only"
+        },
+        "memory_agent": {
+            "status": "planned",
+            "mission": "extract durable memories and semantic recall",
+            "tooling": [
+                "Mem0 patterns",
+                "Qdrant optional"
+            ],
+            "risk": "medium",
+            "default_mode": "review_queue"
+        },
+        "voice_agent": {
+            "status": "planned",
+            "mission": "push-to-talk and realtime voice later",
+            "tooling": [
+                "faster-whisper",
+                "LiveKit",
+                "Pipecat"
+            ],
+            "risk": "medium",
+            "default_mode": "push_to_talk"
+        },
+        "workflow_agent": {
+            "status": "seed_native",
+            "mission": "durable goal/task workflow",
+            "tooling": [
+                "LangGraph patterns",
+                "Seed Task OS"
+            ],
+            "risk": "medium",
+            "default_mode": "manual_tick"
+        },
+        "mcp_agent": {
+            "status": "ready_guarded",
+            "mission": "tool marketplace and permission layer",
+            "tooling": [
+                "MCP server/client"
+            ],
+            "risk": "medium",
+            "default_mode": "allowlist"
+        },
+        "openhands_agent": {
+            "status": "sandbox_only",
+            "mission": "heavy coding agent experiment",
+            "tooling": [
+                "OpenHands"
+            ],
+            "risk": "high",
+            "default_mode": "sandbox"
+        },
+        "swe_agent": {
+            "status": "sandbox_only",
+            "mission": "issue repair benchmark agent",
+            "tooling": [
+                "SWE-agent",
+                "mini-swe-agent"
+            ],
+            "risk": "high",
+            "default_mode": "sandbox"
+        },
+        "ui_agent": {
+            "status": "reference",
+            "mission": "dashboard/workspace UX",
+            "tooling": [
+                "Open WebUI",
+                "AnythingLLM",
+                "Khoj"
+            ],
+            "risk": "low",
+            "default_mode": "pattern_reference"
+        },
+        "computer_control_agent": {
+            "status": "blocked_until_sandbox",
+            "mission": "computer-control harness",
+            "tooling": [
+                "Open Interpreter",
+                "Cline patterns"
+            ],
+            "risk": "very_high",
+            "default_mode": "disabled"
+        },
+        "stateful_companion_agent": {
+            "status": "reference",
+            "mission": "stateful long-term companion architecture",
+            "tooling": [
+                "Letta patterns",
+                "Seed Memory v2"
+            ],
+            "risk": "medium",
+            "default_mode": "pattern_reference"
+        }
+    },
+    "agent_count": 11,
+    "scoreboard_top": [
+        {
+            "name": "open-webui",
+            "repo": "third_party_repos/open-webui",
+            "score": 120,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "open-webui"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI",
+                "adapter:open-webui"
+            ]
+        },
+        {
+            "name": "letta",
+            "repo": "third_party_repos/letta",
+            "score": 114,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "letta"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "adapter:letta"
+            ]
+        },
+        {
+            "name": "openhands",
+            "repo": "third_party_repos/openhands",
+            "score": 112,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "openhands"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI",
+                "adapter:openhands"
+            ]
+        },
+        {
+            "name": "openclaw",
+            "repo": "third_party_repos/openclaw",
+            "score": 108,
+            "risk": "high",
+            "integration_mode": "sandbox_only",
+            "adapters": [],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI"
+            ]
+        },
+        {
+            "name": "moltbot-ai-assistant",
+            "repo": "third_party_repos/moltbot-ai-assistant",
+            "score": 108,
+            "risk": "high",
+            "integration_mode": "sandbox_only",
+            "adapters": [],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI"
+            ]
+        },
+        {
+            "name": "hermes-agent",
+            "repo": "third_party_repos/hermes-agent",
+            "score": 108,
+            "risk": "high",
+            "integration_mode": "sandbox_only",
+            "adapters": [],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI"
+            ]
+        },
+        {
+            "name": "seed_private",
+            "repo": "/Users/altancelik/Desktop/seed_private",
+            "score": 108,
+            "risk": "high",
+            "integration_mode": "sandbox_only",
+            "adapters": [],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "voice / realtime",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:voice / realtime",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI"
+            ]
+        },
+        {
+            "name": "openinterpreter",
+            "repo": "third_party_repos/openinterpreter",
+            "score": 104,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "open-interpreter"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI",
+                "adapter:open-interpreter"
+            ]
+        },
+        {
+            "name": "mini-swe-agent",
+            "repo": "third_party_repos/mini-swe-agent",
+            "score": 92,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "swe-agent"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "browser automation",
+                "coding executor",
+                "MCP/tool protocol",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:MCP/tool protocol",
+                "pattern:dashboard/workspace UI",
+                "adapter:swe-agent"
+            ]
+        },
+        {
+            "name": "SWE-agent",
+            "repo": "third_party_repos/SWE-agent",
+            "score": 90,
+            "risk": "high",
+            "integration_mode": "known_adapter",
+            "adapters": [
+                "swe-agent"
+            ],
+            "patterns": [
+                "agent orchestration",
+                "memory / RAG",
+                "browser automation",
+                "coding executor",
+                "dashboard/workspace UI"
+            ],
+            "reasons": [
+                "pattern:agent orchestration",
+                "pattern:memory / RAG",
+                "pattern:browser automation",
+                "pattern:coding executor",
+                "pattern:dashboard/workspace UI",
+                "adapter:swe-agent"
+            ]
+        }
+    ],
+    "next_best_integrations": [
+        {
+            "repo": "third_party_repos/open-webui",
+            "name": "open-webui",
+            "priority_score": 120,
+            "risk": "high",
+            "mode": "known_adapter",
+            "adapters": [
+                "open-webui"
+            ],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/letta",
+            "name": "letta",
+            "priority_score": 114,
+            "risk": "high",
+            "mode": "known_adapter",
+            "adapters": [
+                "letta"
+            ],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/openhands",
+            "name": "openhands",
+            "priority_score": 112,
+            "risk": "high",
+            "mode": "known_adapter",
+            "adapters": [
+                "openhands"
+            ],
+            "steps": [
+                "create isolated sandbox run directory",
+                "generate issue/task spec",
+                "run agent only in sandbox",
+                "compare plan against Aider",
+                "manual promotion into core"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/openclaw",
+            "name": "openclaw",
+            "priority_score": 108,
+            "risk": "high",
+            "mode": "sandbox_only",
+            "adapters": [],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/moltbot-ai-assistant",
+            "name": "moltbot-ai-assistant",
+            "priority_score": 108,
+            "risk": "high",
+            "mode": "sandbox_only",
+            "adapters": [],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/hermes-agent",
+            "name": "hermes-agent",
+            "priority_score": 108,
+            "risk": "high",
+            "mode": "sandbox_only",
+            "adapters": [],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "/Users/altancelik/Desktop/seed_private",
+            "name": "seed_private",
+            "priority_score": 108,
+            "risk": "high",
+            "mode": "sandbox_only",
+            "adapters": [],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        },
+        {
+            "repo": "third_party_repos/openinterpreter",
+            "name": "openinterpreter",
+            "priority_score": 104,
+            "risk": "high",
+            "mode": "known_adapter",
+            "adapters": [
+                "open-interpreter"
+            ],
+            "steps": [
+                "read README/docs/examples",
+                "extract useful architecture pattern",
+                "write Seed adapter module",
+                "run py_compile",
+                "run relevant gate",
+                "show in Control Plane",
+                "promote only after manual approval"
+            ],
+            "blocked_actions": [
+                "blind install",
+                "direct core mutation by external agent",
+                "arbitrary shell",
+                "delete",
+                "auto-commit"
+            ]
+        }
+    ],
+    "control_loop": [
+        "select agent",
+        "policy check",
+        "sandbox/checkpoint",
+        "dry run",
+        "review",
+        "manual approval",
+        "execute",
+        "verify gate",
+        "log and remember"
+    ],
+    "hard_rules": {
+        "no_blind_installs": true,
+        "no_arbitrary_shell": true,
+        "no_delete": true,
+        "no_auto_commit": true,
+        "external_agents_sandbox_first": true,
+        "aider_first_real_executor": true
+    }
+}

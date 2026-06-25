@@ -4,6 +4,11 @@ from datetime import datetime
 
 
 FINAL_GATE_COMMANDS = [
+    ["python", "seed_v70_gate.py"],
+    ["python", "seed_v60_gate.py"],
+    ["python", "seed_v50_gate.py"],
+    ["python", "seed_v45_total_gate.py"],
+    ["python", "seed_v30_megapatch_gate.py"],
     ["python", "seed_v20_sovereign_gate.py"],
     ["python", "seed_v50_operator_gate.py"],
     ["python", "seed_v40_os_gate.py"],

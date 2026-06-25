@@ -810,3 +810,124 @@ Rules:
 - No auto-commit.
 - Manual tick only.
 - Risky actions require approval.
+
+## Seed v30.0.0 — Repo Assimilation + Agent HQ MegaPatch
+
+Seed v30 turns external repos into structured, ranked, sandboxed Seed integration plans.
+
+Main additions:
+
+- Repo Assimilation Engine
+- Repo Pattern Extractor
+- Repo Risk Scanner
+- External Adapter Registry
+- Integration Scoreboard
+- Repo-to-Seed Planner
+- Agent HQ
+- Control Plane v30 panel
+
+Core method:
+
+extract patterns → build adapters → score risk → sandbox → test → promote to core
+
+Hard rules:
+
+- Aider is first real executor.
+- Browser-use, OpenHands, SWE-agent, Open Interpreter stay sandboxed first.
+- Mem0/Qdrant are memory backend/pattern candidates.
+- LangGraph is workflow runtime reference.
+- MCP is the skill marketplace/protocol layer.
+- LiveKit/Pipecat are voice runtime references.
+- Open WebUI, AnythingLLM, Khoj, Letta are UI/state/memory references.
+
+
+## Seed v45.0.0 — Total Systems Implementation MegaPatch
+
+Seed v45 implements every remaining non-security-hardening system category after v30:
+
+- Task Queue Hygiene
+- Real Aider Cockpit
+- Memory Brain Max
+- Workflow Runtime Max
+- MCP Marketplace Max
+- Browser Read-only Sandbox
+- Voice Runtime Max
+- Heavy Agent Sandbox
+- Professional Agent HQ UI Model
+- Presence Runtime Max
+- Evaluation + Benchmark Lab
+- Terminal Pro + Desktop Launchers
+- Multi-device Hub Max
+- Seed World + Avatar UI State
+- Full Self-Improvement Loop
+
+Principle:
+
+Seed is no longer just a chat responder. It is a local-first Companion OS with agents, memory, workflows, repo assimilation, voice/browser adapters, professional dashboard, and controlled self-improvement loops.
+
+
+## Seed v50.0.0 — Nothing Left Behind Finalization Pack
+
+Seed v50 is the finalization layer over v20-v45.
+
+It adds:
+
+- Full update ledger
+- Dust check
+- Command map
+- Repo notebooks
+- Memory bootstrap
+- Workflow templates
+- System export
+- Seed doctor
+- Control Plane v50 panel
+- Terminal Pro command integration
+
+Meaning:
+
+Every named non-security-hardening Seed subsystem is represented, wired, visible, testable, and documented.
+
+Excluded by user request:
+
+- Dedicated security hardening lab
+
+After v50, future work is not missing categories. It is depth, polish, performance, and real-world execution quality inside already-created systems.
+
+
+## Seed v60.0.0 — Real Intelligence + Natural UX Fusion
+
+Seed v60 turns Seed from a command-heavy developer console into a natural companion/operator surface.
+
+Main additions:
+
+- Model Manager
+- Model Router
+- Model Benchmark Arena
+- Hermes/Moltbot/OpenClaw Fusion Lab
+- Real Memory Auto Extractor
+- Control Plane v60 UX panel
+- Terminal command palette
+- Presence 2.0 rituals
+- Real Aider self-improvement loop
+- Natural intent router
+
+Principle:
+
+The user should talk normally. Seed routes intent internally.
+
+Examples:
+
+- check yourself
+- open dashboard
+- show models
+- benchmark models
+- compare Hermes Moltbot OpenClaw
+- extract memories
+- what should we improve next
+- create a patch plan for improving the Control Plane wording targeting seed_control_plane_ui_v60.py
+
+Seed must not claim consciousness. It should feel present through memory, continuity, reasoned initiative, and useful rituals.
+
+## Seed v70.0.0 — Mega Fusion Companion OS
+
+Combines fusion cleanup, model manager real mode, companion terminal, product Control Plane, memory review, real Aider loop, presence operator, voice/browser/multichannel paths, and polish. Normal UX: talk naturally.
