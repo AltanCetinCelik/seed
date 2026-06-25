@@ -931,3 +931,147 @@ Seed must not claim consciousness. It should feel present through memory, contin
 ## Seed v70.0.0 — Mega Fusion Companion OS
 
 Combines fusion cleanup, model manager real mode, companion terminal, product Control Plane, memory review, real Aider loop, presence operator, voice/browser/multichannel paths, and polish. Normal UX: talk naturally.
+
+## Seed v72.0.0 — Presence Max
+
+Adds friend advice ingestion, repo pattern extraction, expressive simulated emotion, relevant life advice, avatar state, curiosity engine, presence inbox, and voice session foundation.
+
+## Seed v73.0.0 — Action Presence
+
+Adds real voice path commands, avatar panel, memory review actions, action task conversion, curiosity speaking, and expressive simulated excitement after big wins.
+
+## Seed v73.1 — Voice Router Fix
+
+Fixes the issue where `voice once` showed voice status instead of recording.
+Adds:
+- voice once recording
+- ffmpeg avfoundation auto-device fallback
+- faster-whisper transcription
+- routing transcript into Seed local chat
+- macOS say reply
+- voice journal
+- voice devices helper
+
+## Seed v74.0.0 — Embodied Companion Interface
+
+Adds a local web companion panel:
+- live avatar state
+- listening/thinking/speaking/idle modes
+- typed chat
+- server-side voice button
+- voice transcript and reply display
+- memory review action overlay
+- action-task board from friend advice, repo patterns, and curiosity
+- presence inbox and curiosity views
+
+Run:
+python seed_embodied_companion_server_v74.py
+
+## Seed v75.0.0 — Self-State Truth + Real Memory Review
+
+Adds:
+- truthful current self-state context
+- current version override: v75.0.0
+- prevents Seed from calling v70 the current layer
+- real memory review candidates
+- save / ignore / later decisions
+- accepted long-term memory store
+- memory duplicate detection
+- v74 panel memory review backed by v75
+
+Commands:
+- v75 status
+- self state
+- review memories
+- save memory mem_0001
+- ignore memory mem_0001
+- later memory mem_0001
+- show accepted memories
+
+## Seed v75.1 — Recursion Hotfix
+
+Fixes v75.0.0 recursive gate loop:
+self_state -> v75_gate -> v75_systems -> self_state.
+
+Self-state no longer calls v75_gate. It treats v75.1 as the current layer and checks lower green layers only.
+
+## Seed v81.0.0 — V1-Alpha Mega Stack
+
+Combined v76-v81 update:
+- v76 Voice 2.0
+- v77 Panel 2.0
+- v78 Proactive Presence
+- v79 Permission Executor
+- v80 Aider Production Loop
+- v81 Advice/Repo Assimilation
+
+Main commands:
+- v81 status
+- v81 self state
+- voice settings
+- voice journal
+- list voices
+- set voice Samantha
+- voice2 once 8
+- talk mode
+- open v77 panel
+- presence check
+- speak presence
+- executor status
+- propose action git status
+- approve action action_0001
+- aider status
+- coding task <description>
+- assimilation backlog
+- accept assimilation assim_0001
+
+## Seed v85.0.0 — Real v1 Preparation Stack
+
+Combined v82-v85 update:
+- v82 Recovery / self-repair / rollback notes
+- v83 One-command runtime
+- v84 Backup / privacy / export / forget
+- v85 Release candidate checks and README
+
+Main commands:
+- v85 status
+- v85 self state
+- recovery check
+- mark green checkpoint
+- recovery notes
+- runtime status
+- seed start
+- stop seed runtime
+- backup seed
+- list backups
+- export memory
+- forget memory <keyword>
+- privacy status
+- release candidate
+- full release candidate
+
+Shell:
+- ./seed
+- ./seed_start.sh
+
+## Seed v85.1 — Gate Timeout + Recovery Health Hotfix
+
+Fixes:
+- v85 gate no longer fails when nested v81 subprocess times out.
+- v85 gate uses recent cached `seed_v81_gate_report.json` when already green.
+- v82 recovery compiles runtime modules and excludes installer artifacts.
+
+## Seed v85.2 — Fast Gate Hotfix
+
+Fixes slow v85 validation:
+- v85 gate no longer re-runs slow nested v81 gate by default.
+- v85 gate uses recent seed_v81_gate_report.json.
+- --deep mode still exists for slow full validation.
+- Recovery checks only core runtime files, not old installers.
+
+## Seed v85.3 — AST Recovery Guard Hotfix
+
+Fixes false recursion warning in recovery:
+- Old guard matched comments/strings containing seed_v75_gate or seed_v85_gate.
+- New guard uses Python AST and only flags real imports/calls.
+- v85 fast gate remains cached and quick.

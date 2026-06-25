@@ -266,3 +266,84 @@ seed_one_of_a_kind_polish_v70.json
 seed_project_memory_timeline_v70.json
 seed_v70_systems_state.json
 seed_v70_gate_report.json
+
+# Seed v72 Presence Max runtime state
+seed_presence_policy_v72.json
+seed_friend_advice_v72.json
+seed_repo_patterns_v72.json
+seed_avatar_state_v72.json
+seed_presence_inbox_v72.json
+seed_curiosity_v72.json
+seed_voice_session_v72.json
+seed_v72_systems_state.json
+seed_v72_gate_report.json
+
+# Seed v73 Action Presence runtime state
+seed_expressive_state_v73.json
+seed_memory_review_decisions_v73.json
+seed_voice_journal_v73.jsonl
+seed_voice_v73/
+seed_avatar_panel_v73.html
+seed_action_tasks_v73.json
+seed_curiosity_spoken_v73.jsonl
+seed_v73_systems_state.json
+seed_v73_gate_report.json
+
+
+# Seed v73.1 voice runtime
+seed_voice_recordings_v731/
+seed_voice_journal_v731.jsonl
+seed_voice_settings_v731.json
+seed_v731_gate_report.json
+
+
+# Seed v74 Embodied Companion runtime
+seed_embodied_state_v74.json
+seed_avatar_panel_v74_state.json
+seed_memory_review_actions_v74.jsonl
+seed_action_tasks_v74.json
+seed_embodied_session_journal_v74.jsonl
+seed_v74_systems_state.json
+seed_v74_gate_report.json
+
+
+# Seed v75 Self Truth + Real Memory runtime
+seed_self_state_v741.json
+seed_long_term_memory_v75.json
+seed_memory_decisions_v75.jsonl
+seed_memory_candidates_cache_v75.json
+seed_v75_systems_state.json
+seed_v75_gate_report.json
+
+
+# Seed v76-v81 runtime
+seed_self_state_v81.json
+seed_voice_v76_settings.json
+seed_voice_v76_journal.jsonl
+seed_proactive_queue_v78.jsonl
+seed_proactive_log_v78.jsonl
+seed_proactive_state_v78.json
+seed_permission_actions_v79.json
+seed_permission_history_v79.jsonl
+seed_aider_tasks_v80.json
+seed_assimilation_backlog_v81.json
+seed_assimilation_decisions_v81.jsonl
+seed_v81_systems_state.json
+seed_v81_gate_report.json
+
+
+# Seed v82-v85 runtime
+seed_self_state_v85.json
+seed_recovery_report_v82.json
+seed_last_green_checkpoint_v82.json
+seed_recovery_rollback_notes_v82.md
+seed_runtime_v83_state.json
+seed_runtime_v83_panel.log
+seed_runtime_v83_panel.pid
+seed_backups_v84/
+seed_exports_v84/
+seed_forget_log_v84.jsonl
+seed_v85_systems_state.json
+seed_v85_gate_report.json
+seed_v85_release_candidate_report.json
+README_SEED_V1_RC.md

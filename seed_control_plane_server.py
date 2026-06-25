@@ -75,6 +75,24 @@ def api_payload(path):
 
 
 
+    if path == "/api/v73":
+        return safe_json(lambda: __import__("seed_v73_systems", fromlist=["build_v73_state"]).build_v73_state())
+
+    if path == "/api/v85":
+        return safe_json(lambda: __import__("seed_v85_systems", fromlist=["build_v85_state"]).build_v85_state())
+
+    if path == "/api/v81":
+        return safe_json(lambda: __import__("seed_v81_systems", fromlist=["build_v81_state"]).build_v81_state())
+
+    if path == "/api/v75":
+        return safe_json(lambda: __import__("seed_v75_systems", fromlist=["build_v75_state"]).build_v75_state())
+
+    if path == "/api/v74":
+        return safe_json(lambda: __import__("seed_v74_systems", fromlist=["build_v74_state"]).build_v74_state())
+
+    if path == "/api/v72":
+        return safe_json(lambda: __import__("seed_v72_systems", fromlist=["build_v72_state"]).build_v72_state())
+
     if path == "/api/v70":
         return safe_json(lambda: __import__("seed_v70_systems", fromlist=["build_v70_state"]).build_v70_state())
 
@@ -126,6 +144,12 @@ def build_home_bundle():
         "capability_graph": api_payload("/api/capability-graph"),
         "execution_policy": api_payload("/api/execution-policy"),
         "operator_inbox": api_payload("/api/operator-inbox"),
+        "v73": api_payload("/api/v73"),
+        "v85": api_payload("/api/v85"),
+        "v81": api_payload("/api/v81"),
+        "v75": api_payload("/api/v75"),
+        "v74": api_payload("/api/v74"),
+        "v72": api_payload("/api/v72"),
         "v70": api_payload("/api/v70"),
         "v60": api_payload("/api/v60"),
         "v50": api_payload("/api/v50"),

@@ -1460,3 +1460,192 @@ try:
         return _seed_v70_original_handle_chat_command(user_message, *args, **kwargs)
 except Exception:
     pass
+
+# v70.1 Real Chat Router
+# If older Seed logic falls through to "normal", route normal conversation to Ollama.
+try:
+    _seed_v701_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        text = str(user_message or "").strip()
+
+        if text.lower() in {"model usage", "show model usage", "model log"}:
+            from seed_local_chat_v701 import show_model_usage_log
+            return show_model_usage_log()
+
+        result = _seed_v701_previous_handle_chat_command(user_message, *args, **kwargs)
+
+        if result == "handled":
+            return "handled"
+
+        if result is None or str(result).strip().lower() in {"", "normal", "none"}:
+            from seed_local_chat_v701 import local_chat
+            return local_chat(user_message)
+
+        return result
+
+except Exception:
+    pass
+
+# v72 Presence Max router.
+try:
+    _seed_v72_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v72 import handle_natural_intent_v72
+            handled = handle_natural_intent_v72(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v72 natural router error: {error}"); return "handled"
+        try:
+            from seed_v72_commands import handle_v72_command
+            handled = handle_v72_command(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v72 command error: {error}"); return "handled"
+        return _seed_v72_previous_handle_chat_command(user_message,*args,**kwargs)
+except Exception:
+    pass
+
+# v73 Action Presence router.
+try:
+    _seed_v73_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v73 import handle_natural_intent_v73
+            handled = handle_natural_intent_v73(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v73 natural router error: {error}"); return "handled"
+        try:
+            from seed_v73_commands import handle_v73_command
+            handled = handle_v73_command(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v73 command error: {error}"); return "handled"
+        return _seed_v73_previous_handle_chat_command(user_message,*args,**kwargs)
+except Exception:
+    pass
+
+# v73.1 Voice command router fix.
+try:
+    _seed_v731_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_live_voice_v731 import handle_voice_command_v731
+            handled = handle_voice_command_v731(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v73.1 voice router error: {error}")
+            return "handled"
+
+        return _seed_v731_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v74 Embodied Companion router.
+try:
+    _seed_v74_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v74 import handle_natural_intent_v74
+            handled = handle_natural_intent_v74(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v74 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v74_commands import handle_v74_command
+            handled = handle_v74_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v74 command error: {error}")
+            return "handled"
+
+        return _seed_v74_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v75 Self-truth + Real Memory router.
+try:
+    _seed_v75_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v75 import handle_natural_intent_v75
+            handled = handle_natural_intent_v75(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v75 natural router error: {error}"); return "handled"
+        try:
+            from seed_v75_commands import handle_v75_command
+            handled = handle_v75_command(user_message)
+            if handled == "handled": return "handled"
+        except Exception as error:
+            print(f"v75 command error: {error}"); return "handled"
+        return _seed_v75_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+# v81 V1-alpha mega stack router.
+try:
+    _seed_v81_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v81 import handle_natural_intent_v81
+            handled = handle_natural_intent_v81(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v81 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v81_commands import handle_v81_command
+            handled = handle_v81_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v81 command error: {error}")
+            return "handled"
+
+        return _seed_v81_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v85 Real-v1 prep router.
+try:
+    _seed_v85_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v85 import handle_natural_intent_v85
+            handled = handle_natural_intent_v85(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v85 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v85_commands import handle_v85_command
+            handled = handle_v85_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v85 command error: {error}")
+            return "handled"
+
+        return _seed_v85_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
