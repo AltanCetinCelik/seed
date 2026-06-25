@@ -1649,3 +1649,113 @@ try:
 
 except Exception:
     pass
+
+# v86 Wake word router.
+try:
+    _seed_v86_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v86 import handle_natural_intent_v86
+            handled = handle_natural_intent_v86(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v86 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v86_commands import handle_v86_command
+            handled = handle_v86_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v86 command error: {error}")
+            return "handled"
+
+        return _seed_v86_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v87 Alive companion router.
+try:
+    _seed_v87_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v87 import handle_natural_intent_v87
+            handled = handle_natural_intent_v87(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v87 natural router error: {error}")
+            return "handled"
+
+        try:
+            from seed_v87_commands import handle_v87_command
+            handled = handle_v87_command(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v87 command error: {error}")
+            return "handled"
+
+        return _seed_v87_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v87.1 wake conversation router.
+try:
+    _seed_v871_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v871 import handle_natural_intent_v871
+            handled = handle_natural_intent_v871(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v87.1 natural router error: {error}")
+            return "handled"
+
+        return _seed_v871_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v88 Mac body + fast wake router.
+try:
+    _seed_v88_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v88 import handle_natural_intent_v88
+            handled = handle_natural_intent_v88(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v88 natural router error: {error}")
+            return "handled"
+
+        return _seed_v88_previous_handle_chat_command(user_message, *args, **kwargs)
+
+except Exception:
+    pass
+
+# v89 organism router.
+try:
+    _seed_v89_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v89 import handle_natural_intent_v89
+            handled = handle_natural_intent_v89(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v89 natural router error: {error}")
+            return "handled"
+        return _seed_v89_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass

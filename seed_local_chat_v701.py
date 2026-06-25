@@ -522,3 +522,19 @@ For this answer, focus on current truth:
 
 except Exception:
     pass
+
+# v87 Alive Companion Truth chat override.
+try:
+    _seed_v87_old_build_seed_context = build_seed_context
+
+    def build_seed_context():
+        base = _seed_v87_old_build_seed_context()
+        try:
+            from seed_self_state_v87 import build_seed_truth_context
+            truth = build_seed_truth_context()
+        except Exception as error:
+            truth = f"Seed v87 truth context unavailable: {error}"
+        return base + "\n\n" + truth
+
+except Exception:
+    pass

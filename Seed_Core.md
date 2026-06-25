@@ -1075,3 +1075,141 @@ Fixes false recursion warning in recovery:
 - Old guard matched comments/strings containing seed_v75_gate or seed_v85_gate.
 - New guard uses Python AST and only flags real imports/calls.
 - v85 fast gate remains cached and quick.
+
+## Seed v86.0.0 — Wake Word Companion Mode
+
+Seed is a private companion, not a public release product.
+
+Adds:
+- Wake listener for phrases: Seed, hey Seed, wake up, wake up Seed
+- Background daemon start/stop/status
+- Foreground listen mode
+- Opens Seed panel and starts voice after wake phrase
+- Voice/Avatar sync through existing v76/v74 systems
+
+Commands:
+- python seed_wake_word_v86.py start
+- python seed_wake_word_v86.py stop
+- python seed_wake_word_v86.py status
+- python seed_wake_word_v86.py listen
+
+Natural:
+- start wake listener
+- stop wake listener
+- wake status
+- wake listen
+
+## Seed v87.0.0 — Alive Companion Growth Layer
+
+Seed is Altan's private companion/friend, not a public release product.
+
+Adds:
+- v86.1 wake polish
+- long wake phrase priority
+- false-positive filtering
+- screen sense capture
+- camera availability check
+- curiosity engine
+- alive loop
+- start alive mode: panel + wake + curiosity
+
+Commands:
+- v87 status
+- start alive mode
+- stop alive mode
+- start polished wake listener
+- stop polished wake listener
+- curiosity status
+- speak curiosity
+- start curiosity loop
+- stop curiosity loop
+- look at screen
+- sense status
+
+## Seed v87.1 — Wake Conversation Polish
+
+Fixes wake delay:
+- Seed no longer speaks a blocking acknowledgement before listening.
+- Wake phrase immediately opens a follow-up recording window.
+- After wake, Seed answers through a faster wake-specific conversation path.
+- Adds progress prints so Altan can see listening/transcript/thinking stages.
+
+## Seed v87.1.1 — Direct Wake Reply Hotfix
+
+Fixes wake conversation delay:
+- Wake conversation no longer calls `seed_local_chat_v701.call_ollama`.
+- Avoids old stacked `build_seed_context` and gate chain.
+- Calls Ollama directly with a small wake-specific prompt.
+- Keeps wake conversation fast and companion-like.
+
+## Seed v88.0.0 — Mac Body + Fast Wake
+
+Adds:
+- v87.2 fast wake with warm Ollama and inline follow-up.
+- Direct compact prompt for wake replies.
+- Mac body layer: open apps, URLs, screenshots, typing, key presses, optional shell.
+- Body alive mode: panel + fast wake + curiosity + body status.
+
+Commands:
+- python seed_wake_fast_v872.py warm
+- python seed_wake_fast_v872.py listen
+- python seed_body_alive_v88.py start
+- python seed_body_alive_v88.py stop
+- body status
+- body permissions
+- open app Safari
+- open url https://...
+- take screenshot
+- type text hello
+- press enter
+- body trust on/off
+- allow shell on/off
+- run shell <command>
+
+## Seed v89.0.0 — Organism + Avatar + Note-Only Ambient Senses
+
+Seed is Altan's private companion organism layer.
+
+Adds:
+- Local animated avatar at http://127.0.0.1:8798
+- Ambient hearing loop
+- Ambient vision loop
+- Important-note extraction
+- Question asking from important notes
+- Privacy rule: no raw audio saved, no raw screenshots saved, no raw transcript storage by default
+- Storage cap: notes are capped and media is deleted after processing
+
+Commands:
+- python seed_avatar_v89.py start
+- python seed_ambient_hearing_v89.py once
+- python seed_ambient_vision_v89.py once
+- python seed_organism_v89.py start
+- python seed_organism_v89.py stop
+- python seed_v89_systems.py
+- python seed_v89_gate.py
+
+Natural:
+- start organism
+- stop organism
+- avatar
+- notes
+- hear once
+- see once
+
+## Seed v89.1 — Organism Note Quality Hotfix
+
+Fixes v89 ambient vision note quality:
+- Blocks prompt-leak notes like "Return ONLY JSON" or "Inspect this temporary screenshot".
+- Cleans existing bad notes.
+- Sanitizes model output before saving organism notes.
+- Keeps privacy defaults: no raw audio, screenshots, or transcripts stored.
+
+## Seed v89.2 — Organism Filter Polish
+
+Fixes organism note noise:
+- Rejects low-value vision notes like generic terminal/browser/window observations.
+- Rejects entertainment/watch notes unless important.
+- Removes generic questions like "What is Altan doing?"
+- Deduplicates recent notes.
+- Cleans old noisy notes.
+- Resets sticky avatar sensor flags.

@@ -1,0 +1,51 @@
+{
+    "created_at": "2026-06-25T22:58:18",
+    "version": "v89.2.0",
+    "ready": true,
+    "modules_ok": true,
+    "low_value_filter_ok": true,
+    "generic_question_filter_ok": true,
+    "privacy_ok": true,
+    "module_checks": [
+        {
+            "module": "seed_organism_notes_v89.py",
+            "ok": true,
+            "stderr": ""
+        },
+        {
+            "module": "seed_avatar_v89.py",
+            "ok": true,
+            "stderr": ""
+        },
+        {
+            "module": "seed_organism_v89.py",
+            "ok": true,
+            "stderr": ""
+        },
+        {
+            "module": "seed_v892_gate.py",
+            "ok": true,
+            "stderr": ""
+        }
+    ],
+    "details": {
+        "low_value_filter_ok": true,
+        "generic_question_filter_ok": true,
+        "privacy": {
+            "version": "v89.2.0",
+            "max_notes": 2000,
+            "ask_enabled": true,
+            "min_importance_to_ask": 82,
+            "min_seconds_between_questions": 900,
+            "speak_questions": true,
+            "store_raw_audio": false,
+            "store_raw_screenshots": false,
+            "store_raw_transcripts": false,
+            "note_only_mode": true,
+            "reject_prompt_leak": true,
+            "dedupe_minutes": 12,
+            "reject_generic_questions": true,
+            "reject_low_value_vision": true
+        }
+    }
+}
