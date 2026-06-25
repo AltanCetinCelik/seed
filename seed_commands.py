@@ -1759,3 +1759,53 @@ try:
         return _seed_v89_previous_handle_chat_command(user_message, *args, **kwargs)
 except Exception:
     pass
+
+# v90 memory garden router.
+try:
+    _seed_v90_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v90 import handle_natural_intent_v90
+            handled = handle_natural_intent_v90(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v90 natural router error: {error}")
+            return "handled"
+        return _seed_v90_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+# v91 companion context router.
+try:
+    _seed_v91_previous_handle_chat_command = handle_chat_command
+
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v91 import handle_natural_intent_v91
+            handled = handle_natural_intent_v91(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v91 natural router error: {error}")
+            return "handled"
+        return _seed_v91_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass
+
+# v92-v106 mega router.
+try:
+    _seed_v92_106_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v92_106 import handle_natural_intent_v92_106
+            handled = handle_natural_intent_v92_106(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v92-v106 natural router error: {error}")
+            return "handled"
+        return _seed_v92_106_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass

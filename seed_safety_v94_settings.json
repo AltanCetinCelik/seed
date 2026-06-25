@@ -1,0 +1,7 @@
+{
+    "version": "v94.0.0",
+    "auto_allow_observe": true,
+    "auto_allow_safe": true,
+    "require_approval_risky": true,
+    "block_dangerous": true
+}

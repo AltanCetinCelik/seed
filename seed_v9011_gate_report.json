@@ -1,0 +1,46 @@
+{
+    "created_at": "2026-06-25T23:14:11",
+    "version": "v90.1.1",
+    "ready": true,
+    "modules_ok": true,
+    "no_archive_leak": true,
+    "no_old_noise": true,
+    "module_checks": [
+        {
+            "module": "seed_memory_garden_v90.py",
+            "ok": true,
+            "stderr": ""
+        },
+        {
+            "module": "seed_v9011_gate.py",
+            "ok": true,
+            "stderr": ""
+        }
+    ],
+    "details": {
+        "summary": "Seed day summary: no meaningful promoted memories yet.",
+        "status": {
+            "created_at": "2026-06-25T23:14:11",
+            "version": "v90.0.0",
+            "ok": true,
+            "notes_total": 2,
+            "memories_total": 0,
+            "archived_total": 2,
+            "unreviewed_total": 0,
+            "settings": {
+                "version": "v90.0.0",
+                "auto_archive_startup_notes": true,
+                "auto_archive_low_value_notes": true,
+                "min_importance_candidate": 75,
+                "min_importance_auto_promote": 92,
+                "max_candidate_cards": 25,
+                "memory_context_limit": 12,
+                "note_source_file": "seed_organism_notes_v89.jsonl",
+                "no_raw_media_rule": true
+            },
+            "latest_memories": []
+        },
+        "no_archive_leak": true,
+        "no_old_noise": true
+    }
+}

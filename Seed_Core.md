@@ -1213,3 +1213,102 @@ Fixes organism note noise:
 - Deduplicates recent notes.
 - Cleans old noisy notes.
 - Resets sticky avatar sensor flags.
+
+## Seed v90.0.0 — Memory Garden
+
+Turns organism notes into reviewed memories:
+- Reviews note-only organism observations.
+- Archives low-value notes.
+- Promotes only meaningful memories.
+- Keeps a compact memory context for future Seed chat.
+- Supports manual promote/archive and daily summary.
+
+Commands:
+- python seed_memory_garden_v90.py status
+- python seed_memory_garden_v90.py review
+- python seed_memory_garden_v90.py digest
+- python seed_memory_garden_v90.py memories
+- python seed_memory_garden_v90.py promote <note_id>
+- python seed_memory_garden_v90.py promote-latest
+- python seed_memory_garden_v90.py summary
+
+## Seed v90.1.1 — Memory Summary Fix
+
+Fixes Memory Garden summary by inserting a safe override before the CLI main block:
+- Archived low-value startup notes no longer appear in `summary`.
+- If there are no promoted memories, summary says so clearly.
+- Avoids brittle source replacement.
+
+## Seed v91.0.0 — Companion Context
+
+Makes Seed think with its own Memory Garden context:
+- Builds compact companion context from promoted memories and recent note-only observations.
+- Bootstraps the current v88-v90.1.1 green Seed milestone as a promoted memory.
+- Adds contextual direct chat.
+- Adds contextual wake listener with wake mishear handling: wake up / make up / weight up.
+- Keeps raw media storage disabled.
+
+Commands:
+- python seed_companion_context_v91.py status
+- python seed_companion_context_v91.py context
+- python seed_contextual_chat_v91.py ask "what do you remember?"
+- python seed_wake_context_v91.py test "make up what are you"
+- python seed_wake_context_v91.py listen
+- python seed_v91_systems.py
+- python seed_v91_gate.py
+
+## Seed v91.1 — Contextual Recall Polish
+
+Improves v91 contextual replies:
+- Memory/self-state questions now get factual baseline answers.
+- Blocks vague/poetic memory replies.
+- Adds fallback baseline recall if the model ignores context.
+
+## Seed v92-v106 Mega Update
+
+Backbone update for Seed:
+- v92 Supervisor OS
+- v93 Wake Engine Manager
+- v94 Safety Ledger
+- v95 Observability
+- v96 Memory Garden 2
+- v97 Safe Tool Bridge
+- v98 Vision Manager
+- v99 Durable Tasks
+- v100 Operator Mode
+- v101 Coding Bridge
+- v102 Voice Persona
+- v103 Multi-device Body
+- v104 Private RAG
+- v105 Self-Healing Doctor
+- v106 Dashboard
+- v107 Evaluation Arena
+
+## Seed v106.1 — Dashboard UI Fix
+
+Replaces the raw JSON/pre dashboard with a real local web UI:
+- Card grid for Seed subsystems.
+- Health score.
+- Details expandable per module.
+- JSON API stays available at /api/status and /status.
+- Root route `/` serves HTML with correct text/html content type.
+
+## Seed v106.2 — Clean Status Polish
+
+Combined small fixes after v92-v106:
+- Doctor no longer fails the system because optional legacy panel 8797 is down.
+- Tool Bridge allows observe-only tools like git.status and shell.pwd.
+- Safety Ledger keeps dangerous shell blocked while allowing registered observe tools.
+- Vision Manager removes/blocks low-value terminal self-test notes.
+- Private RAG excludes third_party_repos and seed_checkpoints by default.
+- Tasks now support done/failed/paused updates.
+- Supervisor reports mostly_green when required subsystems are healthy.
+
+## Seed v107 — Real Hardening
+
+Combined hardening patch after v106.2:
+- v107.1 stale vision runtime status cleanup.
+- v107.2 stronger evaluation arena.
+- v107.3 supervisor start/stop stress test module.
+- v107.4 wake reliability upgrade with expanded mishear/false-positive tests.
+- v107.5 dashboard approval center for risky action approval records.
