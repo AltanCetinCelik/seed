@@ -1,9 +1,9 @@
 {
-    "created_at": "2026-06-26T14:17:18",
+    "created_at": "2026-06-26T16:22:31",
     "version": "v116.0.0",
     "ok": true,
     "fingerprint": "12b1065a8be5",
-    "changed": false,
+    "changed": true,
     "active_window": {
         "ok": true,
         "app": "Safari"

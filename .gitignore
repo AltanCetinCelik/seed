@@ -564,3 +564,71 @@ seed_runtime_polish_v1361_report.json
 seed_start_state_v1361.json
 seed_v1361_runtime_polish_gate_report.json
 seed_voice_runtime_v136_events_backup_*.jsonl
+
+# Seed v136.2 hygiene center runtime
+seed_hygiene_center_v1362_report.json
+seed_hygiene_center_v1362_events.jsonl
+seed_hygiene_snapshots_v1362/
+seed_memory_hygiene_v1362_shadow_index.json
+seed_hygiene_panel_v1362.pid
+seed_hygiene_panel_v1362.log
+seed_v1362_hygiene_gate_report.json
+
+# Seed v136.2.1 actual hygiene repair runtime
+seed_hygiene_repair_v13621_events.jsonl
+seed_hygiene_repair_v13621_report.json
+seed_hygiene_repair_v13621_memory_plan.json
+seed_hygiene_repair_v13621_task_plan.json
+seed_hygiene_repair_snapshots_v13621/
+seed_hygiene_repair_panel_v13621.pid
+seed_hygiene_repair_panel_v13621.log
+seed_v13621_repair_gate_report.json
+*.v13621.bak
+
+# Seed v136.2.2 autonomy runtime
+seed_autonomy_policy_v13622_settings.json
+seed_autonomy_policy_v13622_grants.json
+seed_autonomy_policy_v13622_decisions.jsonl
+seed_approval_autopilot_v13622.pid
+seed_approval_autopilot_v13622.log
+seed_approval_autopilot_v13622_events.jsonl
+seed_approval_autopilot_v13622_settings.json
+seed_autonomy_panel_v13622.pid
+seed_autonomy_panel_v13622.log
+seed_v13622_autonomy_gate_report.json
+
+# Seed v136.2.3 approval loop fix runtime
+seed_approval_resolver_v13623_suppressed.json
+seed_approval_resolver_v13623_events.jsonl
+seed_approval_autopilot_v13623.pid
+seed_approval_autopilot_v13623.log
+seed_approval_autopilot_v13623_events.jsonl
+seed_approval_autopilot_v13623_settings.json
+seed_v13623_approval_fix_gate_report.json
+
+# Seed v137 companion runtime
+seed_companion_v137.pid
+seed_companion_v137_state.json
+seed_companion_v137_events.jsonl
+seed_companion_v137_inbox.jsonl
+seed_companion_v137.log
+seed_companion_v137_settings.json
+seed_companion_panel_v137.pid
+seed_companion_panel_v137.log
+seed_v137_companion_gate_report.json
+
+# Seed v137.1 optimization runtime
+seed_output_compactor_v1371_events.jsonl
+seed_runtime_proxy_v1371_events.jsonl
+seed_log_optimizer_v1371_report.json
+seed_log_optimizer_v1371_events.jsonl
+seed_log_archive_v1371/
+seed_service_supervisor_v1371_events.jsonl
+seed_service_supervisor_v1371_state.json
+seed_clunkiness_audit_v1371_report.json
+seed_companion_v1371_events.jsonl
+seed_v1371_optimization_gate_report.json
+seed_full_outputs_v1371/
+
+# Seed v137.1.1 de-clunk hotfix runtime
+seed_v13711_declunk_hotfix_gate_report.json

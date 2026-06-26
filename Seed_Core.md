@@ -1351,3 +1351,31 @@ Adds a unified runtime that routes wake text or one-shot voice through transcrip
 ## Seed v136.1 Runtime Polish
 
 Adds compact runtime status, cleanup suggestions, runtime log trimming, one-command seed_start.py launcher, and v136.1 gate. Default voice runtime starts in safe no-speak push-to-talk mode.
+
+## Seed v136.2 Hygiene Center
+
+Big hygiene update before always-on wake. Adds runtime/approval/task/memory/log hygiene scans, hygiene score, safe snapshots, safe log trimming, duplicate memory shadow index, daily brief, clean start wrapper, hygiene web panel on port 8818, and v136.2 gate. Default apply-safe is non-destructive for approvals/tasks.
+
+## Seed v136.2.1 Actual Hygiene Repair
+
+Adds dry-run/apply-safe hygiene repairs: duplicate memory ID repair with backups, old test task closing where safe, approval approve/reject helper commands, snapshots before mutation, repair panel on port 8819, and v136.2.1 gate. Approval actions remain manual by request id.
+
+## Seed v136.2.2 Autonomy / Less Approvals
+
+Adds an autonomy policy and approval autopilot. Trusted-local mode reduces approval friction by auto-resolving stale empty requests, read-only tool checks, and trusted operator typing/key actions while keeping hard boundaries for destructive shell, secrets, email sending, purchases, deletion, and risky pointer actions. Includes autonomy panel on port 8820 and v136.2.2 gate.
+
+## Seed v136.2.3 Approval Loop Fix
+
+Fixes repeated autopilot rejection loops by adding effective approval status, local suppression for already-rejected stale approvals, a resolver that filters resolved/suppressed request IDs, v136.2.3 autopilot, effective hygiene status, and v136.2.3 gate.
+
+## Seed v137 Real Wake / Always-On Companion Runtime
+
+Adds one-command companion runtime: starts dashboard, avatar, proactive rhythm, v136 voice runtime, v136.2.3 approval autopilot, text wake inbox, optional audio wake probe, cooldown-safe processing, companion panel on port 8821, and v137 gate. Defaults to safe_presence with audio wake disabled until explicitly enabled.
+
+## Seed v137.1 Big Optimization / De-Clunk Pack
+
+Adds compact runtime output, full-output archiving, runtime proxy, log optimizer, service supervisor/healer, clunkiness audit, optimized companion wrapper, and v137.1 gate. Goal: make Seed less clunky without changing the stable v137 base.
+
+## Seed v137.1.1 De-Clunk Hotfix
+
+Fixes CLI flag leakage into wake text, keeps supervisor status compact, prevents huge stdout from service health checks, and adds v137.1.1 de-clunk gate.
