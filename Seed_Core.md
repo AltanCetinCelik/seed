@@ -1343,3 +1343,11 @@ Adds mic device listing/selection, volume record test, hallucination transcript 
 ## Seed v135.2 Voice Intent Normalizer
 
 Normalizes common Whisper mishears such as 'Seet status' and 'See its status' into Seed status intent, routes approval/memory intents, and patches voice conversation to answer by intent.
+
+## Seed v136 Voice Runtime
+
+Adds a unified runtime that routes wake text or one-shot voice through transcription, transcript guard, intent normalization, conversation answer, and speech. Includes daemon start/stop, inbox queue, runtime status, small web control panel on port 8816, and v136 gate.
+
+## Seed v136.1 Runtime Polish
+
+Adds compact runtime status, cleanup suggestions, runtime log trimming, one-command seed_start.py launcher, and v136.1 gate. Default voice runtime starts in safe no-speak push-to-talk mode.

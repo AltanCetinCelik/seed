@@ -547,3 +547,20 @@ seed_v1351_voice_calibration_gate_report.json
 # Seed v135.2 intent runtime
 seed_voice_intent_normalizer_v1352.jsonl
 seed_v1352_intent_gate_report.json
+
+# Seed v136 voice runtime
+seed_voice_runtime_v136_settings.json
+seed_voice_runtime_v136_state.json
+seed_voice_runtime_v136_events.jsonl
+seed_voice_runtime_v136_inbox.jsonl
+seed_voice_runtime_v136.pid
+seed_voice_runtime_v136.log
+seed_voice_runtime_ui_v136.pid
+seed_voice_runtime_ui_v136.log
+seed_v136_runtime_gate_report.json
+
+# Seed v136.1 runtime polish
+seed_runtime_polish_v1361_report.json
+seed_start_state_v1361.json
+seed_v1361_runtime_polish_gate_report.json
+seed_voice_runtime_v136_events_backup_*.jsonl
