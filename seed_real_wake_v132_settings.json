@@ -1,0 +1,8 @@
+{
+    "version": "v132.0.0",
+    "enabled": false,
+    "engine": "auto",
+    "poll_seconds": 2,
+    "store_raw_audio": false,
+    "fallback_text_matcher": true
+}

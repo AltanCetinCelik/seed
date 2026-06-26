@@ -1,0 +1,9 @@
+{
+    "version": "v110.0.0",
+    "engine": "auto",
+    "whisper_cpp_binary": "",
+    "model_path": "",
+    "language": "auto",
+    "store_raw_audio": false,
+    "timeout_seconds": 120
+}

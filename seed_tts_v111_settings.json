@@ -1,0 +1,10 @@
+{
+    "version": "v111.0.0",
+    "engine": "auto",
+    "mode": "normal",
+    "rate": 185,
+    "piper_binary": "",
+    "piper_model": "",
+    "voice": "",
+    "timeout_seconds": 90
+}

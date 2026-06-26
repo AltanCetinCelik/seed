@@ -1312,3 +1312,34 @@ Combined hardening patch after v106.2:
 - v107.3 supervisor start/stop stress test module.
 - v107.4 wake reliability upgrade with expanded mishear/false-positive tests.
 - v107.5 dashboard approval center for risky action approval records.
+
+## Seed v108-v122 Mega Evolution
+
+Adds proactive companion rhythm, native wake manager, STT/TTS wrappers, Memory Garden 3, Memory Gate, Project Memory, Operator 2, Screen Understanding 2, Approval UI 2, Skill Registry 2, Safe MCP Bridge, Odysseus/Repo audits, and Private RAG 2.
+
+## Seed v122.1 Reality Completion
+
+- Fixes proactive daemon start/stop verification with heartbeat.
+- Cleans stale v94.0 approval-center false blocks for observe tools.
+- Makes STT/Wake/TTS status honest: configured, fallback, or installed-not-configured.
+- Adds audit-only priority repo bootstrap planning and optional shallow clone command.
+
+## Seed v123-v130 Big Patch
+
+Adds deep research mode, knowledge graph lite, device router, Pi satellite scaffold, Windows worker scaffold, menu-bar/launcher command, Avatar 2, and release packaging CLI.
+
+## Seed v130.1 UI/UX Overhaul
+
+Replaces rough dashboard/avatar with Control Room dashboard, grouped subsystem navigation, health ring, search/filter, command hints, polished Avatar 2, mood/approval/proactive state, and UI gate.
+
+## Seed v131-v135 No-Update-Behind
+
+Adds real voice input wrapper, real wake layer with fallback, voice conversation loop, smarter proactive presence, repo assimilation, and gate.
+
+## Seed v135.1 Voice Calibration
+
+Adds mic device listing/selection, volume record test, hallucination transcript blocker, min transcript filters, language switch, repeat-if-empty behavior, conversation guard for bad transcripts such as 'You', and gate.
+
+## Seed v135.2 Voice Intent Normalizer
+
+Normalizes common Whisper mishears such as 'Seet status' and 'See its status' into Seed status intent, routes approval/memory intents, and patches voice conversation to answer by intent.

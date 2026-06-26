@@ -1,0 +1,13 @@
+{
+    "version": "v108.1.0",
+    "enabled": true,
+    "speak_enabled": true,
+    "max_asks_per_day": 3,
+    "cooldown_minutes": 90,
+    "quiet_hours": {
+        "start": 1,
+        "end": 10
+    },
+    "tick_seconds": 900,
+    "self_heal": true
+}

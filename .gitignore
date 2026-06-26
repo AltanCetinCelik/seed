@@ -491,3 +491,59 @@ seed_wake_reliability_v107_report.json
 seed_action_approvals_v107.jsonl
 seed_supervisor_stress_v107_report.json
 seed_v107_hardening_gate_report.json
+
+# Seed v108-v122 runtime
+seed_proactive_v108_events.jsonl
+seed_proactive_v108.pid
+seed_proactive_v108.log
+seed_memory_garden3_v112.jsonl
+seed_project_memory_v114.jsonl
+seed_approval_policy_v117.jsonl
+seed_skill_registry2_v118.json
+seed_mcp_registry_v119.json
+seed_odysseus_lessons_v120.md
+seed_repo_audit_v121.md
+seed_private_rag2_v122_index.jsonl
+seed_v108_122_gate_report.json
+
+# Seed v122.1 runtime
+seed_action_auto_resolved_v1221.jsonl
+seed_proactive_v108_heartbeat.json
+seed_v1221_reality_gate_report.json
+
+# Seed v123-v130 runtime
+seed_deep_research_v123_sessions.jsonl
+seed_deep_research_v123_sources.jsonl
+seed_deep_research_v123_claims.jsonl
+seed_knowledge_graph_v124.jsonl
+seed_knowledge_graph_v124.dot
+seed_device_router_v125_devices.json
+seed_pi_satellite_v126_heartbeats.jsonl
+seed_windows_worker_v127_jobs.jsonl
+seed_avatar2_v129.pid
+seed_avatar2_v129.log
+seed_v123_130_gate_report.json
+
+# Seed v130.1 UI runtime
+seed_v1301_ui_gate_report.json
+
+# Seed v131-v135 runtime
+seed_voice_input_v131_transcripts.jsonl
+seed_voice_temp_v131/
+seed_real_wake_v132_events.jsonl
+seed_real_wake_v132.pid
+seed_real_wake_v132.log
+seed_voice_conversation_v133_sessions.jsonl
+seed_proactive_presence_v134_state.json
+seed_proactive_presence_v134_events.jsonl
+seed_repo_assimilation_v135_report.json
+seed_repo_assimilation_v135_lessons.jsonl
+seed_v131_135_gate_report.json
+
+# Seed v135.1 voice calibration runtime
+seed_voice_calibration_v1351.jsonl
+seed_v1351_voice_calibration_gate_report.json
+
+# Seed v135.2 intent runtime
+seed_voice_intent_normalizer_v1352.jsonl
+seed_v1352_intent_gate_report.json

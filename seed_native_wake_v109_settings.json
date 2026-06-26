@@ -1,0 +1,7 @@
+{
+    "version": "v109.0.0",
+    "preferred": "openwakeword",
+    "fallback": "v107_matcher",
+    "store_raw_audio": false,
+    "custom_model_path": ""
+}

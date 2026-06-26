@@ -1,0 +1,7 @@
+{
+    "version": "v126.0.0",
+    "enabled": false,
+    "mac_host": "127.0.0.1",
+    "wake_engine": "openWakeWord_or_v107_fallback",
+    "store_raw_audio": false
+}

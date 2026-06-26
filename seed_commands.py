@@ -1809,3 +1809,19 @@ try:
         return _seed_v92_106_previous_handle_chat_command(user_message, *args, **kwargs)
 except Exception:
     pass
+
+# v108-v122 mega evolution natural router.
+try:
+    _seed_v108_122_previous_handle_chat_command = handle_chat_command
+    def handle_chat_command(user_message, *args, **kwargs):
+        try:
+            from seed_natural_intent_router_v108_122 import handle_natural_intent_v108_122
+            handled = handle_natural_intent_v108_122(user_message)
+            if handled == "handled":
+                return "handled"
+        except Exception as error:
+            print(f"v108-v122 natural router error: {error}")
+            return "handled"
+        return _seed_v108_122_previous_handle_chat_command(user_message, *args, **kwargs)
+except Exception:
+    pass

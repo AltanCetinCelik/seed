@@ -1,0 +1,28 @@
+{
+    "version": "v131.1.0",
+    "faster_whisper_model": "base",
+    "language": "auto",
+    "record_seconds": 5,
+    "sample_rate": 16000,
+    "store_raw_audio": false,
+    "delete_audio_after_transcribe": true,
+    "timeout_seconds": 180,
+    "avfoundation_audio_device": ":1",
+    "audio_device_index": "1",
+    "min_transcript_chars": 8,
+    "min_transcript_words": 2,
+    "bad_transcript_phrases": [
+        "you",
+        "thank you",
+        "thanks",
+        "okay",
+        "ok",
+        ".",
+        "uh",
+        "um",
+        "hmm"
+    ],
+    "repeat_if_empty": true,
+    "mean_volume_warn_below_db": -45.0,
+    "max_volume_warn_below_db": -35.0
+}

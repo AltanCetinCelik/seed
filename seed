@@ -1,3 +1,5 @@
-#!/usr/bin/env bash
-cd "$(dirname "$0")"
-python seed_runtime_v83.py start "$@"
+#!/usr/bin/env python3
+import sys,subprocess
+cmd=sys.argv[1] if len(sys.argv)>1 else "status"
+map={"status":["python","seed_v123_130_mega.py","status"],"gate":["python","seed_v123_130_gate.py"],"dashboard":["python","seed_dashboard_v106.py","start"],"avatar":["python","seed_avatar2_v129.py","start"],"backup":["python","seed_release_packaging_v130.py","backup"]}
+subprocess.run(map.get(cmd,["python","seed_v123_130_mega.py","status"]))

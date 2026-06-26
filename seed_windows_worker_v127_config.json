@@ -1,0 +1,12 @@
+{
+    "version": "v127.0.0",
+    "enabled": false,
+    "host": "",
+    "capabilities": [
+        "gpu_vision",
+        "coding",
+        "batch_rag",
+        "long_research"
+    ],
+    "transport": "future_http_or_shared_folder"
+}
