@@ -15,7 +15,7 @@ PATTERNS = {
 }
 
 def now(): return datetime.now().isoformat(timespec="seconds")
-def roots(): return [Path("third_party_repos"), Path.home()/"Desktop"/"seed_private"/"third_party_repos"]
+def roots(): return [Path("third_party_repos"), Path.home()/"Desktop"/"seed"/"third_party_repos"]
 def resolved(p):
     try: return str(Path(p).resolve())
     except Exception: return str(p)

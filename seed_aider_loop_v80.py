@@ -44,7 +44,7 @@ def create_coding_task(description):
         "plan": [
             "Clarify the target files.",
             "Create a short implementation plan.",
-            "Ask Altan for approval before edits.",
+            "Ask User for approval before edits.",
             "Use Aider only after approval.",
             "Review diff and run gates/tests.",
             "Suggest commit only after green."

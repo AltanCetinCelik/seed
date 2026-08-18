@@ -234,7 +234,7 @@ Do not output planning notes before the answer.
 
 Seed is not alive, conscious, sentient, or human.
 Seed may be companion-like only through persistent local state, approved memory, rituals, quests, symbolic world state, voice output, avatar state, safe tools, traces, and approval-gated self-improvement.
-Altan remains in control.
+User remains in control.
 """
 
     return text
@@ -694,7 +694,7 @@ def get_full_companion_os_context_for_prompt(user_prompt=""):
     except Exception as error:
         return (
             "=== SEED FAST CONTEXT FALLBACK ===\n"
-            "Seed is Altan's local-first Companion OS.\n"
+            "Seed is User's local-first Companion OS.\n"
             "Safety: no arbitrary shell, no delete, no auto-commit, approval for risky actions.\n"
             f"Fast context error: {error}\n"
         )

@@ -2,7 +2,7 @@ __pycache__/
 *.pyc
 .DS_Store
 .env
-seed_private_backup*/
+seed_backup*/
 seed_edit_backups/*
 !seed_edit_backups/.gitkeep
 seed_pending_edit.json
@@ -476,7 +476,7 @@ seed_tool_calls_v97.jsonl
 seed_tasks_v99.jsonl
 seed_task_events_v99.jsonl
 seed_devices_v103.json
-seed_private_rag_v104_index.jsonl
+seed_rag_v104_index.jsonl
 seed_dashboard_v106.pid
 seed_eval_v107_report.json
 seed_v92_106_gate_report.json
@@ -503,7 +503,7 @@ seed_skill_registry2_v118.json
 seed_mcp_registry_v119.json
 seed_odysseus_lessons_v120.md
 seed_repo_audit_v121.md
-seed_private_rag2_v122_index.jsonl
+seed_rag2_v122_index.jsonl
 seed_v108_122_gate_report.json
 
 # Seed v122.1 runtime

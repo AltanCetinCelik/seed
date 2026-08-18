@@ -209,7 +209,7 @@
     },
     {
         "type": "technical_progress",
-        "content": "Seed's memory system became more companion-like because Altan no longer has to manually classify every memory; Seed can draft the classification while Altan keeps final approval.",
+        "content": "Seed's memory system became more companion-like because User no longer has to manually classify every memory; Seed can draft the classification while User keeps final approval.",
         "importance": 5,
         "created_at": "2026-06-22T09:05:00"
     },

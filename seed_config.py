@@ -205,7 +205,7 @@ LOCAL_ALLOWED_APPS = [
 ]
 
 LOCAL_ALLOWED_FOLDERS = [
-    "~/Desktop/seed_private",
+    "~/Desktop/seed",
     "~/Desktop",
     "~/Downloads"
 ]
@@ -666,7 +666,7 @@ ACTIVE_VOICE_INCOMPLETE_PHRASES = [
 # Seed v2.1.4 Voice Accuracy + Voice Brain Quality Hotfix
 SEED_VOICE_AUDIO_CLEANUP_ENABLED = True
 SEED_VOICE_LANGUAGE_HINT = None
-SEED_VOICE_INITIAL_PROMPT = "Altan is talking to Seed, a local AI companion. Common words: Seed, Altan, Ollama, repo, GitHub, agent, browser, memory, voice, MacBook, Raspberry Pi, Turkish, English."
+SEED_VOICE_INITIAL_PROMPT = "User is talking to Seed, a local AI companion. Common words: Seed, User, Ollama, repo, GitHub, agent, browser, memory, voice, MacBook, Raspberry Pi, Turkish, English."
 SEED_VOICE_LOW_CONFIDENCE_RERUN = True
 SEED_VOICE_LOW_CONFIDENCE_MODEL = "small"
 SEED_VOICE_MAX_SPOKEN_ANSWER_SENTENCES = 4

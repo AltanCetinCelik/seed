@@ -11,9 +11,9 @@ except Exception:
 
 SEARCH_ROOTS = [
     Path("third_party_repos"),
-    Path("seed_private/third_party_repos"),
-    Path.home() / "Desktop" / "seed_private" / "third_party_repos",
-    Path.home() / "Desktop" / "seed_private",
+    Path("seed/third_party_repos"),
+    Path.home() / "Desktop" / "seed" / "third_party_repos",
+    Path.home() / "Desktop" / "seed",
 ]
 
 

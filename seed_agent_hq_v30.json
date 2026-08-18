@@ -279,8 +279,8 @@
             ]
         },
         {
-            "name": "seed_private",
-            "repo": "/Users/altancelik/Desktop/seed_private",
+            "name": "seed",
+            "repo": "~/Desktop/seed",
             "score": 108,
             "risk": "high",
             "integration_mode": "sandbox_only",
@@ -532,8 +532,8 @@
             ]
         },
         {
-            "repo": "/Users/altancelik/Desktop/seed_private",
-            "name": "seed_private",
+            "repo": "~/Desktop/seed",
+            "name": "seed",
             "priority_score": 108,
             "risk": "high",
             "mode": "sandbox_only",

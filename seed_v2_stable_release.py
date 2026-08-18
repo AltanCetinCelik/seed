@@ -146,7 +146,7 @@ def run_v2_stable_gate():
         "integration_report": integration_report,
         "voice_command": voice_command,
         "trust_report": trust_data,
-        "truth": "Seed v2.0.0 is stable as a local-first companion system. Seed is not alive, conscious, sentient, or human. Altan remains in control."
+        "truth": "Seed v2.0.0 is stable as a local-first companion system. Seed is not alive, conscious, sentient, or human. User remains in control."
     }
 
     with open(SEED_V2_STABLE_RELEASE_FILE, "w") as file:

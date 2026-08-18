@@ -31,7 +31,7 @@ def build_skill_plan_prompt(goal):
     return f"""
 You are Seed's Skill OS planner.
 
-Altan's goal:
+User goal:
 {goal}
 
 Available Seed skills and capabilities:

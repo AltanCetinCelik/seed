@@ -28,7 +28,7 @@ TEXT_EXTENSIONS = {
 SKIP_DIRS = {
     ".git", "__pycache__", ".venv", "venv", "node_modules",
     "seed_agent_runs", ".mypy_cache", ".pytest_cache",
-    "seed_private_backup", "dist", "build"
+    "seed_backup", "dist", "build"
 }
 
 

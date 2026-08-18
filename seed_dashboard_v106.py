@@ -10,7 +10,7 @@ PORT=8806
 
 GROUPS={
     "Command":[("Supervisor","seed_supervisor_v92","supervisor_status"),("Doctor","seed_doctor_v105","diagnose"),("Approval Center","seed_action_approval_v107","status"),("Proactive Rhythm","seed_proactive_rhythm_v108","status")],
-    "Intelligence":[("Memory Garden 3","seed_memory_garden3_v112","status"),("Memory Gate","seed_memory_gate_v113","status"),("Deep Research","seed_deep_research_v123","status"),("Knowledge Graph","seed_knowledge_graph_v124","status"),("Private RAG 2","seed_private_rag2_v122","status"),("Project Memory","seed_project_memory_v114","status")],
+    "Intelligence":[("Memory Garden 3","seed_memory_garden3_v112","status"),("Memory Gate","seed_memory_gate_v113","status"),("Deep Research","seed_deep_research_v123","status"),("Knowledge Graph","seed_knowledge_graph_v124","status"),("Private RAG 2","seed_rag2_v122","status"),("Project Memory","seed_project_memory_v114","status")],
     "Voice / Body":[("Native Wake","seed_native_wake_v109","status"),("STT","seed_stt_v110","status"),("TTS","seed_tts_v111","status"),("Screen Understanding","seed_screen_understanding_v116","status"),("Operator 2","seed_operator2_v115","status"),("Avatar 2","seed_avatar2_v129","status")],
     "Expansion":[("Device Router","seed_device_router_v125","status"),("Pi Satellite","seed_pi_satellite_v126","status"),("Windows Worker","seed_windows_worker_v127","status"),("Skill Registry","seed_skill_registry2_v118","status"),("Safe MCP Bridge","seed_mcp_bridge_v119","status"),("Repo Audit","seed_repo_audit_v121","status"),("Release Packaging","seed_release_packaging_v130","status")]
 }

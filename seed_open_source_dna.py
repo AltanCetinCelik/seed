@@ -494,7 +494,7 @@ def build_repo_audit_prompt(repo):
     return f"""
 You are Seed's open-source DNA auditor.
 
-Seed is a local-first private companion system built by Altan.
+Seed is a local-first private companion system built by User.
 Seed has memory, semantic memory, smart memory capture, self-editing with approval gates, an agent kernel, HUD, and local Ollama cognition.
 
 Audit this cloned open-source repo for ideas Seed can borrow.

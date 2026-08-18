@@ -20,7 +20,7 @@ def now_timestamp():
 FRIEND_ADVICE_DEFAULTS = [
     {
         "id": "friend-001",
-        "source": "Altan/friend repo-tool advice",
+        "source": "User/friend repo-tool advice",
         "title": "Do not install everything blindly",
         "summary": "Seed should know the arsenal but route tools through approval, sandboxing, and tests.",
         "principle": "Capability awareness is good; uncontrolled execution is bad.",
@@ -28,7 +28,7 @@ FRIEND_ADVICE_DEFAULTS = [
     },
     {
         "id": "friend-002",
-        "source": "Altan/friend repo-tool advice",
+        "source": "User/friend repo-tool advice",
         "title": "Use coding agents only through safe edit flow",
         "summary": "OpenHands, SWE-agent, Aider, and Cline-style flows should be treated as write-capable coding tools that need approval and tests.",
         "principle": "Coding tools can edit files; they must be approval-gated and rollback-aware.",
@@ -36,7 +36,7 @@ FRIEND_ADVICE_DEFAULTS = [
     },
     {
         "id": "friend-003",
-        "source": "Altan/friend repo-tool advice",
+        "source": "User/friend repo-tool advice",
         "title": "Memory should upgrade gradually",
         "summary": "Seed currently has JSON semantic memory. Vector memory should be treated as an upgrade path using Mem0, Qdrant, pgvector, or LlamaIndex.",
         "principle": "Do not replace working memory all at once; add retrieval layers first.",
@@ -44,7 +44,7 @@ FRIEND_ADVICE_DEFAULTS = [
     },
     {
         "id": "friend-004",
-        "source": "Altan/friend repo-tool advice",
+        "source": "User/friend repo-tool advice",
         "title": "Voice must remain explicit",
         "summary": "LiveKit, Pipecat, faster-whisper, and TTS systems are useful, but Seed must not become secretly always-listening.",
         "principle": "Voice is interface output/input, not consciousness.",
@@ -52,7 +52,7 @@ FRIEND_ADVICE_DEFAULTS = [
     },
     {
         "id": "friend-005",
-        "source": "Altan/friend repo-tool advice",
+        "source": "User/friend repo-tool advice",
         "title": "Browser and external tools require permission",
         "summary": "browser-use and MCP browser/server tools can be powerful, but external web/account actions must require explicit permission.",
         "principle": "External action needs clear user approval.",

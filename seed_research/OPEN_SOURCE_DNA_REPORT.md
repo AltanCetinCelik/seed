@@ -735,7 +735,7 @@ By carefully studying and adapting the ideas from OpenClaw, you can create a rob
 - README: README.md
 - License: LICENSE
 
-Best use: Local-first private companion system built by Altan, providing memory, semantic memory, smart memory capture, self-editing with approval gates, an agent kernel, HUD, and local Ollama cognition.
+Best use: Local-first private companion system built by User, providing memory, semantic memory, smart memory capture, self-editing with approval gates, an agent kernel, HUD, and local Ollama cognition.
 
 #### Patterns to borrow
 

@@ -3,8 +3,8 @@ import re
 from pathlib import Path
 from datetime import datetime
 
-INDEX = Path("seed_private_rag_v104_index.jsonl")
-SETTINGS = Path("seed_private_rag_v104_settings.json")
+INDEX = Path("seed_rag_v104_index.jsonl")
+SETTINGS = Path("seed_rag_v104_settings.json")
 
 DEFAULTS = {
     "version": "v104.1.0",
@@ -13,11 +13,11 @@ DEFAULTS = {
     "extensions": [".py", ".md", ".txt", ".json"],
     "exclude_dirs": [
         ".git", "__pycache__", "node_modules", ".venv", "venv",
-        "third_party_repos", "seed_checkpoints", "seed_private_backup",
+        "third_party_repos", "seed_checkpoints", "seed_backup",
         "seed_mac_body_v88_screens", "seed_ambient_vision_v89_temp"
     ],
     "exclude_files": [
-        "seed_private_rag_v104_index.jsonl",
+        "seed_rag_v104_index.jsonl",
         "seed_trace_v95.jsonl",
         "seed_errors_v95.jsonl",
         "seed_actions_v95.jsonl",

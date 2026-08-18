@@ -193,7 +193,7 @@ def make_header(console):
     title.append("  •  Local Companion System", style="grey70")
 
     subtitle = Text(
-        "Memory-aware • Local-first • Ollama-powered • Built by Altan",
+        "Memory-aware • Local-first • Ollama-powered • Built by User",
         style="grey70"
     )
 

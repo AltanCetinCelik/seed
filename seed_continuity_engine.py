@@ -235,7 +235,7 @@ def build_recall_pack(chat_state=None):
         prompt = f"""
 You are Seed's Continuity Engine.
 
-Build a recall pack for Altan and Seed.
+Build a recall pack for User and Seed.
 
 Seed is not alive or conscious.
 Seed is a local companion system that grows through memory, timeline, rituals, quests, world state, and approved actions.
@@ -299,10 +299,10 @@ def where_were_we(chat_state=None):
     context = build_continuity_context()
 
     if not LLM_AVAILABLE:
-        response = "We are building Seed into Altan's local companion system, with continuity, memory, world, safety, and approved agency."
+        response = "We are building Seed into User's local companion system, with continuity, memory, world, safety, and approved agency."
     else:
         prompt = f"""
-Answer Altan: where were we?
+Answer User: where were we?
 
 Use only Seed continuity context.
 Do not pretend consciousness.
@@ -334,7 +334,7 @@ def what_changed(chat_state=None):
         }, indent=2)
     else:
         prompt = f"""
-Answer Altan: what changed recently in Seed?
+Answer User: what changed recently in Seed?
 
 Use timeline, events, recall packs, and v2 score.
 Do not hallucinate.
@@ -370,7 +370,7 @@ Rules:
 - Seed is not alive or conscious.
 - Be direct and specific.
 - If context does not support an answer, say so.
-- Tie answer to Altan and Seed's shared journey when relevant.
+- Tie answer to User and Seed's shared journey when relevant.
 """
 
     response = ask_llm(prompt, task_type="chat", runtime_context=chat_state)
@@ -424,7 +424,7 @@ def create_life_timeline_summary(chat_state=None):
         summary = json.dumps(state["continuity"].get("timeline", []), indent=2)
     else:
         prompt = f"""
-Create a Life Timeline summary for Seed and Altan.
+Create a Life Timeline summary for Seed and User.
 
 Timeline:
 {json.dumps(state["continuity"].get("timeline", []), indent=2)}

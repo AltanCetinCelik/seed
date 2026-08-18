@@ -19,7 +19,7 @@ DEFAULTS = {
     "shell_timeout_seconds": 45,
     "log_actions": True,
     "require_confirmation_for_shell": True,
-    "note": "Seed is Altan's private Mac body layer. Actions are local, visible, and logged."
+    "note": "Seed is User's private Mac body layer. Actions are local, visible, and logged."
 }
 
 def now():

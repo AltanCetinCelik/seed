@@ -214,7 +214,7 @@ def default_state():
         "history": [],
         "last_check": None,
         "rules": [
-            "Active voice starts only when Altan launches it.",
+            "Active voice starts only when User launches it.",
             "No secret always-listening.",
             "Wake-word loop is local and explicit.",
             "STT must be local or explicitly approved.",
@@ -637,7 +637,7 @@ def active_voice_loop():
                 active_voice_once()
 
     except KeyboardInterrupt:
-        print("\nActive voice listener stopped by Altan.")
+        print("\nActive voice listener stopped by User.")
 
 
 def active_voice_install_plan():
@@ -665,7 +665,7 @@ def show_active_voice_history():
     print("\n=== ACTIVE VOICE HISTORY ===")
     for item in state.get("history", [])[-20:]:
         print(f"\n{item.get('created_at')} — {item.get('source')}")
-        print("Altan:", item.get("command_text"))
+        print("User:", item.get("command_text"))
         print("Seed:", item.get("answer"))
 
 

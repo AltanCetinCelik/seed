@@ -11,7 +11,7 @@ MODULES = [
     "seed_safety_ledger_v94.py", "seed_trace_v95.py", "seed_memory_garden2_v96.py",
     "seed_tool_bridge_v97.py", "seed_vision_v98.py", "seed_tasks_v99.py",
     "seed_operator_v100.py", "seed_coder_v101.py", "seed_voice_v102.py",
-    "seed_device_body_v103.py", "seed_private_rag_v104.py", "seed_doctor_v105.py",
+    "seed_device_body_v103.py", "seed_rag_v104.py", "seed_doctor_v105.py",
     "seed_dashboard_v106.py", "seed_action_approval_v107.py", "seed_supervisor_stress_v107.py",
 ]
 
@@ -62,7 +62,7 @@ def run():
         tests["supervisor_error"] = str(e)
 
     try:
-        import seed_private_rag_v104 as rag
+        import seed_rag_v104 as rag
         s = rag.status().get("settings", {})
         ex = set(s.get("exclude_dirs", []))
         tests["rag_focused"] = {"third_party_repos", "seed_checkpoints"}.issubset(ex)

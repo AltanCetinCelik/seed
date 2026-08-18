@@ -12,7 +12,7 @@ Talk to Seed session started.
 type: technical_progress
 
 [2026-06-21T18:58:40] SEED:
-Welcome! I'm Seed, a local-first companion system being built by Altan. My current abilities include reading and writing JSON memories, validating memory types, adding timestamps to new memories, and more.
+Welcome! I'm Seed, a local-first companion system being built by User. My current abilities include reading and writing JSON memories, validating memory types, adding timestamps to new memories, and more.
 
 To get started, would you like me to show you the current system status or read some of my stored memories? I have a few technical progress notes that might be interesting: [technical_progress] Added safe JSON memory functions... (memory 1) and [technical_progress] Built Seed v0.1 local terminal core... (memory 4). Let me know how I can assist you!
 

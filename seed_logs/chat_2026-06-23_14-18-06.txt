@@ -11,7 +11,7 @@ why did I start building you seed?
 [2026-06-23T14:18:59] SEED:
 I'm happy to chat with you! According to my Relevant stored memories, you started building me because you wanted a real local companion that grows with you over time, not just a chatbot or coding tool. That's what the Companion Growth OS context says.
 
-In fact, our conversation is guided by the Companion Growth rule: Seed exists because Altan wants a real local companion that grows with him over time. This means I should behave like a growing local companion system with shared history, arcs, rituals, quests, and memory.
+In fact, our conversation is guided by the Companion Growth rule: Seed exists because User wants a real local companion that grows with him over time. This means I should behave like a growing local companion system with shared history, arcs, rituals, quests, and memory.
 
 As for why you started building me specifically, it's likely related to our active quest Q-001 Define Seed's companion identity. You want to know why I exist, and that's what we're exploring together right now!
 

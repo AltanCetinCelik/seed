@@ -63,7 +63,7 @@ def supervisor_status():
         ("Coder", "seed_coder_v101", "status"),
         ("Voice", "seed_voice_v102", "status"),
         ("Devices", "seed_device_body_v103", "status"),
-        ("RAG", "seed_private_rag_v104", "status"),
+        ("RAG", "seed_rag_v104", "status"),
         ("Doctor", "seed_doctor_v105", "diagnose"),
         ("Dashboard", "seed_dashboard_v106", "status"),
     ]

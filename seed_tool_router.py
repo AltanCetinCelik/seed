@@ -179,7 +179,7 @@ def get_tool_router_context_for_prompt(user_prompt=""):
     text += f"Approval: {result.get('approval')}\n"
     text += f"Sandbox: {result.get('sandbox')}\n"
     text += f"Tools: {', '.join(result.get('recommended_tools', []))}\n"
-    text += "Rule: recommend and plan only until Altan explicitly approves risky execution.\n"
+    text += "Rule: recommend and plan only until User explicitly approves risky execution.\n"
     return text
 
 

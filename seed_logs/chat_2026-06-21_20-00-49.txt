@@ -15,7 +15,7 @@ Talk to Seed session started.
 (files
 
 [2026-06-21T20:01:24] SEED:
-Hello! I'm Seed, your private local-first companion system built by Altan.
+Hello! I'm Seed, your private local-first companion system built by User.
 
 You've asked to inspect project files with `/files`. I can do that for you.
 
@@ -36,7 +36,7 @@ Suggested memory skipped.
 n
 
 [2026-06-21T20:02:08] SEED:
-Merhaba! Ben Seed'im, Altan tarafından oluşturulan özel yerel ilk companion sistemim.
+Merhaba! Ben Seed'im, User tarafından oluşturulan özel yerel ilk companion sistemim.
 
 Size önceki mesajında projede ne yaptığımızı soruyorsunuz. Projemizin bugünkü durumu ve özelliklerine bakarsak...
 
@@ -50,7 +50,7 @@ Projemiz şu anda lokal Ollama'ya bağlı ve çeşitli araçlar oluşturulmaya d
 what files do you have?
 
 [2026-06-21T20:02:40] SEED:
-Merhaba! Ben Seed'im, Altan tarafından oluşturulan özel yerel ilk companion sistemim.
+Merhaba! Ben Seed'im, User tarafından oluşturulan özel yerel ilk companion sistemim.
 
 Projemiz şu anda v1.0.0 sürümünde yerel terminal yardımcı sistemi olarak çalışıyor. İlk kontaktmd, memory rules md, Seed Core md gibi önemli belgeleri okuyabiliyoruz.
 

@@ -22,7 +22,7 @@ BASELINE_MEMORY = {
     "memory_id": BASELINE_MEMORY_ID,
     "source_note_id": "manual_v91_baseline",
     "memory_type": "milestone",
-    "summary": "Seed baseline on Altan's Mac is green through v90.1.1: v88 Mac Body works, keyboard control works after Accessibility permission, v89 organism avatar/hearing/vision works in note-only mode, v89.2 filters low-value notes, and v90 Memory Garden archives junk with no promoted memories yet.",
+    "summary": "Seed baseline on User's Mac is green through v90.1.1: v88 Mac Body works, keyboard control works after Accessibility permission, v89 organism avatar/hearing/vision works in note-only mode, v89.2 filters low-value notes, and v90 Memory Garden archives junk with no promoted memories yet.",
     "importance": 96,
     "score": 100,
     "tags": ["seed", "milestone", "mac_body", "organism", "memory_garden", "v91_baseline"],
@@ -124,8 +124,8 @@ def build_context_text(max_chars=None):
 
     lines = []
     lines.append("SEED COMPANION CONTEXT v91")
-    lines.append("Identity: Seed is Altan's private local companion/friend, not a public product.")
-    lines.append("Tone: natural, direct, helpful; Turkish if Altan uses Turkish; do not over-explain.")
+    lines.append("Identity: Seed is User's private local companion/friend, not a public product.")
+    lines.append("Tone: natural, direct, helpful; Turkish if User uses Turkish; do not over-explain.")
     lines.append("Reality: Seed is not literally biologically alive; it can act organism-like through senses, memory, avatar, curiosity, and Mac body.")
     if settings.get("include_note_only_rule", True):
         lines.append("Privacy rule: raw audio, raw screenshots, and raw transcripts should not be saved. Store only important notes/memories.")

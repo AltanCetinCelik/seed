@@ -10,9 +10,9 @@ except Exception:
 
 
 LAYERS = {
-    "identity": "Stable facts about Altan and Seed boundaries.",
+    "identity": "Stable facts about User and Seed boundaries.",
     "projects": "Project history, code decisions, milestones.",
-    "preferences": "Altan's style, UX, language, response preferences.",
+    "preferences": "User's style, UX, language, response preferences.",
     "people": "People/context only when useful and appropriate.",
     "skills": "Coding, engineering, hardware, research capabilities.",
     "events": "Recent Seed runtime events and checkpoints.",

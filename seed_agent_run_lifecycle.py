@@ -186,7 +186,7 @@ def create_agent_run(task, requested_agent=None, mode=None):
             "Approve with the displayed approval token.",
             "Run supervised execution.",
             "Execution may run safe internal diagnostics and prepare agent files.",
-            "External agents remain locked unless Altan explicitly asks for that later.",
+            "External agents remain locked unless User explicitly asks for that later.",
             "Show results and verification.",
             "No auto-commit."
         ],

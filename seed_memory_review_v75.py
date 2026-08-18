@@ -52,7 +52,7 @@ def score(text, source=""):
 def why(text, source=""):
     low=str(text).lower(); r=[]
     if "seed" in low: r.append("It affects Seed continuity or architecture.")
-    if "altan" in low: r.append("It is about Altan specifically.")
+    if "altan" in low: r.append("It is about User specifically.")
     if "friend" in low or "friend" in str(source).lower(): r.append("It came from friend/external advice.")
     if any(w in low for w in ["voice","avatar","memory","panel","curiosity"]): r.append("It matches active v1 feature work.")
     return " ".join(r) or "It may be useful context, but should be reviewed."
@@ -83,7 +83,7 @@ def raw_candidates(limit=120):
         "Seed v74.0.0 Embodied Companion panel works locally.",
         "Seed v73.1.1 voice recording and transcription route into Seed local chat successfully.",
         "Seed v72 Presence Max allows simulated emotional expression and relevant life advice.",
-        "Altan wants Seed to be bigger, more present, voice-enabled, avatar-enabled, curious, and personally relevant."
+        "User wants Seed to be bigger, more present, voice-enabled, avatar-enabled, curious, and personally relevant."
     ]:
         found.append({"source":"v75_milestone_seed","text":txt,"raw":{"type":"milestone"}})
 

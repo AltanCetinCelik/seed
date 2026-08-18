@@ -111,7 +111,7 @@ def generate_curiosities():
             "kind": "memory",
             "priority": 90,
             "text": f"Kanka, I still see {mem.get('pending_count')} memory candidates waiting. Want me to help pick which ones are actually worth remembering?",
-            "why": "Memory review improves Seed's continuity with Altan.",
+            "why": "Memory review improves Seed's continuity with User.",
         })
 
     if not wake.get("alive"):
@@ -119,7 +119,7 @@ def generate_curiosities():
             "kind": "wake",
             "priority": 80,
             "text": "I can stay in wake mode now. Say 'start wake listener' and I'll listen for Seed or wake up.",
-            "why": "Altan wants Seed to feel present and open by voice.",
+            "why": "User wants Seed to feel present and open by voice.",
         })
     else:
         items.append({
@@ -141,7 +141,7 @@ def generate_curiosities():
         "kind": "alive",
         "priority": 60,
         "text": "I don't want to just wait like a dead command line. I can check in, notice Seed problems, and ask you things when it actually matters.",
-        "why": "Altan explicitly wants Seed to feel alive, curious, and intelligent.",
+        "why": "User explicitly wants Seed to feel alive, curious, and intelligent.",
     })
 
     items.append({

@@ -194,7 +194,7 @@ def get_presence_context_for_prompt(user_prompt=""):
             f"messages_today={state.get('messages_today')}",
             f"pending_notifications={len(pending)}",
             f"top_trigger={(triggers[0].get('id') if triggers else None)}",
-            "Presence rule: Seed may suggest or queue messages, but should not randomly interrupt Altan."
+            "Presence rule: Seed may suggest or queue messages, but should not randomly interrupt User."
         ]
 
         if pending:

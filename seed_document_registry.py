@@ -79,7 +79,7 @@ def default_registry():
             "AnythingLLM, and LlamaIndex-style knowledge systems."
         ),
         "privacy_rule": (
-            "Documents are not registered automatically. Altan must add them explicitly."
+            "Documents are not registered automatically. User must add them explicitly."
         ),
         "documents": [],
         "counter": 0
@@ -372,7 +372,7 @@ Text:
 Output:
 1. short summary
 2. important facts
-3. why it may matter to Seed/Altan
+3. why it may matter to Seed/User
 4. suggested memory layer
 5. safety/privacy caveat
 """
@@ -561,7 +561,7 @@ def get_document_registry_context_for_prompt(user_prompt=""):
 
     text += """
 Document Registry rule:
-Only use documents that Altan explicitly registered.
+Only use documents that User explicitly registered.
 Do not claim broad filesystem knowledge.
 If a document has no summary, say it needs summarization/indexing first.
 """

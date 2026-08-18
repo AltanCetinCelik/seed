@@ -1,8 +1,8 @@
 import json,re
 from pathlib import Path
 from datetime import datetime
-INDEX=Path("seed_private_rag2_v122_index.jsonl")
-SETTINGS=Path("seed_private_rag2_v122_settings.json")
+INDEX=Path("seed_rag2_v122_index.jsonl")
+SETTINGS=Path("seed_rag2_v122_settings.json")
 DEFAULT={"version":"v122.0.0","extensions":[".py",".md",".txt",".json"],"max_file_kb":220,"chunk_chars":1200,"modes":{"seed":{"roots":["."],"exclude_dirs":["third_party_repos","seed_checkpoints",".git","__pycache__","node_modules","venv",".venv"]},"audit":{"roots":["third_party_repos"],"exclude_dirs":[".git","node_modules","venv",".venv"]}}}
 def now(): return datetime.now().isoformat(timespec="seconds")
 def settings():

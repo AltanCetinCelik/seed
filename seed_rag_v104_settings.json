@@ -18,14 +18,14 @@
         "seed_ambient_vision_v89_temp",
         "seed_checkpoints",
         "seed_mac_body_v88_screens",
-        "seed_private_backup",
+        "seed_backup",
         "third_party_repos",
         "venv"
     ],
     "exclude_files": [
         "seed_actions_v95.jsonl",
         "seed_errors_v95.jsonl",
-        "seed_private_rag_v104_index.jsonl",
+        "seed_rag_v104_index.jsonl",
         "seed_tool_calls_v97.jsonl",
         "seed_trace_v95.jsonl"
     ]

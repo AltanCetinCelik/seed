@@ -153,7 +153,7 @@ def propose_agent_execution(task, capability, tool_id=None):
         "safe_plan": [
             "Create backup or git branch.",
             "Prepare exact command/tool plan.",
-            "Ask Altan for approval.",
+            "Ask User for approval.",
             "Run in repo sandbox only.",
             "Run tests.",
             "Show diff/results.",

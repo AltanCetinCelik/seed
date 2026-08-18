@@ -19,7 +19,7 @@
         "Moltbot AI Assistant",
         "Open WebUI"
     ],
-    "purpose": "Let Seed propose, plan, diagnose, and prepare its own evolution while keeping Altan in control.",
+    "purpose": "Let Seed propose, plan, diagnose, and prepare its own evolution while keeping User in control.",
     "risk": "dangerous",
     "approval_rule": "Seed may propose and prepare. It must not silently apply code, run risky commands, or claim sentience.",
     "capabilities": [

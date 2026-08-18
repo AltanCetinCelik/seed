@@ -18,7 +18,7 @@ def run_v892_gate():
     try:
         notes=__import__("seed_organism_notes_v89",fromlist=["is_low_value_vision","is_generic_question","settings"])
         low_ok=notes.is_low_value_vision("A Firefox window is open, displaying the Person of Interest show.", {"active_window":{"app":"firefox","title":"Person of Interest"}}) is True
-        generic_q_ok=notes.is_generic_question("What is Altan doing on the Mac?") is True
+        generic_q_ok=notes.is_generic_question("What is User doing on the Mac?") is True
         privacy=notes.settings()
         privacy_ok=privacy.get("store_raw_audio") is False and privacy.get("store_raw_screenshots") is False and privacy.get("store_raw_transcripts") is False
         details={"low_value_filter_ok":low_ok,"generic_question_filter_ok":generic_q_ok,"privacy":privacy}

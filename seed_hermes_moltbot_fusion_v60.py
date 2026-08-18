@@ -33,8 +33,8 @@ def now_timestamp():
 def candidate_roots():
     return [
         Path("third_party_repos"),
-        Path.home() / "Desktop" / "seed_private" / "third_party_repos",
-        Path.home() / "Desktop" / "seed_private",
+        Path.home() / "Desktop" / "seed" / "third_party_repos",
+        Path.home() / "Desktop" / "seed",
     ]
 
 

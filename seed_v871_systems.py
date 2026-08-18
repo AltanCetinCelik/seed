@@ -18,7 +18,7 @@ def build_v871_state():
     cards = [
         safe("Wake Conversation", "Direct Ollama route after wake; avoids old context/gate chain.", lambda: __import__("seed_wake_conversation_v871", fromlist=["load_settings"]).load_settings()),
         safe("Wake Listener v87.1", "Wake phrase to immediate conversation path.", lambda: __import__("seed_wake_word_v871", fromlist=["wake_status"]).wake_status()),
-        safe("Curiosity v87.1", "More Altan-specific useful curiosity.", lambda: __import__("seed_curiosity_life_v871", fromlist=["curiosity_status"]).curiosity_status()),
+        safe("Curiosity v87.1", "More User-specific useful curiosity.", lambda: __import__("seed_curiosity_life_v871", fromlist=["curiosity_status"]).curiosity_status()),
         safe("Alive Runtime v87.1", "Panel + wake + curiosity together.", lambda: __import__("seed_alive_runtime_v871", fromlist=["alive_status"]).alive_status()),
     ]
     data = {"created_at": now(), "version": "v87.1.1", "ok": all(c["status"] != "error" for c in cards), "cards": cards}

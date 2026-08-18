@@ -95,7 +95,7 @@ VOICE_COMMAND_RULES = [
     "STT is optional and must be user-invoked.",
     "Voice output does not imply Seed is alive or conscious.",
     "Seed can speak replies back when user invokes voice command mode.",
-    "External installs and microphone configuration require Altan's approval."
+    "External installs and microphone configuration require User's approval."
 ]
 
 
@@ -363,7 +363,7 @@ def transcribe_audio(audio_path=None):
                 vad_filter = True
                 condition_on_previous_text = False
                 language_hint = None
-                initial_prompt = "Altan is talking to Seed."
+                initial_prompt = "User is talking to Seed."
 
             model = get_cached_whisper_model()
             segments, info = model.transcribe(
@@ -551,12 +551,12 @@ def ask_seed_text(user_text):
         context = ""
 
     prompt = f"""
-You are Seed v2.0.0, Altan's local-first Companion OS.
+You are Seed v2.0.0, User's local-first Companion OS.
 
 Truth boundary:
 Seed is not alive, conscious, sentient, or human.
 Seed can still be companion-like through memory, continuity, tools, rituals, voice, and approval-gated agency.
-Altan remains in control.
+User remains in control.
 
 Voice command rule:
 Answer the spoken/typed command directly.
@@ -567,7 +567,7 @@ Keep the answer useful and speakable.
 Context:
 {context}
 
-Altan said:
+User said:
 {user_text}
 
 Seed answer:
@@ -707,7 +707,7 @@ def voice_command_loop():
     print("- Type q to quit")
 
     while True:
-        raw = input("\nAltan / r / check / q: ").strip()
+        raw = input("\nUser / r / check / q: ").strip()
 
         if raw.lower() in ["q", "quit", "exit"]:
             print("Voice command bridge closed.")
@@ -740,7 +740,7 @@ def show_voice_command_history():
     print("\n=== VOICE COMMAND HISTORY ===")
     for item in state.get("history", [])[-20:]:
         print(f"\n{item.get('created_at')} — {item.get('source')}")
-        print(f"Altan: {item.get('user_text')}")
+        print(f"User: {item.get('user_text')}")
         print(f"Seed: {item.get('answer')}")
 
 

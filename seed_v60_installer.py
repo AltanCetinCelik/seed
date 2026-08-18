@@ -36,7 +36,7 @@ BENCH_PROMPTS = {
     "coding": "Give a concise patch plan to improve a Python CLI UX.",
     "reasoning": "Think carefully and give 3 tradeoffs of local-first AI assistants.",
     "turkish": "Türkçe doğal ve kısa cevap ver: Seed bugün neye odaklanmalı?",
-    "memory_extraction": "Extract one durable memory from: Altan wants Seed to be natural and not command-heavy.",
+    "memory_extraction": "Extract one durable memory from: User wants Seed to be natural and not command-heavy.",
 }
 
 
@@ -271,8 +271,8 @@ def now_timestamp():
 def candidate_roots():
     return [
         Path("third_party_repos"),
-        Path.home() / "Desktop" / "seed_private" / "third_party_repos",
-        Path.home() / "Desktop" / "seed_private",
+        Path.home() / "Desktop" / "seed" / "third_party_repos",
+        Path.home() / "Desktop" / "seed",
     ]
 
 

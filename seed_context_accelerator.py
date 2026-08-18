@@ -76,7 +76,7 @@ def get_fast_companion_context(user_prompt=""):
         if looks_like_terminal_block(user_prompt):
             terminal_note = (
                 "\nThe latest user input looks like terminal commands. "
-                "Do not send it to the LLM as a normal task. Tell Altan to run it in macOS Terminal.\n"
+                "Do not send it to the LLM as a normal task. Tell User to run it in macOS Terminal.\n"
             )
     except Exception:
         pass
@@ -93,9 +93,9 @@ def get_fast_companion_context(user_prompt=""):
 
     lines = [
         "=== SEED FAST CONTEXT v5.1 ===",
-        "Seed is Altan's local-first Companion OS project.",
+        "Seed is User's local-first Companion OS project.",
         "Seed must never claim to be alive, conscious, sentient, human, or to have experiences.",
-        "Altan remains in control.",
+        "User remains in control.",
         "Normal chat uses fast context only; heavy repo scans and full context are opt-in.",
         terminal_note.strip(),
         "",

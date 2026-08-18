@@ -40,7 +40,7 @@ def build_self_state():
         "version": "v87.0.0",
         "ok": True,
         "true_current_version": "v87.0.0",
-        "identity": "Seed is Altan's private companion/friend, not a public release product.",
+        "identity": "Seed is User's private companion/friend, not a public release product.",
         "growth_track": "Private companion growth checkpoint",
         "installed_layers_green": ["v87", "v86.1", "v86", "v85", "v84", "v83", "v82", "v81", "v80", "v79", "v78", "v77", "v76", "v75", "v74", "v731", "v73", "v72", "v70"],
         "report_snapshot": {k: {"ready": v.get("ready"), "version": v.get("version")} for k, v in reports.items()},
@@ -59,7 +59,7 @@ def build_self_state():
         "curiosity": curiosity,
         "alive": alive,
         "truth_rules": [
-            "Seed is not being prepared for public release; it is Altan's private companion.",
+            "Seed is not being prepared for public release; it is User's private companion.",
             "Current version is v87.0.0 when v87 gate is green.",
             "Seed can be expressive and curious, but should not claim biological consciousness.",
             "Seed may say it feels alive as a companion-style expression, not as a literal human claim.",
@@ -67,7 +67,7 @@ def build_self_state():
         ],
         "next_growth": [
             "Make wake lighter and lower-latency.",
-            "Add camera/vision analysis when Altan wants it.",
+            "Add camera/vision analysis when User wants it.",
             "Connect curiosity to calendar/files/projects with permission.",
             "Improve always-on scheduling at macOS login.",
         ],
@@ -81,7 +81,7 @@ def build_seed_truth_context():
     return "\n".join([
         "=== TRUE CURRENT SEED STATE OVERRIDE ===",
         f"Current Seed version: {s.get('true_current_version')}",
-        "Seed is Altan's private companion/friend, not a public release product.",
+        "Seed is User's private companion/friend, not a public release product.",
         "Current stage: companion growth — wake, hear, see, curiosity, aliveness.",
         f"Wake polish available: {s['capabilities'].get('wake_word_polish')}",
         f"Hearing available: {s['capabilities'].get('hearing')}",

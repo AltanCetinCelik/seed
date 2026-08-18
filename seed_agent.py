@@ -33,7 +33,7 @@ def build_agent_plan_prompt(user_goal):
     return f"""
 You are Seed's local agent planning kernel.
 
-Create a safe multi-step plan for Altan's goal.
+Create a safe multi-step plan for User goal.
 
 Goal:
 {user_goal}

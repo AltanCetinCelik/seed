@@ -236,16 +236,16 @@ def default_companion_os_state():
             "voice, avatar state, and approved self-improvement."
         ),
         "mission": (
-            "Become Altan's real local companion that grows with him over time, "
+            "Become User's real local companion that grows with him over time, "
             "not just a coding assistant, terminal tool, or generic chatbot."
         ),
         "current_phase": "Companion OS Alpha",
         "v2_target_score": COMPANION_OS_V2_TARGET_SCORE,
         "continuity": {
-            "shared_history_title": "Altan and Seed",
+            "shared_history_title": "User and Seed",
             "relationship_notes": [
-                "Altan wants Seed to become a real local companion that grows with him.",
-                "Altan rejects small updates that do not move Seed toward the companion vision.",
+                "User wants Seed to become a real local companion that grows with him.",
+                "User rejects small updates that do not move Seed toward the companion vision.",
                 "Seed should be direct, loyal, serious, useful, and honest.",
                 "Seed must not fake consciousness or human identity."
             ],
@@ -256,7 +256,7 @@ def default_companion_os_state():
                     "type": "origin",
                     "importance": 5,
                     "note": (
-                        "Altan started Seed because he wants a real local companion "
+                        "User started Seed because he wants a real local companion "
                         "that grows with him over time."
                     )
                 }
@@ -291,7 +291,7 @@ def default_companion_os_state():
                     "source_repos": ["Hermes Agent", "Letta", "OpenClaw", "Moltbot AI Assistant"],
                     "success_condition": (
                         "Seed can explain why it exists, what it is becoming, "
-                        "and how it grows with Altan."
+                        "and how it grows with User."
                     )
                 },
                 {
@@ -397,7 +397,7 @@ def default_companion_os_state():
                     {
                         "created_at": now_timestamp(),
                         "name": "First Seed",
-                        "meaning": "The beginning of Seed as Altan's local companion."
+                        "meaning": "The beginning of Seed as User's local companion."
                     }
                 ]
             },
@@ -463,7 +463,7 @@ def default_companion_os_state():
                 "Seed must not silently run dangerous commands.",
                 "Seed must not silently save sensitive memories.",
                 "Risky local actions require approval.",
-                "Altan remains in control."
+                "User remains in control."
             ],
             "permission_traces": [],
             "answer_traces": [],
@@ -851,7 +851,7 @@ Companion OS Alpha rule:
 Seed is not alive or conscious.
 Seed may become more companion-like through continuity, memory, rituals, quests, world state, voice, avatar state, safe agency, self-improvement, and approval-gated tools.
 Use this context for v2 planning, meaningful companion behavior, and serious Seed roadmap decisions.
-Altan remains in control.
+User remains in control.
 """
 
     return text

@@ -10,7 +10,7 @@ def now_timestamp():
 
 BIGGER_MAC_MODELS=["qwen3:14b","qwen2.5-coder:14b"]
 ROLE_CANDIDATES={"fast_chat":["llama3.1:8b","qwen3:8b","gemma3:4b"],"turkish":["qwen3:8b","llama3.1:8b"],"coding":["qwen2.5-coder:7b","qwen2.5-coder:14b","qwen3:8b"],"reasoning":["deepseek-r1:8b","qwen3:8b"],"patch_planning":["qwen2.5-coder:7b","qwen3:8b"],"memory_extraction":["llama3.1:8b","qwen3:8b","gemma3:4b"]}
-BENCH_PROMPTS={"fast_chat":"Answer in one short paragraph: what should Seed improve next?","turkish":"Türkçe doğal cevap ver: Seed bugün neye odaklanmalı?","coding":"Give a concise patch plan to improve a Python CLI UX. Include files and tests.","reasoning":"Give 3 tradeoffs for local-first AI companions. Be precise.","patch_planning":"Plan a safe patch for improving a dashboard UI. Include rollback and test steps.","memory_extraction":"Extract durable memories from: Altan wants Seed natural, not slash-command heavy."}
+BENCH_PROMPTS={"fast_chat":"Answer in one short paragraph: what should Seed improve next?","turkish":"Türkçe doğal cevap ver: Seed bugün neye odaklanmalı?","coding":"Give a concise patch plan to improve a Python CLI UX. Include files and tests.","reasoning":"Give 3 tradeoffs for local-first AI companions. Be precise.","patch_planning":"Plan a safe patch for improving a dashboard UI. Include rollback and test steps.","memory_extraction":"Extract durable memories from: User wants Seed natural, not slash-command heavy."}
 
 def now(): return datetime.now().isoformat(timespec="seconds")
 def ollama(): return shutil.which("ollama")

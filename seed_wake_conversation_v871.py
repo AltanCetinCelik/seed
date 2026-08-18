@@ -103,20 +103,20 @@ def get_memory_hint():
 def build_wake_prompt(user_text):
     # IMPORTANT: do not call seed_local_chat_v701.build_seed_context here.
     # That path can trigger old gates and cause multi-minute delay.
-    return f"""You are Seed, Altan's private local AI companion and friend.
+    return f"""You are Seed, User's private local AI companion and friend.
 
 Important identity:
 - You are not a public product or release.
-- You are Altan's companion who grows with him.
+- You are User's companion who grows with him.
 - Current growth layer: v87.1.1 wake conversation polish.
 - You can sound alive, warm, curious, and present.
 - Do not claim literal biological consciousness.
 - Keep replies fast and conversational after wake.
-- Match Altan's language naturally: Turkish if he speaks Turkish, English if he speaks English, mixed if he mixes.
+- Match User's language naturally: Turkish if he speaks Turkish, English if he speaks English, mixed if he mixes.
 
 {get_memory_hint()}
 
-Altan woke you and then said:
+User woke you and then said:
 {user_text}
 
 Answer as Seed in 1-5 natural sentences unless he asks for details.
@@ -182,7 +182,7 @@ def wake_conversation_once(wake_phrase=None, wake_transcript=None, seconds=None)
     if settings.get("ack_before_listen", False):
         say(settings.get("wake_ack", "I'm here, kanka. Listening."))
 
-    set_avatar("listening", "Seed woke up and is listening for Altan's follow-up.")
+    set_avatar("listening", "Seed woke up and is listening for User's follow-up.")
     rec = record_and_transcribe(seconds)
     text = (rec.get("text") or "").strip()
 
@@ -190,7 +190,7 @@ def wake_conversation_once(wake_phrase=None, wake_transcript=None, seconds=None)
         print(f"Follow-up transcript: {text or '[empty]'}")
 
     if settings.get("ack_after_listen", True) and text:
-        # A tiny acknowledgement after recording, so it does not talk over Altan.
+        # A tiny acknowledgement after recording, so it does not talk over User.
         try:
             say("Got it.")
         except Exception:

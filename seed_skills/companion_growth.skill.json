@@ -14,7 +14,7 @@
     ],
     "purpose": "Maintain Seed's companion growth layer: relationship memory, growth arcs, rituals, quests, identity mirror, memory garden, and companion pulse.",
     "risk": "read_only",
-    "approval_rule": "Saving personal growth observations or sensitive memories requires Altan's approval.",
+    "approval_rule": "Saving personal growth observations or sensitive memories requires User's approval.",
     "capabilities": [
         {
             "id": "companion.status",
@@ -28,7 +28,7 @@
             "name": "Why Seed exists",
             "risk": "read_only",
             "command": "/seed-why",
-            "description": "Explain why Altan started building Seed."
+            "description": "Explain why User started building Seed."
         },
         {
             "id": "companion.pulse",

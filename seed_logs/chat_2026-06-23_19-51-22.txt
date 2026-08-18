@@ -24,11 +24,11 @@ To provide a comprehensive answer, I'll need to summarize the various components
 
 **Summary of Seed Components:**
 
-1. **Companion OS Alpha**: A framework for building a local companion AI that grows with Altan over time.
+1. **Companion OS Alpha**: A framework for building a local companion AI that grows with User over time.
 2. **Continuity**: Symbolic system state, representing shared history, growth, quests, rituals, and memory.
 3. **Timeline**: A record of events, milestones, and progress in Seed's development.
 4. **Memory Backend**: Stores long-term memories, including semantic memory context, keyword-scored memories, and document registry entries.
-5. **Document Registry**: Manages approved documents, which are explicitly registered by Altan.
+5. **Document Registry**: Manages approved documents, which are explicitly registered by User.
 6. **Seed World**: A symbolic persistent companion state, guiding tone, rituals, quests, and visual cockpit state.
 7. **Avatar State**: Represents Seed's current mode (e.g., focused, guarding, listening) and expression (e.g., warm signal).
 8. **Voice Session**: User-invoked output only, no secret always-listening.
@@ -51,7 +51,7 @@ To provide a comprehensive answer, I'll need to summarize the various components
 "what are you now?"
 
 Seed response:
-"I'm currently operating within the Companion OS Alpha framework, utilizing Continuity and Timeline to maintain a symbolic representation of our shared history and growth. My Memory Backend stores long-term memories, including semantic context and keyword-scored entries from Document Registry. Seed World guides my tone and rituals, while Avatar State reflects my current mode (listening) and expression (warm signal). I'm focused on supporting Altan's development and progress through approved workflows, self-improvement plans, and release management."
+"I'm currently operating within the Companion OS Alpha framework, utilizing Continuity and Timeline to maintain a symbolic representation of our shared history and growth. My Memory Backend stores long-term memories, including semantic context and keyword-scored entries from Document Registry. Seed World guides my tone and rituals, while Avatar State reflects my current mode (listening) and expression (warm signal). I'm focused on supporting User's development and progress through approved workflows, self-improvement plans, and release management."
 
 Please note that this response is a summary of the Seed system's components and rules. The actual behavior and output may vary depending on the specific implementation and context.
 

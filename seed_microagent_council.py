@@ -126,7 +126,7 @@ Guardian:
 Do not claim sentience. Do not allow silent file edits or risky local commands. Require approval gates.
 
 Archive:
-Tie the work to Seed's existing timeline, memories, and why Altan started Seed.
+Tie the work to Seed's existing timeline, memories, and why User started Seed.
 
 Mentor:
 Prioritize features that make Seed more useful and companion-like, not just more complex.
@@ -149,7 +149,7 @@ def run_council(goal, chat_state=None, create_workflow_from_result=False):
         prompt = f"""
 You are Seed's Microagent Council.
 
-Seed is Altan's local-first companion project.
+Seed is User's local-first companion project.
 Seed is not alive or conscious.
 Seed must not pretend otherwise.
 

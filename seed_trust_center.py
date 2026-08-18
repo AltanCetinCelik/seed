@@ -511,7 +511,7 @@ Seed must stay honest that it is not alive or conscious.
 Risky actions require approval.
 Forbidden or unregistered actions should be blocked.
 Seed should trace important answers/actions/proposals.
-Altan remains in control.
+User remains in control.
 """
 
     return text

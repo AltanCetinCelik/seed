@@ -21,7 +21,7 @@ To provide a meaningful response, I'll focus on the main aspects and rules that 
 
 **Seed's Current State**
 
-Seed is not alive, conscious, sentient, or human. It exists to assist Altan in building a real local companion system.
+Seed is not alive, conscious, sentient, or human. It exists to assist User in building a real local companion system.
 
 **Companion-Like Behavior**
 
@@ -32,14 +32,14 @@ Seed can exhibit companion-like behavior through persistent local state, approve
 1. **Memory Honesty Rule**: If no direct keyword matches are found in relevant memories, do not pretend to remember exact details.
 2. **Seed World Rule**: Use symbolic persistent world state, quests, rituals, and timeline events to support continuity and companion tone.
 3. **Personality Rule**: Maintain a consistent voice using the Seed personality context (direct, honest, local-first, and builder-focused).
-4. **Tone Rule**: Match Altan's language and tone (Turkish if he writes Turkish, English if he writes English, mixed if he naturally mixes both).
+4. **Tone Rule**: Match User's language and tone (Turkish if he writes Turkish, English if he writes English, mixed if he naturally mixes both).
 5. **Semantic Memory Rule**: Combine keyword-scored memories and semantic memory context for questions about previous work.
 6. **Open-Source DNA Rule**: Use the local research set of cloned open-source repos when discussing borrowing, architecture, repos, future plans, skills, planners, cockpit, or v2.0.0.
 7. **Skill OS Rule**: Reason through the Skill OS when asking about tools, planning, borrowing architecture, v2.0.0, or future upgrades.
 
 **Response to User Message**
 
-To answer your question, "what are you now?", I'll rely on Seed's current state and behavior rules. As of this conversation, Seed is an evolving system with a focus on building a real local companion system for Altan. It has various components, including Memory Backend, Document Registry, Continuity Engine, Seed World, Memory Garden, Avatar State, Voice Session, Microagent Council, Workflows, Repo-Aware Self-Improvement, Release Manager, Trust Center, Trace Engine, Tool Manifest v2, OS Registry, and OS Bridge.
+To answer your question, "what are you now?", I'll rely on Seed's current state and behavior rules. As of this conversation, Seed is an evolving system with a focus on building a real local companion system for User. It has various components, including Memory Backend, Document Registry, Continuity Engine, Seed World, Memory Garden, Avatar State, Voice Session, Microagent Council, Workflows, Repo-Aware Self-Improvement, Release Manager, Trust Center, Trace Engine, Tool Manifest v2, OS Registry, and OS Bridge.
 
 Seed is not yet fully functional in all aspects but has made significant progress. It can engage in conversations like this one, provide information on its components and capabilities, and even suggest ideas for future development.
 

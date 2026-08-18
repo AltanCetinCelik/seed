@@ -40,7 +40,7 @@ def build_v20_state():
         "version": "v20.0.0",
         "ok": all(item.get("ok") for item in modules.values()),
         "release": "Seed v20.0.0 — Sovereign Companion OS MegaCore",
-        "identity_boundary": "Seed is not alive, conscious, sentient, human, or experiencing anything. It is Altan's local-first Companion OS.",
+        "identity_boundary": "Seed is not alive, conscious, sentient, human, or experiencing anything. It is User's local-first Companion OS.",
         "loop": ["understand", "remember", "plan", "ask_approval", "act", "verify", "rollback", "learn"],
         "modules": modules,
         "major_capabilities": [

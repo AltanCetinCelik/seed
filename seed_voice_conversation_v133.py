@@ -46,7 +46,7 @@ def context(text):
     except Exception as e:
         c["memory_error"]=str(e)
     try:
-        import seed_private_rag2_v122 as rag
+        import seed_rag2_v122 as rag
         c["rag"]=rag.search(text,limit=5)
     except Exception as e:
         c["rag_error"]=str(e)

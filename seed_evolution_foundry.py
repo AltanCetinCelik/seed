@@ -116,7 +116,7 @@ AUTONOMY_LEVELS = {
     },
     5: {
         "name": "Approved Executor",
-        "meaning": "Seed may execute only actions Altan explicitly approves through existing approval gates."
+        "meaning": "Seed may execute only actions User explicitly approves through existing approval gates."
     }
 }
 
@@ -183,10 +183,10 @@ def default_autonomy_state():
         "emergency_stop": False,
         "truth": (
             "Seed is not sentient or conscious. Seed may simulate presence and "
-            "maintain persistent agency state, but Altan remains in control."
+            "maintain persistent agency state, but User remains in control."
         ),
         "current_agency_goal": (
-            "Become a serious local companion that grows with Altan through memory, "
+            "Become a serious local companion that grows with User through memory, "
             "presence, safe local control, rituals, quests, and self-improvement."
         ),
         "hard_rules": [
@@ -195,7 +195,7 @@ def default_autonomy_state():
             "Seed must not silently edit files.",
             "Seed must not silently save sensitive memories.",
             "Seed must ask approval before risky actions.",
-            "Seed must keep Altan in control."
+            "Seed must keep User in control."
         ]
     }
 
@@ -290,7 +290,7 @@ def default_foundry_state():
     return {
         "created_at": now_timestamp(),
         "updated_at": now_timestamp(),
-        "active_mission": "Make Seed a real local companion that grows with Altan.",
+        "active_mission": "Make Seed a real local companion that grows with User.",
         "foundry_phase": "Ignition",
         "proposals": [],
         "proposal_counter": 0,
@@ -443,9 +443,9 @@ def build_proposal_prompt():
     return f"""
 You are Seed's Evolution Foundry OS.
 
-Seed is Altan's local-first companion project.
+Seed is User's local-first companion project.
 Seed's purpose is not to become just a coding tool.
-Seed exists to become a real companion system that grows with Altan over time.
+Seed exists to become a real companion system that grows with User over time.
 
 Seed is not sentient or conscious.
 Do not claim it is.
@@ -495,7 +495,7 @@ def fallback_proposals():
     return [
         {
             "title": "Autonomous Improvement Foundry",
-            "meaning": "Seed becomes able to propose, plan, and prepare its own upgrades while Altan stays in control.",
+            "meaning": "Seed becomes able to propose, plan, and prepare its own upgrades while User stays in control.",
             "source_repos": ["Cline", "Aider", "SWE-agent", "mini-SWE-agent", "OpenHands"],
             "domains": ["agency", "code", "safety"],
             "target_modules": ["seed_self_editor.py", "seed_skill_kernel.py", "seed_local_control.py"],
@@ -531,7 +531,7 @@ def fallback_proposals():
         },
         {
             "title": "Local Hands Safety Upgrade",
-            "meaning": "Seed becomes more useful on Altan's computer while remaining strictly permission-gated.",
+            "meaning": "Seed becomes more useful on User's computer while remaining strictly permission-gated.",
             "source_repos": ["Open Interpreter", "Cline", "MCP Servers", "OpenClaw"],
             "domains": ["local_control", "safety", "agency"],
             "target_modules": ["seed_local_control.py", "seed_presence.py"],
@@ -732,8 +732,8 @@ def promote_proposal_to_release_candidate(proposal_id=None, chat_state=None):
                 }
             ],
             "approval_points": [
-                "Altan must approve before any file is edited.",
-                "Altan must review diff before apply."
+                "User must approve before any file is edited.",
+                "User must review diff before apply."
             ],
             "acceptance_tests": proposal.get("acceptance_tests", []),
             "rollback_strategy": "Use existing Seed self-edit backups and git checkpoint.",
@@ -912,7 +912,7 @@ Important safety rules:
 - Do not add dangerous shell execution.
 - Preserve existing working commands.
 - Keep local control permission-gated.
-- Keep Altan in control.
+- Keep User in control.
 
 Implementation steps:
 {json.dumps(candidate.get('implementation_steps', []), indent=2)}
@@ -930,7 +930,7 @@ Task:
 Use Seed's existing self-edit workflow to implement this candidate safely.
 Before editing, inspect the relevant target file.
 After editing, show diff.
-Do not apply without Altan's approval.
+Do not apply without User's approval.
 """
 
     with open(SEED_FOUNDRY_SELF_EDIT_PROMPT_FILE, "w") as file:
@@ -1021,10 +1021,10 @@ def build_companion_evolution_pulse_prompt():
     return f"""
 You are Seed's Evolution Foundry OS.
 
-Create a serious companion evolution pulse for Altan.
+Create a serious companion evolution pulse for User.
 
 Seed's core purpose:
-Become a real local companion that grows with Altan over time.
+Become a real local companion that grows with User over time.
 
 Seed is not conscious.
 Seed is not alive.
@@ -1050,7 +1050,7 @@ Output:
 3. Why this is bigger than a normal feature
 4. Current autonomy level and what it allows
 5. Current strongest evolution proposal
-6. What Altan should approve/build next
+6. What User should approve/build next
 7. What still blocks v2.0.0
 8. One serious warning
 9. One concrete next action

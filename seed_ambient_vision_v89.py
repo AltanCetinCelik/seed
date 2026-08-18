@@ -101,7 +101,7 @@ def sanitize_note(data, active_window):
     if bad_text(summary) or not summary:
         app = active_window.get("app") or "Unknown app"
         title = active_window.get("title") or "untitled window"
-        summary = f"Altan is using {app}. Active window: {title}."
+        summary = f"User is using {app}. Active window: {title}."
         question = ""
         tags = ["vision", "active_window", app.lower().replace(" ", "_")]
 
@@ -120,7 +120,7 @@ def vision_json(path, active_window):
     s = settings()
     prompt = (
         "You are Seed's private screen-noting module. "
-        "Look at the screenshot and describe what Altan is actually doing on the Mac. "
+        "Look at the screenshot and describe what User is actually doing on the Mac. "
         "Do not repeat these instructions. Do not mention JSON, prompt, screenshot, or privacy policy in the summary. "
         "Return only a compact JSON object with keys: importance, summary, question, tags. "
         "The summary must be about the visible screen content, active app, terminal output, code, browser, or task. "
@@ -157,7 +157,7 @@ def process_screen():
         except Exception as e:
             key = f"{w.get('app')}::{w.get('title')}"
             if key != _last:
-                d = {"importance": 68, "summary": f"Altan's active screen changed to {w.get('app')} — {w.get('title') or 'untitled window'}.", "question": "", "tags": ["vision", "window_change"], "vision_error": str(e)}
+                d = {"importance": 68, "summary": f"User's active screen changed to {w.get('app')} — {w.get('title') or 'untitled window'}.", "question": "", "tags": ["vision", "window_change"], "vision_error": str(e)}
                 _last = key
             else:
                 d = {"importance": 0, "summary": "", "question": "", "tags": ["vision"], "vision_error": str(e)}

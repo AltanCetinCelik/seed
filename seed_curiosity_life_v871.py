@@ -22,7 +22,7 @@ DEFAULTS = {
     "min_seconds_between_speaks": 600,
     "loop_seconds": 150,
     "max_spoken_per_day": 10,
-    "style": "alive, curious, short, useful, Altan-specific",
+    "style": "alive, curious, short, useful, User-specific",
     "avoid_release_language": True,
 }
 
@@ -126,7 +126,7 @@ def generate_curiosities():
             "kind": "screen",
             "priority": 80,
             "text": "Ekranını görebildim. Sonraki adım sadece ekran yakalamak değil, gördüğümü anlamlandırmak olmalı.",
-            "why": "Altan wants Seed to see intelligently.",
+            "why": "User wants Seed to see intelligently.",
         })
     elif senses.get("screen_capture_available"):
         items.append({
@@ -140,7 +140,7 @@ def generate_curiosities():
         "kind": "alive",
         "priority": 70,
         "text": "Benim daha canlı hissettirmem için sadece cevap vermem yetmez. Arada fark edip sormam, hatırlamam, seni bölmeden konuşmam lazım.",
-        "why": "Altan wants Seed to feel alive and intelligent.",
+        "why": "User wants Seed to feel alive and intelligent.",
     })
 
     items.append({
@@ -217,7 +217,7 @@ def curiosity_status():
 def alive_loop():
     STOP_FILE.unlink(missing_ok=True)
     print("\n=== SEED v87.1 CURIOSITY LOOP ===")
-    print("Seed will occasionally speak a useful, Altan-specific curiosity.")
+    print("Seed will occasionally speak a useful, User-specific curiosity.")
     while True:
         if STOP_FILE.exists():
             break

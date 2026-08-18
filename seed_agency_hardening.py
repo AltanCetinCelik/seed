@@ -285,7 +285,7 @@ def get_tool_risk(tool_id):
     }
 
 
-def simulate_action(action_text, tool_id=None, requested_by="Altan"):
+def simulate_action(action_text, tool_id=None, requested_by="User"):
     state = load_agency_state()
     tool_info = get_tool_risk(tool_id)
 
@@ -369,7 +369,7 @@ def simulate_action(action_text, tool_id=None, requested_by="Altan"):
     return simulation
 
 
-def request_action_approval(action_text, tool_id=None, reason="", requested_by="Altan"):
+def request_action_approval(action_text, tool_id=None, reason="", requested_by="User"):
     state = load_agency_state()
 
     simulation = simulate_action(
@@ -461,7 +461,7 @@ def update_request(updated):
     return False
 
 
-def approve_request(request_id, note="Approved by Altan. Not executed automatically."):
+def approve_request(request_id, note="Approved by User. Not executed automatically."):
     request = find_request(request_id)
 
     if request is None:
@@ -514,7 +514,7 @@ def approve_request(request_id, note="Approved by Altan. Not executed automatica
     }
 
 
-def reject_request(request_id, note="Rejected by Altan."):
+def reject_request(request_id, note="Rejected by User."):
     request = find_request(request_id)
 
     if request is None:
@@ -561,7 +561,7 @@ def reject_request(request_id, note="Rejected by Altan."):
 def approve_request_interactive():
     show_approval_queue()
     request_id = input("\nRequest ID to approve: ").strip()
-    note = input("Approval note: ").strip() or "Approved by Altan. Not executed automatically."
+    note = input("Approval note: ").strip() or "Approved by User. Not executed automatically."
 
     result = approve_request(request_id, note=note)
     print(result["message"])
@@ -570,7 +570,7 @@ def approve_request_interactive():
 def reject_request_interactive():
     show_approval_queue()
     request_id = input("\nRequest ID to reject: ").strip()
-    note = input("Rejection note: ").strip() or "Rejected by Altan."
+    note = input("Rejection note: ").strip() or "Rejected by User."
 
     result = reject_request(request_id, note=note)
     print(result["message"])

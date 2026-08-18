@@ -48,7 +48,7 @@ def build_summary_prompt(session_history, log_path):
     return f"""
 You are Seed.
 
-Create a clean session summary for Altan.
+Create a clean session summary for User.
 
 Use the current session history and the current chat log.
 

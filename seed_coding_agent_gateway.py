@@ -90,7 +90,7 @@ def build_coding_agent_plan(task):
             "Check git status",
             "Create backup/branch",
             "Write exact tool command",
-            "Ask Altan for approval",
+            "Ask User for approval",
             "Run coding agent in sandbox",
             "Run tests",
             "Show diff",

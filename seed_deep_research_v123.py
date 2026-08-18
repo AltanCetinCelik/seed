@@ -27,7 +27,7 @@ def fetch_url(sid,url):
     except Exception as e: return {"ok":False,"error":str(e)}
 def local_rag(sid,q):
     try:
-        import seed_private_rag2_v122 as rag
+        import seed_rag2_v122 as rag
         hits=rag.search(q,limit=8)
         for h in hits: add_source(sid,h["source"],h.get("preview",""),h["source"])
         return {"ok":True,"added":len(hits),"hits":hits}

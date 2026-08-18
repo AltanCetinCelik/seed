@@ -3080,7 +3080,7 @@
             "created_at": "2026-06-22T19:30:57",
             "audit": {
                 "repo": "Moltworker",
-                "best_use_for_seed": "Local-first private companion system built by Altan, providing memory, semantic memory, smart memory capture, self-editing with approval gates, an agent kernel, HUD, and local Ollama cognition.",
+                "best_use_for_seed": "Local-first private companion system built by User, providing memory, semantic memory, smart memory capture, self-editing with approval gates, an agent kernel, HUD, and local Ollama cognition.",
                 "patterns_to_borrow": [
                     "local-first architecture",
                     "private companion system",

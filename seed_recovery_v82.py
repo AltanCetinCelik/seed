@@ -179,7 +179,7 @@ def write_rollback_notes():
         "",
         "Rollback:",
         "1. Stop Seed servers with Ctrl+C.",
-        "2. Restore latest seed_private_backup_*_green folder.",
+        "2. Restore latest seed_backup_*_green folder.",
         "3. Or use git reset --hard <green_commit>.",
         "4. Re-run seed_v85_gate.py.",
     ]))

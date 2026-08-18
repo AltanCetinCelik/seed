@@ -111,7 +111,7 @@ def build_omega_plan():
             "Approval required for external execution.",
             "Commit before executor work.",
             "Release orchestrator before commit.",
-            "Altan remains in control."
+            "User remains in control."
         ],
         "next_big_build": "Seed v3.6.0 — MCP Skill Server + Aider Install/Unlock Prep"
     }

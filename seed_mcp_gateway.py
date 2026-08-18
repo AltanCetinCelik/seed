@@ -101,7 +101,7 @@ def build_mcp_plan(task):
         "safe_order": [
             "Select MCP profile",
             "Show exact server/config needed",
-            "Ask Altan for approval",
+            "Ask User for approval",
             "Run in sandbox/allowlist mode",
             "Verify result",
             "Log action"

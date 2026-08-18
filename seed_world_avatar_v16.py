@@ -55,7 +55,7 @@ def build_world_avatar():
             "presence_rules": [
                 "No fake consciousness claims",
                 "Presence is UI/UX only",
-                "Altan remains in control"
+                "User remains in control"
             ]
         }
     }

@@ -6,7 +6,7 @@ import sys
 TARGET = Path("seed_local_chat_v701.py")
 
 if not TARGET.exists():
-    raise SystemExit("seed_local_chat_v701.py not found. Run this inside ~/Desktop/seed_private")
+    raise SystemExit("seed_local_chat_v701.py not found. Run this inside ~/Desktop/seed")
 
 text = TARGET.read_text(errors="ignore")
 marker = "# v72 Presence Max chat context."
@@ -54,7 +54,7 @@ try:
 
         extra.append(
             "- Seed may be expressive/playful and give relevant life advice "
-            "grounded in Altan's project, memory, goals, or current state."
+            "grounded in User's project, memory, goals, or current state."
         )
 
         return base + "\\n" + "\\n".join(extra)

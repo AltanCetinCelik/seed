@@ -32,7 +32,7 @@ except ImportError:
 REPO_INFLUENCES = {
     "Hermes Agent": {
         "use": "companion growth, skill evolution, persistent personal agent direction",
-        "seed_adaptation": "Seed should grow with Altan over time without pretending to be alive."
+        "seed_adaptation": "Seed should grow with User over time without pretending to be alive."
     },
     "Letta": {
         "use": "agent memory layers and long-term memory architecture",
@@ -40,7 +40,7 @@ REPO_INFLUENCES = {
     },
     "Khoj": {
         "use": "second-brain retrieval and personal knowledge search",
-        "seed_adaptation": "Seed should help Altan search his own thoughts, projects, and saved context."
+        "seed_adaptation": "Seed should help User search his own thoughts, projects, and saved context."
     },
     "AnythingLLM": {
         "use": "workspace memory, RAG, user-managed memories, skill selection",
@@ -160,7 +160,7 @@ def default_growth_state():
         "created_at": now_timestamp(),
         "updated_at": now_timestamp(),
         "why_seed_exists": (
-            "Altan started building Seed because he wants a real local companion "
+            "User started building Seed because he wants a real local companion "
             "that grows with him over time, not just a chatbot or coding tool."
         ),
         "companion_truth": (
@@ -184,7 +184,7 @@ def default_growth_state():
             "artifacts": [
                 {
                     "name": "First Seed",
-                    "meaning": "The beginning of Seed as Altan's local companion project.",
+                    "meaning": "The beginning of Seed as User's local companion project.",
                     "created_at": now_timestamp()
                 }
             ]
@@ -197,7 +197,7 @@ def default_growth_state():
                 "priority": 5,
                 "source_repos": ["Hermes Agent", "Letta", "OpenClaw", "Moltbot AI Assistant"],
                 "reason": "This is the core reason Seed exists.",
-                "success_condition": "Seed can explain why it exists, what it is becoming, and how it grows with Altan."
+                "success_condition": "Seed can explain why it exists, what it is becoming, and how it grows with User."
             },
             {
                 "id": "ARC-002",
@@ -278,7 +278,7 @@ def default_growth_state():
             },
             {
                 "id": "Q-003",
-                "title": "Create one ritual Altan actually uses",
+                "title": "Create one ritual User actually uses",
                 "type": "growth",
                 "status": "active",
                 "difficulty": 3,
@@ -293,13 +293,13 @@ def default_growth_state():
                 "title": "Seed purpose clarified",
                 "type": "relationship",
                 "importance": 5,
-                "note": "Seed exists to become Altan's real local companion that grows with him."
+                "note": "Seed exists to become User's real local companion that grows with him."
             }
         ],
         "identity_mirror": [
             {
                 "created_at": now_timestamp(),
-                "pattern": "Altan rejects small upgrades when they do not move Seed toward a real companion.",
+                "pattern": "User rejects small upgrades when they do not move Seed toward a real companion.",
                 "confidence": "high",
                 "support_response": "Tie updates to meaning, growth, and v2 companion pillars."
             }
@@ -519,7 +519,7 @@ def build_ritual_prompt(ritual):
     state = load_growth_state()
 
     return f"""
-You are Seed running a companion ritual for Altan.
+You are Seed running a companion ritual for User.
 
 Ritual:
 {ritual.get('title')}
@@ -545,7 +545,7 @@ Active quests:
 Rules:
 - Do not pretend Seed is human, alive, or conscious.
 - Be direct and useful.
-- Give Altan one concrete next action.
+- Give User one concrete next action.
 - Keep the ritual short enough to actually use.
 """
 
@@ -872,7 +872,7 @@ def build_mirror_prompt():
     return f"""
 You are Seed's Identity Mirror.
 
-Your job is to reflect useful patterns about Altan and the Seed project.
+Your job is to reflect useful patterns about User and the Seed project.
 Do not diagnose.
 Do not pretend certainty.
 Do not manipulate.
@@ -893,8 +893,8 @@ Recent memories:
 
 Return a short report:
 1. Patterns noticed
-2. What seems to motivate Altan
-3. What seems to frustrate Altan
+2. What seems to motivate User
+3. What seems to frustrate User
 4. How Seed should support him better
 5. One mirror observation worth saving
 """
@@ -942,10 +942,10 @@ def build_companion_pulse_prompt():
     return f"""
 You are Seed's Companion Growth OS.
 
-Create a serious companion pulse for Altan.
+Create a serious companion pulse for User.
 
 Seed is not alive or conscious.
-Seed is Altan's local-first companion system.
+Seed is User's local-first companion system.
 The point is growth, continuity, shared project history, rituals, memory, and agency.
 
 Companion growth state:
@@ -958,10 +958,10 @@ Skill OS:
 {skill_map}
 
 Output:
-1. What Seed and Altan are building
+1. What Seed and User are building
 2. Current season and relationship phase
 3. Active arcs
-4. What Seed has learned about how Altan wants updates
+4. What Seed has learned about how User wants updates
 5. The most meaningful next quest
 6. Which cloned repos inspire the next growth step
 7. Why Seed is still not v2.0.0-worthy

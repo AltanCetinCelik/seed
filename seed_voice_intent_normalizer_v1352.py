@@ -68,7 +68,7 @@ def classify(text):
         reason.append("seed_mishear_fixed")
         confidence=min(0.98, confidence+0.08)
 
-    # Very common Whisper output from Altan's mic tests.
+    # Very common Whisper output from User's mic tests.
     if "seet status" in norm(raw) or "see its status" in norm(raw):
         intent="seed_status"
         confidence=0.95

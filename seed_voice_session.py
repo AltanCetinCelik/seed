@@ -241,7 +241,7 @@ def speak_text_interactive():
 def voice_test():
     text = (
         "Seed Voice Alpha online. I am not conscious, but I am present as a "
-        "local companion system with voice output when Altan invokes it."
+        "local companion system with voice output when User invokes it."
     )
 
     result = speak_text(text, reason="voice_test")
@@ -263,7 +263,7 @@ def build_voice_pulse(chat_state=None):
 
     if LLM_AVAILABLE:
         prompt = f"""
-Create a short voice pulse for Altan.
+Create a short voice pulse for User.
 
 Seed is not alive or conscious.
 Seed is a local companion system.
@@ -327,7 +327,7 @@ def voice_ritual(chat_state=None):
 
     if LLM_AVAILABLE:
         prompt = f"""
-Create a short spoken ritual for Altan.
+Create a short spoken ritual for User.
 
 Ritual:
 {json.dumps(chosen, indent=2)}

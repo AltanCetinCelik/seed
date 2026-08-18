@@ -9,7 +9,7 @@ MODULES = [
     "seed_safety_ledger_v94.py",
     "seed_tool_bridge_v97.py",
     "seed_vision_v98.py",
-    "seed_private_rag_v104.py",
+    "seed_rag_v104.py",
     "seed_tasks_v99.py",
     "seed_supervisor_v92.py",
     "seed_v1062_clean_status_gate.py",
@@ -57,7 +57,7 @@ def run_gate():
         details["tools_error"] = str(e)
 
     try:
-        import seed_private_rag_v104 as rag
+        import seed_rag_v104 as rag
         st = rag.status()
         excludes = set(st.get("settings", {}).get("exclude_dirs", []))
         rag_ok = {"third_party_repos", "seed_checkpoints"}.issubset(excludes)

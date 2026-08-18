@@ -643,7 +643,7 @@ async function sendChat() {{
   if(!msg) return;
 
   const log = document.getElementById('chatlog');
-  log.innerHTML += `<div><strong>Altan:</strong> ${{msg}}</div>`;
+  log.innerHTML += `<div><strong>User:</strong> ${{msg}}</div>`;
   input.value = '';
 
   const res = await fetch('/api/chat', {{

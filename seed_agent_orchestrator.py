@@ -108,7 +108,7 @@ def build_agent_task(task):
         "plan": plan,
         "approval_required": True,
         "status": "planned_not_executed",
-        "rule": "Seed may plan and queue approval. It must not run file/shell/browser agents without Altan approval."
+        "rule": "Seed may plan and queue approval. It must not run file/shell/browser agents without User approval."
     }
 
     append_orchestrator_trace(packet)

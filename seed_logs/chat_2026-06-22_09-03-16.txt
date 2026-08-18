@@ -18,7 +18,7 @@ Smart memory saved: [technical_progress] Fixed self-edit syntax test behavior, c
 /save seed's memory system became more companion-like because altan no longer has to manually classify every memory; seed can draft the classification while altan keeps final approval.
 
 [2026-06-22T09:05:00] SYSTEM:
-Smart memory saved: [technical_progress] Seed's memory system became more companion-like because Altan no longer has to manually classify every memory; Seed can draft the classification while Altan keeps final approval. Importance: 5
+Smart memory saved: [technical_progress] Seed's memory system became more companion-like because User no longer has to manually classify every memory; Seed can draft the classification while User keeps final approval. Importance: 5
 
 [2026-06-22T09:05:08] COMMAND:
 /exit

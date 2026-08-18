@@ -36,7 +36,7 @@ def capture_camera():
     out = CAMERA_DIR / f"camera_{datetime.now().strftime('%Y%m%d_%H%M%S')}.jpg"
     imagesnap = tool("imagesnap")
     if not imagesnap:
-        return {"ok": False, "error": "imagesnap not installed. Install later if Altan wants real webcam capture.", "camera_available": False}
+        return {"ok": False, "error": "imagesnap not installed. Install later if User wants real webcam capture.", "camera_available": False}
     proc = subprocess.run([imagesnap, str(out)], capture_output=True, text=True, timeout=30)
     ok = proc.returncode == 0 and out.exists()
     return {"created_at": now(), "version": "v87.0.0", "ok": ok, "file": str(out), "size": out.stat().st_size if out.exists() else 0, "stderr": proc.stderr[-500:], "camera_available": True}

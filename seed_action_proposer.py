@@ -32,7 +32,7 @@ def build_action_proposal_prompt(goal):
     return f"""
 You are Seed's local action proposer.
 
-Altan's goal:
+User goal:
 {goal}
 
 Computer snapshot:
@@ -61,7 +61,7 @@ JSON shape:
   "action_type": "shell_command/open_app/open_folder/none",
   "command": "git status",
   "app": "Terminal",
-  "folder": "~/Desktop/seed_private",
+  "folder": "~/Desktop/seed",
   "reason": "why this action helps",
   "risk": "read_only/diagnostic/write/dangerous/external",
   "requires_approval": false

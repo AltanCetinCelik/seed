@@ -19,7 +19,7 @@ def generate_curiosities(user_message=""):
         from seed_repo_pattern_extractor_v72 import build_repo_patterns
         p=build_repo_patterns(); add("Convert repo patterns into real features",f"{len(p.get('patterns',[]))} pattern groups are ready from Hermes/Moltbot/OpenClaw.","repo","Repo fusion should become actionable features.",8)
     except Exception: pass
-    add("Protect the build rhythm","Because Seed is green, work in checkpoints, commit after wins, and avoid adding huge models until storage is checked.","life","Relevant to Altan's current Seed work and Mac storage.",6)
+    add("Protect the build rhythm","Because Seed is green, work in checkpoints, commit after wins, and avoid adding huge models until storage is checked.","life","Relevant to User's current Seed work and Mac storage.",6)
     data={"created_at":now(),"version":"v72.0.0","ok":True,"items":sorted(items,key=lambda x:x["relevance_score"], reverse=True)}
     OUT.write_text(json.dumps(data,indent=4,ensure_ascii=False)); return data
 def best_curiosity(user_message=""):

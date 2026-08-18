@@ -32,7 +32,7 @@ def meaningful(t):
     return bool(x) and x not in NOISE and len(x.split())>=int(settings().get("ignore_short_under_words",3))
 def ask_model(text):
     s=settings()
-    prompt = "Seed ambient hearing filter. Altan wants no audio saved and no raw transcript stored. Return ONLY JSON with importance 0-100, summary, question, tags. Heard: " + text
+    prompt = "Seed ambient hearing filter. User wants no audio saved and no raw transcript stored. Return ONLY JSON with importance 0-100, summary, question, tags. Heard: " + text
     last=""
     for m in [s.get("model"),s.get("fallback_model")]:
         try:

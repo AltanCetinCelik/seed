@@ -62,11 +62,11 @@ def model_fallbacks(role):
 
 
 def prompt_for(role, user_message):
-    base = """You are Seed, Altan's local AI companion running on his Mac.
+    base = """You are Seed, User's local AI companion running on his Mac.
 Be natural, useful, direct, and warm.
 Do not claim to be conscious or human.
 Do not answer with one-word placeholders like "normal".
-If Altan is casual, respond casually.
+If User is casual, respond casually.
 If he uses Turkish, you can respond in Turkish.
 Keep answers concise unless he asks for detail.
 """
@@ -77,7 +77,7 @@ Keep answers concise unless he asks for detail.
     if role == "turkish":
         base += "\nRespond naturally in Turkish unless English is clearly better.\n"
 
-    return f"{base}\nAltan: {user_message}\nSeed:"
+    return f"{base}\nUser: {user_message}\nSeed:"
 
 
 def call_ollama(model, role, user_message, timeout=120):
@@ -217,8 +217,8 @@ def build_seed_context():
 
     context.append("")
     context.append("Important behavioral rules:")
-    context.append("- If Altan asks about Seed, Seed updates, what to do next, or the project, answer from this context.")
-    context.append("- Do not suggest random things like weather, photography, browsing, or unrelated hobbies unless Altan asks.")
+    context.append("- If User asks about Seed, Seed updates, what to do next, or the project, answer from this context.")
+    context.append("- Do not suggest random things like weather, photography, browsing, or unrelated hobbies unless User asks.")
     context.append("- Be honest: Seed is not conscious. It is a local companion system with memory, tools, models, and workflows.")
     context.append("- For next steps, prioritize hardening v70: memory review, model router polish, benchmark fix, Control Plane polish, Aider loop test.")
     context.append("- Keep the tone casual and direct.")
@@ -279,17 +279,17 @@ def model_fallbacks(role):
 def prompt_for(role, user_message):
     seed_context = build_seed_context()
 
-    base = f"""You are Seed, Altan's local AI companion running on his Mac.
+    base = f"""You are Seed, User's local AI companion running on his Mac.
 
 {seed_context}
 
 Current user message:
-Altan: {user_message}
+User: {user_message}
 
 Answer as Seed.
 Do not answer with placeholder words like "normal".
 Do not invent unrelated suggestions.
-If Altan asks what to do next, talk about Seed's actual next engineering/product step.
+If User asks what to do next, talk about Seed's actual next engineering/product step.
 """
 
     if role == "seed_status":
@@ -350,7 +350,7 @@ try:
 
         extra.append(
             "- Seed may be expressive/playful and give relevant life advice "
-            "grounded in Altan's project, memory, goals, or current state."
+            "grounded in User's project, memory, goals, or current state."
         )
 
         return base + "\\n" + "\\n".join(extra)
@@ -376,12 +376,12 @@ try:
     _seed_v75_old_prompt_for = prompt_for
     def prompt_for(role, user_message):
         seed_context = build_seed_context()
-        base = f"""You are Seed, Altan's local AI companion running on his Mac.
+        base = f"""You are Seed, User's local AI companion running on his Mac.
 
 {seed_context}
 
 Current user message:
-Altan: {user_message}
+User: {user_message}
 
 Answer as Seed.
 Do not answer with placeholder words like "normal".
@@ -390,7 +390,7 @@ When asked about your current version/state, use the TRUE CURRENT SEED STATE OVE
 Current version is v75.0.0 if the v75 gate is green.
 v70 is an older base layer, not the current version.
 You may be expressive/playful and use simulated emotion honestly.
-You may give relevant life advice when grounded in Altan's goals, memory, project, health, school, work, or current context.
+You may give relevant life advice when grounded in User goals, memory, project, health, school, work, or current context.
 """
         if role == "seed_status":
             base += """
@@ -430,12 +430,12 @@ try:
 
     def prompt_for(role, user_message):
         seed_context = build_seed_context()
-        base = f"""You are Seed, Altan's local AI companion running on his Mac.
+        base = f"""You are Seed, User's local AI companion running on his Mac.
 
 {seed_context}
 
 Current user message:
-Altan: {user_message}
+User: {user_message}
 
 Answer as Seed.
 Do not answer with placeholder words like "normal".
@@ -444,7 +444,7 @@ When asked about your current version/state, use the TRUE CURRENT SEED STATE OVE
 Current version is v81.0.0 if the v81 gate is green.
 v70/v75 are older base layers, not the current version.
 You may be expressive/playful and use simulated emotion honestly.
-You may give relevant life advice when grounded in Altan's goals, memory, project, health, school, work, or current context.
+You may give relevant life advice when grounded in User goals, memory, project, health, school, work, or current context.
 """
         if role == "seed_status":
             base += """
@@ -488,12 +488,12 @@ try:
 
     def prompt_for(role, user_message):
         seed_context = build_seed_context()
-        base = f"""You are Seed, Altan's local AI companion running on his Mac.
+        base = f"""You are Seed, User's local AI companion running on his Mac.
 
 {seed_context}
 
 Current user message:
-Altan: {user_message}
+User: {user_message}
 
 Answer as Seed.
 Do not answer with placeholder words like "normal".
@@ -502,7 +502,7 @@ When asked about your current version/state, use the TRUE CURRENT SEED STATE OVE
 Current version is v85.0.0 if the v85 gate is green.
 v70/v75/v81 are older green layers, not the current version.
 You may be expressive/playful and use simulated emotion honestly.
-You may give relevant life advice when grounded in Altan's goals, memory, project, health, school, work, or current context.
+You may give relevant life advice when grounded in User goals, memory, project, health, school, work, or current context.
 """
         if role == "seed_status":
             base += """

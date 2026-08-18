@@ -86,7 +86,7 @@ def generate_notices():
         "urgency": "normal",
         "title": "Real v1 path is narrowing",
         "body": "After v81, the biggest remaining systems are recovery, one-command runtime, backup/privacy, and release candidate hardening.",
-        "why": "This is relevant to Altan's current Seed v1 goal.",
+        "why": "This is relevant to the current Seed goal.",
     })
 
     return notices

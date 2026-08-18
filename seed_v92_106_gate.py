@@ -1,7 +1,7 @@
 import json, subprocess, sys
 from pathlib import Path
 from datetime import datetime
-MODULES=["seed_supervisor_v92.py","seed_wake_engine_v93.py","seed_safety_ledger_v94.py","seed_trace_v95.py","seed_memory_garden2_v96.py","seed_tool_bridge_v97.py","seed_vision_v98.py","seed_tasks_v99.py","seed_operator_v100.py","seed_coder_v101.py","seed_voice_v102.py","seed_device_body_v103.py","seed_private_rag_v104.py","seed_doctor_v105.py","seed_dashboard_v106.py","seed_eval_v107.py","seed_mega_v92_106.py"]
+MODULES=["seed_supervisor_v92.py","seed_wake_engine_v93.py","seed_safety_ledger_v94.py","seed_trace_v95.py","seed_memory_garden2_v96.py","seed_tool_bridge_v97.py","seed_vision_v98.py","seed_tasks_v99.py","seed_operator_v100.py","seed_coder_v101.py","seed_voice_v102.py","seed_device_body_v103.py","seed_rag_v104.py","seed_doctor_v105.py","seed_dashboard_v106.py","seed_eval_v107.py","seed_mega_v92_106.py"]
 def now(): return datetime.now().isoformat(timespec="seconds")
 def comp(m):
     p=subprocess.run([sys.executable,"-m","py_compile",m],capture_output=True,text=True,timeout=30); return {"module":m,"ok":p.returncode==0,"stderr":p.stderr[-1000:]}

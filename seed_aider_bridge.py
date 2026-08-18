@@ -144,7 +144,7 @@ def aider_install_plan():
             }
         ],
         "do_not_use_inside_seed_auto": True,
-        "note": "Run install manually in terminal only if Altan approves."
+        "note": "Run install manually in terminal only if User approves."
     }
     return plan
 

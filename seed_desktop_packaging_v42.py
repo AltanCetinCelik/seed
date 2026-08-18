@@ -16,17 +16,17 @@ def create_launchers():
     scripts.mkdir(exist_ok=True)
 
     (scripts / "seed_terminal.sh").write_text("""#!/bin/zsh
-cd ~/Desktop/seed_private
+cd ~/Desktop/seed
 python seed_cli.py
 """)
 
     (scripts / "seed_control_plane.sh").write_text("""#!/bin/zsh
-cd ~/Desktop/seed_private
+cd ~/Desktop/seed
 python seed_control_plane_server.py
 """)
 
     (scripts / "seed_terminal_pro.sh").write_text("""#!/bin/zsh
-cd ~/Desktop/seed_private
+cd ~/Desktop/seed
 python seed_terminal_pro.py
 """)
 

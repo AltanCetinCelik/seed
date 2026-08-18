@@ -416,7 +416,7 @@ def explain_world_state():
     garden = world.get("memory_garden", {})
 
     explanation = f"""
-Seed World is a symbolic interface for Seed's growth with Altan.
+Seed World is a symbolic interface for Seed's growth with User.
 
 Current place: {world.get('current_place')}
 Season: {world.get('season')}

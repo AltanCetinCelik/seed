@@ -42,7 +42,7 @@ def build_capability_plan(task):
             "Understand task and classify capability",
             "Choose repo/tool candidate",
             "Explain side effects and risk",
-            "Ask Altan for approval if write/browser/audio/external action is needed",
+            "Ask User for approval if write/browser/audio/external action is needed",
             "Use sandbox or branch",
             "Run tests/checks",
             "Trace decision",
