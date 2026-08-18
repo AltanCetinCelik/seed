@@ -82,7 +82,7 @@ def benchmark_model(model, role, timeout=90):
         if role == "patch_planning" and any(w in reply.lower() for w in ["rollback", "test", "file", "step"]):
             quality += 2
 
-        if role == "memory_extraction" and any(w in reply.lower() for w in ["altan", "seed", "wants", "memory"]):
+        if role == "memory_extraction" and any(w in reply.lower() for w in ["user", "seed", "wants", "memory"]):
             quality += 2
 
         speed_score = max(0, 8 - int(ms / 6000))

@@ -42,7 +42,7 @@ def write_decision(row):
 def score(text, source=""):
     low=str(text).lower(); s=50
     if "seed" in low: s+=15
-    if "altan" in low: s+=15
+    if "user" in low: s+=15
     if any(w in low for w in ["wants","prefers","doesn't want","needs","goal"]): s+=15
     if any(w in low for w in ["v74","v75","voice","avatar","memory","panel","ollama"]): s+=10
     if "friend" in low or "friend" in str(source).lower(): s+=8
@@ -52,7 +52,7 @@ def score(text, source=""):
 def why(text, source=""):
     low=str(text).lower(); r=[]
     if "seed" in low: r.append("It affects Seed continuity or architecture.")
-    if "altan" in low: r.append("It is about User specifically.")
+    if "user" in low: r.append("It is about User specifically.")
     if "friend" in low or "friend" in str(source).lower(): r.append("It came from friend/external advice.")
     if any(w in low for w in ["voice","avatar","memory","panel","curiosity"]): r.append("It matches active v1 feature work.")
     return " ".join(r) or "It may be useful context, but should be reviewed."

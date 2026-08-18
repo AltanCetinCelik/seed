@@ -9,7 +9,7 @@ CANDIDATE_FILE = Path("seed_memory_candidates_v60.json")
 
 
 KEYWORDS = [
-    "altan wants",
+    "user wants",
     "user wants",
     "seed should",
     "seed must",
@@ -50,7 +50,7 @@ def score_sentence(sentence):
 
     if "seed" in low:
         score += 1
-    if "altan" in low:
+    if "user" in low:
         score += 1
     if len(sentence) > 220:
         score -= 1

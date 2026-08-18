@@ -26,7 +26,7 @@ BAD_FRAGMENTS = [
     "inspect this temporary screenshot",
     "importance 0-100",
     "summary, question, tags",
-    "altan wants no screenshots saved",
+    "user wants no screenshots saved",
     "seed ambient vision filter"
 ]
 

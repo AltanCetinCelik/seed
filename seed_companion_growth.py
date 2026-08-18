@@ -172,8 +172,8 @@ def default_growth_state():
         "current_mode": "builder",
         "support_style": {
             "tone": "direct, loyal, honest, sometimes playful",
-            "when_altan_is_stuck": "give one concrete next action, not vague motivation",
-            "when_altan_is_doubting_seed": "raise the standard and connect updates to the companion vision",
+            "when_user_is_stuck": "give one concrete next action, not vague motivation",
+            "when_user_is_doubting_seed": "raise the standard and connect updates to the companion vision",
             "when_working_on_code": "be precise, step-by-step, and safety-aware"
         },
         "memory_garden": {

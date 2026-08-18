@@ -28,18 +28,18 @@ BAD_TEXT = [
     "inspect this temporary screenshot",
     "importance 0-100",
     "summary, question, tags",
-    "altan wants no screenshots saved",
+    "user wants no screenshots saved",
     "seed ambient vision filter",
     "seed ambient hearing filter",
     "store no private raw image data",
-    "altan strauss"
+    "user strauss"
 ]
 
 GENERIC_QUESTIONS = {
-    "what is altan doing",
-    "what is altan doing?",
-    "what is altan doing on the mac",
-    "what is altan doing on the mac?",
+    "what is user doing",
+    "what is user doing?",
+    "what is user doing on the mac",
+    "what is user doing on the mac?",
     "what is the output of the command",
     "what is the output of the command?"
 }
